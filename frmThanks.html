@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=10,IE=edge,chrome=1">
+
+    <title>HCAS 360</title>
+
+    <link href="Images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+    <link href="Content/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Site.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .icon4thanku {
+            padding: 8pt;
+            color: #009032 !important;
+            border: 6px solid #009032;
+            width: 75px;
+            height: 75px;
+            display: inline-block;
+            border-radius: 50%;
+        }
+
+        .thnx {
+            margin: .5rem 0 1rem;
+            font-size: 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+    <script src="Scripts/jquery.min-1.12.4.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function fnLogout() {
+            window.location.href = "Login.aspx";
+        }
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+        $(function () {
+            $("img.bg-img").hide();
+            var $url = $("img.bg-img").attr("src");
+            $('.full-background_one').css('backgroundImage', 'url(' + $url + ')');
+
+            $('.middle-cont').css({
+                "margin-top": ($(window).height() - $(".middle-cont").outerHeight()) / 2 - ($(".navbar").outerHeight() + 30) + "px",
+                "z-index": 1,
+                "position": "relative",
+                "padding-bottom": "2rem"
+            });
+        });
+    </script>
+</head>
+<body>
+    <!--<div class="full-background_one">
+        <img src="Images/site-bg.jpg" class="bg-img" />
+    </div>-->
+    <nav class="navbar">
+        <div class="pull-left">
+            <img src="Images/Deloitte-logo_White.png" class="logo" title="logo" />
+        </div>
+    </nav>
+    <div class="middle-cont">
+        <div class="text-center">
+            <h2 class="icon4thanku"><span class="fa fa-check"></span></h2>
+        </div>
+        <h1 class="thnx">Thank You</h1>
+
+        <h5 class="text-center mt-4"><em>E 360-Degree Feedback Survey has been now completed and closed now.</em></h5>
+        <h5 class="text-center">Thanks for your Interest.</h5>
+    </div>
+</body>
+</html>
