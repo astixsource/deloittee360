@@ -16,7 +16,7 @@ Partial Class Questionaire_Default
         Dim strReturnValue As Integer
         If Not IsPostBack Then
             Dim strConn As String = Convert.ToString(HttpContext.Current.Application("DbConnectionString"))
-            Dim Objcon As New SqlConnection(strConn)
+            Dim Objcon As New SqlConnection(strConn.Split("|")(0))
             Dim objCom As New SqlCommand("[spRSPManage]", Objcon)
             Dim drdr As SqlDataReader
             objCom.Parameters.Add("@LoginID", SqlDbType.Int).Value = Session("LoginId")

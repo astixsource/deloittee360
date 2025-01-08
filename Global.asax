@@ -28,7 +28,7 @@
 
             // Initialize the SecretClient
             var secretClient = new Azure.Security.KeyVault.Secrets.SecretClient(new Uri(keyVaultUri), new Azure.Identity.DefaultAzureCredential());
-            string _clientSecret = secretClient.GetSecret("DeloitteProdDBConnection").Value.Value;
+            //string _clientSecret = secretClient.GetSecret("DeloitteProdDBConnection").Value.Value;
 
             // Retrieve the secrets
             string _dbUserName = secretClient.GetSecret("Secret-PRODDB-Username").Value.Value;

@@ -19,7 +19,7 @@ Public Class E360WebService
     <System.Web.Services.WebMethod(EnableSession:=True)>
     Public Function fnGetCompletionStation() As String
 
-        Dim Objcon As New SqlConnection(strConn)
+        Dim Objcon As New SqlConnection(strConn.Split("|")(0))
         Dim objCom As New SqlCommand("spGetAppraisalStatusSummary", Objcon)
         Dim drdr As SqlDataReader
         Dim strReturn As String = ""
@@ -64,7 +64,7 @@ Public Class E360WebService
         CycleId = Session("CycleID")
 
 
-        Dim Scon As SqlConnection = New SqlConnection(strConn)
+        Dim Scon As SqlConnection = New SqlConnection(strConn.Split("|")(0))
         Dim Scmd As SqlCommand = New SqlCommand()
         Scmd.Connection = Scon
         Scmd.CommandText = "[spRSPNominatedApseList_Abhishek_NEWDesign]"
@@ -146,7 +146,7 @@ Public Class E360WebService
         Dim CycleId As Integer
         CycleId = Session("CycleID")
 
-        Dim Objcon As New SqlConnection(strConn)
+        Dim Objcon As New SqlConnection(strConn.Split("|")(0))
         Dim objCom As New SqlCommand("spRSPNominatedApseList_Abhishek", Objcon)
         objCom.Parameters.Add("@LoginID", Data.SqlDbType.Int).Value = LoginId
         objCom.Parameters.Add("@CycleID", Data.SqlDbType.Int).Value = CycleId
@@ -247,7 +247,7 @@ Public Class E360WebService
     <System.Web.Services.WebMethod(EnableSession:=True)>
     Public Function fnUpdateResponses(ByVal strSave As String, ByVal FinalSave As Integer, ByVal strComment As String, ByVal RspID As Integer) As String
         Dim drdr As SqlDataReader
-        Dim Objcon As New SqlConnection(strConn)
+        Dim Objcon As New SqlConnection(strConn.Split("|")(0))
         Dim objCom As New SqlCommand("[spUpdateResponses]", Objcon)
 
         objCom.Parameters.Add("@RespStr", SqlDbType.VarChar).Value = strSave
@@ -259,7 +259,7 @@ Public Class E360WebService
 
 
         Dim drdr1 As SqlDataReader
-        Dim Objcon1 As New SqlConnection(strConn)
+        Dim Objcon1 As New SqlConnection(strConn.Split("|")(0))
         Dim objCom1 As New SqlCommand("[SPRspManageCmptncyCmmnts]", Objcon1)
 
 
@@ -308,7 +308,7 @@ Public Class E360WebService
     'CHANGE
     <System.Web.Services.WebMethod()>
     Public Function subPopulateQuestions(ByVal RspID As Integer, ByVal PGNmbr As Integer, ByVal levelID As Integer) As String
-        Dim Objcon As New SqlConnection(strConn)
+        Dim Objcon As New SqlConnection(strConn.Split("|")(0))
         Dim objCom As New SqlCommand("[spRSPManageDet_Abhishek]", Objcon)
         Dim drdr As SqlDataReader
         objCom.Parameters.Add("@RSPID", SqlDbType.Int).Value = RspID
@@ -320,7 +320,7 @@ Public Class E360WebService
 
 
 
-        Dim Objcon1 As New SqlConnection(strConn)
+        Dim Objcon1 As New SqlConnection(strConn.Split("|")(0))
         Dim objCom1 As New SqlCommand("[spRSPGetCmptncyCmnts]", Objcon1)
         Dim drdr1 As SqlDataReader
         objCom1.Parameters.Add("@RSPID", SqlDbType.Int).Value = RspID
@@ -564,7 +564,7 @@ Public Class E360WebService
     Function fnRspInsertRspComments(ByVal RSPId As Integer, ByVal Comment1 As String, ByVal Comment2 As String, ByVal Comment3 As String, ByVal Comment4 As String, ByVal FinalSave As Integer) As String
 
 
-        Dim Objcon As New SqlConnection(strConn)
+        Dim Objcon As New SqlConnection(strConn.Split("|")(0))
         Dim objCom As New SqlCommand("[SPRspInsertRspComments]", Objcon)
         Dim drdr As SqlDataReader
         If Comment1 = "" Then
@@ -612,7 +612,7 @@ Public Class E360WebService
 
     <WebMethod()>
     Public Function fnGetRspComments(ByVal RSPId As Integer) As String
-        Dim Objcon As New SqlConnection(strConn)
+        Dim Objcon As New SqlConnection(strConn.Split("|")(0))
         Dim objCom As New SqlCommand("[SPGetRspComments]", Objcon)
         Dim drdr As SqlDataReader
         objCom.Parameters.Add("@RSPID", SqlDbType.Int).Value = RSPId

@@ -10,13 +10,14 @@ Public Class DAL
     Public arrPara(0, 1) As String
     Public conn As New SqlConnection
     Public IPForMail As String
-    Public Shared flagMsg As Integer
-    Public Function OpenConnection()
+        Public Shared flagMsg As Integer
+        Public Shared strConn As String
+        Public Function OpenConnection()
             'conn = New SqlConnection("Persist Security Info=False;User ID=sa;PASSWord=AK6105;Initial Catalog=EYExSearch;Data Source=astixsun")
             'conn = New SqlConnection("Persist Security Info=False;User ID=eyman;PASSWord=eyindia;Initial Catalog=EYExSearch;Data Source=EYDEL")
-            Dim strConn As String = Convert.ToString(HttpContext.Current.Application("DbConnectionString"))
+            strConn = Convert.ToString(HttpContext.Current.Application("DbConnectionString"))
 
-            conn = New SqlConnection(strConn)
+            conn = New SqlConnection(strConn.Split("|")(0))
 
             If conn.State = 0 Then
             conn.Open()
@@ -96,8 +97,8 @@ Public Class DAL
             strPar = SPName
         End If
         If ConnSP.State = ConnectionState.Open Then ConnSP.Close()
-        ConnSP.ConnectionString = System.Configuration.ConfigurationSettings.AppSettings("strConn")
-        ConnSP.Open()
+            ConnSP.ConnectionString = strConn.Split("|")(0)
+            ConnSP.Open()
         Comm.Connection = ConnSP
         Comm.CommandText = strPar
         If RetType = 0 Then
@@ -137,8 +138,8 @@ Public Class DAL
             strPar = SPName
         End If
         If ConnSP.State = ConnectionState.Open Then ConnSP.Close()
-        ConnSP.ConnectionString = System.Configuration.ConfigurationSettings.AppSettings("strConn")
-        ConnSP.Open()
+            ConnSP.ConnectionString = strConn.Split("|")(0)
+            ConnSP.Open()
         Dim rsAdap As New SqlDataAdapter(strPar, ConnSP)
         Dim dsRslts As New DataSet
         rsAdap.Fill(dsRslts)
