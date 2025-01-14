@@ -27,7 +27,7 @@ jobs:
         run: msbuild Deloittee360.sln /nologo /verbosity:m /p:Configuration=Release
 
       - name: Run Unit Tests
-        run: dotnet test --logger "trx;LogFileName=TestResults.trx" --verbosity normal
+        run: dotnet test Deloittee360.sln --logger "trx;LogFileName=TestResults.trx" --verbosity normal
 
   # Continuous Deployment Job with Manual Approval
   deploy:
