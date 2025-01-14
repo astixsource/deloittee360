@@ -34,10 +34,15 @@ jobs:
       - name: Build the solution
         run: msbuild Deloittee360.sln /nologo /verbosity:m /p:Configuration=Release
 
-      # Step 6: Run Unit Tests
-      - name: Run Unit Tests
+      # Install Visual Studio Test Platform
+      - name: Install Visual Studio Test Platform
         run: |
-          vstest.console.exe **\*.Test.dll --logger:trx
+          dotnet tool install --global Microsoft.TestPlatform.CLI
+          echo "::add-path::${{ github.runner.temp }}/.dotnet/tools"
+
+      # Run Unit Tests
+      - name: Run Unit Tests
+        run: dotnet test --logger "trx;LogFileName=TestResults.trx" --verbosity normal
         continue-on-error: false
 
       # Step: Await manual approval
