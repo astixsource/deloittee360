@@ -42,9 +42,8 @@ jobs:
       - name: Setup MSBuild path
         uses: microsoft/setup-msbuild@v1.0.2
 
-      - name: Publish to Folder
-        run: |
-          msbuild Deloittee360.sln /nologo /verbosity:m /t:Build;pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="published" /p:Configuration=Release
+      - name: Publish to folder
+        run: msbuild Deloittee360.sln /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="published"
 
       - name: Login to Azure
         uses: azure/login@v1
