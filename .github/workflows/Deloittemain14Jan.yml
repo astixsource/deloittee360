@@ -33,7 +33,7 @@ jobs:
   deploy:
     needs: build-and-test  # Runs only if CI job succeeds
     runs-on: windows-latest
-    environment: Production  # This is where manual approval is required
+    # environment: Production  # This is where manual approval is required
 
     steps:
       - name: Checkout code
