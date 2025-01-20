@@ -437,6 +437,18 @@ Content Area (right)
             margin-top: 10px;
         }
 
+.top-left-logo {
+    position: absolute;
+    top: 10px; /* Adjust for vertical spacing */
+    left: 10px; /* Adjust for horizontal spacing */
+    z-index: 10; /* Ensure it stays above other elements */
+}
+
+    .top-left-logo .top-logo {
+        width: 120px; /* Adjust size as needed */
+        height: auto; /* Maintain aspect ratio */
+    }
+
     .section-title > .title-line-center,
     .section-title-left > .title-line-left {
         width: 160px;

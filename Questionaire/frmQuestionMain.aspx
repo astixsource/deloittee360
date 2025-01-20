@@ -179,17 +179,17 @@
                 background-color: #1e7e34;
             }
 
-        .btn-submit {
-            background-color: #ffc107;
-            color: #212529;
+        .btn-submit  {
+            background-color: #28a745;
+            color: white;
         }
 
             .btn-submit:hover {
-                background-color: #e0a800;
+               background-color: #218838;
             }
 
             .btn-submit:active {
-                background-color: #c69500;
+               background-color: #1e7e34;
             }
 
         .btn-danger {
