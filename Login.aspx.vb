@@ -33,7 +33,8 @@ Partial Class Login
             '    .Secure = Request.IsSecureConnection
             '}
             'Response.Cookies.Add(antiForgeryCookie)
-
+            Dim strConn1 As String = Convert.ToString(HttpContext.Current.Application("DbConnectionString"))
+            hdnaccesstoken.Value = strConn1
         End If
     End Sub
 
