@@ -24,7 +24,29 @@
     
 </head>
 <body>
+     <style>
+        body {
+        
+        
+
+       
+        .top-left-logo {
+            position: absolute;
+            top: 10px; /* Adjust for vertical spacing */
+            left: 10px; /* Adjust for horizontal spacing */
+            z-index: 10; /* Ensure it stays above other elements */
+        }
+
+        .top-left-logo .top-logo {
+            width: 120px; /* Adjust size as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+    </style>
     <form id="form1" runat="server">
+        <div class="top-left-logo">
+            <asp:Image ID="imgTopLeftLogo" runat="server" ImageUrl="~/Images/Deloitte-logo_White.png" CssClass="top-logo" />
+        </div>
         <div class="full-background">
             <img src="Images/login-bg.jpg" class="bg-img" />
         </div>
