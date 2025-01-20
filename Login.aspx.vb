@@ -171,7 +171,7 @@ Partial Class Login
                 objCom2.CommandTimeout = 0
                 Dim drdr As SqlDataReader
                 Dim cycleName As String = ""
-                'Objcon2.AccessToken =strConn.Split("|")(1)
+                Objcon2.AccessToken = strConn.Split("|")(1)
                 Objcon2.Open()
                 drdr = objCom2.ExecuteReader
                 drdr.Read()

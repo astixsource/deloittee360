@@ -61,7 +61,7 @@ Partial Class _frmMain
         objCom.CommandTimeout = 0
         Dim strReturn As String = ""
         Try
-            ' Objcon.AccessToken = strConn.Split("|")(1)
+            Objcon.AccessToken = strConn.Split("|")(1)
             Objcon.Open()
             drdr = objCom.ExecuteReader()
 

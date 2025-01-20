@@ -28,24 +28,24 @@
 
             // Initialize the SecretClient
             var secretClient = new Azure.Security.KeyVault.Secrets.SecretClient(new Uri(keyVaultUri), new Azure.Identity.DefaultAzureCredential());
-            //string _clientSecret = secretClient.GetSecret("DeloitteProdDBConnection").Value.Value;
+            string _clientSecret = secretClient.GetSecret("DeloitteProdDBConnection").Value.Value;
 
             // Retrieve the secrets
-            string _dbUserName = secretClient.GetSecret("Secret-PRODDB-Username").Value.Value;
-            string _dbPassword = secretClient.GetSecret("Secret-PRODDB-Password").Value.Value;
+            //string _dbUserName = secretClient.GetSecret("Secret-PRODDB-Username").Value.Value;
+            //string _dbPassword = secretClient.GetSecret("Secret-PRODDB-Password").Value.Value;
             // Construct the SQL connection string
-            connectionString = "server=" + _server + ";database=" + _database + ";uid=" + _dbUserName + ";pwd=" + _dbPassword + ";connection timeout=0";
+            //connectionString = "server=" + _server + ";database=" + _database + ";uid=" + _dbUserName + ";pwd=" + _dbPassword + ";connection timeout=0";
 
 
-            /*
+          
                         // Acquire token using Azure.Identity
                         var credential = new Azure.Identity.ClientSecretCredential(_tenantId, _clientId, _clientSecret);
                         var token = credential.GetToken(new Azure.Core.TokenRequestContext(new[] { "https://database.windows.net/.default" }));
             _token=token.Token;
                         // Connection string
-                        var connectionString = "Server="+_server+";Database="+_database+";Authentication=Active Directory AccessToken";
+                         connectionString = "Server="+_server+";Database="+_database+";Authentication=Active Directory AccessToken";
 
-                            */
+                            
             // Store the connection string in a globally accessible location
             Application["DbConnectionString"] = connectionString + "|" + _token;
 

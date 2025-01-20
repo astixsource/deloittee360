@@ -29,6 +29,7 @@ Public Class E360WebService
         objCom.CommandType = CommandType.StoredProcedure
         objCom.CommandTimeout = 0
         Try
+            Objcon.AccessToken = strConn.Split("|")(1)
             Objcon.Open()
             drdr = objCom.ExecuteReader()
             drdr.Read()
@@ -66,6 +67,7 @@ Public Class E360WebService
 
         Dim Scon As SqlConnection = New SqlConnection(strConn.Split("|")(0))
         Dim Scmd As SqlCommand = New SqlCommand()
+        Scon.AccessToken = strConn.Split("|")(1)
         Scmd.Connection = Scon
         Scmd.CommandText = "[spRSPNominatedApseList_Abhishek_NEWDesign]"
         Scmd.CommandType = CommandType.StoredProcedure
@@ -153,6 +155,7 @@ Public Class E360WebService
         objCom.CommandType = CommandType.StoredProcedure
         objCom.CommandTimeout = 0
         Try
+            Objcon.AccessToken = strConn.Split("|")(1)
             Objcon.Open()
             drdr = objCom.ExecuteReader()
 
@@ -248,6 +251,7 @@ Public Class E360WebService
     Public Function fnUpdateResponses(ByVal strSave As String, ByVal FinalSave As Integer, ByVal strComment As String, ByVal RspID As Integer) As String
         Dim drdr As SqlDataReader
         Dim Objcon As New SqlConnection(strConn.Split("|")(0))
+
         Dim objCom As New SqlCommand("[spUpdateResponses]", Objcon)
 
         objCom.Parameters.Add("@RespStr", SqlDbType.VarChar).Value = strSave
@@ -260,6 +264,7 @@ Public Class E360WebService
 
         Dim drdr1 As SqlDataReader
         Dim Objcon1 As New SqlConnection(strConn.Split("|")(0))
+
         Dim objCom1 As New SqlCommand("[SPRspManageCmptncyCmmnts]", Objcon1)
 
 
@@ -274,9 +279,11 @@ Public Class E360WebService
 
         Dim strReturn As String = ""
         Try
+            Objcon.AccessToken = strConn.Split("|")(1)
             Objcon.Open()
             drdr = objCom.ExecuteReader()
 
+            Objcon1.AccessToken = strConn.Split("|")(1)
             Objcon1.Open()
             drdr1 = objCom1.ExecuteReader()
 
@@ -330,9 +337,11 @@ Public Class E360WebService
 
         Dim strReturn As String
         Try
+            Objcon.AccessToken = strConn.Split("|")(1)
             Objcon.Open()
             drdr = objCom.ExecuteReader()
 
+            Objcon1.AccessToken = strConn.Split("|")(1)
             Objcon1.Open()
             drdr1 = objCom1.ExecuteReader()
 
@@ -594,6 +603,7 @@ Public Class E360WebService
 
         Dim strRet As String = ""
         Try
+            Objcon.AccessToken = strConn.Split("|")(1)
             Objcon.Open()
             drdr = objCom.ExecuteReader()
             drdr.Read()
@@ -623,6 +633,7 @@ Public Class E360WebService
 
 
         Try
+            Objcon.AccessToken = strConn.Split("|")(1)
             Objcon.Open()
             drdr = objCom.ExecuteReader()
             drdr.Read()

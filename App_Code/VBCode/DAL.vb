@@ -20,9 +20,10 @@ Public Class DAL
             conn = New SqlConnection(strConn.Split("|")(0))
 
             If conn.State = 0 Then
-            conn.Open()
-        End If
-    End Function
+                conn.AccessToken = strConn.Split("|")(1)
+                conn.Open()
+            End If
+        End Function
     Public Function MailSender(ByVal toWho As String, ByVal SendersName As String, ByVal Subject As String, ByVal Body As String, ByVal IPForMail As String) As Boolean
         Dim objMail As MailMessage
         Dim objMailAttach As MailAttachment
@@ -98,6 +99,7 @@ Public Class DAL
         End If
         If ConnSP.State = ConnectionState.Open Then ConnSP.Close()
             ConnSP.ConnectionString = strConn.Split("|")(0)
+            ConnSP.AccessToken = strConn.Split("|")(1)
             ConnSP.Open()
         Comm.Connection = ConnSP
         Comm.CommandText = strPar
@@ -139,6 +141,7 @@ Public Class DAL
         End If
         If ConnSP.State = ConnectionState.Open Then ConnSP.Close()
             ConnSP.ConnectionString = strConn.Split("|")(0)
+            ConnSP.AccessToken = strConn.Split("|")(1)
             ConnSP.Open()
         Dim rsAdap As New SqlDataAdapter(strPar, ConnSP)
         Dim dsRslts As New DataSet
