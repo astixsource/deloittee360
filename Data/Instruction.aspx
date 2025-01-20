@@ -1,4 +1,4 @@
-﻿<%@ Page  Language="VB" MasterPageFile="~/Data/Site.master" AutoEventWireup="true" CodeFile="Instruction.aspx.vb" Inherits="_Welcome" %>
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/Data/Site.master" AutoEventWireup="true" CodeFile="Instruction.aspx.vb" Inherits="_Welcome" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <script src="../Scripts/instructionJS.js"></script>
@@ -57,7 +57,7 @@
                             <td style="width: 100px; height: 35px;">
                                 <p><strong>Often</strong></p>
                             </td>
-                            <td style="width: 363.6px; height: 35px;">
+                             <td style="width: 363.6px; height: 35px;">
                                 <p>Individual demonstrates the competency most of the time, and it is a strong aspect of their performance. They frequently exhibit proficiency in this competency, meeting or exceeding expectations.</p>
                             </td>
                         </tr>
@@ -68,7 +68,7 @@
                             <td style="width: 100px; height: 35px;">
                                 <p><strong>Sometimes</strong></p>
                             </td>
-                            <td style="width: 363.6px; height: 35px;">
+                             <td style="width: 363.6px; height: 35px;">
                                 <p>Individual demonstrates the competency regularly, but there is room for improvement. They show competence, but there are areas where their performance can be enhanced.</p>
                             </td>
                         </tr>
@@ -79,7 +79,7 @@
                             <td style="width: 100px; height: 49px;">
                                 <p><strong>Occasionally</strong></p>
                             </td>
-                            <td style="width: 363.6px; height: 49px;">
+                             <td style="width: 363.6px; height: 35px;">
                                 <p>Individual demonstrates the competency on occasion, but it is not consistent. There are noticeable gaps in their proficiency, and it is not a regular occurrence.</p>
                             </td>
                         </tr>
@@ -90,7 +90,7 @@
                             <td style="width: 100px; height: 35px;">
                                 <p><strong>Rarely</strong></p>
                             </td>
-                            <td style="width: 363.6px; height: 35px;">
+                             <td style="width: 363.6px; height: 35px;">
                                 <p>Competency is rarely demonstrated by the individual, and there is a significant need for improvement. It is seldom seen in their performance.</p>
                             </td>
                         </tr>
@@ -102,7 +102,7 @@
                             <td style="width: 100px; height: 35px;">
                                 <p><strong>Cannot rate</strong></p>
                             </td>
-                            <td style="width: 363.6px; height: 35px;">
+                             <td style="width: 363.6px; height: 35px;">
                                 <p>Did not have an opportunity to observe this person in this capacity</p>
                             </td>
                         </tr>
