@@ -4,6 +4,8 @@ Imports System.Text.RegularExpressions
 Imports System.Data
 Imports System.Web
 Imports System.Web.Helpers
+Imports Azure.Identity
+Imports Azure.Core
 
 
 Partial Class Login
@@ -14,10 +16,13 @@ Partial Class Login
     Dim drdr As SqlDataReader
     Dim objCon As SqlConnection
     Dim objCom As SqlCommand
+    Dim _tenantId As String = ConfigurationManager.AppSettings("_tenantId")
+    Dim _clientId As String = ConfigurationManager.AppSettings("_clientId")
 
     Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load, Me.Load
         'btnLogin.Attributes.Add("onclick", "javascript:return fnValidate()")
         If Page.IsPostBack = False Then
+
             Session.Abandon()
             Session.Clear()
             Session.RemoveAll()
@@ -33,8 +38,8 @@ Partial Class Login
             '    .Secure = Request.IsSecureConnection
             '}
             'Response.Cookies.Add(antiForgeryCookie)
-            Dim strConn1 As String = Convert.ToString(HttpContext.Current.Application("DbConnectionString"))
-            hdnaccesstoken.Value = strConn1
+            ' Dim strConn1 As String = Convert.ToString(HttpContext.Current.Application("DbConnectionString"))
+            'hdnaccesstoken.Value = strConn1
         End If
     End Sub
 
@@ -172,7 +177,8 @@ Partial Class Login
                 objCom2.CommandTimeout = 0
                 Dim drdr As SqlDataReader
                 Dim cycleName As String = ""
-                Objcon2.AccessToken = strConn.Split("|")(1)
+
+                'Objcon2.AccessToken = clsAccesstoken.getazureAccessToken()
                 Objcon2.Open()
                 drdr = objCom2.ExecuteReader
                 drdr.Read()

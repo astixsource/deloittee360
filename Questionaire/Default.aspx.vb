@@ -34,7 +34,7 @@ Partial Class Questionaire_Default
             Dim MaxPGNmbr As Integer
 
             Try
-                Objcon.AccessToken = strConn.Split("|")(1)
+                'Objcon.AccessToken = strConn.Split("|")(1)
                 Objcon.Open()
                 drdr = objCom.ExecuteReader()
                 drdr.Read()

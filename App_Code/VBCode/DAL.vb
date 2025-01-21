@@ -20,7 +20,7 @@ Public Class DAL
             conn = New SqlConnection(strConn.Split("|")(0))
 
             If conn.State = 0 Then
-                conn.AccessToken = strConn.Split("|")(1)
+                'conn.AccessToken = strConn.Split("|")(1)
                 conn.Open()
             End If
         End Function
@@ -99,7 +99,7 @@ Public Class DAL
         End If
         If ConnSP.State = ConnectionState.Open Then ConnSP.Close()
             ConnSP.ConnectionString = strConn.Split("|")(0)
-            ConnSP.AccessToken = strConn.Split("|")(1)
+            ' ConnSP.AccessToken = strConn.Split("|")(1)
             ConnSP.Open()
         Comm.Connection = ConnSP
         Comm.CommandText = strPar
@@ -141,7 +141,7 @@ Public Class DAL
         End If
         If ConnSP.State = ConnectionState.Open Then ConnSP.Close()
             ConnSP.ConnectionString = strConn.Split("|")(0)
-            ConnSP.AccessToken = strConn.Split("|")(1)
+            ' ConnSP.AccessToken = strConn.Split("|")(1)
             ConnSP.Open()
         Dim rsAdap As New SqlDataAdapter(strPar, ConnSP)
         Dim dsRslts As New DataSet
