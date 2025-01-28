@@ -1,4 +1,4 @@
-﻿<%@ Page  Language="VB" MasterPageFile="~/Data/Site.master" AutoEventWireup="false" CodeFile="frmQuestionMain.aspx.vb" Inherits="Questionaire_frmQuestionMain" %>
+﻿<%@ Page Language="VB" MasterPageFile="~/Data/Site.master" AutoEventWireup="false" CodeFile="frmQuestionMain.aspx.vb" Inherits="Questionaire_frmQuestionMain" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <link href="../Content/jquery-ui.css" rel="stylesheet" type="text/css" />
@@ -18,7 +18,7 @@
         .container {
             margin: 20px auto;
             padding: 10px;
-            max-width: 900px;
+            /*  max-width: 900px;*/
         }
 
         .instructions {
@@ -27,6 +27,17 @@
             border-left: 5px solid #4caf50;
             margin-bottom: 20px;
         }
+
+        table.no-border {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            table.no-border,
+            table.no-border td,
+            table.no-border th {
+                border: none;
+            }
 
 
         input[type="radio"].styled-radio {
@@ -135,11 +146,11 @@
             margin-left: 15px;
         }
 
-         .btn {
+        .btn {
             padding: 12px 30px; /* Adjust padding for consistent size */
             font-size: 16px;
             border: none;
-           /* border-radius: 5px;*/
+            /* border-radius: 5px;*/
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
             text-align: center;
@@ -172,24 +183,26 @@
         }
 
             .btn-next:hover {
-                background-color: #88bd26 !important;
+                background-color: #5e6271 !important;
+                color: white;
             }
 
             .btn-next:active {
                 background-color: #1e7e34;
             }
 
-        .btn-submit  {
-            background-color:#88bd26 !important;
+        .btn-submit {
+            background-color: #88bd26 !important;
             color: white;
         }
 
             .btn-submit:hover {
-               background-color: #88bd26 !important;
+                background-color: #5e6271 !important;
+                color: white;
             }
 
             .btn-submit:active {
-               background-color: #1e7e34;
+                background-color: #1e7e34;
             }
 
         .btn-danger {
@@ -215,7 +228,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <!--Ques Heading-->
-<div class="section-title" style="background-color: #88bd26; /*border-radius: 5px*/">
+    <div class="section-title" style="background-color: #88bd26; /*border-radius: 5px*/">
         <%--<h3 class="text-center" style="color: white;">INSTRUCTIONS</h3>--%>
         <h3 class="text-center" style="color: white;">WELCOME TO HCAS 360 DEGREE FEEDBACK SURVEY<br />
             <span class="text-center" style="color: white;" id="h6">Please respond to each statement on the scale provided alongside from "Always" to "Rarely".<br />
@@ -243,7 +256,7 @@
         <div class="col-md-6 ques-header-left">
             <table class="Questable" style="width: 100%; border-collapse: collapse;">
                 <tr>
-                    <th style="color: black;width: 100px;" id="tdPageNum1">
+                    <th style="color: black; width: 100px;" id="tdPageNum1">
                         <br>
                     </th>
                     <th style="color: white;" id="dvName">
@@ -279,14 +292,14 @@
 
     <!--divComments Section end-->
     <div class="ques-row w-100" id="divComments" style="display: none; overflow-x: hidden; overflow-y: hidden;">
-      
+
         <div class="row mb-2">
             <div class="col-md-6 align-left-middile" id="tdCmmnt1" runat="server"><strong>What are the overall strengths that this individual demonstrates?</strong></div>
             <div class="col-md-6">
                 <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox1" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
             </div>
         </div>
-    
+
         <div class="row mb-2">
             <div class="col-md-6 align-left-middile" id="tdCmmnt2" runat="server"><strong>What are the areas in which the individual can develop?</strong></div>
             <div class="col-md-6">
@@ -295,14 +308,14 @@
         </div>
 
 
-          <%--  <div class="row mb-2">
+        <%--  <div class="row mb-2">
             <div class="col-md-6 align-right-middile" id="tdCmmnt1" runat="server"><strong>Keeping your current role in mind, what would be described as your areas of strength?</strong></div>
             <div class="col-md-6">
                 <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox1" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
             </div>
         </div>--%>
 
-            <%--  <div class="row mb-2">
+        <%--  <div class="row mb-2">
             <div class="col-md-6 align-right-middile" id="tdCmmnt3" runat="server"><strong>What are the areas you can develop further in order to be more effective in your current role?</strong></div>
             <div class="col-md-6">
                 <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox3" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
@@ -327,7 +340,7 @@
 
             </div>
         </div>
-       <%-- <div class="col-md-1 text-right">
+        <%-- <div class="col-md-1 text-right">
             <input type="button" class="btn btn-danger" id="btnSaveExit" onclick="fnSaveExit()" value="Exit" />
         </div>--%>
     </div>

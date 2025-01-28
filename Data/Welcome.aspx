@@ -15,7 +15,7 @@
     <div class="row no-gutters">
         <div class="col-md-6">
             <div class="grid-welcome-bg">
-                <img src="../Images/Instruction.jpg" class="info-bg" />
+                <img src="../Images/Welcome.jpg" class="info-bg" />
             </div>
         </div>
         <div class="col-md-6">

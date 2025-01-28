@@ -6,15 +6,15 @@
         div.sec-relationship {
             display: inline-block;
             margin: 10px 10px 10px 10px;
-            width: 200px;
+            width: 300px;
             vertical-align: top;
         }
  
         div.sec-relationship-img {
            
             border-radius: 100px;
-            border: 1px solid #444;
-            margin-left: 50px;
+        /*    border: 1px solid #444;*/
+        /*    margin-left: 50px;*/
         }
  
         div.sec-relationship-lbl {
@@ -34,9 +34,9 @@
 
 .sec-relationship {
     text-align: left;
-    width: 200px; 
-    font-style: italic;
-    font-size: 13px;/* Adjust width as needed for alignment */
+    width: 300px; 
+    /*font-style: italic;
+    font-size: 13px;*//* Adjust width as needed for alignment */
 }
 
 .sec-relationship-img img {

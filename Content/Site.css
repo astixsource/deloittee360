@@ -18,7 +18,7 @@ body {
     padding: 0px;
     background-color: #D0D0CE;
     font-size: .915rem;
-    font-family: 'Open Sans',  sans-serif;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 
 *,
@@ -449,13 +449,13 @@ Content Area (right)
         height: auto; /* Maintain aspect ratio */
     }
 
-    .section-title > .title-line-center,
-    .section-title-left > .title-line-left {
-        width: 160px;
-        height: 4px;
-        background: #E02213;
-        display: block;
-    }
+.section-title > .title-line-center,
+.section-title-left > .title-line-left {
+    width: 160px;
+    height: 4px;
+    background: #88bd26;
+    display: block;
+}
 
     .section-title > .title-line-center {
         margin-right: auto;
@@ -464,7 +464,7 @@ Content Area (right)
 
 .grid-welcome-bg {
     min-height: 175px;
-    height: 100%;
+    height: 70%;
     width: 100%;
     box-sizing: border-box;
     background-position: center center;
@@ -517,7 +517,7 @@ input[type="radio"].styled-radio {
     }
 
 .grid {
-    padding: 50px 20px;
+  /*  padding: 50px 20px;*/
     box-sizing: border-box;
     margin: 0px;
     display: flex;
@@ -531,6 +531,7 @@ input[type="radio"].styled-radio {
 
     .grid.bg_two {
         background-color: white;
+        border: 1px solid #88bd26;
     }
 
 table.feedback_tbl th {
@@ -1033,7 +1034,7 @@ input {
 }
 
     .btns:hover {
-        background-color: #005f8a;
+        background-color: #88bd26;
     }
 
     .btns.btn-submit {
@@ -1043,7 +1044,7 @@ input {
     }
 
         .btns.btn-submit:hover {
-            background-color: #26890d;
+            background-color: #5e6271;
         }
 
 /* Links */

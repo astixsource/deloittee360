@@ -211,6 +211,8 @@ Partial Class Login
                         strResponse = "1|Data/frmMain.aspx"  'Response.Redirect("Data/frmMain.aspx")
                     Else
                         strResponse = "1|Data/Instruction.aspx?NodeID="
+                        'strResponse = "1|Data/Dashboard.aspx?NodeID="
+
                     End If
 
                 End If

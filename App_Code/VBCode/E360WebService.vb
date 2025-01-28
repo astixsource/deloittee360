@@ -79,7 +79,7 @@ Public Class E360WebService
         Sdap.Fill(Ds)
         Dim sb As New StringBuilder
 
-        sb = sb.Append("<div class='section-title'><h3 class='text-center'>Survey Landing Page</h3></br><h6 class='text-center'></h6></div>")
+        sb = sb.Append("<div class='section-title'><h3 class='text-center'>Survey Landing Page</h3><div class='title-line-center'></div></div>")
 
 
         For i As Integer = 0 To Ds.Tables(0).Rows.Count - 1
@@ -439,7 +439,7 @@ Public Class E360WebService
                 strTable = strTable & "<div class='ques-row row'>"
                 '  strTable = strTable & "<div class='ques-row'>"
                 strTable = strTable & "<div Class='col-md-6'>"
-                strTable = strTable & "<table class='table table-sm'>"
+                strTable = strTable & "<table class=''>"
                 strTable = strTable & "<tr>"
                 strTable = strTable & "<td width='6%'><b>"
                 strTable = strTable & drdr.Item("SrlNmbr")
@@ -450,7 +450,7 @@ Public Class E360WebService
                 strTable = strTable & "</tr>"
                 strTable = strTable & "</table></div>"
                 strTable = strTable & "<div class='col-md-6'>"
-                strTable = strTable & "<table class='table text-center table-sm' iden='tblMain'>"
+                strTable = strTable & "<table class='no-border text-center' iden='tblMain'>"
                 strTable = strTable & "<tr>"
                 Dim i As Integer = 1
                 Dim rdovalue As String = ""
@@ -478,7 +478,7 @@ Public Class E360WebService
                 'For i = 0 To 4
                 For i = 5 To 0 Step -1
                     rdovalue = drdr.Item("RspDetId") & "^" & i
-                    strTable = strTable & " <td class='text-center' style='width:14.28%; text-align:center;  padding:10px;'>"
+                    strTable = strTable & " <td class='text-center' style='width:14.28%; text-align:center;  padding:0px;'>"
 
                     If (drdr.Item("Answ") = i) Then
                         ' Checked radio button (ensure it has the correct checked style)
