@@ -17,7 +17,7 @@ Partial Class Questionaire_frmQuestionMain
         hdnRspID.Value = RspID
         hdnPGNmbr.Value = Request.QueryString("PgNmbr")
         hdnName.Value = Replace(Name, "_", " ")
-        LevelID = 1 'Request.QueryString("LevelID")
+        LevelID = Request.QueryString("LevelID")
         hdnLevelID.Value = LevelID
         Dim panelLogout As Panel
         panelLogout = DirectCast(Page.Master.FindControl("panelLogout"), Panel)

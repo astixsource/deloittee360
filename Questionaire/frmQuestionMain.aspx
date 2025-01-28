@@ -167,12 +167,12 @@
             }
 
         .btn-next {
-            background-color: #28a745;
+            background-color: #88bd26 !important;
             color: white;
         }
 
             .btn-next:hover {
-                background-color: #218838;
+                background-color: #88bd26 !important;
             }
 
             .btn-next:active {
@@ -180,12 +180,12 @@
             }
 
         .btn-submit  {
-            background-color: #28a745;
+            background-color:#88bd26 !important;
             color: white;
         }
 
             .btn-submit:hover {
-               background-color: #218838;
+               background-color: #88bd26 !important;
             }
 
             .btn-submit:active {
@@ -193,13 +193,13 @@
             }
 
         .btn-danger {
-            background-color: #dc3545;
+            background-color: black !important;
             color: white;
             /*padding: 12px 25px;*/ /* Match size with other buttons */
         }
 
             .btn-danger:hover {
-                background-color: #c82333;
+                background-color: black !important;
             }
 
             .btn-danger:active {
@@ -281,14 +281,14 @@
     <div class="ques-row w-100" id="divComments" style="display: none; overflow-x: hidden; overflow-y: hidden;">
       
         <div class="row mb-2">
-            <div class="col-md-6 align-right-middile" id="tdCmmnt1" runat="server"><strong>Keeping the person's current role in mind, what would be described as their areas of strength?</strong></div>
+            <div class="col-md-6 align-left-middile" id="tdCmmnt1" runat="server"><strong>What are the overall strengths that this individual demonstrates?</strong></div>
             <div class="col-md-6">
                 <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox1" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
             </div>
         </div>
     
         <div class="row mb-2">
-            <div class="col-md-6 align-right-middile" id="tdCmmnt2" runat="server"><strong>What are the areas this person can develop further in order to be more effective in their current role?</strong></div>
+            <div class="col-md-6 align-left-middile" id="tdCmmnt2" runat="server"><strong>What are the areas in which the individual can develop?</strong></div>
             <div class="col-md-6">
                 <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox2" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
             </div>

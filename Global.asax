@@ -25,7 +25,7 @@
             string _clientId = ConfigurationManager.AppSettings["_clientId"];
             string _token = "";
             string connectionString = "";
-
+            //Application["DbConnectionString"] = "";
             // Initialize the SecretClient
             var secretClient = new Azure.Security.KeyVault.Secrets.SecretClient(new Uri(keyVaultUri), new Azure.Identity.DefaultAzureCredential());
             //string _clientSecret = secretClient.GetSecret("DeloitteProdDBConnection").Value.Value;

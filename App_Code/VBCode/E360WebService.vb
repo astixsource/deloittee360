@@ -510,49 +510,49 @@ Public Class E360WebService
                 'strColorTable = strColorTable & "<td id='tdColor" & indx & "' ><img src='../Styles/Images/trans.gif' height='12px'></td>"
 
                 indx = indx + 1
-                strTxtLastValue = IIf(IsDBNull(drdr.Item(9)), "", drdr.Item(9))
+                strTxtLastValue = IIf(IsDBNull(drdr.Item(7)), "", drdr.Item(7))
             End While
 
-            'If PGNmbr <> 8 Then
-            '    strTable = strTable & "<table class='w-100 mt-2'>"
-            '    '''''''TExtBox Afet Each Competency
-            '    strTable = strTable & "<tr>"
-            '    strTable = strTable & "<td class='text-center'><b><i><u>" & "Comments for " & OldName & "</u></i>: Please provide your comments regarding the questions above (optional)</b></td>"
-            '    'strTable = strTable & "<td colspan='2'><b><i></i>  Please provide your comments regarding the questions above (optional)</b></td>"
-            '    strTable = strTable & "</tr>"
-            '    strTable = strTable & "<tr>"
+            If PGNmbr <> 9 Then
+                strTable = strTable & "<table class='w-100 mt-2'>"
+                '''''''TExtBox Afet Each Competency
+                strTable = strTable & "<tr>"
+                strTable = strTable & "<td class='text-center'><b><i><u>" & "Comments for " & OldName & "</u></i> : Please provide your comments regarding the questions above (optional)</b></td>"
+                'strTable = strTable & "<td colspan='2'><b><i></i>  Please provide your comments regarding the questions above (optional)</b></td>"
+                strTable = strTable & "</tr>"
+                strTable = strTable & "<tr>"
 
 
-            '    Dim arr1() As String
-            '    arr1 = cmptncyString.Split("|")
-            '    Dim kk1 As Integer
-            '    'strTxtLastValue1 &= IIf(IsDBNull(drdr.Item(8)), "", drdr.Item(8)) & "|"
-            '    For kk1 = 0 To arr1.Length - 1
-            '        If (strTxtLastValue = arr1(kk1).Split("^")(0)) Then
-            '            txtcomment = arr1(kk1).Split("^")(1)
-            '        End If
-            '    Next
+                Dim arr1() As String
+                arr1 = cmptncyString.Split("|")
+                Dim kk1 As Integer
+                'strTxtLastValue1 &= IIf(IsDBNull(drdr.Item(7)), "", drdr.Item(7)) & "|"
+                For kk1 = 0 To arr1.Length - 1
+                    If (strTxtLastValue = arr1(kk1).Split("^")(0)) Then
+                        txtcomment = arr1(kk1).Split("^")(1)
+                    End If
+                Next
 
-            '    If (txtcomment = "") Then ' Eng
+                If (txtcomment = "") Then ' Eng
 
-            '        ' strTable = strTable & "<td class='text-center' id='tdCom" & cmtIndex & "'><textarea class='form-control wm-50' id='txtCompCmt" & cmtIndex & "' rows='3'  onkeypress='fnCheckLengthAnsCmt(this)' onkeyup='fnRemoveChar(this);fnAdjustRows(this)' onmousedown=fnClearTextbox('txtCompCmt" & cmtIndex & "') ></textarea></td>" '<div style='width:50%; margin: 0 auto;'></div>
-            '        strTable = strTable & "<td class='text-center' id='tdCom" & cmtIndex & "'><textarea class='form-control wm-50' id='txtCompCmt" & cmtIndex & "' rows='3'  onkeypress='return IsAlphaNumeric(event);' onkeyup='fnAdjustRows(this)' onmousedown=fnClearTextbox('txtCompCmt" & cmtIndex & "') ></textarea><span id='error' style='color: Red; display: none'>* Some Special Characters not allowed.</span></td>" '<div style='width:50%; margin: 0 auto;'></div>
-            '    Else
-            '        ' strTable = strTable & "<td class='text-center' id='tdCom" & cmtIndex & "'><textarea class='form-control wm-50' id='txtCompCmt" & cmtIndex & "' rows='3' onkeypress='fnCheckLengthAnsCmt(this)' onkeyup='fnRemoveChar(this);fnAdjustRows(this)' onmousedown=fnClearTextbox('txtCompCmt" & cmtIndex & "') >" & txtcomment & "</textarea></td> "
-            '        strTable = strTable & "<td class='text-center' id='tdCom" & cmtIndex & "'><textarea class='form-control wm-50' id='txtCompCmt" & cmtIndex & "' rows='3' onkeypress='return IsAlphaNumeric(event);' onkeyup='fnAdjustRows(this)' onmousedown=fnClearTextbox('txtCompCmt" & cmtIndex & "') >" & txtcomment & "</textarea><span id='error' style='color: Red; display: none'>* Some Special Characters  not allowed.</span></td> "
-            '    End If
+                    ' strTable = strTable & "<td class='text-center' id='tdCom" & cmtIndex & "'><textarea class='form-control wm-50' id='txtCompCmt" & cmtIndex & "' rows='3'  onkeypress='fnCheckLengthAnsCmt(this)' onkeyup='fnRemoveChar(this);fnAdjustRows(this)' onmousedown=fnClearTextbox('txtCompCmt" & cmtIndex & "') ></textarea></td>" '<div style='width:50%; margin: 0 auto;'></div>
+                    strTable = strTable & "<td class='text-center' id='tdCom" & cmtIndex & "'><textarea class='form-control wm-50' id='txtCompCmt" & cmtIndex & "' rows='3'  onkeypress='return IsAlphaNumeric(event);' onkeyup='fnAdjustRows(this)' onmousedown=fnClearTextbox('txtCompCmt" & cmtIndex & "') ></textarea><span id='error' style='color: Red; display: none'>* Some Special Characters not allowed.</span></td>" '<div style='width:50%; margin: 0 auto;'></div>
+                Else
+                    ' strTable = strTable & "<td class='text-center' id='tdCom" & cmtIndex & "'><textarea class='form-control wm-50' id='txtCompCmt" & cmtIndex & "' rows='3' onkeypress='fnCheckLengthAnsCmt(this)' onkeyup='fnRemoveChar(this);fnAdjustRows(this)' onmousedown=fnClearTextbox('txtCompCmt" & cmtIndex & "') >" & txtcomment & "</textarea></td> "
+                    strTable = strTable & "<td class='text-center' id='tdCom" & cmtIndex & "'><textarea class='form-control wm-50' id='txtCompCmt" & cmtIndex & "' rows='3' onkeypress='return IsAlphaNumeric(event);' onkeyup='fnAdjustRows(this)' onmousedown=fnClearTextbox('txtCompCmt" & cmtIndex & "') >" & txtcomment & "</textarea><span id='error' style='color: Red; display: none'>* Some Special Characters  not allowed.</span></td> "
+                End If
 
-            '    CmptncyCmntCntr = CmptncyCmntCntr + 1
-            '    'strTable &= "</td>"
-            '    cmtIndex = cmtIndex + 1
+                CmptncyCmntCntr = CmptncyCmntCntr + 1
+                'strTable &= "</td>"
+                cmtIndex = cmtIndex + 1
 
 
-            '    strTable = strTable & "</tr>"
-            '    'hdnCmptncyCmntCntr.Value = CmptncyCmntCntr
+                strTable = strTable & "</tr>"
+                'hdnCmptncyCmntCntr.Value = CmptncyCmntCntr
 
-            '    strTable = strTable & "</table>"
-            '    ''''''''''END
-            'End If
+                strTable = strTable & "</table>"
+                ''''''''''END
+            End If
 
             strReturn = "1@" & strTable & "@" & strTxtLastValue1
         Catch ex As Exception
