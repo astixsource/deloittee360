@@ -202,6 +202,7 @@
         });
         var dTable = null;
         $(document).ready(function () {
+            $("#liHome").hide();
             fnGetNomineeDetails();
             dTable = new DataTable('#tblMainNominee', {
                 paging: false,
