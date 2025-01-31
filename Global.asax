@@ -19,21 +19,21 @@
         if (Application["DbConnectionString"] == null)
         {
             string keyVaultUri = ConfigurationManager.AppSettings["_AzureKeyVaultUri"];
-            string _server = ConfigurationManager.AppSettings["_server"];
-            string _database = ConfigurationManager.AppSettings["_database"];
+            string _server = "srv-sqldeloitte.database.windows.net";// ConfigurationManager.AppSettings["_server"];
+            string _database = "db_Deloitte_HCAS_360_Dev";// ConfigurationManager.AppSettings["_database"];
             string _tenantId = ConfigurationManager.AppSettings["_tenantId"];
             string _clientId = ConfigurationManager.AppSettings["_clientId"];
             string _token = "";
             string connectionString = "";
             //Application["DbConnectionString"] = "";
             // Initialize the SecretClient
-            var secretClient = new Azure.Security.KeyVault.Secrets.SecretClient(new Uri(keyVaultUri), new Azure.Identity.DefaultAzureCredential());
+            // var secretClient = new Azure.Security.KeyVault.Secrets.SecretClient(new Uri(keyVaultUri), new Azure.Identity.DefaultAzureCredential());
             //string _clientSecret = secretClient.GetSecret("DeloitteProdDBConnection").Value.Value;
             // Application["_clientSecret"] = _clientSecret;
 
             // Retrieve the secrets
-            string _dbUserName = secretClient.GetSecret("Secret-PRODDB-Username").Value.Value;
-            string _dbPassword = secretClient.GetSecret("Secret-PRODDB-Password").Value.Value;
+            string _dbUserName = "sqladmin";// secretClient.GetSecret("Secret-PRODDB-Username").Value.Value;
+            string _dbPassword = "SAFF@31324FASD$";// secretClient.GetSecret("Secret-PRODDB-Password").Value.Value;
             // Construct the SQL connection string
             connectionString = "server=" + _server + ";database=" + _database + ";uid=" + _dbUserName + ";pwd=" + _dbPassword + ";connection timeout=0";
 

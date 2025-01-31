@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Data/Site.master" AutoEventWireup="true" CodeFile="frmNominateRater.aspx.cs" Inherits="Data_frmNominateRater" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Data/Site.master" AutoEventWireup="true" CodeFile="frmNominateRaterApprove.aspx.cs" Inherits="frmNominateRaterApprove" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <link href="../Content/jquery-ui.css" rel="stylesheet" />
@@ -10,8 +10,8 @@
     <script src="../JDatatable/fixedHeader.dataTables.js"></script>
     <style>
         .main-content {
-            max-width: 97%;
-            width: 97%;
+            max-width: 97.5%;
+            width: 97.5%;
         }
 
         body {
@@ -149,6 +149,19 @@
             color: #ffffff;
             font-size: 10.5pt;
         }
+        div.clscoacheelist{
+            border: 1px solid #354e09;
+            background-color: #86bc25;
+            color: #ffffff;
+            padding:3px 2px 3px 4px;
+            margin-block:2px;
+            cursor:pointer;
+        }
+        div.clscoacheelist:hover{
+            border: 1px solid #354e09;
+            background-color: #000000;
+            color: #ffffff;
+        }
     </style>
     <script>
         $.widget('custom.mcautocomplete', $.ui.autocomplete, {
@@ -169,10 +182,8 @@
                 }
                 var cnt = 0;
                 $.each(items, function (index, item) {
-                    if ($("#tblMainNominee tr[nomineid='" + item["NodeID"] + "']").length == 0) {
-                        self._renderItem(ul, item, cnt);
-                        cnt++;
-                    }
+                    self._renderItem(ul, item, cnt);
+                    cnt++;
                 });
             },
             _renderItem: function (ul, item, cnt) {
@@ -202,7 +213,7 @@
         });
         var dTable = null;
         $(document).ready(function () {
-            fnGetNomineeDetails();
+            $("#dvFadeForProcessing").hide();
             dTable = new DataTable('#tblMainNominee', {
                 paging: false,
                 scrollCollapse: true,
@@ -215,7 +226,7 @@
             fnHideremoveicon();
         })
 
-        function fnGetNomineeDetails() {
+        function fnGetNomineeDetails(nodeid) {
 
             $("#dvFadeForProcessing").show();
             var LoginId = $("#MainContent_hdnLoginId").val();
@@ -233,6 +244,7 @@
                 fnShowmsg("Error:" + result._message);
             });
         }
+
         function fnBindAutocomplete() {
             $(".clsSearchUser").mcautocomplete({
                 open: function () {
@@ -348,20 +360,17 @@
                         //  $(this).val((ui.item ? ui.item.InvCode : ''));
                         //alert(ui.item.FullName)
                         //tblMainNominee
-                        var str = "<tr flg='0' flgvalid='1' nomineid='" + ui.item.NodeID + "' rpid='" + $("#MainContent_ddlRelatioShip option:selected").val() + "'>";
+                        var str = "<tr empid='" + ui.item.NodeID + "' rip='" + $("#MainContent_ddlRelatioShip option:selected").val() + "'>";
                         str += "<td>" + $("#MainContent_ddlRelatioShip option:selected").text() + "</td>";
                         str += "<td>" + ui.item.FullName + "</td>";
                         str += "<td>" + ui.item.EMailID + "</td>";
                         str += "<td>" + ui.item.Function + "</td>";
                         str += "<td>" + ui.item.Department + "</td>";
                         str += "<td>" + ui.item.Designation + "</td>";
-                        str += "<td>Initial draft</td>";
-                        str += "<td class='text-center' style='color:red;cursor:pointer'><i class='fa fa-remove' onclick='fnRemoverow(this)'></i></td>";
+                        str += "<td class='text-center'><i class='fa fa-remove' onclick='fnRemoverow(this)'></i></td>";
                         str += "</tr>";
                         $("#tblMainNominee tbody").find("td.dt-empty").closest("tr").remove();
                         $("#tblMainNominee tbody").append(str);
-                        $("#MainContent_ddlRelatioShip option").eq(0).prop("selected", true);
-                        //fnDisableCategory();
                         // dTable.DataTable().columns.adjust().draw();
                         //$(this).closest("div").prev().find("span.clsnomiTitle").html(" Edit");
                         //$(this).closest("table").next().find("input").attr("sid", ui.item.NodeID);
@@ -376,16 +385,6 @@
             })
 
         }
-
-        function fnDisableCategory() {
-            var $trs = $("#tblMainNominee tbody tr[flgvalid='1']");
-            $("#MainContent_ddlRelatioShip option").prop("disabled", false);
-            for (var i = 0; i < $trs.length; i++) {
-                var rpid = $trs.eq(i).attr("rpid");
-                $("#MainContent_ddlRelatioShip option[value='" + rpid +"']").prop("disabled", true);
-            }
-        }
-
         function fnShowHideDiv(sender) {
             if ($(sender).find("i.fa").hasClass("fa-arrow-circle-o-down")) {
                 $("div.clsNomineebodycontainer").hide();
@@ -447,94 +446,19 @@
         function fnRemoverow(sender) {
             $(sender).closest("tr").remove();
         }
-        function fnShowmsg(msg) {
-            $("#dvAlert").html(msg);
-            $("#dvAlert").dialog({
-                title: "Alert!",
-                modal: true,
-                width: "auto",
-                height: "auto",
-                dialogClass: "alertcss",
-                close: function () {
-                    $(this).dialog('destroy');
-                    $("#dvAlert").html("");
-                },
-                buttons: [
-                    {
-                        text: "OK",
-                        "class": "btns btn-submit",
-                        click: function () {
-                            $("#dvAlert").dialog('close');
-                        }
-                    }
-                ]
-            })
-        }
-
-
-        function fnRemoveFromDB(sender) {
-            var LoginId = $("#MainContent_hdnLoginId").val();
-            var str = "<div>Are you sure to remove this nominee?</div>";
-            $("#dvDialog").html(str);
-            $("#dvDialog").dialog({
-                title: "Confirmation :",
-                modal: true,
-                width: "300",
-                height: "auto",
-                close: function () {
-                    $(this).dialog('destroy');
-                    $("#dvDialog").html("");
-                },
-                buttons: {
-                    "Yes": function () {
-                        var arr = [];
-                        var ApseNodeId = $("#MainContent_hdnNodeId").val();
-                        arr.push({
-                            ApseNodeId: ApseNodeId, ApsrNodeId: $(sender).closest("tr").attr("nomineid"), RltshpId: $(sender).closest("tr").attr("rpid"), flgAction: 1
-                        });
-                        $("#dvFadeForProcessing").show();
-                        $(this).dialog('close');
-                        PageMethods.fnSaveandDeleteNomineeData(LoginId, arr, 0, function (result) {
-                            $("#dvFadeForProcessing").hide();
-                            if (result.split("|")[0] == 2) {
-                                fnShowmsg("Error:" + result.split("|")[1]);
-                                return false;
-                            }
-                            fnGetNomineeDetails();
-
-                        }, function (result) {
-                            $("#dvFadeForProcessing").hide();
-                            fnShowmsg("Error:" + result._message);
-                        });
-                    },
-                    "No": function () {
-                        $(this).dialog('close');
-                    }
-                }
-            })
-
-        }
-
         function fnSaveAndSubmit(flg) {
             var $trs = $("#tblMainNominee tr[flg='0']");
-            if ($trs.length == 0 && flg == 0) {
-                fnShowmsg("No data found for this action, kindly add new nominee first!");
+            if ($trs.length == 0) {
+                fnShowmsg("Kindly Select BPHR First!");
                 return false;
             }
-            if (flg == 1) {
-                $trs = $("#tblMainNominee tbody tr[flgvalid='1']");
-                if ($trs.length >= 0 && $trs.length < 3) {
-                    fnShowmsg("Kindly add minimum 3 nominees first!");
-                    return false;
-                }
-            }
-            var LoginId = $("#MainContent_hdnLoginId").val();
-            var str = "<div>Are you sure to " + (flg == 0 ? "save" : "submit") + "?</div>";
+            var LoginId = $("#ConatntMatter_hdnLoginId").val();
+            var str = "<div><b>Reason for cancellation:</b></div><div><textarea value='' rows='3' style='width:100%' id='txtReason' place='type here'></textarea></div>";
             $("#dvDialog").html(str);
             $("#dvDialog").dialog({
-                title: "Confirmation :",
+                title: "Cancellation confirmation For Slot :" + slotdescr,
                 modal: true,
-                width: "200",
+                width: "550",
                 height: "auto",
                 close: function () {
                     $(this).dialog('destroy');
@@ -542,40 +466,51 @@
                 },
                 buttons: {
                     "Yes": function () {
-                        var arr = [];
-                        var ApseNodeId = $("#MainContent_hdnNodeId").val();
-                        for (var i = 0; i < $trs.length; i++) {
-                            arr.push({
-                                ApseNodeId: ApseNodeId, ApsrNodeId: $trs.eq(i).attr("nomineid"), RltshpId: $trs.eq(i).attr("rpid"), flgAction: 0
-                            });
+                        var RemoverType = $("input[name='rdodelete']:checked").val();
+                        if ($("input[name='rdodelete']:checked").length == 0) {
+                            fnShowmsg("Kindly select 'Requested by' first!");
+                            $("#txtReason").focus();
+                            return false;
                         }
+
+                        if ($("#txtReason").val().trim().length == 0) {
+                            fnShowmsg("Kindly give the reason for cancellation first!");
+                            $("#txtReason").focus();
+                            return false;
+                        }
+                        else if ($("#txtReason").val().trim().length < 5) {
+                            fnShowmsg("Reason should be minimum 5 characters for this action");
+                            $("#txtReason").focus();
+                            return false;
+                        }
+
+                        var dd = $(sender).attr("dd");
+                        var hr = $(sender).attr("hr");
+                        var AssessorTimeSlotId = $(sender).attr("AssessorTimeSlotId");
+                        var ctrl = $(sender).closest("td");
+                        var LoginId = $("#ConatntMatter_hdnLogin").val();
+
+                        var ReasonText = $("#txtReason").val().trim();
                         $("#dvFadeForProcessing").show();
+                        var AssessorId = $("#ConatntMatter_ddlAssessor").val();
                         $(this).dialog('close');
-                        PageMethods.fnSaveandDeleteNomineeData(LoginId, arr, flg, function (result) {
+                        PageMethods.fnDeleteSlot(AssessorTimeSlotId, LoginId, RemoverType, AssessorId, ReasonText, function (result) {
                             $("#dvFadeForProcessing").hide();
-                            if (result.split("|")[0] == 2) {
-                                fnShowmsg("Error:" + result.split("|")[1]);
+                            if (result.split("|")[0] == 1) {
+                                alert("Error:" + result.split("|")[1]);
                                 return false;
                             }
-                            fnGetNomineeDetails();
+                            $("#dvFadeForProcessing").show();
+                            fnChangeAssessor();
 
-                        }, function (result) {
-                            $("#dvFadeForProcessing").hide();
-                            fnShowmsg("Error:" + result._message);
-                        });
+                        }, fnFailed);
                     },
                     "No": function () {
-
                         $(this).dialog('close');
                     }
                 }
             })
         }
-
-        function fnGotosurveypage() {
-            window.location.href = "Instruction.aspx?NodeID="
-        }
-
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
@@ -583,123 +518,58 @@
         <div class="col-md-12">
 
             <div class="section-title">
-                <h3 class="text-center">Nominate your Raters</h3>
+                <h3 class="text-center">Coachee Nomination List</h3>
                 <div class="title-line-center"></div>
             </div>
-            <h5 class="text-center">Nominate individuals for the rater groups listed below, ensuring a minimum of 3 nominations per category</h5>
+            <h6 class="text-center" style="font-size: 11.5pt">Please review the list of nominated raters submitted by your coachee and provide your approval or suggest changes as needed to ensure balanced and meaningful feedback.</h6>
 
-            <div id="btnMainbodyContainer">
-
-                <table id="tblMainNominee" style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th style="width: 10%">Category*
-                            </th>
-                            <th>Name*
-                            </th>
-                            <th style="width: 24%">Email ID*
-                            </th>
-                            <th style="width: 13%">Function*
-                            </th>
-                            <th style="width: 13%">Department*
-                            </th>
-                            <th style="width: 13%">Designation*
-                            </th>
-                            <th style="width: 10%">Status
-                            </th>
-                            <th style="width: 5%">Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="8">Select Category:
-                                <asp:DropDownList ID="ddlRelatioShip" Style="height: 33px; border: 1px solid #c0c0c0" AppendDataBoundItems="true" runat="server" AutoPostBack="false">
-                                    <asp:ListItem Value="0">-----</asp:ListItem>
-                                </asp:DropDownList>
-
-                                <input type="search" id="txtsearch" placeholder="search nominee" class="form-control w-75 d-inline-block clsSearchUser" />
-                            </th>
-                        </tr>
-                    </tfoot>
-                </table>
-
-                <%--<div style="margin: 5px 0px 10px 0px;" class="clsmainbody d-none">
-                    <div class="clsNomineebtncontainer">
-                        <label class="bg-secondary p-2 w-100 text-white" style="text-align: left">
-                            <span onclick="fnShowHideDiv(this)" style="cursor: pointer"><i class="fa fa-arrow-circle-o-down clsarrow" style="font-size: 13pt"></i><span class="clsnomiTitle">Enter</span> details of Review Partner: Nominee <span class="clsnomcount">1</span></span>
-
-                            <i class="fa fa-minus-circle float-end" onclick="fnRemoveNewNominee(this)" style="font-size: 16pt; margin-left: 10px; display: none" title="click to remove nominee"></i>
-                            <i class="fa fa-plus-circle float-end" onclick="fnAddNewNominee(this)" style="font-size: 16pt;" title="click to add new nominee"></i>
-                        </label>
+            <div class="row">
+                <div class="col-md-3" style="width:18%;border-right:1px solid #b0b0b0;min-height:430px;max-height:430px">
+                    <div class="text-center">
+                       <b> Your Coachees </b>
                     </div>
-                    <div style="display: none; border: 1px solid #c0c0c0" class="clsNomineebodycontainer">
-                        <table class="w-100">
-                            <tr>
-                                <td style="padding: 10px; width: 13%"></td>
-                                <td style="padding: 10px; width: 15%"></td>
-                                <td style="padding: 10px; width: 13%">Search Nominee:</td>
-                                <td style="padding: 10px"></td>
-                            </tr>
-                        </table>
-                        <table class="w-75 table-bordered">
+                    <div runat="server" id="dvcoacheelist" style="overflow:auto;max-height:380px">
+                    </div>
+                </div>
+                <div class="col-md-9" style="width:82%">
+                    <div id="btnMainbodyContainer">
+                        <table id="tblMainNominee" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th style="width: 3%"></th>
+                                    <th style="width: 10%">Category*</th>
+                                    <th>Name*</th>
+                                    <th style="width: 24%">Email ID*
+                                    </th>
+                                    <th style="width: 13%">Function*
+                                    </th>
+                                    <th style="width: 13%">Department*
+                                    </th>
+                                    <th style="width: 13%">Designation*
+                                    </th>
+                                    <th style="width: 8%">Status
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
 
-                            <tr>
-                                <td style="font-size: 15px; width: 15%" class="clscellbgcolor">Name <span style="color: red">*</span> :</td>
-                                <td>
-
-                                    <input type="text" id="txtName" class="form-control bg-white clsinput" disabled />
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td style="font-size: 15px" class="clscellbgcolor">EmailID <span style="color: red">*</span> :</td>
-                                <td>
-                                    <input type="text" id="txtEmailid" class="form-control bg-white clsinput" disabled />
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-size: 15px" class="clscellbgcolor">Function <span style="color: red">*</span> :</td>
-                                <td>
-                                    <input type="text" id="txtfunction" class="form-control clsinput" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-size: 15px" class="clscellbgcolor">Department <span style="color: red">*</span> :</td>
-                                <td>
-                                    <input type="text" id="txtDepartment" class="form-control clsinput" />
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-size: 15px" class="clscellbgcolor">Designation <span style="color: red">*</span> :</td>
-                                <td>
-                                    <input type="text" id="txtDesignation" class="form-control clsinput" />
-                                </td>
-                            </tr>
                         </table>
                     </div>
-                </div>--%>
+                    <div class="button-group mb-4">
+                        <input type="button" class="btn btn-submit" id="btnSave" value="Approve" style="display: inline-block;">
+                        <input type="button" class="btn btn-submit" id="btnSubmit" value="Reject" style="display: inline-block;">
+                        <%--<input type="button" class="btn btn-next" id="btnNext" value="Next" style="display: inline-block;">--%>
+                    </div>
+                </div>
             </div>
 
-            <div class="button-group mb-4">
-                <input type="button" class="btn btn-submit" id="btnSave" value="Save" onclick="fnSaveAndSubmit(0)" style="display: inline-block;">
-                <input type="button" class="btn btn-submit" id="btnSubmit" value="Submit" onclick="fnSaveAndSubmit(1)" style="display: inline-block;">
-                <input type="button" class="btn btn-next d-none" id="btnNext" onclick="fnGotosurveypage()" value="Next" style="display: inline-block;">
-            </div>
         </div>
     </div>
-
-    <div id="dvDialog" style="display: none"></div>
-    <div id="dvAlert" style="display: none"></div>
     <asp:HiddenField ID="hdnLoginId" runat="server" Value="0" />
-    <asp:HiddenField ID="hdnNodeId" runat="server" Value="0" />
-    <div id="dvFadeForProcessing" style="display: none; position: fixed; text-align: center; z-index: 999999; top: 0; bottom: 0; left: 0; right: 0; opacity: .80; -moz-opacity: 0.8; filter: alpha(opacity=80); background-color: #ccc;">
+    <div id="dvAlert" style="display: none"></div>
+    <div id="dvFadeForProcessing" style="display: block; position: fixed; text-align: center; z-index: 999999; top: 0; bottom: 0; left: 0; right: 0; opacity: .80; -moz-opacity: 0.8; filter: alpha(opacity=80); background-color: #ccc;">
         <img src="../Images/loading.gif" style="width: 90px; height: 70px; position: relative; top: 50%; margin-top: -35px;" />
     </div>
-
 </asp:Content>
 

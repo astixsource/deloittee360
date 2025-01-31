@@ -93,7 +93,7 @@
 
         <%-- <div id="divAntiforgery" runat="server" style="display:none"></div>--%>
         <div id="dvFadeForProcessing" style="display: none" align="center" class="clsloader">
-            <img src="Images/loading.gif" style="margin-top: 300px;" />
+            <img src="Images/loading.gif" style="margin-top: 200px;" />
         </div>
         <div class="footer">
             <p class="footer-text">
