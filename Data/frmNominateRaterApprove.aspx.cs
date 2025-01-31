@@ -38,44 +38,41 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
         if (!IsPostBack)
         {
             hdnLoginId.Value = Session["LoginId"].ToString();
-           
-            //SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]);
-            //SqlCommand Scmd = new SqlCommand();
-            //Scmd.Connection = Scon;
-            //Scmd.CommandText = "[spGetUserListForNomination]";
-            //Scmd.CommandType = CommandType.StoredProcedure;
-            //Scmd.CommandTimeout = 0;
-            //Scmd.Parameters.AddWithValue("@LoginId", hdnLoginId.Value);
-
-            //SqlDataAdapter Sdap = new SqlDataAdapter(Scmd);
-            //DataTable dt = new DataTable();
-            //Sdap.Fill(dt);
-            //Session["UserListForNomination"] = dt;
-            fnFillCycle();
+            hdnNodeId.Value = Session["NodeId"].ToString();
+            fnGetApseListForManager();
         }
     }
-    public void fnFillCycle()
+    public void fnGetApseListForManager()
     {
-        SqlConnection con = new SqlConnection(strCon.Split('|')[0]);
-        string com = "spFillRltshp";
-        SqlDataAdapter adpt = new SqlDataAdapter(com, con);
-
-        DataTable dt = new DataTable();
-        adpt.Fill(dt);
-        //ddlCoacheeList.DataSource = dt;
-        //ddlCoacheeList.DataTextField = "Descr";
-        //ddlCoacheeList.DataValueField = "RltshpID";
-        //ddlCoacheeList.DataBind();
-        StringBuilder sb = new StringBuilder();
-        foreach(DataRow dr in dt.Rows)
+        using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
         {
-            sb.Append("<div class='clscoacheelist' onclick='fnShowNomineelist(this)'>" + dr["Descr"].ToString()+"</div>");
+            using (SqlCommand command = new SqlCommand("spGetApseListForManager", Scon))
+            {
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandTimeout = 0;
+                command.Parameters.AddWithValue("@LoginId", hdnLoginId.Value);
+                using (SqlDataAdapter da = new SqlDataAdapter(command))
+                {
+                    using (DataTable dt = new DataTable())
+                    {
+                        da.Fill(dt);
+                        StringBuilder sb = new StringBuilder();
+                        int i = 1;
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            //sb.Append("<div class='clscoacheelist' onclick='fnShowNomineelist(this)'>Coachee " + dr["Descr"].ToString()+"</div>");
+                            sb.Append("<div class='clscoacheelist' onclick=\"fnGetNomineeDetails(this," + dr["EmpNodeId"].ToString() + ")\">"+ dr["FullName"].ToString() + "</div>");
+                            i++;
+                        }
+                        dvcoacheelist.InnerHtml = sb.ToString();
+                    }
+                }
+            }
         }
-        dvcoacheelist.InnerHtml = sb.ToString();
     }
 
     [System.Web.Services.WebMethod()]
-    public static string fnGetNomineeDetails(int loginId)
+    public static string fnGetNomineeDetails(int loginId,int EmpNodeId)
     {
         string jsonData = "";
         try
@@ -87,6 +84,9 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.CommandTimeout = 0;
                     command.Parameters.AddWithValue("@LoginId", loginId);
+                    command.Parameters.AddWithValue("@EmpNodeId", EmpNodeId);
+                    command.Parameters.AddWithValue("@flgSubmittedForApproval", 1);
+                    
                     using (SqlDataAdapter da = new SqlDataAdapter(command))
                     {
                         using (DataTable dt = new DataTable())
@@ -96,14 +96,23 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                             for (int i = 0; i < dt.Rows.Count; i++)
                             {
                                 int flgSubmittedForApproval = Convert.ToInt32(dt.Rows[i]["flgSubmittedForApproval"]);
-                                sb.Append("<tr flg='1' flgvalid='1' nomineid='" + dt.Rows[i]["NodeId"].ToString() + "' rpid='" + dt.Rows[i]["RltshpID"].ToString() + "'>");
+                                sb.Append("<tr flg='1' flgvalid='1' CycleApseApsrMapID='"+ dt.Rows[i]["CycleApseApsrMapID"].ToString() + "' nomineid='" + dt.Rows[i]["NodeId"].ToString() + "' rpid='" + dt.Rows[i]["RltshpID"].ToString() + "'>");
+                               if(flgSubmittedForApproval == 1 && Convert.ToInt32(dt.Rows[i]["flgApproved"]) == 0)
+                                {
+                                    sb.Append("<td class='text-center'><input type='checkbox' /></td>");
+                                }
+                                else
+                                {
+                                    sb.Append("<td class='text-center'></td>");
+                                }
+                                
                                 sb.Append("<td>" + dt.Rows[i]["Relationship"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["FullName"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["EMailID"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Function"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Department"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Designation"].ToString() + "</td>");
-                                sb.Append("<td>" + (flgSubmittedForApproval == 0 ? "Save as draft" : flgSubmittedForApproval == 1 ? "Submitted" : flgSubmittedForApproval == 2 ? "Approved" : "Rejected") + "</td>");
+                                sb.Append("<td>" + dt.Rows[i]["Status"].ToString() + "</td>");
                                 sb.Append("</tr>");
                             }
                             jsonData = "1|" + sb.ToString();
@@ -165,7 +174,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
 
 
     [System.Web.Services.WebMethod()]
-    public static string fnSaveandDeleteNomineeData(int LoginID, object arrData, int flg)
+    public static string fnSaveandDeleteNomineeData(int LoginID, object arrData, string RejectionComment)
     {
         string jsonData = "";
         try
@@ -176,19 +185,18 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
 
             using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
             {
-                using (SqlCommand command = new SqlCommand("", Scon))
+                using (SqlCommand command = new SqlCommand("spSaveNominationsAprovalFromManager", Scon))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.CommandTimeout = 0;
                     command.Parameters.AddWithValue("@LoginId", LoginID);
-                    command.Parameters.AddWithValue("@arr", LoginID);
-                    command.Parameters.AddWithValue("@statusid", flg);
+                    command.Parameters.AddWithValue("@tmpApproveNominationsFromManager", tblOrderDetail);
+                    command.Parameters.AddWithValue("@RejectionComment", RejectionComment);
                     Scon.Open();
                     command.ExecuteNonQuery();
                     Scon.Close();
                     jsonData = "1|";
                 }
-
             }
         }
         catch (Exception e)

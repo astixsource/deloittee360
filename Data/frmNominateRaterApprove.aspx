@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Data/Site.master" AutoEventWireup="true" CodeFile="frmNominateRaterApprove.aspx.cs" Inherits="frmNominateRaterApprove" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Data/SiteNominate.master" AutoEventWireup="true" CodeFile="frmNominateRaterApprove.aspx.cs" Inherits="frmNominateRaterApprove" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <link href="../Content/jquery-ui.css" rel="stylesheet" />
@@ -130,20 +130,20 @@
 
 
         table.dataTable > tbody > tr > th, table.dataTable > tbody > tr > td {
-            padding: 2px 3px;
+            padding: 2px 2px;
             border: 1px solid #e3efcc;
-            font-size: 10pt;
+            font-size: 9pt;
         }
 
         table.dataTable > tfoot > tr > th {
-            padding: 2px 3px;
+            padding: 2px 2px;
             border: 1px solid #e3efcc;
             border-top: 2px solid #a6a6a6;
             font-size: 10pt;
         }
 
         table.dataTable > thead > tr > th, table.dataTable > thead > tr > td {
-            padding: 2px 3px;
+            padding: 2px 2px;
             border: 1px solid #e3efcc;
             background-color: #86bc25;
             color: #ffffff;
@@ -162,6 +162,13 @@
             background-color: #000000;
             color: #ffffff;
         }
+
+        div.clsactive{
+            border: 1px solid #354e09;
+            background-color: #000000;
+            color: #ffffff;
+        }
+
     </style>
     <script>
         $.widget('custom.mcautocomplete', $.ui.autocomplete, {
@@ -214,6 +221,9 @@
         var dTable = null;
         $(document).ready(function () {
             $("#dvFadeForProcessing").hide();
+            if ($("#MainContent_dvcoacheelist div").length > 0) {
+                $("#MainContent_dvcoacheelist div").eq(0).click();
+            }
             dTable = new DataTable('#tblMainNominee', {
                 paging: false,
                 scrollCollapse: true,
@@ -226,11 +236,12 @@
             fnHideremoveicon();
         })
 
-        function fnGetNomineeDetails(nodeid) {
-
+        function fnGetNomineeDetails(sender, nodeid) {
+            $("#MainContent_dvcoacheelist div.clsactive").removeClass("clsactive");
+            $(sender).addClass("clsactive");
             $("#dvFadeForProcessing").show();
             var LoginId = $("#MainContent_hdnLoginId").val();
-            PageMethods.fnGetNomineeDetails(LoginId, function (result) {
+            PageMethods.fnGetNomineeDetails(LoginId, nodeid, function (result) {
                 $("#dvFadeForProcessing").hide();
                 if (result.split("|")[0] == 2) {
                     fnShowmsg("Error:" + result.split("|")[1]);
@@ -446,19 +457,56 @@
         function fnRemoverow(sender) {
             $(sender).closest("tr").remove();
         }
+
+        function fnShowmsg(msg) {
+            $("#dvAlert").html(msg);
+            $("#dvAlert").dialog({
+                title: "Alert!",
+                modal: true,
+                width: "auto",
+                height: "auto",
+                dialogClass: "alertcss",
+                close: function () {
+                    $(this).dialog('destroy');
+                    $("#dvAlert").html("");
+                },
+                buttons: [
+                    {
+                        text: "OK",
+                        "class": "btns btn-submit",
+                        click: function () {
+                            $("#dvAlert").dialog('close');
+                        }
+                    }
+                ]
+            })
+        }
+
+
+       
         function fnSaveAndSubmit(flg) {
-            var $trs = $("#tblMainNominee tr[flg='0']");
-            if ($trs.length == 0) {
-                fnShowmsg("Kindly Select BPHR First!");
+            var $trs = $("#tblMainNominee tr[flgvalid='1']");
+            if ($trs.length == 0 && flg == 0) {
+                fnShowmsg("No data found for this action!");
                 return false;
             }
-            var LoginId = $("#ConatntMatter_hdnLoginId").val();
-            var str = "<div><b>Reason for cancellation:</b></div><div><textarea value='' rows='3' style='width:100%' id='txtReason' place='type here'></textarea></div>";
+            var $checked = $("#tblMainNominee input:checked");
+            if ($checked.length == 0) {
+                fnShowmsg("Please select record first for this action!");
+                return false;
+            }
+           
+            var LoginId = $("#MainContent_hdnLoginId").val();
+            var str = "<div>Are you sure to approve the selected ones?</div>";
+            if (flg == 2) {
+                var str = "<div><b>Reason for rejection:</b></div><div><textarea value='' rows='3' style='width:100%' id='txtReason' place='type here'></textarea></div>";
+            }
+           
             $("#dvDialog").html(str);
             $("#dvDialog").dialog({
-                title: "Cancellation confirmation For Slot :" + slotdescr,
+                title: "Confirmation :",
                 modal: true,
-                width: "550",
+                width: (flg==1? "350":"500"),
                 height: "auto",
                 close: function () {
                     $(this).dialog('destroy');
@@ -466,46 +514,38 @@
                 },
                 buttons: {
                     "Yes": function () {
-                        var RemoverType = $("input[name='rdodelete']:checked").val();
-                        if ($("input[name='rdodelete']:checked").length == 0) {
-                            fnShowmsg("Kindly select 'Requested by' first!");
-                            $("#txtReason").focus();
-                            return false;
-                        }
-
-                        if ($("#txtReason").val().trim().length == 0) {
-                            fnShowmsg("Kindly give the reason for cancellation first!");
-                            $("#txtReason").focus();
-                            return false;
-                        }
-                        else if ($("#txtReason").val().trim().length < 5) {
-                            fnShowmsg("Reason should be minimum 5 characters for this action");
-                            $("#txtReason").focus();
-                            return false;
-                        }
-
-                        var dd = $(sender).attr("dd");
-                        var hr = $(sender).attr("hr");
-                        var AssessorTimeSlotId = $(sender).attr("AssessorTimeSlotId");
-                        var ctrl = $(sender).closest("td");
-                        var LoginId = $("#ConatntMatter_hdnLogin").val();
-
-                        var ReasonText = $("#txtReason").val().trim();
-                        $("#dvFadeForProcessing").show();
-                        var AssessorId = $("#ConatntMatter_ddlAssessor").val();
-                        $(this).dialog('close');
-                        PageMethods.fnDeleteSlot(AssessorTimeSlotId, LoginId, RemoverType, AssessorId, ReasonText, function (result) {
-                            $("#dvFadeForProcessing").hide();
-                            if (result.split("|")[0] == 1) {
-                                alert("Error:" + result.split("|")[1]);
+                        var RejectionComment = "";
+                        if (flg == 2) {
+                            RejectionComment = $("#txtReason").val().trim();
+                            if (RejectionComment == "") {
+                                fnShowmsg("Please give the reason for rejection first!");
+                                $("#txtReason").focus();
                                 return false;
                             }
-                            $("#dvFadeForProcessing").show();
-                            fnChangeAssessor();
+                        }
+                        var arr = [];
+                        for (var i = 0; i < $checked.length; i++) {
+                            arr.push({
+                                CycleApseApsrMapID: $checked.eq(i).closest("tr").attr("CycleApseApsrMapID"), flgApproved: flg
+                            });
+                        }
+                        $("#dvFadeForProcessing").show();
+                        $(this).dialog('close');
+                        PageMethods.fnSaveandDeleteNomineeData(LoginId, arr, RejectionComment, function (result) {
+                            $("#dvFadeForProcessing").hide();
+                            if (result.split("|")[0] == 2) {
+                                fnShowmsg("Error:" + result.split("|")[1]);
+                                return false;
+                            }
+                            $("#MainContent_dvcoacheelist div.clsactive").click();
 
-                        }, fnFailed);
+                        }, function (result) {
+                            $("#dvFadeForProcessing").hide();
+                            fnShowmsg("Error:" + result._message);
+                        });
                     },
                     "No": function () {
+
                         $(this).dialog('close');
                     }
                 }
@@ -537,17 +577,17 @@
                             <thead>
                                 <tr>
                                     <th style="width: 3%"></th>
-                                    <th style="width: 10%">Category*</th>
+                                    <th style="width: 11%">Category*</th>
                                     <th>Name*</th>
-                                    <th style="width: 24%">Email ID*
+                                    <th style="width: 22%">Email ID*
                                     </th>
-                                    <th style="width: 13%">Function*
+                                    <th style="width: 11%">Function*
                                     </th>
-                                    <th style="width: 13%">Department*
+                                    <th style="width: 11%">Department*
                                     </th>
-                                    <th style="width: 13%">Designation*
+                                    <th style="width: 11%">Designation*
                                     </th>
-                                    <th style="width: 8%">Status
+                                    <th style="width: 14%">Status
                                     </th>
                                 </tr>
                             </thead>
@@ -557,8 +597,8 @@
                         </table>
                     </div>
                     <div class="button-group mb-4">
-                        <input type="button" class="btn btn-submit" id="btnSave" value="Approve" style="display: inline-block;">
-                        <input type="button" class="btn btn-submit" id="btnSubmit" value="Reject" style="display: inline-block;">
+                        <input type="button" class="btn btn-submit" id="btnSave" value="Approve" onclick="fnSaveAndSubmit(1)"  style="display: inline-block;">
+                        <input type="button" class="btn btn-submit" id="btnSubmit" value="Reject" onclick="fnSaveAndSubmit(2)" style="display: inline-block;">
                         <%--<input type="button" class="btn btn-next" id="btnNext" value="Next" style="display: inline-block;">--%>
                     </div>
                 </div>
@@ -566,7 +606,9 @@
 
         </div>
     </div>
+    <asp:HiddenField ID="hdnNodeId" runat="server" Value="0" />
     <asp:HiddenField ID="hdnLoginId" runat="server" Value="0" />
+     <div id="dvDialog" style="display: none"></div>
     <div id="dvAlert" style="display: none"></div>
     <div id="dvFadeForProcessing" style="display: block; position: fixed; text-align: center; z-index: 999999; top: 0; bottom: 0; left: 0; right: 0; opacity: .80; -moz-opacity: 0.8; filter: alpha(opacity=80); background-color: #ccc;">
         <img src="../Images/loading.gif" style="width: 90px; height: 70px; position: relative; top: 50%; margin-top: -35px;" />

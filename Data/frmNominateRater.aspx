@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Data/Site.master" AutoEventWireup="true" CodeFile="frmNominateRater.aspx.cs" Inherits="Data_frmNominateRater" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Data/SiteNominate.master" AutoEventWireup="true" CodeFile="frmNominateRater.aspx.cs" Inherits="Data_frmNominateRater" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <link href="../Content/jquery-ui.css" rel="stylesheet" />
@@ -377,14 +377,7 @@
 
         }
 
-        function fnDisableCategory() {
-            var $trs = $("#tblMainNominee tbody tr[flgvalid='1']");
-            $("#MainContent_ddlRelatioShip option").prop("disabled", false);
-            for (var i = 0; i < $trs.length; i++) {
-                var rpid = $trs.eq(i).attr("rpid");
-                $("#MainContent_ddlRelatioShip option[value='" + rpid +"']").prop("disabled", true);
-            }
-        }
+       
 
         function fnShowHideDiv(sender) {
             if ($(sender).find("i.fa").hasClass("fa-arrow-circle-o-down")) {
@@ -415,15 +408,7 @@
             fnHideremoveicon();
             fnBindAutocomplete();
         }
-        function IsValidateInput(inputs) {
-            for (var i = 0; i < inputs.length; i++) {
-                if (inputs.eq(i).val().trim() == "") {
-                    inputs.eq(i).closest("clsNomineebodycontainer").show();
-                    return false;
-                }
-            }
-            return true;
-        }
+       
         function fnRemoveNewNominee(sender) {
             $(sender).closest(".clsmainbody").remove();
             $("div.clsNomineebodycontainer").hide();
@@ -515,6 +500,32 @@
 
         }
 
+        function IsValidateInput() {
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs.eq(i).val().trim() == "") {
+                    inputs.eq(i).closest("clsNomineebodycontainer").show();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function IsValidateCategory() {
+            var $trs = $("#tblMainNominee tbody tr[flgvalid='1']");
+            if ($trs.length > 0) {
+                var arrCategories = $("#MainContent_ddlRelatioShip option[value!=0]");
+                for (var i = 0; i < arrCategories.length; i++) {
+                    var rpid = arrCategories.eq(i).val();
+                    if ($("#tblMainNominee tbody tr[rpid='" + rpid + "']").length > 0) {
+                        if ($("#tblMainNominee tbody tr[rpid='" + rpid + "']").length < 3) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
         function fnSaveAndSubmit(flg) {
             var $trs = $("#tblMainNominee tr[flg='0']");
             if ($trs.length == 0 && flg == 0) {
@@ -523,9 +534,11 @@
             }
             if (flg == 1) {
                 $trs = $("#tblMainNominee tbody tr[flgvalid='1']");
-                if ($trs.length >= 0 && $trs.length < 3) {
-                    fnShowmsg("Kindly add minimum 3 nominees first!");
-                    return false;
+                if ($trs.length >= 0) {
+                    if (!IsValidateCategory()) {
+                        fnShowmsg("Kindly add minimum 3 nominees per category first!");
+                        return false;
+                    }
                 }
             }
             var LoginId = $("#MainContent_hdnLoginId").val();
@@ -597,17 +610,17 @@
                             </th>
                             <th>Name*
                             </th>
-                            <th style="width: 24%">Email ID*
+                            <th style="width: 22%">Email ID*
                             </th>
-                            <th style="width: 13%">Function*
+                            <th style="width: 12%">Function*
                             </th>
-                            <th style="width: 13%">Department*
+                            <th style="width: 12%">Department*
                             </th>
-                            <th style="width: 13%">Designation*
+                            <th style="width: 12%">Designation*
                             </th>
-                            <th style="width: 10%">Status
+                            <th style="width: 13%">Status
                             </th>
-                            <th style="width: 5%">Action
+                            <th style="width: 5%;text-align:center">Action
                             </th>
                         </tr>
                     </thead>

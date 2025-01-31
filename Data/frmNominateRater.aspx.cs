@@ -42,34 +42,47 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
         {
             hdnLoginId.Value = Session["LoginId"].ToString();
             hdnNodeId.Value = Session["NodeId"].ToString();
-
-            SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]);
-            SqlCommand Scmd = new SqlCommand();
-            Scmd.Connection = Scon;
-            Scmd.CommandText = "[spGetUserListForNomination]";
-            Scmd.CommandType = CommandType.StoredProcedure;
-            Scmd.CommandTimeout = 0;
-            Scmd.Parameters.AddWithValue("@LoginId", hdnLoginId.Value);
-
-            SqlDataAdapter Sdap = new SqlDataAdapter(Scmd);
-            DataTable dt = new DataTable();
-            Sdap.Fill(dt);
-            Session["UserListForNomination"] = dt;
+            using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
+            {
+                using (SqlCommand command = new SqlCommand("spGetUserListForNomination", Scon))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.CommandTimeout = 0;
+                    command.Parameters.AddWithValue("@LoginId", hdnLoginId.Value);
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        using (DataTable dt = new DataTable())
+                        {
+                            da.Fill(dt);
+                            Session["UserListForNomination"] = dt;
+                        }
+                    }
+                }
+            }
             fnFillCycle();
         }
     }
     public void fnFillCycle()
     {
-        SqlConnection con = new SqlConnection(strCon.Split('|')[0]);
-        string com = "spFillRltshp";
-        SqlDataAdapter adpt = new SqlDataAdapter(com, con);
-
-        DataTable dt = new DataTable();
-        adpt.Fill(dt);
-        ddlRelatioShip.DataSource = dt;
-        ddlRelatioShip.DataTextField = "Descr";
-        ddlRelatioShip.DataValueField = "RltshpID";
-        ddlRelatioShip.DataBind();
+        using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
+        {
+            using (SqlCommand command = new SqlCommand("spFillRltshp", Scon))
+            {
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandTimeout = 0;
+                using (SqlDataAdapter da = new SqlDataAdapter(command))
+                {
+                    using (DataTable dt = new DataTable())
+                    {
+                        da.Fill(dt);
+                        ddlRelatioShip.DataSource = dt;
+                        ddlRelatioShip.DataTextField = "Descr";
+                        ddlRelatioShip.DataValueField = "RltshpID";
+                        ddlRelatioShip.DataBind();
+                    }
+                }
+            }
+        }
     }
 
     [System.Web.Services.WebMethod()]
@@ -194,6 +207,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.CommandTimeout = 0;
                     command.Parameters.AddWithValue("@LoginId", loginId);
+                    command.Parameters.AddWithValue("@EmpNodeId", 0);
                     using (SqlDataAdapter da = new SqlDataAdapter(command))
                     {
                         using (DataTable dt = new DataTable())
@@ -210,9 +224,16 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                                 sb.Append("<td>" + dt.Rows[i]["Function"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Department"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Designation"].ToString() + "</td>");
-                                sb.Append("<td>" + (flgSubmittedForApproval == 0?"Save as draft": flgSubmittedForApproval == 1?"Submitted": flgSubmittedForApproval == 2 ? "Approved":"Rejected") + "</td>");
-                                sb.Append("<td class='text-center'  style='color:red;cursor:pointer'><i class='fa fa-remove' onclick='fnRemoveFromDB(this)'></i></td>");
-                                sb.Append("</tr>");
+                                sb.Append("<td>" + dt.Rows[i]["Status"].ToString() + "</td>");
+                                if (dt.Rows[i]["flgApproved"].ToString() == "0")
+                                {
+                                    sb.Append("<td class='text-center'  style='color:red;cursor:pointer'><i class='fa fa-remove' onclick='fnRemoveFromDB(this)'></i></td>");
+                                }
+                                else
+                                {
+                                    sb.Append("<td class='text-center'  style='color:red;cursor:pointer'></td>");
+                                }
+                                    sb.Append("</tr>");
                             }
                             jsonData = "1|" + sb.ToString();
                         }

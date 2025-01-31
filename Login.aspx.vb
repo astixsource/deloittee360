@@ -211,6 +211,8 @@ Partial Class Login
 
                     If drdr.Item("flgParticipant").ToString() = 1 Then
                         strResponse = "1|Data/frmNominateRater.aspx"  'Response.Redirect("Data/frmMain.aspx")
+                    ElseIf drdr.Item("flgIsManager").ToString() = 1 Then
+                        strResponse = "1|Data/frmNominateApproveNomination.aspx"  'Response.Redirect("Data/frmMain.aspx")
                     Else
                         strResponse = "1|Data/Instruction.aspx?NodeID="
                         'strResponse = "1|Data/Dashboard.aspx?NodeID="
