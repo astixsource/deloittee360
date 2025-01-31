@@ -42,6 +42,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
         {
             hdnLoginId.Value = Session["LoginId"].ToString();
             hdnNodeId.Value = Session["NodeId"].ToString();
+            hdnIsManager.Value= Session["flgIsManager"].ToString();
             using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
             {
                 using (SqlCommand command = new SqlCommand("spGetUserListForNomination", Scon))

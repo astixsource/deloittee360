@@ -189,6 +189,7 @@ Partial Class Login
                     HttpContext.Current.Session("LoginId") = drdr.Item("LoginID")
                     HttpContext.Current.Session("FullName") = drdr.Item("FullName")
                     HttpContext.Current.Session("NodeId") = drdr.Item("NodeId")
+                    HttpContext.Current.Session("flgIsManager") = drdr.Item("flgIsManager")
 
                     If Not IsDBNull(drdr.Item("CycleID")) Then
                         HttpContext.Current.Session("CycleID") = drdr.Item("CycleID")

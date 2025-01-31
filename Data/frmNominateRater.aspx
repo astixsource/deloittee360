@@ -202,7 +202,9 @@
         });
         var dTable = null;
         $(document).ready(function () {
-            $("#liHome").hide();
+            if ($("#MainContent_hdnIsManager").val() == "0") {
+                $("#liHome").hide();
+            }
             fnGetNomineeDetails();
             dTable = new DataTable('#tblMainNominee', {
                 paging: false,
@@ -710,6 +712,7 @@
     <div id="dvDialog" style="display: none"></div>
     <div id="dvAlert" style="display: none"></div>
     <asp:HiddenField ID="hdnLoginId" runat="server" Value="0" />
+    <asp:HiddenField ID="hdnIsManager" runat="server" Value="0" />
     <asp:HiddenField ID="hdnNodeId" runat="server" Value="0" />
     <div id="dvFadeForProcessing" style="display: none; position: fixed; text-align: center; z-index: 999999; top: 0; bottom: 0; left: 0; right: 0; opacity: .80; -moz-opacity: 0.8; filter: alpha(opacity=80); background-color: #ccc;">
         <img src="../Images/loading.gif" style="width: 90px; height: 70px; position: relative; top: 50%; margin-top: -35px;" />
