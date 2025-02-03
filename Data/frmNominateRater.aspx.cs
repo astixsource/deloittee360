@@ -76,10 +76,18 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                     using (DataTable dt = new DataTable())
                     {
                         da.Fill(dt);
-                        ddlRelatioShip.DataSource = dt;
-                        ddlRelatioShip.DataTextField = "Descr";
-                        ddlRelatioShip.DataValueField = "RltshpID";
-                        ddlRelatioShip.DataBind();
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            ListItem lst=new ListItem();
+                            lst.Text = dr["Descr"].ToString();
+                            lst.Value = dr["RltshpID"].ToString();
+                            lst.Attributes.Add("minNominationperCategory", dr["minNominationperCategory"].ToString());
+                            ddlRelatioShip.Items.Add(lst);
+                        }
+                        //ddlRelatioShip.DataSource = dt;
+                        //ddlRelatioShip.DataTextField = "Descr";
+                        //ddlRelatioShip.DataValueField = "RltshpID";
+                        //ddlRelatioShip.DataBind();
                     }
                 }
             }
@@ -218,7 +226,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                             for(int i=0; i<dt.Rows.Count; i++)
                             {
                                 int flgSubmittedForApproval = Convert.ToInt32(dt.Rows[i]["flgSubmittedForApproval"]);
-                                sb.Append("<tr flg='1' flgvalid='1' nomineid='" + dt.Rows[i]["NodeId"].ToString() + "' rpid='" + dt.Rows[i]["RltshpID"].ToString() + "'>");
+                                sb.Append("<tr flg='1' flgvalid='"+ (Convert.ToInt32(dt.Rows[i]["flgApproved"])==2?"0":"1") + "' nomineid='" + dt.Rows[i]["NodeId"].ToString() + "' rpid='" + dt.Rows[i]["RltshpID"].ToString() + "'>");
                                 sb.Append("<td>" + dt.Rows[i]["Relationship"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["FullName"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["EMailID"].ToString() + "</td>");

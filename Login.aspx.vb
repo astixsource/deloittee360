@@ -190,6 +190,7 @@ Partial Class Login
                     HttpContext.Current.Session("FullName") = drdr.Item("FullName")
                     HttpContext.Current.Session("NodeId") = drdr.Item("NodeId")
                     HttpContext.Current.Session("flgIsManager") = drdr.Item("flgIsManager")
+                    HttpContext.Current.Session("flgParticipant") = drdr.Item("flgParticipant")
 
                     If Not IsDBNull(drdr.Item("CycleID")) Then
                         HttpContext.Current.Session("CycleID") = drdr.Item("CycleID")
@@ -211,9 +212,11 @@ Partial Class Login
                     strResponse = drdr.Item("RoleID").ToString()
 
                     If drdr.Item("flgParticipant").ToString() = 1 Then
-                        strResponse = "1|Data/frmNominateRater.aspx"  'Response.Redirect("Data/frmMain.aspx")
+                        strResponse = "1|Data/InstructionPage.aspx?NodeID="
+                        'strResponse = "1|Data/frmNominateRater.aspx"  'Response.Redirect("Data/frmMain.aspx")
                     ElseIf drdr.Item("flgIsManager").ToString() = 1 Then
-                        strResponse = "1|Data/frmNominateApproveNomination.aspx"  'Response.Redirect("Data/frmMain.aspx")
+                        strResponse = "1|Data/InstructionPage.aspx?NodeID="
+                        '  strResponse = "1|Data/frmNominateApproveNomination.aspx"  'Response.Redirect("Data/frmMain.aspx")
                     Else
                         strResponse = "1|Data/Instruction.aspx?NodeID="
                         'strResponse = "1|Data/Dashboard.aspx?NodeID="

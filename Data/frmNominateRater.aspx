@@ -351,7 +351,7 @@
                         //  $(this).val((ui.item ? ui.item.InvCode : ''));
                         //alert(ui.item.FullName)
                         //tblMainNominee
-                        var str = "<tr flg='0' flgvalid='1' nomineid='" + ui.item.NodeID + "' rpid='" + $("#MainContent_ddlRelatioShip option:selected").val() + "'>";
+                        var str = "<tr flg='0' flgvalid='1' nomineid='" + ui.item.NodeID + "' minnominationpercategory='" + $("#MainContent_ddlRelatioShip option:selected").attr("minNominationperCategory") +"' rpid='" + $("#MainContent_ddlRelatioShip option:selected").val() + "'>";
                         str += "<td>" + $("#MainContent_ddlRelatioShip option:selected").text() + "</td>";
                         str += "<td>" + ui.item.FullName + "</td>";
                         str += "<td>" + ui.item.EMailID + "</td>";
@@ -520,13 +520,14 @@
                 for (var i = 0; i < arrCategories.length; i++) {
                     var rpid = arrCategories.eq(i).val();
                     if ($("#tblMainNominee tbody tr[rpid='" + rpid + "']").length > 0) {
-                        if ($("#tblMainNominee tbody tr[rpid='" + rpid + "']").length < 3) {
-                            return false;
+                        var minnominationpercategory = $("#tblMainNominee tbody tr[rpid='" + rpid + "']").attr("minnominationpercategory");
+                        if ($("#tblMainNominee tbody tr[rpid='" + rpid + "']").length < parseInt(minnominationpercategory)) {
+                            return "false|" + minnominationpercategory;
                         }
                     }
                 }
             }
-            return true;
+            return "true";
         }
 
         function fnSaveAndSubmit(flg) {
@@ -538,8 +539,9 @@
             if (flg == 1) {
                 $trs = $("#tblMainNominee tbody tr[flgvalid='1']");
                 if ($trs.length >= 0) {
-                    if (!IsValidateCategory()) {
-                        fnShowmsg("Kindly add minimum 3 nominees per category first!");
+                    var str = IsValidateCategory();
+                    if (str.split("|")[0]=="false") {
+                        fnShowmsg("Kindly add minimum " + str.split("|")[1] +" nominee(s) per category first!");
                         return false;
                     }
                 }
