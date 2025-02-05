@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=10,IE=edge,chrome=1">
     <title>HCAS 360</title>
-    
+
     <%--<link href="../Images/favicon1.ico" rel="shortcut icon" type="image/x-icon" />--%>
     <link href="../Content/font-awesome.css" rel="stylesheet" type="text/css" />
     <link href="../Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -20,7 +20,7 @@
     </asp:ContentPlaceHolder>
     <script src="../Scripts/jquery.nicescroll.min.js"></script>
     <script src="../Scripts/siteJS.js"></script>
-      <!-- WARNING: Respond.js doesn't work if you view the page via file: -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file: -->
     <!--[if lt IE 9]>
   <script src="../Scripts/html5shiv.min.js"></script>
   <script src="../Scripts/respond.min.js"></script>
@@ -33,46 +33,31 @@
                 <asp:ServiceReference Path="~/E360WebService.asmx" />
             </Services>
         </asp:ScriptManager>
-       <%-- <div class="full-background_one">
-            <img src="../Images/site-bg.jpg" class="bg-img" />
-        </div>--%>
-        <nav class="navbar">
-            <div class="pull-left">
-                <asp:Image ID="imgLogo1" runat="server" ImageUrl="~/Images/Deloitte-logo_White.png" title="logo" CssClass="logo" />
+        <div class="wrapper">
+            <div class="main-header">
+                <div class="container">
+                    <!-- Logo -->
+                    <a href="#" class="logo">
+                        <!-- logo for regular state and mobile devices -->
+                        <span class="logo-lg">
+                            <asp:Image ID="imgLogo1" runat="server" ImageUrl="~/Images/Deloitte-logo_White.png" title="logo" />
+                        </span></a>
+                    <!-- Header Navbar: style can be found in header.less -->
+                    <div class="navbar-right">
+                        <ul class="navtop">
+                            <asp:Panel ID="panelLogout" runat="server">
+                                <li><a href="../Login.aspx" class="btn"><span class="fa fa-sign-out"></span></a></li>
+                            </asp:Panel>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <nav class="pull-right">
-                <%--<asp:Image ID="Image1" runat="server" ImageUrl="~/Images/HR_next-logo.png" title="logo" CssClass="ey-logo-sec" />--%>
-                <ul class="navtop">
-                    <asp:Panel ID="panelLogout" runat="server">
-                        <%--<li><a href="http://23.102.103.18/deloitteVac_Demo" class="btns btn-submit sm"><span class="fa fa-sign-out"></span></a></li>--%>
-                        <li><a href="../Login.aspx" class="btns btn-submit sm"><span class="fa fa-sign-out"></span></a></li>
-                    </asp:Panel>
-                </ul>
-            </nav>
-        </nav>
-        <div class="container-fluid">
-            <%--<div class="body-content">--%>
-            <div class="container main-content">
-                <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                </asp:ContentPlaceHolder>
-            </div>
-            <%--<div class="row">
-                <!-- Preloader -->
-                <aside class="left-panel">
-                    <asp:ContentPlaceHolder ID="LeftContent" runat="server">
+            <div class="container-fluid">
+                <div class="container main-content">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
                     </asp:ContentPlaceHolder>
-                </aside>
-                <section class="content">
-                    <asp:ContentPlaceHolder ID="RightContent" runat="server">
-                    </asp:ContentPlaceHolder>
-                </section>
+                </div>
             </div>
-            <footer>
-                    <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
-                </footer>
-            </div>--%>
-             <asp:HiddenField runat="server" ID="hdnantitoken" />
-        <div id="divAntiforgery" runat="server" style="display:none"></div>
         </div>
     </form>
 </body>

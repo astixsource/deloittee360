@@ -12,9 +12,9 @@ Partial Class InstructionPage
     Dim objCom As SqlCommand
 
     Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Dim panelLogout As Panel
-        panelLogout = DirectCast(Page.Master.FindControl("panelLogout"), Panel)
-        panelLogout.Visible = False
+        'Dim panelLogout As Panel
+        'panelLogout = DirectCast(Page.Master.FindControl("panelLogout"), Panel)
+        'panelLogout.Visible = False
 
     End Sub
     Protected Sub btnContiue_Click(sender As Object, e As EventArgs) Handles btnContiue.Click

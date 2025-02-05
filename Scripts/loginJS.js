@@ -4,12 +4,14 @@
     $('.full-background').css('backgroundImage', 'url(' + $url + ')');
 
     $(".loginfrm").css({
-        'margin-top': ($(window).height() - $(this).outerHeight() + 250) / 2 + "px",
-        'margin-left': ($(window).width() - $(this).outerWidth()) * 3 / 4 + "px"
+        'margin-top': ($(window).height() - ($(".loginfrm").outerHeight() + 56)) / 2 + "px",
+        'margin-left': ($(window).width() - $('.loginfrm').outerWidth()) * 1 / 8 + "px"
     });
 });
 $(document).ready(function () {
+
     $("#dvFadeForProcessing").hide();
+    
     $("#btnLogin").click(function () {
         fnSendLogin();
     })
@@ -28,15 +30,15 @@ function fnHideError() {
 function fnValidate() {
     document.getElementById("hdnResolution").value = screen.availWidth + "*" + screen.availHeight;
     if (document.getElementById("txtLoginID").value == "") {
-        document.getElementById("dvMessage").innerText = "Login ID can't be left blank";
+        document.getElementById("dvMessage").innerText = "Email ID can't be left blank";
         document.getElementById("txtLoginID").focus();
         return false;
     }
-    if (document.getElementById("txtPassword").value == "") {
-        document.getElementById("dvMessage").innerText = "Password can't be left blank";
-        document.getElementById("txtPassword").focus();
-        return false;
-    }
+    //if (document.getElementById("txtPassword").value == "") {
+    //    document.getElementById("dvMessage").innerText = "Password can't be left blank";
+    //    document.getElementById("txtPassword").focus();
+    //    return false;
+    //}
 }
 
 function fnKeyPress() {
@@ -49,20 +51,20 @@ function fnSendLogin() {
         document.getElementById("txtLoginID").focus();
         return false;
     }
-    else if (document.getElementById("txtPassword").value == "") {
-        alert("Password can't be left blank");
-        document.getElementById("txtPassword").focus();
-        return false;
-    }
+    //else if (document.getElementById("txtPassword").value == "") {
+    //    alert("Password can't be left blank");
+    //    document.getElementById("txtPassword").focus();
+    //    return false;
+    //}
     var UserName = document.getElementById("txtLoginID").value;
-    var Password = document.getElementById("txtPassword").value;
+    /*var Password = document.getElementById("txtPassword").value;*/
     $("#dvFadeForProcessing").show();
     $.ajax({
         url: "Login.aspx/fnLoginFromDB",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: '{UserName:' + JSON.stringify(UserName) + ',Password:' + JSON.stringify(Password) + '}',
+        data: '{UserName:' + JSON.stringify(UserName) + '}',
         success: function (response) {
             $("#dvFadeForProcessing").css("display", "none");
             var strRep = response.d;

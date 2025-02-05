@@ -20,6 +20,9 @@ using System.Xml;
 using Newtonsoft.Json;
 using Formatting = Newtonsoft.Json.Formatting;
 using System.Text;
+using Azure;
+using Azure.Communication.Email;
+using System.Net.Mail;
 
 public partial class frmNominateRaterApprove : System.Web.UI.Page
 {
@@ -27,7 +30,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
     SqlCommand objCom = default(SqlCommand);
     DataTable dt;
     static string strCon = HttpContext.Current.Application["DbConnectionString"].ToString();
- 
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["LoginId"] == null)
@@ -39,7 +42,56 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
         {
             hdnLoginId.Value = Session["LoginId"].ToString();
             hdnNodeId.Value = Session["NodeId"].ToString();
+            using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
+            {
+                using (SqlCommand command = new SqlCommand("spGetUserListForNomination", Scon))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.CommandTimeout = 0;
+                    command.Parameters.AddWithValue("@LoginId", hdnLoginId.Value);
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        using (DataTable dt = new DataTable())
+                        {
+                            da.Fill(dt);
+                            Session["UserListForNominationForManager"] = dt;
+                        }
+                    }
+                }
+            }
+            fnFillCycle();
             fnGetApseListForManager();
+        }
+    }
+
+    public void fnFillCycle()
+    {
+        using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
+        {
+            using (SqlCommand command = new SqlCommand("spFillRltshp", Scon))
+            {
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandTimeout = 0;
+                using (SqlDataAdapter da = new SqlDataAdapter(command))
+                {
+                    using (DataTable dt = new DataTable())
+                    {
+                        da.Fill(dt);
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            ListItem lst = new ListItem();
+                            lst.Text = dr["Descr"].ToString();
+                            lst.Value = dr["RltshpID"].ToString();
+                            lst.Attributes.Add("minNominationperCategory", dr["minNominationperCategory"].ToString());
+                            ddlRelatioShip.Items.Add(lst);
+                        }
+                        //ddlRelatioShip.DataSource = dt;
+                        //ddlRelatioShip.DataTextField = "Descr";
+                        //ddlRelatioShip.DataValueField = "RltshpID";
+                        //ddlRelatioShip.DataBind();
+                    }
+                }
+            }
         }
     }
     public void fnGetApseListForManager()
@@ -61,7 +113,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                         foreach (DataRow dr in dt.Rows)
                         {
                             //sb.Append("<div class='clscoacheelist' onclick='fnShowNomineelist(this)'>Coachee " + dr["Descr"].ToString()+"</div>");
-                            sb.Append("<div class='clscoacheelist' onclick=\"fnGetNomineeDetails(this," + dr["EmpNodeId"].ToString() + ")\">"+ dr["FullName"].ToString() + "</div>");
+                            sb.Append("<div class='clscoacheelist' EmpNodeId='" + dr["EmpNodeId"].ToString() + "' onclick=\"fnGetNomineeDetails(this," + dr["EmpNodeId"].ToString() + ")\">" + dr["FullName"].ToString() + "</div>");
                             i++;
                         }
                         dvcoacheelist.InnerHtml = sb.ToString();
@@ -72,7 +124,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
     }
 
     [System.Web.Services.WebMethod()]
-    public static string fnGetNomineeDetails(int loginId,int EmpNodeId)
+    public static string fnGetNomineeDetails(int loginId, int EmpNodeId)
     {
         string jsonData = "";
         try
@@ -86,7 +138,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                     command.Parameters.AddWithValue("@LoginId", loginId);
                     command.Parameters.AddWithValue("@EmpNodeId", EmpNodeId);
                     command.Parameters.AddWithValue("@flgSubmittedForApproval", 1);
-                    
+
                     using (SqlDataAdapter da = new SqlDataAdapter(command))
                     {
                         using (DataTable dt = new DataTable())
@@ -96,16 +148,16 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                             for (int i = 0; i < dt.Rows.Count; i++)
                             {
                                 int flgSubmittedForApproval = Convert.ToInt32(dt.Rows[i]["flgSubmittedForApproval"]);
-                                sb.Append("<tr flg='1' flgvalid='1' CycleApseApsrMapID='"+ dt.Rows[i]["CycleApseApsrMapID"].ToString() + "' nomineid='" + dt.Rows[i]["NodeId"].ToString() + "' rpid='" + dt.Rows[i]["RltshpID"].ToString() + "'>");
-                               if(flgSubmittedForApproval == 1 && Convert.ToInt32(dt.Rows[i]["flgApproved"]) == 0)
-                                {
-                                    sb.Append("<td class='text-center'><input type='checkbox' /></td>");
-                                }
-                                else
-                                {
-                                    sb.Append("<td class='text-center'></td>");
-                                }
-                                
+                                sb.Append("<tr flg='1' flgvalid='1' flgApproved='" + dt.Rows[i]["flgApproved"].ToString() + "' CycleApseApsrMapID='" + dt.Rows[i]["CycleApseApsrMapID"].ToString() + "' nomineid='" + dt.Rows[i]["NodeId"].ToString() + "' rpid='" + dt.Rows[i]["RltshpID"].ToString() + "'>");
+                                //if (flgSubmittedForApproval == 1 && Convert.ToInt32(dt.Rows[i]["flgApproved"]) == 0)
+                                //{
+                                //    sb.Append("<td class='text-center'><input type='checkbox' /></td>");
+                                //}
+                                //else
+                                //{
+                                //    sb.Append("<td class='text-center'></td>");
+                                //}
+
                                 sb.Append("<td>" + dt.Rows[i]["Relationship"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["FullName"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["EMailID"].ToString() + "</td>");
@@ -113,6 +165,14 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                                 sb.Append("<td>" + dt.Rows[i]["Department"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Designation"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Status"].ToString() + "</td>");
+                                if (dt.Rows[i]["flgApproved"].ToString() == "0")
+                                {
+                                    sb.Append("<td class='text-center'  ><i class='fa fa-pencil' onclick='fnEditCategory(this)' title='click to edit' style='cursor:pointer;display:none'></i> <i class='fa fa-trash-o' onclick='fnRemoveFromDB(this)' style='color:red;cursor:pointer;margin-left:5px;display:none' title='click to delete'></i></td>");
+                                }
+                                else
+                                {
+                                    sb.Append("<td class='text-center'  style='color:red;cursor:pointer'></td>");
+                                }
                                 sb.Append("</tr>");
                             }
                             jsonData = "1|" + sb.ToString();
@@ -174,8 +234,40 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
 
 
     [System.Web.Services.WebMethod()]
-    public static string fnSaveandDeleteNomineeData(int LoginID, object arrData, string RejectionComment)
+    public static string fnRemoveNomineeData(int empid, int rpId, int LoginID)
     {
+        string jsonData = "";
+        try
+        {
+
+            using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
+            {
+                using (SqlCommand command = new SqlCommand("", Scon))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.CommandTimeout = 0;
+                    command.Parameters.AddWithValue("@LoginId", LoginID);
+                    command.Parameters.AddWithValue("@arr", LoginID);
+                    Scon.Open();
+                    command.ExecuteNonQuery();
+                    Scon.Close();
+                    jsonData = "1|";
+                }
+
+            }
+        }
+        catch (Exception e)
+        {
+            jsonData = "2|" + e.Message;
+        }
+
+        return jsonData;
+    }
+
+    [System.Web.Services.WebMethod()]
+    public static string fnSaveandDeleteNomineeData(int LoginID, object arrData, int flg)
+    {
+        int Scenario = 1;
         string jsonData = "";
         try
         {
@@ -185,16 +277,27 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
 
             using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
             {
-                using (SqlCommand command = new SqlCommand("spSaveNominationsAprovalFromManager", Scon))
+                using (SqlCommand command = new SqlCommand("spSaveNominationsFromManager", Scon))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.CommandTimeout = 0;
                     command.Parameters.AddWithValue("@LoginId", LoginID);
-                    command.Parameters.AddWithValue("@tmpApproveNominationsFromManager", tblOrderDetail);
-                    command.Parameters.AddWithValue("@RejectionComment", RejectionComment);
-                    Scon.Open();
-                    command.ExecuteNonQuery();
-                    Scon.Close();
+                    command.Parameters.AddWithValue("@tmpSaveNominationsFromUser", tblOrderDetail);
+                    command.Parameters.AddWithValue("@flgSubmit", flg);
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        using (DataTable dt = new DataTable())
+                        {
+                            da.Fill(dt);
+                            if (flg == 0)
+                            {
+                                if (dt.Rows.Count > 0)
+                                {
+                                    string strStatus = fnSendMailToUsers(Scenario, Convert.ToString(dt.Rows[0]["ParticipantName"]), "", "", Convert.ToString(dt.Rows[0]["ParticipantEMailID"]), "");
+                                }
+                            }
+                        }
+                    }
                     jsonData = "1|";
                 }
             }
@@ -205,5 +308,168 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
         }
 
         return jsonData;
+    }
+
+
+    [System.Web.Services.WebMethod()]
+    public static string fnSaveaNewStakeholder(int LoginID, string st_name, string st_email, string st_function, string st_dept, string st_desig)
+    {
+        string jsonData = "";
+        try
+        {
+
+            using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
+            {
+                using (SqlCommand command = new SqlCommand("spSaveIndUser", Scon))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.CommandTimeout = 0;
+                    command.Parameters.AddWithValue("@LoginId", LoginID);
+                    command.Parameters.AddWithValue("@FullName", st_name);
+                    command.Parameters.AddWithValue("@EmailId", st_email);
+                    command.Parameters.AddWithValue("@Function", st_function);
+                    command.Parameters.AddWithValue("@Department", st_dept);
+                    command.Parameters.AddWithValue("@Designation", st_desig);
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        using (DataTable dt = new DataTable())
+                        {
+                            da.Fill(dt);
+                            jsonData = "1|" + dt.Rows[0]["flgUserExist"].ToString() + "|" + Convert.ToString(dt.Rows[0]["EmpNodeId"]);
+                        }
+                    }
+
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            jsonData = "2|" + e.Message;
+        }
+
+        return jsonData;
+    }
+
+
+
+    public static string fnSendMailToUsers(int Scenario, string FName, string UserName, string Password, string MailTo, string Comment)
+    {
+
+
+        string strRespoonse = "1";
+        try
+        {
+
+
+            string WebSitePath = ConfigurationManager.AppSettings["PhysicalPath"].ToString();
+            string flgActualUser = ConfigurationManager.AppSettings["flgActualUser"].ToString();
+            string fromMail = ConfigurationManager.AppSettings["FromAddress"].ToString();
+            MailMessage msg = new MailMessage();
+            msg.From = new MailAddress("VAC Manager<" + fromMail + ">");
+
+            var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=eY/ca2ZawDDXmJx1KvbW0FXw5CbMmucrsW+mjBqE9urodCYTNJeiBeRq3vjX/s7cVlCymgjphLEPbeF9IJRSuw==";
+            var emailClient = new EmailClient(connectionString);
+
+            var emailRecipients = new EmailRecipients();
+            if (ConfigurationSettings.AppSettings["flgActualUser"].ToString() == "1")
+            {
+                if (MailTo != "")
+                {
+                    for (int i = 0; i < MailTo.Split(',').Length; i++)
+                    {
+                        emailRecipients.To.Add(new EmailAddress(MailTo.Split(',')[i].Trim()));
+                    }
+                }
+
+                // For BCC
+                string[] BCCEmailIDs = ConfigurationSettings.AppSettings["MailBcc"].Split(',');
+                if (BCCEmailIDs.Length > 1)
+                {
+                    for (int i = 0; i < BCCEmailIDs.Length; i++)
+                    {
+                        emailRecipients.BCC.Add(new EmailAddress(BCCEmailIDs[i]));
+                    }
+                }
+                else
+                {
+                    emailRecipients.BCC.Add(new EmailAddress(ConfigurationSettings.AppSettings["MailBcc"]));
+                }
+
+            }
+            else
+            {
+                MailTo = ConfigurationSettings.AppSettings["MailTo"].ToString();
+                if (MailTo != "")
+                {
+                    for (int i = 0; i < MailTo.Split(',').Length; i++)
+                    {
+                        emailRecipients.To.Add(new EmailAddress(MailTo.Split(',')[i].Trim()));
+                    }
+                }
+
+            }
+
+            StringBuilder strBody = new StringBuilder();
+            if (Scenario == 1)
+            {
+                msg.Subject = "Your HCAS 360-Degree Feedback FY2025 Rater Approval Update";
+
+                strBody.Append("<font  style='COLOR: #000000; FONT-FAMILY: Arial'  size=2>");
+
+                strBody.Append("<p>Dear " + FName + ",</p>"); //// Participants Name WIll Come
+                strBody.Append("<p>Thank you for your nominating your raters for the HCAS 360-Degree Feedback FY2025. Your nominated raters have been reviewed by your manager/coach. Below are the next steps for you:</p>");
+                strBody.Append("<p>All your nominated raters have been approved. No further action is required at this stage. Please await the survey launch to complete your self-rating & provide feedback for others if you have been nominated. </p>");
+                strBody.Append("<p>Should you have any questions or need assistance, please reach out to your talent advisors. </p>");
+                //strBody.Append("<p>Your timely review will help ensure a smooth and effective feedback process. Should you have any questions or need assistance, please reach out to : <a style = 'COLOR: #000000; FONT-weight: bold' href = mailto:demer@deloitte.com> (demer@deloitte.com)</a>.</p>");
+                strBody.Append("<p><b>Best Regards,</b></p>");
+                strBody.Append("<p><b>Team Deloitte</b></p>");
+
+
+                strBody.Append("</font>");
+
+            }
+            else
+            {
+                msg.Subject = "Your HCAS 360-Degree Feedback FY2025 Rater Approval Update";
+
+                strBody.Append("<font  style='COLOR: #000000; FONT-FAMILY: Arial'  size=2>");
+
+                strBody.Append("<p>Dear " + FName + ",</p>"); // Participants Name WIll Come
+                strBody.Append("<p>Thank you for your nominating your raters for the HCAS 360-Degree Feedback FY2025. Your nominated raters have been reviewed by your manager/coach. </p>");
+                strBody.Append("<p>Below are the next steps for you:</p>");
+                strBody.Append("<p>Some of your nominated raters were not approved and your manager/coach has shared below feedback:</p>");
+                strBody.Append("<p>" + Comment + ",</p>"); // When Comment WIll Come then Code need to uncomment
+                strBody.Append("<p>Please log-into the platform once again and update your rater selection accordingly before resubmitting for approval.</p>");
+                strBody.Append("<p>URL <a href='" + WebSitePath + "'>" + WebSitePath + "</a>.</p>");
+                strBody.Append("<p><b>Login ID: " + UserName + "</b></p>");
+                strBody.Append("<p><b>Password: " + Password + "</b></p>");
+
+                strBody.Append("<p>Once you updated your raters, please await the survey launch to complete your self-rating & provide feedback for others if you have been nominated. </p>");
+                strBody.Append("<p>Should you have any questions or need assistance, please reach out to your talent advisors.</p>");
+                strBody.Append("<p><b>Best Regards,</b></p>");
+                strBody.Append("<p><b>Team Deloitte</b></p>");
+
+
+                strBody.Append("</font>");
+
+            }
+
+
+
+
+            var emailContent = new EmailContent(msg.Subject) { PlainText = null, Html = strBody.ToString() };
+            var emailMessage = new EmailMessage(
+                senderAddress: ConfigurationSettings.AppSettings["MailSender"],      //The email address of the domain registered with the Communication Services resource
+                recipients: emailRecipients,
+                content: emailContent);
+
+
+            var emailSendOperation = emailClient.Send(wait: WaitUntil.Completed, message: emailMessage);
+        }
+        catch (Exception ex)
+        {
+            strRespoonse = ex.Message;
+        }
+        return strRespoonse;
     }
 }

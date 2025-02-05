@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <script src="../Scripts/instructionJS.js"></script>
 
-    <style>
+    <%--<style>
         table.bordered, table.bordered > tbody > tr td, table.bordered > tbody > tr th  {
             border: 1px solid #88bd26;
         }
@@ -12,27 +12,24 @@
             width: 100%;
             border-collapse: collapse;
         }
-        .heading3{
-            background-color: #88bd26; color: white; text-align: center; font-size: 1.2rem; padding: 6px;
-        }
-    </style>
+    </style>--%>
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="row no-gutters">
-        <div class="section-title">
-            <h3 class="text-center">HCAS | 360 Degree Feedback Survey</h3>
-            <div class="title-line-center"></div>
-        </div>
-        <div class="col-md-5">
+    <div class="section-title">
+        <h3 class="text-center">HCAS | 360 Degree Feedback Survey</h3>
+        <div class="title-line-center"></div>
+    </div>
+    <div class="row g-0">
+        <div class="col-md-4">
             <div class="grid-welcome-bg">
                 <img src="../Images/welcome.jpg" class="info-bg" />
             </div>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
             <div class="grid bg_two">
-                <h3 class="heading3">ABOUT THE SURVEY</h3>
+                <h3 class="heading-3">ABOUT THE SURVEY</h3>
                 <p>This newly launched platform is our in-house tool to consolidate our assessment offerings and simplify the reporting process.&nbsp;&nbsp; We are excited to invite you to be the first users of this assessment tool! While the HCAS survey is currently open only to AD&rsquo;s and above, we hope to scale this across all levels internally, as well as a robust client offering. The HCAS 360 Survey is an assessment tool anchored on the competencies aligned with our the &ldquo;Deloitte Future Leaders Framework&rdquo;. The initiative spotlights transformative insights by analysing inputs by the individual as well as reporting managers, coaches, peers, direct reports, and others for a well-rounded perspective into strengths and areas for growth. Please be assured, all responses in this survey will be strictly confidential.</p>
-                <h3 class="heading3">HOW IT WORKS</h3>
+                <h3 class="heading-3">HOW IT WORKS</h3>
                 <p><strong>Survey Instructions</strong></p>
                 <ul>
                     <li>Click on &ldquo;<strong>Your Name</strong>&rdquo; under the relevant category to start the survey.</li>
@@ -44,20 +41,10 @@
                 <ul>
                     <li>There will also be two open-ended questions at the end of the survey.</li>
                 </ul>
-
-                <h3 class="heading3">RATING SCALE</h3>
-                <table class="bordered">
+                <h3 class="heading-3">RATING SCALE</h3>
+                <table class="table table-bordered table-sm">
                     <tbody>
-                        <%--<tr>
-                            <th>Rating</th>
-                            <th>Interpretation</th>
-                            <th>Description</th>
-                        </tr>--%>
-
                         <tr>
-                           <%-- <td>
-                                <strong>5</strong>
-                            </td>--%>
                             <td>
                                 <strong>Always</strong>
                             </td>
@@ -66,9 +53,6 @@
                         </tr>
 
                         <tr>
-                            <%--<td>
-                                <strong>4</strong>
-                            </td>--%>
                             <td>
                                 <strong>Often</strong>
                             </td>
@@ -76,9 +60,6 @@
                             </td>
                         </tr>
                         <tr>
-                           <%-- <td>
-                                <strong>3</strong>
-                            </td>--%>
                             <td>
                                 <strong>Sometimes</strong>
                             </td>
@@ -86,9 +67,6 @@
                             </td>
                         </tr>
                         <tr>
-                           <%-- <td>
-                                <strong>2</strong>
-                            </td>--%>
                             <td>
                                 <strong>Occasionally</strong>
                             </td>
@@ -96,9 +74,6 @@
                             </td>
                         </tr>
                         <tr>
-                           <%-- <td>
-                                <strong>1</strong>
-                            </td>--%>
                             <td>
                                 <strong>Rarely</strong>
                             </td>
@@ -107,9 +82,6 @@
                         </tr>
 
                         <tr>
-                           <%-- <td>
-                                <strong>0</strong>
-                            </td>--%>
                             <td>
                                 <strong>Have Not Observed</strong>
                             </td>
@@ -119,13 +91,11 @@
 
                     </tbody>
                 </table>
-
+                <p>If you have any technical queries, please contact  <a href="mailto:demer@deloitte.com.">demer@deloitte.com.</a></p>
             </div>
-               <p>If you have any technical queries, please contact  <a href="mailto:demer@deloitte.com.">demer@deloitte.com.</a></p>
-            <div class="text-center">
-                <%--<asp:Button ID="btnBack" runat="server" Text="Back"  CssClass="btns btn-submit" />--%>
-                <asp:Button ID="btnContiue" runat="server" Text="Start Survey" CssClass="btns btn-submit" />
-            </div>
+        </div>
+        <div class="text-center">
+            <asp:Button ID="btnContiue" runat="server" Text="Start Survey" CssClass="btns btn-submit" />
         </div>
 
     </div>

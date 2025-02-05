@@ -3,22 +3,22 @@
     var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
     return is_ie;
 }
-$(document).ready(function () {
+$(function () {
     if (isIE()) {
         //alert('It is InternetExplorer');
-        $("nav.navbar").css("display", "block"), $("img.logo").css("margin-top", "8px");
+        $(".main-header").css("display", "block"), $("img.logo").css("margin-top", "8px");
     } else {
         //alert('It is NOT InternetExplorer');
-        $("nav.navbar").css("display", "flex")
+        $(".main-header").css("display", "flex")
     }
 
     $("img.bg-img").hide();
     var $url = $("img.bg-img").attr("src");
     $('.full-background_one').css('backgroundImage', 'url(' + $url + ')');
 
-    var navbarH = $(".navbar").outerHeight() + "px"
+    var navbarH = $(".main-header").outerHeight() + "px"
     $(".main-content").css({
-        "min-height": $(window).height() - ($(".navbar").outerHeight() + 20),
+        "min-height": $(window).height() - ($(".main-header").outerHeight() + 20),
         "margin-top": - navbarH
     });
 
@@ -28,13 +28,34 @@ $(document).ready(function () {
 
     $("nav.navigation ul li.has-submenu ul").first().css("display", "block");
 
+    $(window).on('scroll', function () {
+        if ($(this).scrollTop() > 60) {
+            $('.wrapper').addClass("fixed");
+            //$('.main-header').css('background', '#9C9C9A');
+        }
+        else {
+            $('.wrapper').removeClass("fixed");
+            //$('.main-header').css('background', 'rgba(0, 0, 0, 0.25)')
+        }
+    });
+
+    /* ------------------ for tabs script ------------------ */
+    $('.tabs-content > .tabs-body:first').show();
+    $('.tabs > li').click(function () {
+        $(this).addClass('active').siblings().removeClass('active');
+
+        //$(this).removeClass('active');
+        //$(this).addClass('active');
+
+        $('.tabs-content > .tabs-body').hide();
+        $('.' + $(this).data('class')).fadeIn();
+    });
+
     //$(window).width() < 768) {
     //    $('nav.navigation ul li a, nav.navigation ul li.has-submenu ul li a').click(function () {
     //        $('aside.left-panel').removeClass('collapsed');
     //    });
     //}
-
-
 
     /********************************
         Aside Navigation Menu

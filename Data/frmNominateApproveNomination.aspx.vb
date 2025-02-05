@@ -16,6 +16,10 @@ Partial Class _Welcome
         'panelLogout = DirectCast(Page.Master.FindControl("panelLogout"), Panel)
         'panelLogout.Visible = False
 
+        If Convert.ToString(Session("flgParticipant")) = 1 Then
+            div2.Style.Add("display", "none")
+        End If
+
     End Sub
     'Protected Sub btnContiue_Click(sender As Object, e As EventArgs) Handles btnContiue.Click
     '    Response.Redirect("frmMain.aspx")

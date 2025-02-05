@@ -1,8 +1,10 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/Data/Site.master" AutoEventWireup="true" CodeFile="InstructionPage.aspx.vb" Inherits="InstructionPage" %>
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/Data/SiteNominate.master" AutoEventWireup="true" CodeFile="InstructionPage.aspx.vb" Inherits="InstructionPage" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <script src="../Scripts/instructionJS.js"></script>
+    <script src="../Scripts/progressbarJS.js"></script>
 
-    <style>
+    <%-- <style>
         table.bordered, table.bordered > tbody > tr td, table.bordered > tbody > tr th {
             border: 1px solid #88bd26;
         }
@@ -19,48 +21,52 @@
             font-size: 1.2rem;
             padding: 6px;
         }
-    </style>
+    </style>--%>
 </asp:Content>
+
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="row no-gutters">
-        <div class="section-title">
-            <h3 class="text-center">HCAS | 360 Degree Feedback Survey</h3>
-            <div class="title-line-center"></div>
-        </div>
+    <div class="section-title">
+        <h3 class="text-center">HCAS | 360 Degree Feedback Survey</h3>
+        <div class="title-line-center"></div>
+    </div>
+    <div class="row g-0">
         <div class="col-md-5">
             <div class="grid-welcome-bg">
-                <img src="../Images/welcome.jpg" class="info-bg" />
+                <img src="../Images/welcome2.jpg" class="info-bg" />
             </div>
         </div>
         <div class="col-md-7">
             <div class="grid bg_two">
-                <h3 class="heading3">ABOUT THE SURVEY</h3>
+                <h3 class="heading-3">ABOUT THE SURVEY</h3>
                 <p>
-                    <p>The HCAS 360 Survey is an assessment tool anchored on the competencies aligned with our the &ldquo;Deloitte Future Leaders Framework&rdquo;, which captures the leadership capabilities and personal attributes that are the building blocks of successful leaders, contextualized for Deloitte through our shared values and purpose. This assessment initiative spotlights transformative insights by analysing inputs by the individual as well as reporting managers, coaches, peers, direct reports, and others for a well-rounded perspective into strengths and areas for growth.</p>
+                    As part of Deloitte&rsquo;s commitment to fostering growth and development, we are excited to introduce the 360-Degree Feedback Program for FY2025. This initiative is designed to provide a well-rounded perspective on leadership capabilities and personal attributes, aligned with the Deloitte Future Leaders Framework. By gathering feedback from multiple sources&mdash;including peers, direct reports, managers, coaches, and stakeholders&mdash;this program offers valuable insights into individual strengths and areas for growth.<br />
+                    <strong>Process:</strong><br />
+                    Participants will nominate raters, Coaches/Managers will approve nominations, and all stakeholders will complete the survey and follow the outlined guidelines within the specified timelines.
                 </p>
-                <h3 class="heading3">HOW IT WORKS</h3>
-                <p><strong>1A. Rater Selection (FOR PARTICIPANTS ONLY)</strong></p>
-                <p>On the next screen, you will see 6 categories of identified appraisers. You are required to submit a minimum of<strong> 3 raters per category </strong>to complete your appraisal. Minimum selection is required to ensure confidentiality of your evaluators.</p>
-                <p>Upon submission, your selection will go to your manager/coach for approval.</p>
-                <p>Please ensure your selection is confirmed, or take further action as prompted</p>
-                <p><strong>1B. Rater Approval (FOR COACHES ONLY)</strong></p>
-                <p>On the next page, you will receive a list of appraisers nominated by your coachee, with the option to approve or reject each individual entry, or approve the entire list with no changes.</p>
-                <p>In case you reject any nominee, you will be required to provide a <strong>reason for rejection </strong>and a <strong>replacement within the same category.</strong></p>
-                <p><strong><em>Categories</em></strong><em>: </em><em>Peers, Direct </em><em>reportees</em><em>, Managers/Coaches, Review partners, others</em></p>
-                <ol start="2">
-                    <li><strong>Next Steps</strong></li>
-                </ol>
-                <ul>
-                    <li>Keep an eye out for a confirmation on your selected appraisers, and take any action indicated.</li>
-                </ul>
 
+
+                <h3 class="heading-3">HOW IT WORKS</h3>
+                <p>
+                    <strong>FOR PARTICIPANTS:</strong><br />
+                    On the next screen, you will see five categories of identified appraisers. To ensure a comprehensive evaluation, you are required to submit a minimum of three raters per category. This minimum selection helps maintain the confidentiality of your evaluators.<br />
+                    <strong>Categories:</strong>
+                </p>
+                <ul>
+                    <li><strong>Direct Reports: </strong>Team members who report to you (Min. 2)</li>
+                    <li><strong>Peers: </strong>Colleagues you work with (Min. 2)</li>
+                    <li><strong>Other Stakeholders: </strong>Other stakeholders that do not map across the rater categories defined (Min. 2)</li>
+                    <li><strong>Reporting Manager (RM)/Coach:</strong> Your supervisory, responsible for your career (Auto-added, more raters can be added)</li>
+                    <li><strong>Review Partner: </strong>Your project supervisor (Optional)</li>
+                </ul>
+                <p>Upon submission, your selection will be sent to your coach/RM for approval. Please ensure your selection is confirmed, or take further action as prompted.<br />
+                    <strong>FOR RATER APPROVAL (FOR RM/COACHES)</strong><br />
+                    On the next screen, you will be able to see a list of raters nominated by your coachee. You will have the option to approve or reject individual entries or approve the entire list without changes.<br />
+                    If you reject any nominee, you must provide a reason or suggest a replacement within the same category. This will help ensure your reportee has the right set of stakeholder providing feedback.</p>
             </div>
-           
+
             <div class="text-center">
-    
                 <asp:Button ID="btnContiue" runat="server" Text="Next" CssClass="btns btn-submit" OnClick="btnContiue_Click" />
             </div>
         </div>
-
     </div>
 </asp:Content>

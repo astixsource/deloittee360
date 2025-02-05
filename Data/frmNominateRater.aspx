@@ -8,11 +8,15 @@
     <script src="../JDatatable/dataTables.js"></script>
     <script src="../JDatatable/dataTables.fixedHeader.js"></script>
     <script src="../JDatatable/fixedHeader.dataTables.js"></script>
+     <script src="../Scripts/progressbarJS.js"></script>
     <style>
-        .main-content {
+        .mcacAnchor {
+            font-size: 12px;
+        }
+        /*.main-content {
             max-width: 97%;
             width: 97%;
-        }
+        }*/
 
         body {
             overflow-y: scroll;
@@ -27,10 +31,9 @@
         }
 
         .btn {
-            padding: 12px 30px; /* Adjust padding for consistent size */
+            padding: 12px 30px;
             font-size: 16px;
             border: none;
-            /* border-radius: 5px;*/
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
             text-align: center;
@@ -88,7 +91,6 @@
         .btn-danger {
             background-color: black !important;
             color: white;
-            /*padding: 12px 25px;*/ /* Match size with other buttons */
         }
 
             .btn-danger:hover {
@@ -149,6 +151,60 @@
             color: #ffffff;
             font-size: 10.5pt;
         }
+ .ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #ccc;
+    background: white;
+    font-size:9.5pt;
+}
+
+.autocomplete-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size:9.5pt;
+}
+
+.autocomplete-table th, .autocomplete-table td {
+    padding: 5px;
+    border: 1px solid #ddd;
+}
+
+.autocomplete-table th {
+    background-color: #f4f4f4;
+    text-align: left;
+}
+
+.autocomplete-table-row {
+    width: 100%;
+}
+
+.ui-menu-item {
+    list-style: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+/* Highlight selected row */
+.ui-menu-item-wrapper {
+    display: block;
+    padding: 5px;
+}
+
+.ui-state-active {
+    background: #007bff;
+    color: white;
+}
+        
+        .clsheaderitem th {
+    background-color: #f4f4f4 !important;
+    text-align: left;
+     color: #000000 !important;
+}
+        .alertcss{
+            min-width:300px;
+        }
     </style>
     <script>
         $.widget('custom.mcautocomplete', $.ui.autocomplete, {
@@ -157,16 +213,16 @@
                 this.widget().menu("option", "items", "> :not(.ui-widget-header)");
             },
             _renderMenu: function (ul, items) {
-                var self = this,
-                    thead;
+               // $(ul).addClass("autocomplete-menu"); // Add class to style
                 if (this.options.showHeader) {
-                    table = $('<div class="ui-widget-header" style="width:auto;position:fixed;margin-top:-2px"></div>');
+                    var table = '<table id="tblPrdContainer" class="autocomplete-table clsheaderitem"><thead><tr>';
                     $.each(this.options.columns, function (index, item) {
-                        table.append('<span style="padding:0 4px;float:left;width:' + item.width + ';">' + item.name + '</span>');
+                        table+=('<th style="padding:0 4px;width:' + item.width + ';">' + item.name + '</th>');
                     });
-                    table.append('<div style="clear: both;"></div>');
-                    ul.append(table);
+                    table += ('</tr></thead>');
+                    $(ul).append(table);
                 }
+                var self = this;
                 var cnt = 0;
                 $.each(items, function (index, item) {
                     if ($("#tblMainNominee tr[nomineid='" + item["NodeID"] + "']").length == 0) {
@@ -178,28 +234,136 @@
             _renderItem: function (ul, item, cnt) {
                 var stylee = "";
                 if (cnt == 0) {
-                    stylee = "style='margin-top:25px'";
+                    stylee = "style='margin-top:35px'";
                 }
                 var t = '',
                     result = '';
                 if (item.label != "No Record Found,Please enter correct text for search!" && item.label != "Session Expired,Kindly login again!") {
                     $.each(this.options.columns, function (index, column) {
-                        t += '<span style="padding:0 4px;float:left;width:' + column.width + ';">' + item[column.valueField ? column.valueField : index] + '</span>'
+                        //t += '<span style="padding:0 4px;float:left;width:' + column.width + ';">' + item[column.valueField ? column.valueField : index] + '</span>'
+
+                        t += '<td style="padding:0 4px;width:' + column.width + ';">' + item[column.valueField ? column.valueField : index] + '</td>'
                     });
-                    result = $('<li ' + stylee + '></li>')
+                    result = $('<li></li>')
+
                         .data('ui-autocomplete-item', item)
-                        .append('<a class="mcacAnchor">' + t + '<div style="clear: both;"></div></a>')
+                        .append("<div><table class='autocomplete-table-row'><tr>" + t + "</tr></table></div>")
+                        //.append('<a class="mcacAnchor">' + t + '<div style="clear: both;"></div></a>')
+                        //.append(t)
                         .appendTo(ul);
+
+                   
                 } else {
-                    result = $('<li style="margin-top:25px"></li>')
+                    result = $('<tr style="margin-top:25px"></tr>')
                         .data('ui-autocomplete-item', item)
-                        .append('<a class="mcacAnchor">' + item.label + '<div style="clear: both;"></div></a>')
+                        //.append('<a class="mcacAnchor">' + item.label + '<div style="clear: both;"></div></a>')
+                        .append(item.label)
                         .appendTo(ul);
                 }
 
                 return result;
             }
         });
+
+        var arrss = true;
+        function EnableKeySelection() {
+            // debugger;
+            var trows = document.getElementById('tblPrdContainer').rows, t = trows.length, trow, nextrow,
+                addEvent = (function () {
+                    return window.addEventListener ? function (el, ev, f) {
+                        el.addEventListener(ev, f, false); //modern browsers
+                    } : window.attachEvent ? function (el, ev, f) {
+                        el.attachEvent('on' + ev, function (e) { f.apply(el, [e]); }); //IE 8 and less
+                    } : function () { return; }; //a very old browser (IE 4 or less, or Mozilla, others, before Netscape 6), so let's skip those
+                })();
+
+            while (--t > -1) {
+                trow = trows[t];
+                trow.className = 'normal';
+                addEvent(trow, 'click', highlightRow);
+            } //end while
+
+            function highlightRow(gethighlight) { //now dual use - either set or get the highlighted row
+                //debugger;
+                gethighlight = gethighlight === true;
+                var t = trows.length;
+                while (--t > -1) {
+                    trow = trows[t];
+                    if (gethighlight && trow.className === 'highlighted') {
+                        return t;
+                    }
+                    else if (!gethighlight && trow !== this) {
+                        trow.className = 'normal';
+                    }
+                } //end while
+                return gethighlight ? null : this.className = this.className === 'highlighted' ? 'normal' : 'highlighted';
+            } //end function
+
+            function movehighlight(way, e) {
+                e.preventDefault && e.preventDefault();
+                e.returnValue = false;
+                var idx = highlightRow(true); //gets current index or null if none highlighted
+                if (typeof idx === 'number') {//there was a highlighted row
+                    idx += way; //increment\decrement the index value
+                    if (idx && (nextrow = trows[idx])) {
+                        $(nextrow).find("input:checkbox").focus();
+                        return highlightRow.apply(nextrow);
+                    } //index is > 0 and a row exists at that index
+                    else if (idx) {
+                        $(trows[1]).find("input:checkbox").focus();
+                        return highlightRow.apply(trows[1]);
+                    } //index is out of range high, go to first row
+
+                    $(trows[trows.length - 1]).find("input:checkbox").focus();
+                    return highlightRow.apply(trows[trows.length - 1]); //index is out of range low, go to last row
+                }
+                $(trows[way > 0 ? 1 : trows.length - 1]).find("input:checkbox").focus();
+                return highlightRow.apply(trows[way > 0 ? 1 : trows.length - 1]); //none was highlighted - go to 1st if down arrow, last if up arrow
+            } //end function
+
+            function processkey(e) {
+                switch (e.keyCode) {
+                    case 38:
+                        {//up arrow
+                            return movehighlight(-1, e)
+                        }
+                    case 40:
+                        {//down arrow
+                            arrss = true;
+                            $("#chkprd0").focus();
+                            return movehighlight(1, e);
+                        }
+                    case 9:
+                        {//Tab
+                            if ($("#chkprd0").length > 0) {
+                                arrss = true;
+                                $("#chkprd0").focus();
+                                return movehighlight(1, e);
+                            } else {
+                                return false;
+                            }
+                        }
+                    case 13:
+                        {
+                            if ($("#tblPrdContainer tr.highlighted").length > 0) {
+                                var tr = $("#tblPrdContainer tr.highlighted").eq(0);
+                                fnFillOrder(tr, 1, e);
+                            }
+                        }
+                    case 32:
+                        {
+
+                            $(e.currentTarget.activeElement).closest("tr").addClass("highlightedRowInChecked");
+                            return false;
+                        }
+
+                }
+            } //end function
+
+            addEvent(document, 'keydown', processkey);
+
+        }
+
         var dTable = null;
         $(document).ready(function () {
             if ($("#MainContent_hdnIsManager").val() == "0") {
@@ -229,6 +393,11 @@
                 } else {
                     $("#tblMainNominee tbody").html(result.split("|")[1]);
                     //fnDisableCategory();
+                    if ($("#tblMainNominee tbody tr[flgSubmittedForApproval='1']").length > 0) {
+                        $("#btnSave,#btnSubmit").prop("disabled", true);
+                        $("#tblMainNominee tfoot tr").hide();
+                        $(".dt-scroll-foot").hide();
+                    }
                 }
 
             }, function (result) {
@@ -240,31 +409,33 @@
             $(".clsSearchUser").mcautocomplete({
                 open: function () {
                     var wd = $(".ui-autocomplete:visible").find("div.ui-widget-header").width();
-                    wd = parseInt(wd) + parseInt(30)
+                    wd = parseInt(wd) + parseInt(25)
                     $(".ui-autocomplete:visible").css({
                         "width": wd + "px",
                         "max-height": "200px",
                         "overflow-y": "auto",
                         "overflow-y": "auto",
-                        "left": "250px",
+                        "left": "360px",
                     });
+                    $("#tblPrdContainer").removeClass("ui-menu-item");
+                   // EnableKeySelection();
                 },
                 position: ({
-                    my: "left top",
-                    at: "left bottom",
-                    collision: 'flipfit',
+                    my: "left bottom",
+                    at: "left top",
+                    collision: "flip flip",
                     within: window
                 }),
                 delay: 100,
                 showHeader: true,
                 columns: [{
                     name: 'Emp Code',
-                    width: '100px',
+                    width: '80px',
                     valueField: 'EmpCode'
                 },
                 {
                     name: 'Name',
-                    width: '230px',
+                    width: '200px',
                     valueField: 'FullName'
                 },
                 {
@@ -274,18 +445,18 @@
                 },
                 {
                     name: 'Function',
-                    width: '150px',
+                    width: '110px',
                     valueField: 'Function'
                 }
                     ,
                 {
                     name: 'Department',
-                    width: '150px',
+                    width: '110px',
                     valueField: 'Department'
                 },
                 {
                     name: 'Designation',
-                    width: '150px',
+                    width: '130px',
                     valueField: 'Designation'
                 }
                 ],
@@ -351,7 +522,7 @@
                         //  $(this).val((ui.item ? ui.item.InvCode : ''));
                         //alert(ui.item.FullName)
                         //tblMainNominee
-                        var str = "<tr flg='0' flgvalid='1' nomineid='" + ui.item.NodeID + "' minnominationpercategory='" + $("#MainContent_ddlRelatioShip option:selected").attr("minNominationperCategory") +"' rpid='" + $("#MainContent_ddlRelatioShip option:selected").val() + "'>";
+                        var str = "<tr flg='0' flgvalid='1' nomineid='" + ui.item.NodeID + "' minnominationpercategory='" + $("#MainContent_ddlRelatioShip option:selected").attr("minNominationperCategory") + "' rpid='" + $("#MainContent_ddlRelatioShip option:selected").val() + "'>";
                         str += "<td>" + $("#MainContent_ddlRelatioShip option:selected").text() + "</td>";
                         str += "<td>" + ui.item.FullName + "</td>";
                         str += "<td>" + ui.item.EMailID + "</td>";
@@ -359,7 +530,7 @@
                         str += "<td>" + ui.item.Department + "</td>";
                         str += "<td>" + ui.item.Designation + "</td>";
                         str += "<td>Initial draft</td>";
-                        str += "<td class='text-center' style='color:red;cursor:pointer'><i class='fa fa-remove' onclick='fnRemoverow(this)'></i></td>";
+                        str += "<td class='text-center'><i class='fa fa-pencil' onclick='fnEditCategory(this)' title='click to edit' style='cursor:pointer'></i> <i class='fa fa-trash-o' onclick='fnRemoveFromDB(this)' style='color:red;cursor:pointer;margin-left:5px' title='click to delete'></i></td>";
                         str += "</tr>";
                         $("#tblMainNominee tbody").find("td.dt-empty").closest("tr").remove();
                         $("#tblMainNominee tbody").append(str);
@@ -380,7 +551,24 @@
 
         }
 
-       
+        function fnEditCategory(sender) {
+            var id = $(sender).closest("tr").attr("rpid");
+            if ($(sender).hasClass("fa-pencil")) {
+                var sClone = $("#MainContent_ddlRelatioShip").clone();
+                $(sClone).find("option[value='0']").remove();
+                var id = $(sender).closest("tr").attr("rpid");
+                
+                $(sender).closest("tr").attr("flg", "0");
+                $(sender).closest("tr").find("td").eq(0).html("<select style='width:100px'>" + $(sClone).html() + "</select>");
+                $(sender).closest("tr").find("td").eq(0).find("select option").prop("selected", false);
+                $(sender).closest("tr").find("td").eq(0).find("select option[value='" + id + "']").prop("selected", true);
+                $(sender).removeClass("fa-pencil").addClass("fa-undo");
+            } else {
+                $(sender).closest("tr").attr("flg", "1");
+                $(sender).removeClass("fa-undo").addClass("fa-pencil");
+                $(sender).closest("tr").find("td").eq(0).html($("#MainContent_ddlRelatioShip option[value='" + id + "']").text());
+            }
+        }
 
         function fnShowHideDiv(sender) {
             if ($(sender).find("i.fa").hasClass("fa-arrow-circle-o-down")) {
@@ -396,7 +584,7 @@
         }
         function fnAddNewNominee(sender) {
             if (!IsValidateInput($("#btnMainbodyContainer").find("input.clsinput"))) {
-                alert("Please enter nominee details first before adding new one");
+                alert("Please enter rater details first before adding new one");
                 //$(sender).closest(".clsNomineebtncontainer").next().show();
                 //$(sender).closest(".clsNomineebtncontainer").find("i.clsarrow").removeClass("fa-arrow-circle-o-down").addClass("fa-arrow-circle-o-up");
                 //$(sender).closest(".clsNomineebtncontainer").next().find("input.clsSearchUser").focus();
@@ -411,7 +599,7 @@
             fnHideremoveicon();
             fnBindAutocomplete();
         }
-       
+
         function fnRemoveNewNominee(sender) {
             $(sender).closest(".clsmainbody").remove();
             $("div.clsNomineebodycontainer").hide();
@@ -462,7 +650,7 @@
 
         function fnRemoveFromDB(sender) {
             var LoginId = $("#MainContent_hdnLoginId").val();
-            var str = "<div>Are you sure to remove this nominee?</div>";
+            var str = "<div>Are you sure you want to remove this rater?</div>";
             $("#dvDialog").html(str);
             $("#dvDialog").dialog({
                 title: "Confirmation :",
@@ -514,13 +702,14 @@
         }
 
         function IsValidateCategory() {
+           
             var $trs = $("#tblMainNominee tbody tr[flgvalid='1']");
             if ($trs.length > 0) {
                 var arrCategories = $("#MainContent_ddlRelatioShip option[value!=0]");
                 for (var i = 0; i < arrCategories.length; i++) {
                     var rpid = arrCategories.eq(i).val();
                     if ($("#tblMainNominee tbody tr[rpid='" + rpid + "']").length > 0) {
-                        var minnominationpercategory = $("#tblMainNominee tbody tr[rpid='" + rpid + "']").attr("minnominationpercategory");
+                        var minnominationpercategory = arrCategories.eq(i).attr("minnominationpercategory");
                         if ($("#tblMainNominee tbody tr[rpid='" + rpid + "']").length < parseInt(minnominationpercategory)) {
                             return "false|" + minnominationpercategory;
                         }
@@ -533,27 +722,31 @@
         function fnSaveAndSubmit(flg) {
             var $trs = $("#tblMainNominee tr[flg='0']");
             if ($trs.length == 0 && flg == 0) {
-                fnShowmsg("No data found for this action, kindly add new nominee first!");
+                fnShowmsg("No data found for this action, kindly add new rater first!");
                 return false;
             }
             if (flg == 1) {
                 $trs = $("#tblMainNominee tbody tr[flgvalid='1']");
-                if ($trs.length >= 0) {
+                if ($trs.length > 0) {
                     var str = IsValidateCategory();
-                    if (str.split("|")[0]=="false") {
-                        fnShowmsg("Kindly add minimum " + str.split("|")[1] +" nominee(s) per category first!");
+                    if (str.split("|")[0] == "false") {
+                        fnShowmsg("Kindly add minimum rater(s) for the category first as per the above instructions!");
                         return false;
                     }
+                } else {
+                    fnShowmsg("No data found for this action, kindly add new rater first!");
+                    return false;
                 }
             }
             var LoginId = $("#MainContent_hdnLoginId").val();
-            var str = "<div>Are you sure to " + (flg == 0 ? "save" : "submit") + "?</div>";
+            var str = "<div>" + (flg == 0 ? "Are you sure to save?" : "Please Submit if these are your final nominations?") + "</div>";
             $("#dvDialog").html(str);
             $("#dvDialog").dialog({
                 title: "Confirmation :",
                 modal: true,
-                width: "200",
+                width: "370",
                 height: "auto",
+                dialogClass: "alertcss",
                 close: function () {
                     $(this).dialog('destroy');
                     $("#dvDialog").html("");
@@ -563,8 +756,14 @@
                         var arr = [];
                         var ApseNodeId = $("#MainContent_hdnNodeId").val();
                         for (var i = 0; i < $trs.length; i++) {
+                            var RltshpId = 0;
+                            if ($trs.eq(i).find("td").eq(0).find("select").length > 0) {
+                                RltshpId = $trs.eq(i).find("td").eq(0).find("select").find("option:selected").val();
+                            } else {
+                                RltshpId = $trs.eq(i).attr("rpid");
+                            }
                             arr.push({
-                                ApseNodeId: ApseNodeId, ApsrNodeId: $trs.eq(i).attr("nomineid"), RltshpId: $trs.eq(i).attr("rpid"), flgAction: 0
+                                ApseNodeId: ApseNodeId, ApsrNodeId: $trs.eq(i).attr("nomineid"), RltshpId: RltshpId, flgAction: 0
                             });
                         }
                         $("#dvFadeForProcessing").show();
@@ -604,11 +803,26 @@
                 <h3 class="text-center">Nominate your Raters</h3>
                 <div class="title-line-center"></div>
             </div>
-            <h5 class="text-center">Nominate individuals for the rater groups listed below, ensuring a minimum of 3 nominations per category</h5>
+            <h6><b>What you should know before selecting your raters:</b></h6>
+                For each category, please ensure you meet the minimum nomination requirements as mentioned below:
+                <ul style="font-size:9.5pt">
+                    <li><b>Direct Reports:</b> Team members who report to you (Min. 2)
+                    </li>
+                    <li><b>Peers:</b> Colleagues you work with (Min. 2)</li>
+                    <li><b>Other Stakeholders:</b> Other stakeholders that do not map across the rater categories defined (Min. 2)</li>
+                    <li><b>Reporting Manager (RM)/Coach:</b> Your supervisory, responsible for your career (Auto-added, more raters can be added)</li>
+                    <li><b>Review Partner:</b> Your project supervisor (Optional)</li>
+                </ul>
+            <p>To help ensure a holistic feedback and maintains confidentiality, you will only be able to submit your nominations if these requirements are met. 
+</p>
+            <p>For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with @deloitte.com.
+</p>
+            <p>As next step, once you submit your nominations, your manager can review, modify, and approve them.
+</p>
 
             <div id="btnMainbodyContainer">
 
-                <table id="tblMainNominee" style="width: 100%">
+                <table id="tblMainNominee" style="width: 100%;border-bottom:1px solid #e2eecb">
                     <thead>
                         <tr>
                             <th style="width: 10%">Category*
@@ -625,7 +839,7 @@
                             </th>
                             <th style="width: 13%">Status
                             </th>
-                            <th style="width: 5%;text-align:center">Action
+                            <th style="width: 5%; text-align: center">Action
                             </th>
                         </tr>
                     </thead>
@@ -634,11 +848,11 @@
                     <tfoot>
                         <tr>
                             <th colspan="8">Select Category:
-                                <asp:DropDownList ID="ddlRelatioShip" Style="height: 33px; border: 1px solid #c0c0c0" AppendDataBoundItems="true" runat="server" AutoPostBack="false">
+                                <asp:DropDownList ID="ddlRelatioShip" Style="height: 33px;width:140px; border: 1px solid #c0c0c0" AppendDataBoundItems="true" runat="server" AutoPostBack="false">
                                     <asp:ListItem Value="0">-----</asp:ListItem>
                                 </asp:DropDownList>
 
-                                <input type="search" id="txtsearch" placeholder="search nominee" class="form-control w-75 d-inline-block clsSearchUser" />
+                                <input type="search" id="txtsearch" placeholder="search raters" class="form-control w-75 d-inline-block clsSearchUser" />
                             </th>
                         </tr>
                     </tfoot>

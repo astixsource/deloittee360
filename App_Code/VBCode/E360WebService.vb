@@ -16,6 +16,38 @@ Public Class E360WebService
     Public Function HelloWorld() As String
         Return "Hello World"
     End Function
+
+    <System.Web.Services.WebMethod(EnableSession:=True)>
+    Public Function fnGetOverallStatusForTheUser() As String
+
+        Dim Objcon As New SqlConnection(strConn.Split("|")(0))
+        Dim objCom As New SqlCommand("spGetOverallStatusForTheUser", Objcon)
+        Dim drdr As SqlDataReader
+        Dim strReturn As String = ""
+        objCom.Parameters.Add("@EmpNdeId", Data.SqlDbType.Int).Value = Session("NodeId")
+        objCom.Parameters.Add("@CycleID", Data.SqlDbType.Int).Value = Session("CycleId")
+        objCom.CommandType = CommandType.StoredProcedure
+        objCom.CommandTimeout = 0
+        Try
+            ' Objcon.AccessToken = strConn.Split("|")(1)
+            Objcon.Open()
+            drdr = objCom.ExecuteReader()
+            drdr.Read()
+
+            strReturn = drdr.Item(0)
+
+            strReturn = "1@" & strReturn
+
+        Catch ex As Exception
+            strReturn &= "2@" & ex.Message
+        Finally
+            objCom.Dispose()
+            Objcon.Close()
+            Objcon.Dispose()
+        End Try
+        Return strReturn
+
+    End Function
     <System.Web.Services.WebMethod(EnableSession:=True)>
     Public Function fnGetCompletionStation() As String
 
