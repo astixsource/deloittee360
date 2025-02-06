@@ -15,7 +15,12 @@
             border-top: none !important;
         }
 
-        .container {
+        .main-content {
+            margin-top:110px;
+            /*  max-width: 900px;*/
+        }
+
+         .container {
             margin: 20px auto;
             padding: 10px;
             /*  max-width: 900px;*/
