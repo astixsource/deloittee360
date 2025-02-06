@@ -42,7 +42,7 @@
 
     <div class="row absolute-center mt-4">
         <div class="col-4" id="div1" runat="server">
-             <h5 class="text-center">For participant, click on nominate to select raters: <br /> ` </h5>
+             <h5 class="text-center">For participant, click on nominate to select raters:</h5>
             
             <div class="btn-img" onclick="fnOPenPage(1)">
                 <img src="../Images/1-nom.svg" alt="" class="" />
