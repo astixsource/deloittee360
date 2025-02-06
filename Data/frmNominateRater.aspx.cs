@@ -83,11 +83,14 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                         da.Fill(dt);
                         foreach (DataRow dr in dt.Rows)
                         {
-                            ListItem lst = new ListItem();
-                            lst.Text = dr["Descr"].ToString();
-                            lst.Value = dr["RltshpID"].ToString();
-                            lst.Attributes.Add("minNominationperCategory", dr["minNominationperCategory"].ToString());
-                            ddlRelatioShip.Items.Add(lst);
+                            if (dr["RltshpID"].ToString() != "4")
+                            {
+                                ListItem lst = new ListItem();
+                                lst.Text = dr["Descr"].ToString();
+                                lst.Value = dr["RltshpID"].ToString();
+                                lst.Attributes.Add("minNominationperCategory", dr["minNominationperCategory"].ToString());
+                                ddlRelatioShip.Items.Add(lst);
+                            }
                         }
                         //ddlRelatioShip.DataSource = dt;
                         //ddlRelatioShip.DataTextField = "Descr";
@@ -400,7 +403,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                                 sb.Append("<td>" + dt.Rows[i]["Department"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Designation"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Status"].ToString() + "</td>");
-                                if (dt.Rows[i]["flgSubmittedForApproval"].ToString() == "0")
+                                if (dt.Rows[i]["flgSubmittedForApproval"].ToString() == "0" && dt.Rows[i]["flgApproved"].ToString() == "0")
                                 {
                                     sb.Append("<td class='text-center'><i class='fa fa-pencil' onclick='fnEditCategory(this)' title='click to edit' style='cursor:pointer'></i>  <i class='fa fa-trash-o' onclick='fnRemoveFromDB(this)' style='color:red;cursor:pointer;margin-left:5px' title='click to delete'></i></td>");
                                 }

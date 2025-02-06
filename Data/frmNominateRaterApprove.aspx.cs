@@ -236,7 +236,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
         }
         else
         {
-            jsonData = "3^Session Expired,Kindly login again!";
+            jsonData = "3^No Record Found,Please enter correct text for search!";
         }
 
 
@@ -300,7 +300,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                         using (DataTable dt = new DataTable())
                         {
                             da.Fill(dt);
-                            if (flg == 0)
+                            if (flg == 1)
                             {
                                 if (dt.Rows.Count > 0)
                                 {
