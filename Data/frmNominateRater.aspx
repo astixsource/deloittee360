@@ -855,7 +855,7 @@
                                     <asp:ListItem Value="0">-----</asp:ListItem>
                                 </asp:DropDownList>
 
-                                <input type="search" id="txtsearch" placeholder="search raters" class="form-control w-75 d-inline-block clsSearchUser" />
+                                <input type="search" id="txtsearch" placeholder="Search raters by Emp Id, Name, Email ID" class="form-control w-75 d-inline-block clsSearchUser" />
                             </th>
                         </tr>
                     </tfoot>

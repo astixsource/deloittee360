@@ -830,7 +830,7 @@
                                 </asp:DropDownList>
 </th>
                             <th>
-                                <input type="search" id="txtsearch" placeholder="search raters" class="form-control w-100 d-inline-block clsSearchUser" />
+                                <input type="search" id="txtsearch" placeholder="Search raters by Emp Id, Name, Email ID" class="form-control w-100 d-inline-block clsSearchUser" />
                             </th>
                         </tr>
                         </table>
