@@ -1,5 +1,9 @@
 ﻿
 $(document).ready(function () {
+    fnUpdateProgressbar();
+});
+
+function fnUpdateProgressbar() {
     E360WebService.fnGetOverallStatusForTheUser(function (result) {
         if (result.split("@")[0] == 1) {
             var statusid = result.split("@")[1];
@@ -31,4 +35,4 @@ $(document).ready(function () {
         }
     }, function (result) {
     });
-});
+}

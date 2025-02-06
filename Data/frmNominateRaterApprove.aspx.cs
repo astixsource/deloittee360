@@ -23,6 +23,7 @@ using System.Text;
 using Azure;
 using Azure.Communication.Email;
 using System.Net.Mail;
+using System.Runtime.InteropServices;
 
 public partial class frmNominateRaterApprove : System.Web.UI.Page
 {
@@ -42,26 +43,33 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
         {
             hdnLoginId.Value = Session["LoginId"].ToString();
             hdnNodeId.Value = Session["NodeId"].ToString();
-            using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
-            {
-                using (SqlCommand command = new SqlCommand("spGetUserListForNomination", Scon))
-                {
-                    command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.CommandTimeout = 0;
-                    command.Parameters.AddWithValue("@LoginId", hdnLoginId.Value);
-                    using (SqlDataAdapter da = new SqlDataAdapter(command))
-                    {
-                        using (DataTable dt = new DataTable())
-                        {
-                            da.Fill(dt);
-                            Session["UserListForNominationForManager"] = dt;
-                        }
-                    }
-                }
-            }
+            
             fnFillCycle();
             fnGetApseListForManager();
         }
+    }
+    [System.Web.Services.WebMethod()]
+    public static string fnGetNominateList(int LoginId,int EmpNodeId) {
+
+        using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
+        {
+            using (SqlCommand command = new SqlCommand("spGetUserListForNomination", Scon))
+            {
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandTimeout = 0;
+                command.Parameters.AddWithValue("@LoginId", LoginId);
+                command.Parameters.AddWithValue("@EmpNodeId", EmpNodeId);
+                using (SqlDataAdapter da = new SqlDataAdapter(command))
+                {
+                    using (DataTable dt = new DataTable())
+                    {
+                        da.Fill(dt);
+                     HttpContext.Current.Session["UserListForNominationForManager"] = dt;
+                    }
+                }
+            }
+        }
+        return "";
     }
 
     public void fnFillCycle()
@@ -79,11 +87,14 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                         da.Fill(dt);
                         foreach (DataRow dr in dt.Rows)
                         {
-                            ListItem lst = new ListItem();
-                            lst.Text = dr["Descr"].ToString();
-                            lst.Value = dr["RltshpID"].ToString();
-                            lst.Attributes.Add("minNominationperCategory", dr["minNominationperCategory"].ToString());
-                            ddlRelatioShip.Items.Add(lst);
+                            if (dr["RltshpID"].ToString() != "4")
+                            {
+                                ListItem lst = new ListItem();
+                                lst.Text = dr["Descr"].ToString();
+                                lst.Value = dr["RltshpID"].ToString();
+                                lst.Attributes.Add("minNominationperCategory", dr["minNominationperCategory"].ToString());
+                                ddlRelatioShip.Items.Add(lst);
+                            }
                         }
                         //ddlRelatioShip.DataSource = dt;
                         //ddlRelatioShip.DataTextField = "Descr";
@@ -131,13 +142,13 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
         {
             using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
             {
-                using (SqlCommand command = new SqlCommand("spGetNominationsForUser", Scon))
+                using (SqlCommand command = new SqlCommand("spGetUserNominationsForManager", Scon))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.CommandTimeout = 0;
                     command.Parameters.AddWithValue("@LoginId", loginId);
                     command.Parameters.AddWithValue("@EmpNodeId", EmpNodeId);
-                    command.Parameters.AddWithValue("@flgSubmittedForApproval", 1);
+                    //command.Parameters.AddWithValue("@flgSubmittedForApproval", 1);
 
                     using (SqlDataAdapter da = new SqlDataAdapter(command))
                     {
@@ -194,9 +205,9 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
     public static string fnGetUserListForNomination(string searchText, int LoginID)
     {
         string jsonData = "";
-        if (HttpContext.Current.Session["UserListForNomination"] != null)
+        if (HttpContext.Current.Session["UserListForNominationForManager"] != null)
         {
-            DataTable dt = (DataTable)HttpContext.Current.Session["UserListForNomination"];
+            DataTable dt = (DataTable)HttpContext.Current.Session["UserListForNominationForManager"];
             if (dt.Rows.Count > 0)
             {
                 string[] filterArray = searchText.Split(',');
@@ -283,7 +294,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                     command.CommandTimeout = 0;
                     command.Parameters.AddWithValue("@LoginId", LoginID);
                     command.Parameters.AddWithValue("@tmpSaveNominationsFromUser", tblOrderDetail);
-                    command.Parameters.AddWithValue("@flgSubmit", flg);
+                    command.Parameters.AddWithValue("@flgSubmit", 1);
                     using (SqlDataAdapter da = new SqlDataAdapter(command))
                     {
                         using (DataTable dt = new DataTable())

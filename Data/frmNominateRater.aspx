@@ -677,6 +677,7 @@
                                 return false;
                             }
                             fnGetNomineeDetails();
+                            fnUpdateProgressbar();
 
                         }, function (result) {
                             $("#dvFadeForProcessing").hide();

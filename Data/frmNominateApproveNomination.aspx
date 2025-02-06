@@ -22,7 +22,7 @@
             }
 
             .btn-img:hover {
-                border-color: #FF0000;
+                border-color: #000000;
             }
     </style>
 
@@ -54,12 +54,12 @@
                 <img src="../Images/2-nom.svg" alt="" class="" />
             </div>
         </div>
-      <%--  <div class="col-4" id="div2" runat="server">
+        <div class="col-4" id="div3" runat="server">
              <h5 class="text-center">For Survey, click on below to go to survey page:</h5>
             <div class="btn-img" onclick="fnOPenPage(3)">
-                <img src="../Images/surveyicon.jpg" alt="" class="" />
+                <img src="../Images/3-nom.svg" alt="" class="" />
             </div>
-        </div>--%>
+        </div>
         <%--  <div class="text-center">
                     <asp:Button ID="btnContiue" runat="server" Text="Start Survey" CssClass="btns btn-submit" />
                 </div>--%>

@@ -312,7 +312,24 @@
                     }
                     else {
                         $("#btnSave,#btnAdd").prop("disabled", false);
+                        fnGetNominateList(LoginId, nodeid);
                     }
+                }
+
+            }, function (result) {
+                $("#dvFadeForProcessing").hide();
+                fnShowmsg("Error:" + result._message);
+            });
+        }
+
+        function fnGetNominateList(LoginId, nodeid) {
+           
+            PageMethods.fnGetNominateList(LoginId, nodeid, function (result) {
+                $("#dvFadeForProcessing").hide();
+                if (result.split("|")[0] == 2) {
+                    fnShowmsg("Error:" + result.split("|")[1]);
+                } else {
+                   
                 }
 
             }, function (result) {
@@ -386,7 +403,7 @@
                     $.ajax({
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
-                        url: "frmNominateRater.aspx/fnGetUserListForNomination",
+                        url: "frmNominateRaterApprove.aspx/fnGetUserListForNomination",
                         data: "{'searchText':'" + SearchText + "',LoginID:" + $("#MainContent_hdnLoginId").val() + "}",
                         dataType: "json",
                         success: function (data) {
@@ -444,7 +461,7 @@
                         str += "<td>" + ui.item.Department + "</td>";
                         str += "<td>" + ui.item.Designation + "</td>";
                         str += "<td>Initial draft</td>";
-                        str += "<td class='text-center'><i class='fa fa-pencil' onclick='fnEditCategory(this)' title='click to edit' style='cursor:pointer'></i> <i class='fa fa-trash-o' onclick='fnRemoveFromDB(this)' style='color:red;cursor:pointer;margin-left:5px' title='click to delete'></i></td>";
+                        str += "<td class='text-center'><i class='fa fa-pencil' onclick='fnEditCategory(this)' title='click to edit' style='cursor:pointer'></i> <i class='fa fa-trash-o' onclick='fnRemoverow(this)' style='color:red;cursor:pointer;margin-left:5px' title='click to delete'></i></td>";
                         str += "</tr>";
                         $("#tblMainNominee tbody").append(str);
                         $("#MainContent_ddlRelatioShip option").eq(0).prop("selected", true);
@@ -516,7 +533,7 @@
                                 str += "<td>" + st_dept + "</td>";
                                 str += "<td>" + st_deg + "</td>";
                                 str += "<td>Initial draft</td>";
-                                str += "<td class='text-center'><i class='fa fa-pencil' onclick='fnEditCategory(this)' title='click to edit' style='cursor:pointer'></i> <i class='fa fa-trash-o' onclick='fnRemoveFromDB(this)' style='color:red;cursor:pointer;margin-left:5px' title='click to delete'></i></td>";
+                                str += "<td class='text-center'><i class='fa fa-pencil' onclick='fnEditCategory(this)' title='click to edit' style='cursor:pointer'></i> <i class='fa fa-trash-o' onclick='fnRemoverow(this)' style='color:red;cursor:pointer;margin-left:5px' title='click to delete'></i></td>";
                                 str += "</tr>";
                                 $("#tblMainNominee tbody").append(str);
                             }, function (result) {
