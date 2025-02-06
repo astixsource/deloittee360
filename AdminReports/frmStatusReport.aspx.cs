@@ -56,7 +56,7 @@ public partial class AdminReports_frmStatusReportNew : System.Web.UI.Page
     public void fnBindGrid()
     {
         objCon = new SqlConnection(strCon);
-        objCom = new SqlCommand("spGETStatusForALKEM", objCon);
+        objCom = new SqlCommand("spGetCompletionStatus", objCon);
         objCom.CommandType = CommandType.StoredProcedure;
         objCom.Parameters.Add("@CycleID", SqlDbType.Int).Value = ddlCycle.SelectedValue.ToString();
 
