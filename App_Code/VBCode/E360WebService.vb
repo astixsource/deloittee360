@@ -101,7 +101,7 @@ Public Class E360WebService
         Dim Scmd As SqlCommand = New SqlCommand()
         'Scon.AccessToken = strConn.Split("|")(1)
         Scmd.Connection = Scon
-        Scmd.CommandText = "[spRSPNominatedApseList_Abhishek_NEWDesign]"
+        Scmd.CommandText = "[spRSPNominatedApseList]"
         Scmd.CommandType = CommandType.StoredProcedure
         Scmd.CommandTimeout = 0
         Scmd.Parameters.AddWithValue("@LoginID", LoginId)
@@ -180,103 +180,103 @@ Public Class E360WebService
         Dim CycleId As Integer
         CycleId = Session("CycleID")
 
-        Dim Objcon As New SqlConnection(strConn.Split("|")(0))
-        Dim objCom As New SqlCommand("spRSPNominatedApseList_Abhishek", Objcon)
-        objCom.Parameters.Add("@LoginID", Data.SqlDbType.Int).Value = LoginId
-        objCom.Parameters.Add("@CycleID", Data.SqlDbType.Int).Value = CycleId
-        objCom.CommandType = CommandType.StoredProcedure
-        objCom.CommandTimeout = 0
-        Try
-            ' Objcon.AccessToken = strConn.Split("|")(1)
-            Objcon.Open()
-            drdr = objCom.ExecuteReader()
+        'Dim Objcon As New SqlConnection(strConn.Split("|")(0))
+        'Dim objCom As New SqlCommand("spRSPNominatedApseList_Abhishek", Objcon)
+        'objCom.Parameters.Add("@LoginID", Data.SqlDbType.Int).Value = LoginId
+        'objCom.Parameters.Add("@CycleID", Data.SqlDbType.Int).Value = CycleId
+        'objCom.CommandType = CommandType.StoredProcedure
+        'objCom.CommandTimeout = 0
+        'Try
+        '    ' Objcon.AccessToken = strConn.Split("|")(1)
+        '    Objcon.Open()
+        '    drdr = objCom.ExecuteReader()
 
-            Dim iCol As Integer = 0
+        '    Dim iCol As Integer = 0
 
-            Dim counter As Integer = 1
-            Dim strTable As String = ""
-            Dim flag As Integer = 0
-            Dim str As String = ""
-            Dim AssmntID As Integer = 0
+        '    Dim counter As Integer = 1
+        '    Dim strTable As String = ""
+        '    Dim flag As Integer = 0
+        '    Dim str As String = ""
+        '    Dim AssmntID As Integer = 0
 
-            strTable = strTable & "<div class='section-title'><h3 class='text-center'>KINDLY PROVIDE FEEDBACK FOR PERSONS IN THE FOLLOWING LIST</h3></br><h6 class='text-center'>(Please click on the Name of the Person And proceed with the Survey)</h6><div class='title-line-center'></div></div>"
-
-
-            strTable &= "<table class='table table-bordered table-sm feedback_tbl' id='tblPreNominated'>"
-            strTable &= "<thead><tr><th width='5%'>S.No.</th><th width='30%' align='left'>Name</th><th width='20%' align='left'>Provide Feedback As</th><th width='15%' align='left'>Status</th></thead><tbody>"
-            While (drdr.Read)
-                RSPId = drdr.Item("RSPID")
-                RSPStatus = drdr.Item("RspStatus")
-
-                strTable &= "<tr>"
-
-                strTable &= "<td>" & counter & "</td>"
-
-                If RSPStatus = 0 Or RSPStatus = 1 Then
-
-                    strTable = strTable & "<td align='left' class='paraTd'><input type='hidden' id='hdnRspId' value=" & drdr.Item("RspId") & "><input type='hidden' id='hdnRspStatus' value=" & drdr.Item("RspStatus") & "><input type='hidden' id='hdnCycApseAssmntTypeMapID' value=" & drdr.Item("CycleApseApsrMapID") & "><input type='hidden' id='hdnCycleID' value=" & drdr.Item("CycleID") & "><input type='hidden' id='hdnAssmntTypeID' value=" & drdr.Item("AssmntTypeID") & "><input type='hidden' id='hdnLevelID' value=" & drdr.Item("LevelID") & ">"
-                    Dim NodeNameForJS As String = Replace(drdr.Item("NodeName"), " ", "_")
-
-                    If RSPStatus = 0 Then
-
-                        strTable = strTable & "<a href='###' onclick=fnShowQuestion(this," & drdr.Item("RspId") & "," & drdr.Item("RspStatus") & "," & drdr.Item("CycleApseApsrMapID") & "," & drdr.Item("CycleID") & "," & drdr.Item("AssmntTypeID") & "," & drdr.Item("LevelID") & ")  sname='" & NodeNameForJS & "' ><b><span class='glyphicon glyphicon-hand-right'></span> &nbsp;" & drdr.Item("NodeName")
-                    ElseIf RSPStatus = 1 Then
-                        strTable = strTable & "<a href='###' onclick=fnShowQuestion(this," & drdr.Item("RspId") & "," & drdr.Item("RspStatus") & "," & drdr.Item("CycleApseApsrMapID") & "," & drdr.Item("CycleID") & "," & drdr.Item("AssmntTypeID") & "," & drdr.Item("LevelID") & ") sname='" & NodeNameForJS & "' ><b><span class='glyphicon glyphicon-hand-right'></span> &nbsp;" & drdr.Item("NodeName")
-                    End If
-                    strTable = strTable & "</b></a></td>" '</label>
-
-                ElseIf RSPStatus = 2 Then
-                    strTable = strTable & "<td width='6%'>" '<label class='label label-success'>
-                    strTable = strTable & drdr.Item("NodeName")
-                    strTable = strTable & "</td>" '</label>
-
-                End If
-
-                strTable &= "<td align='left'>"
-                str = drdr.Item("Relationship")
-                strTable &= str & "</td>"
+        '    strTable = strTable & "<div class='section-title'><h3 class='text-center'>KINDLY PROVIDE FEEDBACK FOR PERSONS IN THE FOLLOWING LIST</h3></br><h6 class='text-center'>(Please click on the Name of the Person And proceed with the Survey)</h6><div class='title-line-center'></div></div>"
 
 
-                If RSPStatus = 0 Then
-                    strTable &= "<td align='left'><label class=m-0 pl-2 pr-2 alert-danger'>"
-                    str = "Pending"
-                ElseIf RSPStatus = 1 Then
-                    strTable &= "<td align='left'><label class='m-0 pl-2 pr-2 alert-warning'>"
-                    str = "In Progress"
-                ElseIf RSPStatus = 2 Then
-                    strTable &= "<td align='left'><label class='m-0 pl-2 pr-2 alert-success'>"
-                    str = "Completed"
-                End If
-                strTable &= str & "</label></td>"
+        '    strTable &= "<table class='table table-bordered table-sm feedback_tbl' id='tblPreNominated'>"
+        '    strTable &= "<thead><tr><th width='5%'>S.No.</th><th width='30%' align='left'>Name</th><th width='20%' align='left'>Provide Feedback As</th><th width='15%' align='left'>Status</th></thead><tbody>"
+        '    While (drdr.Read)
+        '        RSPId = drdr.Item("RSPID")
+        '        RSPStatus = drdr.Item("RspStatus")
 
-                strTable &= "</tr>"
+        '        strTable &= "<tr>"
 
-                'End If
+        '        strTable &= "<td>" & counter & "</td>"
 
-                If (iCol Mod 2 = 0) Then
-                    If (iCol > 0) Then
-                        strTable = strTable & "</tr>"
-                    End If
+        '        If RSPStatus = 0 Or RSPStatus = 1 Then
 
-                    strTable = strTable & "<tr>"
-                Else
-                End If
-                iCol += 1
-                counter += 1
+        '            strTable = strTable & "<td align='left' class='paraTd'><input type='hidden' id='hdnRspId' value=" & drdr.Item("RspId") & "><input type='hidden' id='hdnRspStatus' value=" & drdr.Item("RspStatus") & "><input type='hidden' id='hdnCycApseAssmntTypeMapID' value=" & drdr.Item("CycleApseApsrMapID") & "><input type='hidden' id='hdnCycleID' value=" & drdr.Item("CycleID") & "><input type='hidden' id='hdnAssmntTypeID' value=" & drdr.Item("AssmntTypeID") & "><input type='hidden' id='hdnLevelID' value=" & drdr.Item("LevelID") & ">"
+        '            Dim NodeNameForJS As String = Replace(drdr.Item("NodeName"), " ", "_")
 
-            End While
+        '            If RSPStatus = 0 Then
 
-            strTable = strTable & "</tbody></table>"
+        '                strTable = strTable & "<a href='###' onclick=fnShowQuestion(this," & drdr.Item("RspId") & "," & drdr.Item("RspStatus") & "," & drdr.Item("CycleApseApsrMapID") & "," & drdr.Item("CycleID") & "," & drdr.Item("AssmntTypeID") & "," & drdr.Item("LevelID") & ")  sname='" & NodeNameForJS & "' ><b><span class='glyphicon glyphicon-hand-right'></span> &nbsp;" & drdr.Item("NodeName")
+        '            ElseIf RSPStatus = 1 Then
+        '                strTable = strTable & "<a href='###' onclick=fnShowQuestion(this," & drdr.Item("RspId") & "," & drdr.Item("RspStatus") & "," & drdr.Item("CycleApseApsrMapID") & "," & drdr.Item("CycleID") & "," & drdr.Item("AssmntTypeID") & "," & drdr.Item("LevelID") & ") sname='" & NodeNameForJS & "' ><b><span class='glyphicon glyphicon-hand-right'></span> &nbsp;" & drdr.Item("NodeName")
+        '            End If
+        '            strTable = strTable & "</b></a></td>" '</label>
 
-            strReturn = "1@" & strTable.ToString
-        Catch ex As Exception
-            strReturn = "2@" & ex.Message
-        Finally
-            objCom.Dispose()
-            Objcon.Close()
-            Objcon.Dispose()
-        End Try
-        Return strReturn
+        '        ElseIf RSPStatus = 2 Then
+        '            strTable = strTable & "<td width='6%'>" '<label class='label label-success'>
+        '            strTable = strTable & drdr.Item("NodeName")
+        '            strTable = strTable & "</td>" '</label>
+
+        '        End If
+
+        '        strTable &= "<td align='left'>"
+        '        str = drdr.Item("Relationship")
+        '        strTable &= str & "</td>"
+
+
+        '        If RSPStatus = 0 Then
+        '            strTable &= "<td align='left'><label class=m-0 pl-2 pr-2 alert-danger'>"
+        '            str = "Pending"
+        '        ElseIf RSPStatus = 1 Then
+        '            strTable &= "<td align='left'><label class='m-0 pl-2 pr-2 alert-warning'>"
+        '            str = "In Progress"
+        '        ElseIf RSPStatus = 2 Then
+        '            strTable &= "<td align='left'><label class='m-0 pl-2 pr-2 alert-success'>"
+        '            str = "Completed"
+        '        End If
+        '        strTable &= str & "</label></td>"
+
+        '        strTable &= "</tr>"
+
+        '        'End If
+
+        '        If (iCol Mod 2 = 0) Then
+        '            If (iCol > 0) Then
+        '                strTable = strTable & "</tr>"
+        '            End If
+
+        '            strTable = strTable & "<tr>"
+        '        Else
+        '        End If
+        '        iCol += 1
+        '        counter += 1
+
+        '    End While
+
+        '    strTable = strTable & "</tbody></table>"
+
+        '    strReturn = "1@" & strTable.ToString
+        'Catch ex As Exception
+        '    strReturn = "2@" & ex.Message
+        'Finally
+        '    objCom.Dispose()
+        '    Objcon.Close()
+        '    Objcon.Dispose()
+        'End Try
+        Return ""
     End Function
 
     <System.Web.Services.WebMethod(EnableSession:=True)>
@@ -348,7 +348,7 @@ Public Class E360WebService
     <System.Web.Services.WebMethod()>
     Public Function subPopulateQuestions(ByVal RspID As Integer, ByVal PGNmbr As Integer, ByVal levelID As Integer) As String
         Dim Objcon As New SqlConnection(strConn.Split("|")(0))
-        Dim objCom As New SqlCommand("[spRSPManageDet_Abhishek]", Objcon)
+        Dim objCom As New SqlCommand("[spRSPManageDet]", Objcon)
         Dim drdr As SqlDataReader
         objCom.Parameters.Add("@RSPID", SqlDbType.Int).Value = RspID
         objCom.Parameters.Add("@PgNmbr", SqlDbType.Int).Value = PGNmbr
