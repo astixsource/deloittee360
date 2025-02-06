@@ -430,7 +430,7 @@ Public Class E360WebService
 
                     ''''''''''''''''''END''' 
                     CompValue = drdr.Item("CompNodeId")
-                    strTable &= "<div style='background: #000000; color: #ffffff; font-size: 1rem ;font-weight: 700; text-transform: uppercase; margin-left: 0; margin-right: -15px; margin-bottom: .25rem; padding: 0 25px ; width:100%'>"
+                    strTable &= "<div style='background: #000000; color: #ffffff; font-size: 1rem ;font-weight: 700; text-transform: none; margin-left: 0; margin-right: -15px; margin-bottom: .25rem; padding: 0 25px ; width:100%'>"
                     strTable &= drdr.Item(6)
                     strTable &= "</div>"
                     OldName = drdr.Item(6)
@@ -549,7 +549,8 @@ Public Class E360WebService
                 strTable = strTable & "<table class='w-100 mt-2'>"
                 '''''''TExtBox Afet Each Competency
                 strTable = strTable & "<tr>"
-                strTable = strTable & "<td class='text-center'><b><i><u>" & "Comments for " & OldName & "</u></i> : Please provide your comments regarding the questions above (optional)</b></td>"
+                'strTable = strTable & "<td class='text-center'><b><i><u>" & "Comments for " & OldName & "</u></i> : Please provide your comments regarding the questions above (optional)</b></td>"
+                strTable = strTable & "<td class='text-center'><b><i><u>" & "Comments for " & OldName & "</u></i> : Additional Comments (optional)</b></td>"
                 'strTable = strTable & "<td colspan='2'><b><i></i>  Please provide your comments regarding the questions above (optional)</b></td>"
                 strTable = strTable & "</tr>"
                 strTable = strTable & "<tr>"

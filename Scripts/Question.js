@@ -31,7 +31,7 @@
                 var $checked = $("input:radio[name=" + name + "]:checked").length;
                 //   alert($checked)
                 if ($checked == 0) {
-                    alert("Please select atleast one option for each question")
+                    alert("Select one rating for all the Statement.")
                     $("input:radio[name=" + name + "]").eq(0).focus();
                     $("input:radio[name=" + name + "]").eq(0).addClass("RadioBackgrouncolor");
                     document.getElementById("btnNext").disabled = false;
@@ -322,25 +322,25 @@
 
         function fnSaveComments(X, FinalSave) {
          
-            if (X == "1") {
-                if (document.getElementById("MainContent_Textbox1").value == "") {
-            alert("Please note that it is mandatory to fill the comment");
-        return false;
-                }
-        if (document.getElementById("MainContent_Textbox2").value == "") {
-            alert("Please note that it is mandatory to fill the comment");
-        return false;
-                }
-                //if (document.getElementById("MainContent_Textbox3").value == "") {
-            //    alert("Please note that it is mandatory to fill the comment");
-            //    return false;
-            //}
-            //if (document.getElementById("MainContent_Textbox4").value == "") {
-            //    alert("Please note that it is mandatory to fill the comment");
-            //    return false;
-            //}
+        //    if (X == "1") {
+        //        if (document.getElementById("MainContent_Textbox1").value == "") {
+        //    alert("Please note that it is mandatory to fill the comment");
+        //return false;
+        //        }
+        //if (document.getElementById("MainContent_Textbox2").value == "") {
+        //    alert("Please note that it is mandatory to fill the comment");
+        //return false;
+        //        }
+        //        //if (document.getElementById("MainContent_Textbox3").value == "") {
+        //    //    alert("Please note that it is mandatory to fill the comment");
+        //    //    return false;
+        //    //}
+        //    //if (document.getElementById("MainContent_Textbox4").value == "") {
+        //    //    alert("Please note that it is mandatory to fill the comment");
+        //    //    return false;
+        //    //}
 
-        }
+        //}
         var RspID = document.getElementById("MainContent_hdnRspID").value;
 
         E360WebService.fnRspInsertRspComments(RspID, document.getElementById("MainContent_Textbox1").value, document.getElementById("MainContent_Textbox2").value, document.getElementById("MainContent_Textbox2").value, document.getElementById("MainContent_Textbox2").value, FinalSave, rsltRspInsertRspComments, rsltFailed, FinalSave + "^" + RspID);

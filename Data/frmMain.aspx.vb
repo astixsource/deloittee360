@@ -20,6 +20,12 @@ Partial Class _frmMain
 
 
     Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        Dim panelLogout As Panel
+        panelLogout = DirectCast(Page.Master.FindControl("panelLogout"), Panel)
+        If Convert.ToString(Session("flgParticipant")) = "0" And Convert.ToString(Session("flgIsManager")) = "0" Then
+            panelLogout.Visible = False
+        End If
         CycleID = Session("CycleID")
 
         AssmntTypeID = IIf(IsNothing(Session("AssmntTypeID")), 1, Session("AssmntTypeID"))

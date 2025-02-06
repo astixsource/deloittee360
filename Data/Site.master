@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="container-fluid">
-                <div class="container main-content">
+                <div class="container main-content" style="margin-top:110px">
                     <asp:ContentPlaceHolder ID="MainContent" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>

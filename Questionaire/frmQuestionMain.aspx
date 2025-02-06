@@ -230,7 +230,7 @@
     <!--Ques Heading-->
     <div class="section-title" style="background-color: #88bd26; /*border-radius: 5px*/">
         <%--<h3 class="text-center" style="color: white;">INSTRUCTIONS</h3>--%>
-        <h3 class="text-center" style="color: white;">WELCOME TO HCAS 360 DEGREE FEEDBACK SURVEY<br />
+        <h3 class="text-center" style="color: white;">WELCOME TO 360 Feedback Survey FY 2025<br />
             <span class="text-center" style="color: white;" id="h6">Please respond to each statement on the scale provided alongside from "Always" to "Rarely".<br />
                 You may ‘Save’ your responses to leave and come back later to complete the rest of the Survey.</span></h3>
         <%--    <div class="title-line-center"></div>--%>
@@ -244,7 +244,7 @@
                 <thead>
                     <tr>
                         <!-- Header for Statements -->
-                        <th style="background-color: #88bd26; color: white; width: 50%; text-align: center; padding: 10px; border: 10px solid white;">Statements</th>
+                        <th style="background-color: #88bd26; color: white; width: 50%; text-align: center; padding: 10px; border: 10px solid white;">Competencies</th>
                         <!-- Header for Rating Scale -->
                         <th style="background-color: #88bd26; color: white; width: 50%; text-align: center; padding: 10px; border: 10px solid white;">Rating Scale</th>
                     </tr>
@@ -294,14 +294,14 @@
     <div class="ques-row w-100" id="divComments" style="display: none; overflow-x: hidden; overflow-y: hidden;">
 
         <div class="row mb-2">
-            <div class="col-md-6 align-left-middile" id="tdCmmnt1" runat="server"><strong>What are the overall strengths that this individual demonstrates?</strong></div>
+            <div class="col-md-6 align-left-middile" id="tdCmmnt1" runat="server"><strong>Overall strengths consistently demonstrated by the individual.</strong></div>
             <div class="col-md-6">
                 <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox1" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
             </div>
         </div>
 
         <div class="row mb-2">
-            <div class="col-md-6 align-left-middile" id="tdCmmnt2" runat="server"><strong>What are the areas in which the individual can develop?</strong></div>
+            <div class="col-md-6 align-left-middile" id="tdCmmnt2" runat="server"><strong>Areas of development observed in the individual.</strong></div>
             <div class="col-md-6">
                 <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox2" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
             </div>
