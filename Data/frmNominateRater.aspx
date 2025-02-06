@@ -369,6 +369,7 @@
             if ($("#MainContent_hdnIsManager").val() == "0") {
                 $("#liHome").hide();
             }
+            
             fnGetNomineeDetails();
             dTable = new DataTable('#tblMainNominee', {
                 paging: false,
@@ -775,6 +776,7 @@
                                 fnShowmsg("Error:" + result.split("|")[1]);
                                 return false;
                             }
+                            fnUpdateProgressbar();
                             fnGetNomineeDetails();
 
                         }, function (result) {

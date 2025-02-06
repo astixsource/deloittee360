@@ -45,9 +45,13 @@
                     <!-- Header Navbar: style can be found in header.less -->
                     <div class="navbar-right">
                         <ul class="navtop">
-                            <asp:Panel ID="panelLogout" runat="server">
-                                <li><a href="../Login.aspx" class="btn"><span class="fa fa-sign-out"></span></a></li>
-                            </asp:Panel>
+                           <li><asp:Panel ID="panelLogout" runat="server">
+     <a href="frmNominateApproveNomination.aspx" class="btn" style="margin-right:10px"><span class="fa fa-home" ></span></a>
+     </asp:Panel>
+     </li>
+                               
+                            
+                             <li><a href="../Login.aspx" class="btn"><span class="fa fa-sign-out"></span></a></li>
                         </ul>
                     </div>
                 </div>
