@@ -16,7 +16,7 @@
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="section-title">
-        <h3 class="text-center">HCAS | 360 Degree Feedback Survey</h3>
+        <h3 class="text-center">360 Degree Feedback Survey 2025</h3>
         <div class="title-line-center"></div>
     </div>
     <div class="row g-0">
