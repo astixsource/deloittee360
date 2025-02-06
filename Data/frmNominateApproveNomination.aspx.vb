@@ -18,6 +18,8 @@ Partial Class _Welcome
 
         If Convert.ToString(Session("flgParticipant")) = 1 Then
             div2.Style.Add("display", "none")
+        ElseIf Convert.ToString(Session("flgParticipant")) = 0 And Convert.ToString(Session("flgIsManager")) = 1 Then
+            div1.Style.Add("display", "none")
         End If
 
     End Sub
