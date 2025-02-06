@@ -16,9 +16,9 @@ Partial Class _Welcome
         'panelLogout = DirectCast(Page.Master.FindControl("panelLogout"), Panel)
         'panelLogout.Visible = False
 
-        If Convert.ToString(Session("flgParticipant")) = 1 Then
+        If Convert.ToString(Session("flgParticipant")) = "1" And Convert.ToString(Session("flgIsManager")) = "0" Then
             div2.Style.Add("display", "none")
-        ElseIf Convert.ToString(Session("flgParticipant")) = 0 And Convert.ToString(Session("flgIsManager")) = 1 Then
+        ElseIf Convert.ToString(Session("flgParticipant")) = "0" And Convert.ToString(Session("flgIsManager")) = "1" Then
             div1.Style.Add("display", "none")
         End If
 

@@ -18,9 +18,9 @@ Partial Class InstructionPage
 
     End Sub
     Protected Sub btnContiue_Click(sender As Object, e As EventArgs) Handles btnContiue.Click
-        If Convert.ToString(Session("flgParticipant")) = 1 Then
-            Response.Redirect("frmNominateRater.aspx")  'Response.Redirect("Data/frmMain.aspx")
-        ElseIf Convert.ToString(Session("flgIsManager")) = 1 Then
+        If Convert.ToString(Session("flgParticipant")) = "1" And Convert.ToString(Session("flgIsManager")) = "0" Then
+            Response.Redirect("frmNominateApproveNomination.aspx")  'Response.Redirect("Data/frmMain.aspx")
+        ElseIf Convert.ToString(Session("flgIsManager")) = "1" Then
             Response.Redirect("frmNominateApproveNomination.aspx")  'Response.Redirect("Data/frmMain.aspx")
         Else
             Response.Redirect("Instruction.aspx?NodeID=")
