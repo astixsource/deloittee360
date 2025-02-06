@@ -416,7 +416,6 @@
                         "max-height": "200px",
                         "overflow-y": "auto",
                         "overflow-y": "auto",
-                        "left": "360px",
                     });
                     $("#tblPrdContainer").removeClass("ui-menu-item");
                    // EnableKeySelection();
@@ -732,7 +731,7 @@
                 if ($trs.length > 0) {
                     var str = IsValidateCategory();
                     if (str.split("|")[0] == "false") {
-                        fnShowmsg("Kindly add minimum rater(s) for the category first as per the above instructions!");
+                        fnShowmsg("Kindly add minimum rater(s) required for the category as per the instructions!");
                         return false;
                     }
                 } else {

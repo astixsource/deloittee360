@@ -283,7 +283,7 @@ ul.status-progress {
     line-height: 1.15;
     background: #FFF;
     z-index: 2;
-    padding: .15rem .5rem;
+    padding: .15rem .0rem;
     display: flex;
     align-items: center;
     text-align: left;

@@ -348,7 +348,6 @@
                         "max-height": "200px",
                         "overflow-y": "auto",
                         "overflow-y": "auto",
-                        "left": "576px",
                     });
                 },
                 position: ({
