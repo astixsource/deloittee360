@@ -22,7 +22,7 @@
     <div class="row g-0">
         <div class="col-md-4">
             <div class="grid-welcome-bg">
-                <img src="../Images/welcome2.jpg" class="info-bg" />
+                <img src="../Images/welcome.jpg" class="info-bg" />
             </div>
         </div>
         <div class="col-md-8">
@@ -31,6 +31,7 @@
                 <p>As part of Deloitte&rsquo;s commitment to fostering growth and development, we are excited to introduce the 360-Degree Feedback Program for FY2025. This initiative is designed to provide a well-rounded perspective on leadership capabilities and personal attributes, aligned with the Deloitte Future Leaders Framework. By gathering feedback from multiple sources&mdash;including peers, direct reports, managers, coaches, and stakeholders&mdash;this program offers valuable insights into individual strengths and areas for growth.</p>
                 <h3 class="heading-3">HOW IT WORKS</h3>
                 <p>You will see a list of stakeholders who have nominated you as a rater across different categories, including your <strong>self-rating</strong>.</p>
+               <div style="font-size:10pt">
                 <ul>
                     <li>Click on the <strong>hyperlinked name</strong> under the relevant category to begin the survey for that stakeholder.</li>
                     <li>You will be presented with a series of behaviors specific to your stakeholder&rsquo;s role.</li>
@@ -40,10 +41,10 @@
                 </ul>
                 <p>The survey takes approximately <strong>15 minutes</strong> and should be completed in one sitting.</p>
                 <p><strong>Note:</strong> Read each question carefully, as descriptions may vary based on the stakeholder&rsquo;s designation. The survey will conclude with <strong>two open-ended questions </strong>where you can add your comments.</p>
-
+</div>
 
                 <h3 class="heading-3">RATING SCALE</h3>
-                <table class="table table-bordered table-sm">
+                <table class="table table-bordered table-sm" style="font-size:10pt">
                     <tbody>
                         <tr>
                             <td>

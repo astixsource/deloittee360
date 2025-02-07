@@ -8,7 +8,7 @@
     <script src="../JDatatable/dataTables.js"></script>
     <script src="../JDatatable/dataTables.fixedHeader.js"></script>
     <script src="../JDatatable/fixedHeader.dataTables.js"></script>
-     <script src="../Scripts/progressbarJS.js"></script>
+    <script src="../Scripts/progressbarJS.js"></script>
     <style>
         /*.main-content {
             max-width: 97.5%;
@@ -28,7 +28,7 @@
         }
 
         .btn {
-            padding: 12px 30px; 
+            padding: 12px 30px;
             font-size: 16px;
             border: none;
             cursor: pointer;
@@ -148,76 +148,79 @@
             color: #ffffff;
             font-size: 10.5pt;
         }
-        div.clscoacheelist{
+
+        div.clscoacheelist {
             border: 1px solid #354e09;
             background-color: #86bc25;
             color: #ffffff;
-            padding:3px 2px 3px 4px;
-            margin-block:2px;
-            cursor:pointer;
+            padding: 3px 2px 3px 4px;
+            margin-block: 2px;
+            cursor: pointer;
         }
-        div.clscoacheelist:hover{
+
+            div.clscoacheelist:hover {
+                border: 1px solid #354e09;
+                background-color: #000000;
+                color: #ffffff;
+            }
+
+        div.clsactive {
             border: 1px solid #354e09;
             background-color: #000000;
             color: #ffffff;
         }
 
-        div.clsactive{
-            border: 1px solid #354e09;
-            background-color: #000000;
-            color: #ffffff;
+        .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            border: 1px solid #ccc;
+            background: white;
+            font-size: 9.5pt;
         }
-       .ui-autocomplete {
-    max-height: 200px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    border: 1px solid #ccc;
-    background: white;
-    font-size:9.5pt;
-}
 
-.autocomplete-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size:9.5pt;
-}
+        .autocomplete-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9.5pt;
+        }
 
-.autocomplete-table th, .autocomplete-table td {
-    padding: 5px;
-    border: 1px solid #ddd;
-}
+            .autocomplete-table th, .autocomplete-table td {
+                padding: 5px;
+                border: 1px solid #ddd;
+            }
 
-.autocomplete-table th {
-    background-color: #f4f4f4;
-    text-align: left;
-}
+            .autocomplete-table th {
+                background-color: #f4f4f4;
+                text-align: left;
+            }
 
-.autocomplete-table-row {
-    width: 100%;
-}
+        .autocomplete-table-row {
+            width: 100%;
+        }
 
-.ui-menu-item {
-    list-style: none;
-    padding: 5px;
-    cursor: pointer;
-}
+        .ui-menu-item {
+            list-style: none;
+            padding: 5px;
+            cursor: pointer;
+        }
 
-/* Highlight selected row */
-.ui-menu-item-wrapper {
-    display: block;
-    padding: 5px;
-}
+        /* Highlight selected row */
+        .ui-menu-item-wrapper {
+            display: block;
+            padding: 5px;
+        }
 
-.ui-state-active {
-    background: #007bff;
-    color: white;
-}
-        
+        .ui-state-active {
+            background: #007bff;
+            color: white;
+        }
+
         .clsheaderitem th {
-    background-color: #f4f4f4 !important;
-    text-align: left;
-     color: #000000 !important;
-}
+            background-color: #f4f4f4 !important;
+            text-align: left;
+            color: #000000 !important;
+        }
     </style>
     <script>
         $.widget('custom.mcautocomplete', $.ui.autocomplete, {
@@ -270,7 +273,7 @@
                     result = $('<tr style="margin-top:25px"></tr>')
                         .data('ui-autocomplete-item', item)
                         //.append('<a class="mcacAnchor">' + item.label + '<div style="clear: both;"></div></a>')
-                        .append($("#MainContent_ddlRelatioShip option:selected").text()=="Other Stakeholders"?"<a href='###' class='' onclick='fnAddNewStakeholder()'> Add New Stackholder </a>": item.label)
+                        .append($("#MainContent_ddlRelatioShip option:selected").text() == "Other Stakeholders" ? "<a href='###' class='' onclick='fnAddNewStakeholder()'> Add New Stackholder </a>" : item.label)
                         .appendTo(ul);
                 }
 
@@ -323,13 +326,13 @@
         }
 
         function fnGetNominateList(LoginId, nodeid) {
-           
+
             PageMethods.fnGetNominateList(LoginId, nodeid, function (result) {
                 $("#dvFadeForProcessing").hide();
                 if (result.split("|")[0] == 2) {
                     fnShowmsg("Error:" + result.split("|")[1]);
                 } else {
-                   
+
                 }
 
             }, function (result) {
@@ -654,19 +657,19 @@
         }
 
 
-       
+
         function fnSaveAndSubmit(flg) {
             var $trs = $("#tblMainNominee tr[flgvalid='1']");
             if ($trs.length == 0 && flg == 0) {
                 fnShowmsg("No data found for this action!");
                 return false;
             }
-           
-           
+
+
             var LoginId = $("#MainContent_hdnLoginId").val();
             var str = "<div>Are you sure to approve the rater(s)?</div>";
-            
-           
+
+
             $("#dvDialog").html(str);
             $("#dvDialog").dialog({
                 title: "Confirmation :",
@@ -768,50 +771,64 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <div class="row no-gutters" style="padding-left:15px;width:100%">
-        <div class="col-md-12" style="padding:0px">
+    <div class="row no-gutters" style="padding-left: 15px; width: 100%">
+        <div class="col-md-12" style="padding: 0px">
 
             <div class="section-title">
                 <h3 class="text-center">APPROVE RATERS</h3>
                 <div class="title-line-center"></div>
             </div>
-            Below is the list of your <b>coachees/reportees:</b>
-                <ul>
-                    <li>Review their submitted raters for relevance & completeness. 
-                    </li>
-                    <li>You can edit stakeholder categories to ensure the best fit.</li>
-                    <li>You can also add or remove stakeholders as needed.</li>
-                    <li>Once you are satisfied with the selections, click "Approve" to finalize.</li>
-                </ul>
+            <div style="font-size: 10pt">
+                Below is the list of your <b>coachees/reportees:</b>
+                <table style="width: 100%">
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>Review their submitted raters for relevance & completeness. 
+                                </li>
+                                <li>You can edit stakeholder categories to ensure the best fit.</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>You can also add or remove stakeholders as needed.</li>
+                                <li>Once you are satisfied with the selections, click "Approve" to finalize.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+               
+            </div>
 
-          
+
+
             <div class="row">
-                <div class="col-md-3" style="width:18%;border-right:1px solid #b0b0b0;min-height:430px;max-height:430px">
+                <div class="col-md-3" style="width: 18%; border-right: 1px solid #b0b0b0; min-height: 430px; max-height: 430px">
                     <div class="text-center">
-                       <b> Your Coachees </b>
+                        <b>Your Coachees </b>
                     </div>
-                    <div runat="server" id="dvcoacheelist" style="overflow:auto;max-height:380px">
+                    <div runat="server" id="dvcoacheelist" style="overflow: auto; max-height: 380px">
                     </div>
                 </div>
-                <div class="col-md-9" style="width:82%">
+                <div class="col-md-9" style="width: 82%">
                     <div id="btnMainbodyContainer">
                         <table id="tblMainNominee" style="width: 100%">
                             <thead>
                                 <tr>
-                                   
-                                    <th style="width: 12%">Category*</th>
-                                    <th>Name*</th>
-                                    <th style="width: 22%">Email ID*
+
+                                    <th style="width: 13%">Category</th>
+                                    <th>Name</th>
+                                    <th style="width: 21%">Email ID
                                     </th>
-                                    <th style="width: 11%">Function*
+                                    <th style="width: 10%">Function
                                     </th>
-                                    <th style="width: 11%">Department*
+                                    <th style="width: 9%">Department
                                     </th>
-                                    <th style="width: 11%">Designation*
+                                    <th style="width: 10%">Designation
                                     </th>
                                     <th style="width: 14%">Status
                                     </th>
-                                     <th style="width: 5%;text-align:center">Action
+                                    <th style="width: 5%; text-align: center">Action
                                     </th>
                                 </tr>
                             </thead>
@@ -820,23 +837,23 @@
 
                         </table>
                     </div>
-                    <div style="display:none" id="divaddratercon">
-                        <table style="width:100%;font-size:9.5pt">
-                        <tr>
-                            <th style="width:28%">Select Category:
+                    <div style="display: none" id="divaddratercon">
+                        <table style="width: 100%; font-size: 9.5pt">
+                            <tr>
+                                <th style="width: 28%">Select Category:
                                 <asp:DropDownList ID="ddlRelatioShip" Style="height: 33px; border: 1px solid #c0c0c0" AppendDataBoundItems="true" runat="server" AutoPostBack="false">
                                     <asp:ListItem Value="0">-----</asp:ListItem>
                                 </asp:DropDownList>
-</th>
-                            <th>
-                                <input type="search" id="txtsearch" placeholder="Search raters by Emp Id, Name, Email ID" class="form-control w-100 d-inline-block clsSearchUser" />
-                            </th>
-                        </tr>
+                                </th>
+                                <th>
+                                    <input type="search" id="txtsearch" placeholder="Search raters by Emp Id, Name, Email ID" class="form-control w-100 d-inline-block clsSearchUser" />
+                                </th>
+                            </tr>
                         </table>
                     </div>
                     <div class="button-group mb-4">
-                        <input type="button" class="btn btn-submit" id="btnAdd" value="Edit" onclick="fnAddRows()"  style="display: inline-block;">
-                        <input type="button" class="btn btn-submit" id="btnSave" value="Approve" onclick="fnSaveAndSubmit(1)"  style="display: inline-block;">
+                        <input type="button" class="btn btn-submit" id="btnAdd" value="Edit" onclick="fnAddRows()" style="display: inline-block;">
+                        <input type="button" class="btn btn-submit" id="btnSave" value="Approve" onclick="fnSaveAndSubmit(1)" style="display: inline-block;">
                         <%--<input type="button" class="btn btn-next" id="btnNext" value="Next" style="display: inline-block;">--%>
                     </div>
                 </div>
@@ -844,28 +861,43 @@
 
         </div>
     </div>
-    <div style="display:none" id="divNewStakeholders">
-         <table class="table" id="tblNewStakeholders">
-                                <tr>
-                                    <td style="width:20%">Name </td><td style="width:2%">:</td><td><input type="text" class="form-control form-control-sm" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Email Id : </td><td>:</td><td><input type="text" class="form-control form-control-sm" /></td>
-                                </tr>
-                                 <tr>
-                                    <td>Function : </td><td>:</td><td><input type="text" class="form-control form-control-sm" /></td>
-                                </tr>
-                                 <tr>
-                                    <td>Department : </td><td>:</td><td><input type="text" class="form-control form-control-sm" /></td>
-                                </tr>
-                                 <tr>
-                                    <td>Designation : </td><td>:</td><td><input type="text" class="form-control form-control-sm" /></td>
-                                </tr>
-                            </table>
+    <div style="display: none" id="divNewStakeholders">
+        <table class="table" id="tblNewStakeholders">
+            <tr>
+                <td style="width: 20%">Name </td>
+                <td style="width: 2%">:</td>
+                <td>
+                    <input type="text" class="form-control form-control-sm" /></td>
+            </tr>
+            <tr>
+                <td>Email Id : </td>
+                <td>:</td>
+                <td>
+                    <input type="text" class="form-control form-control-sm" /></td>
+            </tr>
+            <tr>
+                <td>Function : </td>
+                <td>:</td>
+                <td>
+                    <input type="text" class="form-control form-control-sm" /></td>
+            </tr>
+            <tr>
+                <td>Department : </td>
+                <td>:</td>
+                <td>
+                    <input type="text" class="form-control form-control-sm" /></td>
+            </tr>
+            <tr>
+                <td>Designation : </td>
+                <td>:</td>
+                <td>
+                    <input type="text" class="form-control form-control-sm" /></td>
+            </tr>
+        </table>
     </div>
     <asp:HiddenField ID="hdnNodeId" runat="server" Value="0" />
     <asp:HiddenField ID="hdnLoginId" runat="server" Value="0" />
-     <div id="dvDialog" style="display: none"></div>
+    <div id="dvDialog" style="display: none"></div>
     <div id="dvAlert" style="display: none"></div>
     <div id="dvFadeForProcessing" style="display: block; position: fixed; text-align: center; z-index: 999999; top: 0; bottom: 0; left: 0; right: 0; opacity: .80; -moz-opacity: 0.8; filter: alpha(opacity=80); background-color: #ccc;">
         <img src="../Images/loading.gif" style="width: 90px; height: 70px; position: relative; top: 50%; margin-top: -35px;" />

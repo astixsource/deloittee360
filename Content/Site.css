@@ -13,7 +13,7 @@ body {
     margin: 0px;
     padding: 0px;
     background-color: #D0D0CE;
-    font-size: 1.00rem;
+    font-size: 10pt;
     font-family: 'Open Sans',  sans-serif;
 }
 
@@ -217,7 +217,7 @@ ol, ul {
         /-------- status-progress ---------/
         /---------------------------------*/
 ul.status-progress {
-    margin: 1rem 0 0;
+    margin: 1rem 0 1rem 0;
     padding: 0;
     clear: both;
     display: table;
@@ -271,8 +271,8 @@ ul.status-progress {
 
         ul.status-progress li.done::before,
         ul.status-progress li.active::before {
-            border-color: #194597;
-            color: #194597;
+            border-color: #000000;
+            color: #000000;
         }
 
         ul.status-progress li.active::before {
@@ -289,7 +289,7 @@ ul.status-progress {
     line-height: 1.15;
     background: #FFF;
     z-index: 2;
-    padding: .15rem .0rem;
+    padding: .15rem .0rem .15rem 0.19rem;
     display: flex;
     align-items: center;
     text-align: left;

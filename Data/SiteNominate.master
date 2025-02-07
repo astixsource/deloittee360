@@ -26,7 +26,7 @@
   <script src="../Scripts/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body  oncontextmenu="return false">
     <form runat="server">
         <asp:ScriptManager runat="server" ID="ScriptManager1" EnablePageMethods="true">
             <Services>
@@ -48,12 +48,12 @@
                         <ul class="navtop">
                             
  <li><asp:Panel ID="panelLogout" runat="server">
-     <a href="frmNominateApproveNomination.aspx" class="btn" style="margin-right:10px"><span class="fa fa-home" ></span></a>
+     <a href="frmNominateApproveNomination.aspx" title="click to back home" class="btn" style="margin-right:10px"><span class="fa fa-home" ></span></a>
      </asp:Panel>
      </li>
                                
                             
-                             <li><a href="../Login.aspx" class="btn"><span class="fa fa-sign-out"></span></a></li>
+                             <li><a href="../Login.aspx" title="click to logout" class="btn"><span class="fa fa-sign-out"></span></a></li>
                         </ul>
                     </div>
                 </div>

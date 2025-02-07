@@ -176,7 +176,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                                 sb.Append("<td>" + dt.Rows[i]["Department"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Designation"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Status"].ToString() + "</td>");
-                                if (dt.Rows[i]["flgApproved"].ToString() == "0" && dt.Rows[i]["RltshpID"].ToString()!="4")
+                                if (dt.Rows[i]["flgApproved"].ToString() == "0" && dt.Rows[i]["RltshpID"].ToString()!="4" && dt.Rows[i]["RltshpID"].ToString() != "1")
                                 {
                                     sb.Append("<td class='text-center'  ><i class='fa fa-pencil' onclick='fnEditCategory(this)' title='click to edit' style='cursor:pointer;display:none'></i> <i class='fa fa-trash-o' onclick='fnRemoveFromDB(this)' style='color:red;cursor:pointer;margin-left:5px;display:none' title='click to delete'></i></td>");
                                 }

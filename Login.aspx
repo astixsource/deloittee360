@@ -100,7 +100,7 @@
             </p>
         </div>
 
-        <div id="dvFadeForProcessing" style="display: none" align="center" class="clsloader">
+        <div id="dvFadeForProcessing1" style="display: none" align="center" class="clsloader">
             <img src="Images/loading.gif" style="margin-top: 200px;" />
         </div>
         <asp:HiddenField runat="server" ID="hdnaccesstoken" />

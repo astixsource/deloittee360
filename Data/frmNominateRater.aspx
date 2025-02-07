@@ -134,7 +134,7 @@
         table.dataTable > tbody > tr > th, table.dataTable > tbody > tr > td {
             padding: 2px 3px;
             border: 1px solid #e3efcc;
-            font-size: 10pt;
+            font-size: 9.5pt;
         }
 
         table.dataTable > tfoot > tr > th {
@@ -806,8 +806,9 @@
                 <div class="title-line-center"></div>
             </div>
             <h6><b>What you should know before selecting your raters:</b></h6>
+            <div style="font-size:10pt">
                 For each category, please ensure you meet the minimum nomination requirements as mentioned below:
-                <ul style="font-size:9.5pt">
+                <ul>
                     <li><b>Direct Reports:</b> Team members who report to you (Min. 2)
                     </li>
                     <li><b>Peers:</b> Colleagues you work with (Min. 2)</li>
@@ -821,27 +822,27 @@
 </p>
             <p>As next step, once you submit your nominations, your manager can review, modify, and approve them.
 </p>
-
+</div>
             <div id="btnMainbodyContainer">
 
                 <table id="tblMainNominee" style="width: 100%;border-bottom:1px solid #e2eecb">
                     <thead>
                         <tr>
-                            <th style="width: 10%">Category*
+                            <th style="width: 16%">Category
                             </th>
-                            <th>Name*
+                            <th>Name
                             </th>
-                            <th style="width: 22%">Email ID*
+                            <th style="width: 22%">Email ID
                             </th>
-                            <th style="width: 12%">Function*
+                            <th style="width: 8.5%">Function
                             </th>
-                            <th style="width: 12%">Department*
+                            <th style="width: 8%">Department
                             </th>
-                            <th style="width: 12%">Designation*
+                            <th style="width: 10.5%">Designation
                             </th>
-                            <th style="width: 13%">Status
+                            <th style="width: 12.5%">Status
                             </th>
-                            <th style="width: 5%; text-align: center">Action
+                            <th style="width: 4%; text-align: center">Action
                             </th>
                         </tr>
                     </thead>
