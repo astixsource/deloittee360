@@ -10,6 +10,13 @@
     <script src="../JDatatable/fixedHeader.dataTables.js"></script>
      <script src="../Scripts/progressbarJS.js"></script>
     <style>
+        table.table > tbody > tr:nth-child(even) {
+    background-color: transparent !important;
+}
+
+        table.table > thead > tr:last-child {
+    border-bottom: 2px solid #b0b0b0 !important;
+}
         .mcacAnchor {
             font-size: 12px;
         }
@@ -522,8 +529,8 @@
                         //  $(this).val((ui.item ? ui.item.InvCode : ''));
                         //alert(ui.item.FullName)
                         //tblMainNominee
-                        var str = "<tr flg='0' flgvalid='1' nomineid='" + ui.item.NodeID + "' minnominationpercategory='" + $("#MainContent_ddlRelatioShip option:selected").attr("minNominationperCategory") + "' rpid='" + $("#MainContent_ddlRelatioShip option:selected").val() + "'>";
-                        str += "<td>" + $("#MainContent_ddlRelatioShip option:selected").text() + "</td>";
+                        var str = "<tr flg='0' flgvalid='1' nomineid='" + ui.item.NodeID + "' minnominationpercategory='" + $("#MainContent_ddlRelatioShip option:selected").attr("minNominationperCategory") + "' rpid='" + $("#MainContent_ddlRelatioShip option:selected").val() + "' newrpid='" + $("#MainContent_ddlRelatioShip option:selected").val() + "'>";
+                        str += "<td>" + $("#MainContent_ddlRelatioShip option:selected").attr("rptxt") + "</td>";
                         str += "<td>" + ui.item.FullName + "</td>";
                         str += "<td>" + ui.item.EMailID + "</td>";
                         str += "<td>" + ui.item.Function + "</td>";
@@ -550,7 +557,9 @@
             })
 
         }
-
+        function fnChangeCategory(sender) {
+            $(sender).closest("tr").attr("newrpid", $(sender).val());
+        }
         function fnEditCategory(sender) {
             var id = $(sender).closest("tr").attr("rpid");
             if ($(sender).hasClass("fa-pencil")) {
@@ -559,14 +568,15 @@
                 var id = $(sender).closest("tr").attr("rpid");
                 
                 $(sender).closest("tr").attr("flg", "0");
-                $(sender).closest("tr").find("td").eq(0).html("<select style='width:100px'>" + $(sClone).html() + "</select>");
+                $(sender).closest("tr").find("td").eq(0).html("<select onchange='fnChangeCategory(this)' style='width:150px'>" + $(sClone).html() + "</select>");
                 $(sender).closest("tr").find("td").eq(0).find("select option").prop("selected", false);
                 $(sender).closest("tr").find("td").eq(0).find("select option[value='" + id + "']").prop("selected", true);
                 $(sender).removeClass("fa-pencil").addClass("fa-undo");
             } else {
+                $(sender).closest("tr").attr("newrpid", id);
                 $(sender).closest("tr").attr("flg", "1");
                 $(sender).removeClass("fa-undo").addClass("fa-pencil");
-                $(sender).closest("tr").find("td").eq(0).html($("#MainContent_ddlRelatioShip option[value='" + id + "']").text());
+                $(sender).closest("tr").find("td").eq(0).html($("#MainContent_ddlRelatioShip option[value='" + id + "']").attr("rptxt"));
             }
         }
 
@@ -709,15 +719,35 @@
                 var arrCategories = $("#MainContent_ddlRelatioShip option[value!=0]");
                 for (var i = 0; i < arrCategories.length; i++) {
                     var rpid = arrCategories.eq(i).val();
-                    if ($("#tblMainNominee tbody tr[rpid='" + rpid + "']").length > 0) {
+                    if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length > 0) {
                         var minnominationpercategory = arrCategories.eq(i).attr("minnominationpercategory");
-                        if ($("#tblMainNominee tbody tr[rpid='" + rpid + "']").length < parseInt(minnominationpercategory)) {
+                        if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length < parseInt(minnominationpercategory)) {
                             return "false|" + minnominationpercategory;
                         }
                     }
                 }
             }
             return "true";
+        }
+
+        function fnShowValidateRaterCategory() {
+            var str = "";
+            var $trs = $("#tblMainNominee tbody tr[flgvalid='1']");
+            if ($trs.length > 0) {
+                var arrCategories = $("#MainContent_ddlRelatioShip option[value!=0]");
+                for (var i = 0; i < arrCategories.length; i++) {
+                    var rpid = arrCategories.eq(i).val();
+                    if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length > 0) {
+                        var minnominationpercategory = arrCategories.eq(i).attr("minnominationpercategory");
+                        var rptxt = arrCategories.eq(i).attr("rptxt");
+                        str += "<tr><td class='fw-bold'>" + rptxt + "</td>";
+                        str += "<td class='text-center'>" + (rpid == "1" ? "Auto Populated" : minnominationpercategory==0?"Optional": minnominationpercategory) + "</td>";
+                        str += "<td class='text-center'>" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "</td>";
+                        str += "</tr>";
+                    }
+                }
+            }
+            return str;
         }
 
         function fnSaveAndSubmit(flg) {
@@ -731,7 +761,11 @@
                 if ($trs.length > 0) {
                     var str = IsValidateCategory();
                     if (str.split("|")[0] == "false") {
-                        fnShowmsg("Kindly add minimum rater(s) required for the category as per the instructions!");
+                        var msg = "<div><b>Error: Minimum Rater Selection Not Met</b><br>Please ensure that you have selected the required number of raters in each mandatory category.<br/>Please review and update your selections.</div>";
+                        msg += "<table class='table table-bordered table-sm'><thead class='table-light' ><tr><th class='fw-bold text-start' style='color:#000000'>Rater Category</th><th class='text-center fw-bold' style='color:#000000'>Minimum Required</th><th class='text-center fw-bold' style='color:#000000'>You Have Selected</th></tr></thead><tbody>";
+                        msg += fnShowValidateRaterCategory();
+                        msg += "</tbody></table>";
+                        fnShowmsg(msg);
                         return false;
                     }
                 } else {
@@ -828,7 +862,7 @@
                 <table id="tblMainNominee" style="width: 100%;border-bottom:1px solid #e2eecb">
                     <thead>
                         <tr>
-                            <th style="width: 16%">Category
+                            <th style="width: 16%" >Category
                             </th>
                             <th>Name
                             </th>

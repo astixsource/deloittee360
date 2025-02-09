@@ -90,8 +90,16 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                             if (dr["RltshpID"].ToString() != "4")
                             {
                                 ListItem lst = new ListItem();
-                                lst.Text = dr["Descr"].ToString();
+                                if (dr["minNominationperCategory"].ToString() == "0")
+                                {
+                                    lst.Text = dr["Descr"].ToString() + " (Optional)";
+                                }
+                                else
+                                {
+                                    lst.Text = dr["RltshpID"].ToString() == "1" ? dr["Descr"].ToString() + " (Auto populated)" : dr["Descr"].ToString() + " (Min. " + dr["minNominationperCategory"].ToString() + ")";
+                                }
                                 lst.Value = dr["RltshpID"].ToString();
+                                lst.Attributes.Add("rptxt", dr["Descr"].ToString());
                                 lst.Attributes.Add("minNominationperCategory", dr["minNominationperCategory"].ToString());
                                 ddlRelatioShip.Items.Add(lst);
                             }
@@ -159,7 +167,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                             for (int i = 0; i < dt.Rows.Count; i++)
                             {
                                 int flgSubmittedForApproval = Convert.ToInt32(dt.Rows[i]["flgSubmittedForApproval"]);
-                                sb.Append("<tr flg='1' flgvalid='1' flgApproved='" + dt.Rows[i]["flgApproved"].ToString() + "' CycleApseApsrMapID='" + dt.Rows[i]["CycleApseApsrMapID"].ToString() + "' nomineid='" + dt.Rows[i]["NodeId"].ToString() + "' rpid='" + dt.Rows[i]["RltshpID"].ToString() + "'>");
+                                sb.Append("<tr flg='1' flgvalid='1' flgApproved='" + dt.Rows[i]["flgApproved"].ToString() + "' CycleApseApsrMapID='" + dt.Rows[i]["CycleApseApsrMapID"].ToString() + "' nomineid='" + dt.Rows[i]["NodeId"].ToString() + "' rpid='" + dt.Rows[i]["RltshpID"].ToString() + "'  newrpid='" + dt.Rows[i]["RltshpID"].ToString() + "'>");
                                 //if (flgSubmittedForApproval == 1 && Convert.ToInt32(dt.Rows[i]["flgApproved"]) == 0)
                                 //{
                                 //    sb.Append("<td class='text-center'><input type='checkbox' /></td>");
