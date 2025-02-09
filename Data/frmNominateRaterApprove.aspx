@@ -703,10 +703,7 @@
 
         function fnSaveAndSubmit(flg) {
             var $trs = $("#tblMainNominee tr[flgvalid='1']");
-            if ($trs.length == 0 && flg == 0) {
-                fnShowmsg("No data found for this action!");
-                return false;
-            }
+           
 
             if ($trs.length > 0) {
                 var str = IsValidateCategory();
@@ -719,7 +716,7 @@
                     return false;
                 }
             } else {
-                fnShowmsg("No data found for this action, kindly add new rater first!");
+                fnShowmsg("Rater Nomination not yet submitted for your approval!");
                 return false;
             }
 
@@ -862,7 +859,7 @@
             <div class="row">
                 <div class="col-md-3" style="width: 18%; border-right: 1px solid #b0b0b0; min-height: 430px; max-height: 430px">
                     <div class="text-center">
-                        <b>Your Coachees </b>
+                        <b>Your Team Members </b>
                     </div>
                     <div runat="server" id="dvcoacheelist" style="overflow: auto; max-height: 380px">
                     </div>
@@ -897,10 +894,21 @@
                     <div style="display: none" id="divaddratercon">
                         <table style="width: 100%; font-size: 9.5pt">
                             <tr>
-                                <th style="width: 28%">Select Category:
-                                <asp:DropDownList ID="ddlRelatioShip" Style="height: 33px; border: 1px solid #c0c0c0" AppendDataBoundItems="true" runat="server" AutoPostBack="false">
+                                <th style="width: 28%">
+                                    <table style="width:100%">
+                                        <tr>
+                                            <td>
+Select Category:
+                                            </td>
+                                            <td>
+                                                 <asp:DropDownList ID="ddlRelatioShip" Style="width:150px;height: 33px; border: 1px solid #c0c0c0" AppendDataBoundItems="true" runat="server" AutoPostBack="false">
                                     <asp:ListItem Value="0">-----</asp:ListItem>
                                 </asp:DropDownList>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                               
                                 </th>
                                 <th>
                                     <input type="search" id="txtsearch" placeholder="Search raters by Emp Id, Name, Email ID" class="form-control w-100 d-inline-block clsSearchUser" />
