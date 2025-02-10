@@ -118,16 +118,19 @@
                                     <td style="width:15%">Name </td><td style="width:2%">:</td><td><%=Session("FullName") %></td>
                                 </tr>
                                 <tr>
-                                    <td>Email Id : </td><td>:</td><td><%=Session("emailid") %></td>
+                                    <td>Email Id</td><td>:</td><td><%=Session("emailid") %></td>
                                 </tr>
                                  <tr>
-                                    <td>Function : </td><td>:</td><td><%=Session("function") %></td>
+                                    <td>Function</td><td>:</td><td><%=Session("function") %></td>
                                 </tr>
                                  <tr>
-                                    <td>Department : </td><td>:</td><td><%=Session("Department") %></td>
+                                    <td>Department</td><td>:</td><td><%=Session("Department") %></td>
                                 </tr>
                                  <tr>
-                                    <td>Designation : </td><td>:</td><td><%=Session("Desgination") %></td>
+                                    <td>Designation</td><td>:</td><td><%=Session("Desgination") %></td>
+                                </tr>
+                                 <tr>
+                                    <td>Reporting Manager</td><td>:</td><td><%=Session("RM") %></td>
                                 </tr>
                             </table>
                         </div>

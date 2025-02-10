@@ -199,7 +199,7 @@ Partial Class Login
                     HttpContext.Current.Session("function") = Convert.ToString(drdr.Item("Function"))
                     HttpContext.Current.Session("Department") = Convert.ToString(drdr.Item("Department"))
                     HttpContext.Current.Session("Desgination") = Convert.ToString(drdr.Item("Desgination"))
-
+                    HttpContext.Current.Session("RM") = Convert.ToString(drdr.Item("ReportingManager"))
                     If Not IsDBNull(drdr.Item("CycleID")) Then
                         HttpContext.Current.Session("CycleID") = drdr.Item("CycleID")
                     Else
