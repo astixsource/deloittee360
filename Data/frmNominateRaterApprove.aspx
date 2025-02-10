@@ -10,10 +10,10 @@
     <script src="../JDatatable/fixedHeader.dataTables.js"></script>
     <script src="../Scripts/progressbarJS.js"></script>
     <style>
-        /*.main-content {
-            max-width: 97.5%;
-            width: 97.5%;
-        }*/
+        .main-content {
+            max-width: 90%;
+            width: 90%;
+        }
          table.table > tbody > tr:nth-child(even) {
     background-color: transparent !important;
 }
@@ -161,6 +161,12 @@
             padding: 3px 2px 3px 4px;
             margin-block: 2px;
             cursor: pointer;
+            display:inline-block;
+            width:85%;
+        }
+        .clsiconclass {
+           margin-left:2px;
+           font-size:24px !important;
         }
 
             div.clscoacheelist:hover {
@@ -288,8 +294,8 @@
         var dTable = null;
         $(document).ready(function () {
             $("#dvFadeForProcessing").hide();
-            if ($("#MainContent_dvcoacheelist div").length > 0) {
-                $("#MainContent_dvcoacheelist div").eq(0).click();
+            if ($("#MainContent_dvcoacheelist div.clscoacheelist").length > 0) {
+                $("#MainContent_dvcoacheelist div.clscoacheelist").eq(0).click();
             }
             dTable = new DataTable('#tblMainNominee', {
                 paging: false,
@@ -833,20 +839,32 @@
                 <div class="title-line-center"></div>
             </div>
             <div style="font-size: 10pt">
-                Below is the list of your <b>coachees/reportees:</b>
+                Below is the list of your team members:
+                <br />Each name has an icon next to it indicating their current status:
                 <table style="width: 100%">
                     <tr>
                         <td>
-                            <ul>
-                                <li>Review their submitted raters for relevance & completeness. 
-                                </li>
-                                <li>You can edit stakeholder categories to ensure the best fit.</li>
-                            </ul>
+                            <table>
+                                <tr>
+                                    <td><i class="fa fa-circle" aria-hidden="true" style="color:#e1ac43;font-size:15pt"></i></td><td><b>Pending Submission</b> – Team Member has not submitted raters yet</td>
+                                </tr>
+                                 <tr>
+                                    <td><i class="fa fa-circle" aria-hidden="true" style="color:#53cd8e;font-size:15pt"></i></td><td><b>Submitted</b> – Team member has submitted raters</td>
+                                </tr>
+                                 <tr>
+                                    <td><i class="fa fa-refresh" aria-hidden="true" style="background-color:#5aadf9;color:#fff;padding:2px;"></i></td><td><b>Pending Approval</b> – Submitted but not yet approved</td>
+                                </tr>
+                                 <tr>
+                                    <td><i class="fa fa-check-square" aria-hidden="true" style="color:#59d68e;font-size:15pt"></i></td><td><b>Approved</b> – Raters have been approved
+</td>
+                                </tr>
+                            </table>
                         </td>
                         <td>
                             <ul>
-                                <li>You can also add or remove stakeholders as needed.</li>
-                                <li>Once you are satisfied with the selections, click "Approve" to finalize.</li>
+                                <li>Review their submitted raters for relevance and completeness. You can edit stakeholder categories to ensure the best fit.</li>
+                                <li>You can also add or remove stakeholders (Except for Self & RM/Coach) as needed.</li>
+                                <li>Once you are satisfied with the selections, click <b>"Approve"</b> to finalize for all your team members.</li>
                             </ul>
                         </td>
                     </tr>

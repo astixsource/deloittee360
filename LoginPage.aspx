@@ -100,9 +100,12 @@
             </p>
         </div>
 
-        <div id="dvFadeForProcessing" style="display: none" align="center" class="clsloader">
-            <img src="Images/loading.gif" style="margin-top: 200px;" />
-        </div>
+         <div id="dvFadeForProcessing" style="display: block; position: fixed; text-align: center; z-index: 999999; top: 0; bottom: 0; left: 0; right: 0; opacity: .80; -moz-opacity: 0.8; filter: alpha(opacity=80); background-color: #ccc;">
+        <img src="../Images/loading.gif" style="width: 90px; height: 70px; position: relative; top: 50%; margin-top: -35px;" />
+    </div>
+      <%--  <div id="dvFadeForProcessing" style="display: none" align="center" class="clsloader">
+            <img src="../Images/loading.gif" style="margin-top: 200px;" />
+        </div>--%>
         <asp:HiddenField runat="server" ID="hdnaccesstoken" />
         <asp:HiddenField ID="hdnEmailId" runat="server"  />
     </form>

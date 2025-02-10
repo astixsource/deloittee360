@@ -132,7 +132,24 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                         foreach (DataRow dr in dt.Rows)
                         {
                             //sb.Append("<div class='clscoacheelist' onclick='fnShowNomineelist(this)'>Coachee " + dr["Descr"].ToString()+"</div>");
-                            sb.Append("<div class='clscoacheelist' EmpNodeId='" + dr["EmpNodeId"].ToString() + "' onclick=\"fnGetNomineeDetails(this," + dr["EmpNodeId"].ToString() + ")\">" + dr["FullName"].ToString() + "</div>");
+                            string strIcon = "";
+                            if (dr["StatusID"].ToString() == "1")
+                            {
+                                strIcon = "<i class=\"fa fa-circle clsiconclass\" aria-hidden=\"true\" style=\"color:#e1ac43;font-size:15pt\"></i>";
+                            }
+                            else if (dr["StatusID"].ToString() == "2")
+                            {
+                                strIcon = "<i class=\"fa fa-circle clsiconclass\" aria-hidden=\"true\" style=\"color:#53cd8e;font-size:15pt\"></i>";
+                            }
+                            else if (dr["StatusID"].ToString() == "3")
+                            {
+                                strIcon = "<i class=\"fa fa-refresh clsiconclass\" aria-hidden=\"true\" style=\"background-color:#5aadf9;color:#fff;padding:2px;\"></i>";
+                            }
+                            else
+                            {
+                                strIcon = "<i class=\"fa fa-check-square clsiconclass\" aria-hidden=\"true\" style=\"color:#59d68e;font-size:15pt\"></i>";
+                            }
+                            sb.Append("<div style='vertical-align:middle'><div class='clscoacheelist' EmpNodeId='" + dr["EmpNodeId"].ToString() + "' onclick=\"fnGetNomineeDetails(this," + dr["EmpNodeId"].ToString() + ")\">" + dr["FullName"].ToString()+ "</div>"+ strIcon+"</div>");
                             i++;
                         }
                         dvcoacheelist.InnerHtml = sb.ToString();
