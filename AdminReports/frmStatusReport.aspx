@@ -20,7 +20,7 @@
         </table>
     </div>
     <br />
-    <asp:GridView ID="grdWSMapping" runat="server" BorderWidth="1" align="center" Width="80%" EmptyDataText="There is no record found" BorderStyle="Solid"
+    <asp:GridView ID="grdWSMapping" runat="server" BorderWidth="1" align="center" class="table table-bordered table-sm mt-3" Width="80%" EmptyDataText="There is no record found" BorderStyle="Solid"
         ForeColor="#333333" AutoGenerateColumns="False" HeaderStyle-VerticalAlign="Middle">
         <HeaderStyle VerticalAlign="Middle" />
         <FooterStyle BackColor="#507CD1" Font-Bold="false" ForeColor="White" />
@@ -73,7 +73,7 @@
         <PagerStyle BackColor="#ef4522" ForeColor="White" HorizontalAlign="Left" />
 
         <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-        <HeaderStyle Height="25" Font-Size="10" BackColor="#2488C4" Font-Bold="True" ForeColor="White" />
+        <HeaderStyle Height="25" Font-Size="10" BackColor="#88bd26" Font-Bold="True" ForeColor="White" />
         <EditRowStyle BackColor="#ef4522" />
     </asp:GridView>
 </asp:Content>

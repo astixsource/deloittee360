@@ -143,13 +143,13 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                             }
                             else if (dr["StatusID"].ToString() == "3")
                             {
-                                strIcon = "<i class=\"fa fa-refresh clsiconclass\" aria-hidden=\"true\" style=\"background-color:#5aadf9;color:#fff;padding:2px;\"></i>";
+                                strIcon = "<i class=\"fa fa-refresh clsiconclass\" aria-hidden=\"true\" style=\"background-color:#5aadf9;color:#fff;font-size:15pt\"></i>";
                             }
                             else
                             {
-                                strIcon = "<i class=\"fa fa-check-square clsiconclass\" aria-hidden=\"true\" style=\"color:#59d68e;font-size:15pt\"></i>";
+                                strIcon = "<i class=\"fa fa-check-square clsiconclass clsnomineeapprove\" aria-hidden=\"true\" style=\"color:#59d68e;font-size:15pt\"></i>";
                             }
-                            sb.Append("<div style='vertical-align:middle'><div class='clscoacheelist' EmpNodeId='" + dr["EmpNodeId"].ToString() + "' onclick=\"fnGetNomineeDetails(this," + dr["EmpNodeId"].ToString() + ")\">" + dr["FullName"].ToString()+ "</div>"+ strIcon+"</div>");
+                            sb.Append("<div style='display:table-row'><div class='clscoacheelist' EmpNodeId='" + dr["EmpNodeId"].ToString() + "' onclick=\"fnGetNomineeDetails(this," + dr["EmpNodeId"].ToString() + ")\">" + dr["FullName"].ToString()+ "</div><div class='clsiconcontainer'>"+ strIcon+"</div></div>");
                             i++;
                         }
                         dvcoacheelist.InnerHtml = sb.ToString();

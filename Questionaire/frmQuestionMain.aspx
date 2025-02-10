@@ -15,12 +15,7 @@
             border-top: none !important;
         }
 
-        .main-content {
-            margin-top:110px;
-            /*  max-width: 900px;*/
-        }
-
-         .container {
+        .container {
             margin: 20px auto;
             padding: 10px;
             /*  max-width: 900px;*/
@@ -236,7 +231,7 @@
     <div class="section-title" style="background-color: #88bd26; /*border-radius: 5px*/">
         <%--<h3 class="text-center" style="color: white;">INSTRUCTIONS</h3>--%>
         <h3 class="text-center" style="color: white;">WELCOME TO 360 Feedback Survey FY 2025<br />
-            <span class="text-center" style="color: white;" id="h6">Please respond to each statement on the scale provided alongside from "Always" to "Rarely".<br />
+            <span class="text-center" style="color: white;" id="h6">Please respond to each statement on the scale provided alongside from "Always" to "Rarely".
                 You may ‘Save’ your responses to leave and come back later to complete the rest of the Survey.</span></h3>
         <%--    <div class="title-line-center"></div>--%>
     </div>
@@ -245,15 +240,71 @@
     <div id="tblTopHeader" class="ques-header row">
         <!-- Proper Table Header -->
         <div class="col-md-12" id="h7">
-            <table class="Questable" style="width: 100%; border-collapse: collapse;">
-                <thead>
+            <table  class="table table-bordered table-sm" style="width: 100%; border-collapse: collapse;">
+              <%--  <thead>
                     <tr>
                         <!-- Header for Statements -->
                         <th style="background-color: #88bd26; color: white; width: 50%; text-align: center; padding: 10px; border: 10px solid white;">Competencies</th>
                         <!-- Header for Rating Scale -->
                         <th style="background-color: #88bd26; color: white; width: 50%; text-align: center; padding: 10px; border: 10px solid white;">Rating Scale</th>
                     </tr>
-                </thead>
+                </thead>--%>
+                <tbody>
+                     <tr>
+                            <td>
+                                <strong>Scale</strong>
+                            </td>
+                            <td><strong>Defination</strong></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Always</strong>
+                            </td>
+                            <td>Consistently and continuously demonstrates the competency at a high level. They display exceptional proficiency in this competency, setting consistently high standards.</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Often</strong>
+                            </td>
+                            <td>Demonstrates the competency most of the time, and it is a strong aspect of their performance. They frequently exhibit proficiency in this competency, exceeding expectations.</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Sometimes</strong>
+                            </td>
+                            <td>Demonstrates the competency regularly, but there is room for improvement. They show competence, but there are areas where their performance can be enhanced.
+
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Occasionally</strong>
+                            </td>
+                            <td>Demonstrates the competency on occasion, but it is not consistent. There are noticeable gaps in their proficiency, and it is not a regular occurrence.
+
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Rarely</strong>
+                            </td>
+                            <td>Competency is rarely demonstrated, and there is a significant need for improvement. It is seldom seen in their performance.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Cannot Rate</strong>
+                            </td>
+                            <td>In case this behavior is not applicable to this professional.
+
+                            </td>
+                        </tr>
+
+                    </tbody>
             </table>
         </div>
 
@@ -261,9 +312,7 @@
         <div class="col-md-6 ques-header-left">
             <table class="Questable" style="width: 100%; border-collapse: collapse;">
                 <tr>
-                    <th style="color: black; width: 100px;" id="tdPageNum1">
-                        <br>
-                    </th>
+                   
                     <th style="color: white;" id="dvName">
                         <br>
                     </th>
@@ -278,7 +327,7 @@
                 <thead>
                     <tr>
                         <!-- Rating Scale Values -->
-                        <th style="width: 14.28%; text-align: center; padding: 5px;"><span id="Label0">Always</span></th>
+                        <th style="width: 14.28%; text-align: center; padding: 5px;"><span id="Label0" >Always</span></th>
                         <th style="width: 14.28%; text-align: center; padding: 5px;"><span id="Label1">Often</span></th>
                         <th style="width: 14.28%; text-align: center; padding: 5px;"><span id="Label2">Sometimes</span></th>
                         <th style="width: 14.28%; text-align: center; padding: 5px;"><span id="Label3">Occasionally</span></th>
@@ -308,7 +357,7 @@
         <div class="row mb-2">
             <div class="col-md-6 align-left-middile" id="tdCmmnt2" runat="server"><strong>Areas of development observed in the individual.</strong></div>
             <div class="col-md-6">
-                <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox2" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
+                <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox2" runat="server"  CssClass="form-control" TextMode="MultiLine" Rows="4" ></asp:TextBox>
             </div>
         </div>
 
@@ -326,6 +375,9 @@
                 <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox3" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
             </div>
         </div>--%>
+    </div>
+    <div style="text-align:right" id="tdPageNum1">
+     
     </div>
     <div class="row mt-3 mb-3">
         <div class="col-md-11">

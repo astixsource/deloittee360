@@ -214,7 +214,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                             {
                                 if (dt.Rows.Count > 0)
                                 {
-                                    fnSendMailToUsers(Convert.ToString(dt.Rows[0][0]), Convert.ToString(dt.Rows[0][1]));
+                                     fnSendMailToUsers(Convert.ToString(dt.Rows[0][0]), Convert.ToString(dt.Rows[0][1]));
                                 }
                             }
                         }

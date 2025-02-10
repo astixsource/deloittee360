@@ -233,14 +233,13 @@ Partial Class Login
 
                 End If
                 drdr = Nothing
+                Objcon2.Close()
             End If
-            objCom2.Dispose()
-            Objcon2.Close()
-            Objcon2.Dispose()
         Catch ex As Exception
             strResponse = "2|Error : " & ex.Message
         Finally
-
+            objCom2.Dispose()
+            Objcon2.Dispose()
         End Try
 
         Return strResponse

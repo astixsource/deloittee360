@@ -224,7 +224,7 @@
                 if (this.options.showHeader) {
                     var table = '<table id="tblPrdContainer" class="autocomplete-table clsheaderitem"><thead><tr>';
                     $.each(this.options.columns, function (index, item) {
-                        table+=('<th style="padding:0 4px;width:' + item.width + ';">' + item.name + '</th>');
+                        table+=('<th style="padding:0 2px;width:' + item.width + ';">' + item.name + '</th>');
                     });
                     table += ('</tr></thead>');
                     $(ul).append(table);
@@ -249,7 +249,7 @@
                     $.each(this.options.columns, function (index, column) {
                         //t += '<span style="padding:0 4px;float:left;width:' + column.width + ';">' + item[column.valueField ? column.valueField : index] + '</span>'
 
-                        t += '<td style="padding:0 4px;width:' + column.width + ';">' + item[column.valueField ? column.valueField : index] + '</td>'
+                        t += '<td style="padding:0 2px;word-break:break-all;width:' + column.width + ';">' + item[column.valueField ? column.valueField : index] + '</td>'
                     });
                     result = $('<li></li>')
 
@@ -402,7 +402,7 @@
                     $("#tblMainNominee tbody").html(result.split("|")[1]);
                     //fnDisableCategory();
                     if ($("#tblMainNominee tbody tr[flgSubmittedForApproval='1']").length > 0) {
-                        $("#btnSave,#btnSubmit").prop("disabled", true);
+                        //$("#btnSave,#btnSubmit").prop("disabled", true);
                         $("#tblMainNominee tfoot tr").hide();
                         $(".dt-scroll-foot").hide();
                     }
@@ -719,9 +719,13 @@
                 var arrCategories = $("#MainContent_ddlRelatioShip option[value!=0]");
                 for (var i = 0; i < arrCategories.length; i++) {
                     var rpid = arrCategories.eq(i).val();
-                    if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length > 0) {
-                        var minnominationpercategory = arrCategories.eq(i).attr("minnominationpercategory");
-                        if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length < parseInt(minnominationpercategory)) {
+                    var minnominationpercategory = arrCategories.eq(i).attr("minnominationpercategory");
+                    if (minnominationpercategory > 0) {
+                        if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length > 0) {
+                            if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length < parseInt(minnominationpercategory)) {
+                                return "false|" + minnominationpercategory;
+                            }
+                        } else {
                             return "false|" + minnominationpercategory;
                         }
                     }
@@ -737,13 +741,21 @@
                 var arrCategories = $("#MainContent_ddlRelatioShip option[value!=0]");
                 for (var i = 0; i < arrCategories.length; i++) {
                     var rpid = arrCategories.eq(i).val();
-                    if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length > 0) {
-                        var minnominationpercategory = arrCategories.eq(i).attr("minnominationpercategory");
-                        var rptxt = arrCategories.eq(i).attr("rptxt");
-                        str += "<tr><td class='fw-bold'>" + rptxt + "</td>";
-                        str += "<td class='text-center'>" + (rpid == "1" ? "Auto Populated" : minnominationpercategory==0?"Optional": minnominationpercategory) + "</td>";
-                        str += "<td class='text-center'>" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "</td>";
-                        str += "</tr>";
+                    var minnominationpercategory = arrCategories.eq(i).attr("minnominationpercategory");
+                    var rptxt = arrCategories.eq(i).attr("rptxt");
+                    if (minnominationpercategory > 0) {
+                        if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length > 0) {
+                            str += "<tr><td class='fw-bold'>" + rptxt + "</td>";
+                            str += "<td class='text-center'>" + (rpid == "1" ? "Auto Populated" : minnominationpercategory == 0 ? "Optional" : minnominationpercategory) + "</td>";
+                            str += "<td class='text-center'>" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "</td>";
+                            str += "</tr>";
+                        }
+                        else {
+                            str += "<tr><td class='fw-bold'>" + rptxt + "</td>";
+                            str += "<td class='text-center'>" + (rpid == "1" ? "Auto Populated" : minnominationpercategory == 0 ? "Optional" : minnominationpercategory) + "</td>";
+                            str += "<td class='text-center'>" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "</td>";
+                            str += "</tr>";
+                        }
                     }
                 }
             }
@@ -751,6 +763,7 @@
         }
 
         function fnSaveAndSubmit(flg) {
+            $("#dvMsg").html("");
             var $trs = $("#tblMainNominee tr[flg='0']");
             if ($trs.length == 0 && flg == 0) {
                 fnShowmsg("No data found for this action, kindly add new rater first!");
@@ -774,7 +787,8 @@
                 }
             }
             var LoginId = $("#MainContent_hdnLoginId").val();
-            var str = "<div>" + (flg == 0 ? "Are you sure to save?" : "Please Submit if these are your final nominations?") + "</div>";
+            var str = "<div>" + (flg == 0 ? "Are you sure you want to save?" : "Please Submit if these are your final nominations?") + "</div>";
+           
             $("#dvDialog").html(str);
             $("#dvDialog").dialog({
                 title: "Confirmation :",
@@ -809,8 +823,13 @@
                                 fnShowmsg("Error:" + result.split("|")[1]);
                                 return false;
                             }
+                            $("#dvMsg").html("Your rater list is shared with your RM/Coach for their approval");
                             fnUpdateProgressbar();
                             fnGetNomineeDetails();
+
+                            setTimeout(function () {
+                                window.location.href = "frmNominateApproveNomination.aspx";
+                            }, 3000);
 
                         }, function (result) {
                             $("#dvFadeForProcessing").hide();
@@ -954,11 +973,12 @@
                 </div>--%>
             </div>
 
-            <div class="button-group mb-4">
+            <div class="button-group mb-3">
                 <input type="button" class="btn btn-submit" id="btnSave" value="Save" onclick="fnSaveAndSubmit(0)" style="display: inline-block;">
                 <input type="button" class="btn btn-submit" id="btnSubmit" value="Submit" onclick="fnSaveAndSubmit(1)" style="display: inline-block;">
                 <input type="button" class="btn btn-next d-none" id="btnNext" onclick="fnGotosurveypage()" value="Next" style="display: inline-block;">
             </div>
+            <div id="dvMsg" style="font-weight:bold;font-size:11pt;text-align:center"></div>
         </div>
     </div>
 

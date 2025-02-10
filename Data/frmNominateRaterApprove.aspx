@@ -10,6 +10,7 @@
     <script src="../JDatatable/fixedHeader.dataTables.js"></script>
     <script src="../Scripts/progressbarJS.js"></script>
     <style>
+        
         .main-content {
             max-width: 90%;
             width: 90%;
@@ -161,12 +162,16 @@
             padding: 3px 2px 3px 4px;
             margin-block: 2px;
             cursor: pointer;
-            display:inline-block;
-            width:85%;
+            display:table-cell;
+            width:100%;
         }
         .clsiconclass {
-           margin-left:2px;
+           
            font-size:24px !important;
+        }
+        .clsiconcontainer{
+            padding: 3px 2px 3px 4px;
+            display:table-cell;
         }
 
             div.clscoacheelist:hover {
@@ -244,7 +249,7 @@
                 if (this.options.showHeader) {
                     var table = '<table id="tblPrdContainer" class="autocomplete-table clsheaderitem"><thead><tr>';
                     $.each(this.options.columns, function (index, item) {
-                        table += ('<th style="padding:0 4px;width:' + item.width + ';">' + item.name + '</th>');
+                        table += ('<th style="padding:0 2px;width:' + item.width + ';">' + item.name + '</th>');
                     });
                     table += ('</tr></thead>');
                     $(ul).append(table);
@@ -269,12 +274,12 @@
                     $.each(this.options.columns, function (index, column) {
                         //t += '<span style="padding:0 4px;float:left;width:' + column.width + ';">' + item[column.valueField ? column.valueField : index] + '</span>'
 
-                        t += '<td style="padding:0 4px;width:' + column.width + ';">' + item[column.valueField ? column.valueField : index] + '</td>'
+                        t += '<td style="padding:0 2px;word-break:break-all;width:' + column.width + ';">' + item[column.valueField ? column.valueField : index] + '</td>'
                     });
-                    result = $('<li></li>')
+                    result = $('<li style="padding-right:0px !important"></li>')
 
                         .data('ui-autocomplete-item', item)
-                        .append("<div><table class='autocomplete-table-row'><tr>" + t + "</tr></table></div>")
+                        .append("<div style='padding-right:0px'><table class='autocomplete-table-row'><tr>" + t + "</tr></table></div>")
                         //.append('<a class="mcacAnchor">' + t + '<div style="clear: both;"></div></a>')
                         //.append(t)
                         .appendTo(ul);
@@ -356,7 +361,7 @@
             $(".clsSearchUser").mcautocomplete({
                 open: function () {
                     var wd = $(".ui-autocomplete:visible").find("div.ui-widget-header").width();
-                    wd = parseInt(wd) + parseInt(30)
+                    wd = parseInt(wd);
                     $(".ui-autocomplete:visible").css({
                         "width": wd + "px",
                         "max-height": "200px",
@@ -389,7 +394,7 @@
                 },
                 {
                     name: 'Function',
-                    width: '80px',
+                    width: '90px',
                     valueField: 'Function'
                 }
                     ,
@@ -669,26 +674,6 @@
         }
 
 
-        function fnShowValidateRaterCategory() {
-            var str = "";
-            var $trs = $("#tblMainNominee tbody tr[flgvalid='1']");
-            if ($trs.length > 0) {
-                var arrCategories = $("#MainContent_ddlRelatioShip option[value!=0]");
-                for (var i = 0; i < arrCategories.length; i++) {
-                    var rpid = arrCategories.eq(i).val();
-                    if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length > 0) {
-                        var minnominationpercategory = arrCategories.eq(i).attr("minnominationpercategory");
-                        var rptxt = arrCategories.eq(i).attr("rptxt");
-                        str += "<tr><td class='fw-bold'>" + rptxt + "</td>";
-                        str += "<td class='text-center'>" + (rpid == "1" ? "Auto Populated" : minnominationpercategory == 0 ? "Optional" : minnominationpercategory) + "</td>";
-                        str += "<td class='text-center'>" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "</td>";
-                        str += "</tr>";
-                    }
-                }
-            }
-            return str;
-        }
-
         function IsValidateCategory() {
 
             var $trs = $("#tblMainNominee tbody tr[flgvalid='1']");
@@ -696,15 +681,48 @@
                 var arrCategories = $("#MainContent_ddlRelatioShip option[value!=0]");
                 for (var i = 0; i < arrCategories.length; i++) {
                     var rpid = arrCategories.eq(i).val();
-                    if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length > 0) {
-                        var minnominationpercategory = arrCategories.eq(i).attr("minnominationpercategory");
-                        if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length < parseInt(minnominationpercategory)) {
+                    var minnominationpercategory = arrCategories.eq(i).attr("minnominationpercategory");
+                    if (minnominationpercategory > 0) {
+                       // alert("Total row:" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "\nminnominationpercategory:" + minnominationpercategory)
+                        if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length > 0) {
+                            if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length < parseInt(minnominationpercategory)) {
+                                return "false|" + minnominationpercategory;
+                            }
+                        } else {
                             return "false|" + minnominationpercategory;
                         }
                     }
                 }
             }
             return "true";
+        }
+
+        function fnShowValidateRaterCategory() {
+            var str = "";
+            var $trs = $("#tblMainNominee tbody tr[flgvalid='1']");
+            if ($trs.length > 0) {
+                var arrCategories = $("#MainContent_ddlRelatioShip option[value!=0]");
+                for (var i = 0; i < arrCategories.length; i++) {
+                    var rpid = arrCategories.eq(i).val();
+                    var minnominationpercategory = arrCategories.eq(i).attr("minnominationpercategory");
+                    var rptxt = arrCategories.eq(i).attr("rptxt");
+                   // if (minnominationpercategory > 0) {
+                        if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length > 0) {
+                            str += "<tr><td class='fw-bold'>" + rptxt + "</td>";
+                            str += "<td class='text-center'>" + (rpid == "1" ? "Auto Populated" : minnominationpercategory == 0 ? "Optional" : minnominationpercategory) + "</td>";
+                            str += "<td class='text-center'>" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "</td>";
+                            str += "</tr>";
+                        }
+                        else {
+                            str += "<tr><td class='fw-bold'>" + rptxt + "</td>";
+                            str += "<td class='text-center'>" + (rpid == "1" ? "Auto Populated" : minnominationpercategory == 0 ? "Optional" : minnominationpercategory) + "</td>";
+                            str += "<td class='text-center'>" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "</td>";
+                            str += "</tr>";
+                        }
+                    //}
+                }
+            }
+            return str;
         }
 
         function fnSaveAndSubmit(flg) {
@@ -727,9 +745,9 @@
             }
 
             var LoginId = $("#MainContent_hdnLoginId").val();
-            var str = "<div>Are you sure to approve the rater(s)?</div>";
-
-
+            var str = "<div>Are you sure you want to approve the rater(s)?</div>";
+           
+           
             $("#dvDialog").html(str);
             $("#dvDialog").dialog({
                 title: "Confirmation :",
@@ -763,8 +781,21 @@
                                 fnShowmsg("Error:" + result.split("|")[1]);
                                 return false;
                             }
+                           // alert($("#MainContent_dvcoacheelist div.clsactive").parent("div")[0].outerHTML);
+                           
+                            $("#MainContent_dvcoacheelist div.clsactive").parent("div").find("i").removeAttr("style").css({
+                                "color": "#59d68e",
+                                "font-size":"15pt"
+                            });
+                            $("#MainContent_dvcoacheelist div.clsactive").parent("div").find("i").removeAttr("class").attr("class", "fa fa-check-square clsiconclass clsnomineeapprove");
                             $("#MainContent_dvcoacheelist div.clsactive").click();
-
+                            if ($("#MainContent_dvcoacheelist div.clscoacheelist").length == $("#MainContent_dvcoacheelist i.clsnomineeapprove").length) {
+                                $("#dvMsg").html("You have approved all nominations");
+                                setTimeout(function () {
+                                    window.location.href = "frmNominateApproveNomination.aspx";
+                                }, 3000);
+                            }
+                           
                         }, function (result) {
                             $("#dvFadeForProcessing").hide();
                             fnShowmsg("Error:" + result._message);
@@ -879,7 +910,7 @@
                     <div class="text-center">
                         <b>Your Team Members </b>
                     </div>
-                    <div runat="server" id="dvcoacheelist" style="overflow: auto; max-height: 380px">
+                    <div runat="server" id="dvcoacheelist" style="overflow: auto; max-height: 380px;display:table;border-collapse:separate;border-spacing:.15rem">
                     </div>
                 </div>
                 <div class="col-md-9" style="width: 82%">
@@ -934,11 +965,12 @@ Select Category:
                             </tr>
                         </table>
                     </div>
-                    <div class="button-group mb-4">
+                    <div class="button-group mb-3">
                         <input type="button" class="btn btn-submit" id="btnAdd" value="Edit" onclick="fnAddRows()" style="display: inline-block;">
                         <input type="button" class="btn btn-submit" id="btnSave" value="Approve" onclick="fnSaveAndSubmit(1)" style="display: inline-block;">
                         <%--<input type="button" class="btn btn-next" id="btnNext" value="Next" style="display: inline-block;">--%>
                     </div>
+                    <div id="dvMsg" style="font-weight:bold;font-size:11pt;text-align:center"></div>
                 </div>
             </div>
 

@@ -82,7 +82,7 @@ Public Class E360WebService
     End Function
     'CHANGE
     <System.Web.Services.WebMethod(EnableSession:=True)>
-    Public Function fnShowDispPerson() As String
+    Public Function fnShowDispPerson_OLD() As String
         '**************************************For Feedback to others**********************************                
         Dim RSPId As Integer
         Dim RSPStatus As Integer
@@ -166,7 +166,7 @@ Public Class E360WebService
     End Function
 
     <System.Web.Services.WebMethod(EnableSession:=True)>
-    Public Function fnShowDispPerson_OLD() As String
+    Public Function fnShowDispPerson() As String
         '**************************************For Feedback to others**********************************                
 
         Dim RSPId As Integer
@@ -180,104 +180,150 @@ Public Class E360WebService
         Dim CycleId As Integer
         CycleId = Session("CycleID")
 
-        'Dim Objcon As New SqlConnection(strConn.Split("|")(0))
-        'Dim objCom As New SqlCommand("spRSPNominatedApseList_Abhishek", Objcon)
-        'objCom.Parameters.Add("@LoginID", Data.SqlDbType.Int).Value = LoginId
-        'objCom.Parameters.Add("@CycleID", Data.SqlDbType.Int).Value = CycleId
-        'objCom.CommandType = CommandType.StoredProcedure
-        'objCom.CommandTimeout = 0
-        'Try
-        '    ' Objcon.AccessToken = strConn.Split("|")(1)
-        '    Objcon.Open()
-        '    drdr = objCom.ExecuteReader()
+        Dim Objcon As New SqlConnection(strConn.Split("|")(0))
+        Dim objCom As New SqlCommand("spRSPNominatedApseList", Objcon)
+        objCom.Parameters.Add("@LoginID", Data.SqlDbType.Int).Value = LoginId
+        objCom.Parameters.Add("@CycleID", Data.SqlDbType.Int).Value = CycleId
+        objCom.CommandType = CommandType.StoredProcedure
+        objCom.CommandTimeout = 0
+        Try
+            ' Objcon.AccessToken = strConn.Split("|")(1)
+            Objcon.Open()
+            drdr = objCom.ExecuteReader()
 
-        '    Dim iCol As Integer = 0
+            Dim iCol As Integer = 0
 
-        '    Dim counter As Integer = 1
-        '    Dim strTable As String = ""
-        '    Dim flag As Integer = 0
-        '    Dim str As String = ""
-        '    Dim AssmntID As Integer = 0
+            Dim counter As Integer = 1
+            Dim strTable As String = ""
+            Dim flag As Integer = 0
+            Dim str As String = ""
+            Dim AssmntID As Integer = 0
 
-        '    strTable = strTable & "<div class='section-title'><h3 class='text-center'>KINDLY PROVIDE FEEDBACK FOR PERSONS IN THE FOLLOWING LIST</h3></br><h6 class='text-center'>(Please click on the Name of the Person And proceed with the Survey)</h6><div class='title-line-center'></div></div>"
+            ' strTable = strTable & "<div><h3>KINDLY PROVIDE FEEDBACK FOR PERSONS IN THE FOLLOWING LIST</h3></br><h6>(Please click on the Name of the Person And proceed with the Survey)</h6><div class='title-line-center'></div></div>"
 
+            strTable = strTable & "<div><p><strong>Survey Landing page:</strong></p><ul><li>Below is a comprehensive list of pending actions to ensure completion of the 360-degree feedback for yourself and all stakeholder who have nominated you as a rater.</li><li>The table indicates your relationship to the named individual.</li><li>Clicking on the hyperlinked statement in the &lsquo;Action Pending&rsquo; column will direct you to respective survey form.</li><li>Please complete all actions by the due date to ensure a smooth evaluation process for everyone involved.</li></ul></div>"
 
-        '    strTable &= "<table class='table table-bordered table-sm feedback_tbl' id='tblPreNominated'>"
-        '    strTable &= "<thead><tr><th width='5%'>S.No.</th><th width='30%' align='left'>Name</th><th width='20%' align='left'>Provide Feedback As</th><th width='15%' align='left'>Status</th></thead><tbody>"
-        '    While (drdr.Read)
-        '        RSPId = drdr.Item("RSPID")
-        '        RSPStatus = drdr.Item("RspStatus")
+            strTable &= "<table class='table table-bordered table-sm feedback_tbl' id='tblPreNominated'>"
+            strTable &= "<thead><tr><th width='1%'>S.No.</th><th width='22%' align='left'>Stakeholder Name</th><th width='22%' align='left'>Relationship to Self</th><th width='12%' align='left'>Function</th><th width='12%' align='left'>Department</th><th width='12%' align='left'>Designation</th><th width='12%' align='left'>Action</th><th width='15%' align='left'>Due Date</th></thead><tbody>"
+            While (drdr.Read)
+                RSPId = drdr.Item("RSPID")
+                RSPStatus = drdr.Item("RspStatus")
 
-        '        strTable &= "<tr>"
+                strTable &= "<tr>"
 
-        '        strTable &= "<td>" & counter & "</td>"
+                strTable &= "<td>" & counter & "</td>"
 
-        '        If RSPStatus = 0 Or RSPStatus = 1 Then
+                'If RSPStatus = 0 Or RSPStatus = 1 Then
 
-        '            strTable = strTable & "<td align='left' class='paraTd'><input type='hidden' id='hdnRspId' value=" & drdr.Item("RspId") & "><input type='hidden' id='hdnRspStatus' value=" & drdr.Item("RspStatus") & "><input type='hidden' id='hdnCycApseAssmntTypeMapID' value=" & drdr.Item("CycleApseApsrMapID") & "><input type='hidden' id='hdnCycleID' value=" & drdr.Item("CycleID") & "><input type='hidden' id='hdnAssmntTypeID' value=" & drdr.Item("AssmntTypeID") & "><input type='hidden' id='hdnLevelID' value=" & drdr.Item("LevelID") & ">"
-        '            Dim NodeNameForJS As String = Replace(drdr.Item("NodeName"), " ", "_")
+                '    strTable = strTable & "<td align='left' class='paraTd'><input type='hidden' id='hdnRspId' value=" & drdr.Item("RspId") & "><input type='hidden' id='hdnRspStatus' value=" & drdr.Item("RspStatus") & "><input type='hidden' id='hdnCycApseAssmntTypeMapID' value=" & drdr.Item("CycleApseApsrMapID") & "><input type='hidden' id='hdnCycleID' value=" & drdr.Item("CycleID") & "><input type='hidden' id='hdnAssmntTypeID' value=" & drdr.Item("AssmntTypeID") & "><input type='hidden' id='hdnLevelID' value=" & drdr.Item("LevelID") & ">"
+                '    Dim NodeNameForJS As String = Replace(drdr.Item("NodeName"), " ", "_")
 
-        '            If RSPStatus = 0 Then
+                '    If RSPStatus = 0 Then
 
-        '                strTable = strTable & "<a href='###' onclick=fnShowQuestion(this," & drdr.Item("RspId") & "," & drdr.Item("RspStatus") & "," & drdr.Item("CycleApseApsrMapID") & "," & drdr.Item("CycleID") & "," & drdr.Item("AssmntTypeID") & "," & drdr.Item("LevelID") & ")  sname='" & NodeNameForJS & "' ><b><span class='glyphicon glyphicon-hand-right'></span> &nbsp;" & drdr.Item("NodeName")
-        '            ElseIf RSPStatus = 1 Then
-        '                strTable = strTable & "<a href='###' onclick=fnShowQuestion(this," & drdr.Item("RspId") & "," & drdr.Item("RspStatus") & "," & drdr.Item("CycleApseApsrMapID") & "," & drdr.Item("CycleID") & "," & drdr.Item("AssmntTypeID") & "," & drdr.Item("LevelID") & ") sname='" & NodeNameForJS & "' ><b><span class='glyphicon glyphicon-hand-right'></span> &nbsp;" & drdr.Item("NodeName")
-        '            End If
-        '            strTable = strTable & "</b></a></td>" '</label>
+                '        strTable = strTable & "<a href='###' onclick=fnShowQuestion(this," & drdr.Item("RspId") & "," & drdr.Item("RspStatus") & "," & drdr.Item("CycleApseApsrMapID") & "," & drdr.Item("CycleID") & "," & drdr.Item("AssmntTypeID") & "," & drdr.Item("LevelID") & ")  sname='" & NodeNameForJS & "' ><b><span class='glyphicon glyphicon-hand-right'></span> &nbsp;" & drdr.Item("NodeName")
+                '    ElseIf RSPStatus = 1 Then
+                '        strTable = strTable & "<a href='###' onclick=fnShowQuestion(this," & drdr.Item("RspId") & "," & drdr.Item("RspStatus") & "," & drdr.Item("CycleApseApsrMapID") & "," & drdr.Item("CycleID") & "," & drdr.Item("AssmntTypeID") & "," & drdr.Item("LevelID") & ") sname='" & NodeNameForJS & "' ><b><span class='glyphicon glyphicon-hand-right'></span> &nbsp;" & drdr.Item("NodeName")
+                '    End If
+                '    strTable = strTable & "</b></a></td>" '</label>
 
-        '        ElseIf RSPStatus = 2 Then
-        '            strTable = strTable & "<td width='6%'>" '<label class='label label-success'>
-        '            strTable = strTable & drdr.Item("NodeName")
-        '            strTable = strTable & "</td>" '</label>
+                'ElseIf RSPStatus = 2 Then
+                '    strTable = strTable & "<td width='6%'>" '<label class='label label-success'>
+                '    strTable = strTable & drdr.Item("NodeName")
+                '    strTable = strTable & "</td>" '</label>
 
-        '        End If
-
-        '        strTable &= "<td align='left'>"
-        '        str = drdr.Item("Relationship")
-        '        strTable &= str & "</td>"
+                'End If
 
 
-        '        If RSPStatus = 0 Then
-        '            strTable &= "<td align='left'><label class=m-0 pl-2 pr-2 alert-danger'>"
-        '            str = "Pending"
-        '        ElseIf RSPStatus = 1 Then
-        '            strTable &= "<td align='left'><label class='m-0 pl-2 pr-2 alert-warning'>"
-        '            str = "In Progress"
-        '        ElseIf RSPStatus = 2 Then
-        '            strTable &= "<td align='left'><label class='m-0 pl-2 pr-2 alert-success'>"
-        '            str = "Completed"
-        '        End If
-        '        strTable &= str & "</label></td>"
+                strTable &= "<td align='left'>"
+                str = drdr.Item("NodeName")
+                strTable &= str & "</td>"
 
-        '        strTable &= "</tr>"
+                strTable &= "<td align='left'>"
+                str = drdr.Item("Relationship")
+                strTable &= str & "</td>"
 
-        '        'End If
+                strTable &= "<td align='left'>"
+                str = drdr.Item("Function")
+                strTable &= str & "</td>"
 
-        '        If (iCol Mod 2 = 0) Then
-        '            If (iCol > 0) Then
-        '                strTable = strTable & "</tr>"
-        '            End If
+                strTable &= "<td align='left'>"
+                str = drdr.Item("Department")
+                strTable &= str & "</td>"
 
-        '            strTable = strTable & "<tr>"
-        '        Else
-        '        End If
-        '        iCol += 1
-        '        counter += 1
+                strTable &= "<td align='left'>"
+                str = drdr.Item("Designation")
+                strTable &= str & "</td>"
 
-        '    End While
 
-        '    strTable = strTable & "</tbody></table>"
 
-        '    strReturn = "1@" & strTable.ToString
-        'Catch ex As Exception
-        '    strReturn = "2@" & ex.Message
-        'Finally
-        '    objCom.Dispose()
-        '    Objcon.Close()
-        '    Objcon.Dispose()
-        'End Try
-        Return ""
+
+                If RSPStatus = 0 Or RSPStatus = 1 Then
+
+                    strTable = strTable & "<td align='left' class='paraTd'><input type='hidden' id='hdnRspId' value=" & drdr.Item("RspId") & "><input type='hidden' id='hdnRspStatus' value=" & drdr.Item("RspStatus") & "><input type='hidden' id='hdnCycApseAssmntTypeMapID' value=" & drdr.Item("CycleApseApsrMapID") & "><input type='hidden' id='hdnCycleID' value=" & drdr.Item("CycleID") & "><input type='hidden' id='hdnAssmntTypeID' value=" & drdr.Item("AssmntTypeID") & "><input type='hidden' id='hdnLevelID' value=" & drdr.Item("LevelID") & ">"
+                    Dim NodeNameForJS As String = Replace(drdr.Item("NodeName"), " ", "_")
+
+                    If RSPStatus = 0 Then
+
+                        strTable = strTable & "<a class=m-0 pl-2 pr-2 alert-danger' href='###' onclick=fnShowQuestion(this," & drdr.Item("RspId") & "," & drdr.Item("RspStatus") & "," & drdr.Item("CycleApseApsrMapID") & "," & drdr.Item("CycleID") & "," & drdr.Item("AssmntTypeID") & "," & drdr.Item("LevelID") & ")  sname='" & NodeNameForJS & "' ><b><span class='glyphicon glyphicon-hand-right'></span> &nbsp;" & "Start Survey"
+                    ElseIf RSPStatus = 1 Then
+                        strTable = strTable & "<a class='m-0 pl-2 pr-2 alert-warning' href='###' onclick=fnShowQuestion(this," & drdr.Item("RspId") & "," & drdr.Item("RspStatus") & "," & drdr.Item("CycleApseApsrMapID") & "," & drdr.Item("CycleID") & "," & drdr.Item("AssmntTypeID") & "," & drdr.Item("LevelID") & ") sname='" & NodeNameForJS & "' ><b><span class='glyphicon glyphicon-hand-right'></span> &nbsp;" & "In Progress"
+                    End If
+                    strTable = strTable & "</b></a></td>" '</label>
+
+                ElseIf RSPStatus = 2 Then
+                    strTable = strTable & "<td width='6%'  class='m-0 pl-2 pr-2 alert-success'>" '<label class='label label-success'>
+                    strTable = strTable & "Completed"
+                    strTable = strTable & "</td>" '</label>
+
+                End If
+
+                'If RSPStatus = 0 Then
+                '    strTable &= "<td align='left'><label class=m-0 pl-2 pr-2 alert-danger'>"
+                '    str = "Pending"
+                'ElseIf RSPStatus = 1 Then
+                '    strTable &= "<td align='left'><label class='m-0 pl-2 pr-2 alert-warning'>"
+                '    str = "In Progress"
+                'ElseIf RSPStatus = 2 Then
+                '    strTable &= "<td align='left'><label class='m-0 pl-2 pr-2 alert-success'>"
+                '    str = "Completed"
+                'End If
+                'strTable &= str & "</label></td>"
+
+
+                strTable &= "<td align='left'>"
+                str = drdr.Item("Duedate")
+                strTable &= str & "</td>"
+
+                strTable &= "</tr>"
+
+                'End If
+
+                If (iCol Mod 2 = 0) Then
+                    If (iCol > 0) Then
+                        strTable = strTable & "</tr>"
+                    End If
+
+                    strTable = strTable & "<tr>"
+                Else
+                End If
+                iCol += 1
+                counter += 1
+
+            End While
+
+            strTable = strTable & "</tbody></table>"
+
+            strReturn = "1@" & strTable.ToString
+        Catch ex As Exception
+            strReturn = "2@" & ex.Message
+        Finally
+            objCom.Dispose()
+            Objcon.Close()
+            Objcon.Dispose()
+        End Try
+        Return strReturn
     End Function
+
 
     <System.Web.Services.WebMethod(EnableSession:=True)>
     Public Function fnUpdateResponses(ByVal strSave As String, ByVal FinalSave As Integer, ByVal strComment As String, ByVal RspID As Integer) As String

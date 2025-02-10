@@ -23,7 +23,8 @@ public partial class AdminReports_frmStatusReportNew : System.Web.UI.Page
     SqlConnection objCon = default(SqlConnection);
     SqlCommand objCom = default(SqlCommand);
     DataTable dt;
-    string strCon = System.Configuration.ConfigurationManager.AppSettings["strConn"];
+    string strConOLD = System.Configuration.ConfigurationManager.AppSettings["strConn"];
+    string strCon = HttpContext.Current.Application["DbConnectionString"].ToString();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -35,7 +36,7 @@ public partial class AdminReports_frmStatusReportNew : System.Web.UI.Page
     }
     public void fnFillCycle()
     {
-        SqlConnection con = new SqlConnection(strCon);
+        SqlConnection con = new SqlConnection(strCon.Split('|')[0]);
         string com = "spFillCycle";
         SqlDataAdapter adpt = new SqlDataAdapter(com, con);
 
@@ -55,7 +56,7 @@ public partial class AdminReports_frmStatusReportNew : System.Web.UI.Page
 
     public void fnBindGrid()
     {
-        objCon = new SqlConnection(strCon);
+        objCon = new SqlConnection(strCon.Split('|')[0]);
         objCom = new SqlCommand("spGetCompletionStatus", objCon);
         objCom.CommandType = CommandType.StoredProcedure;
         objCom.Parameters.Add("@CycleID", SqlDbType.Int).Value = ddlCycle.SelectedValue.ToString();
@@ -114,5 +115,5 @@ public partial class AdminReports_frmStatusReportNew : System.Web.UI.Page
     {
 
     }
-   
+
 }
