@@ -181,36 +181,44 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                         {
                             da.Fill(dt);
                             StringBuilder sb = new StringBuilder();
-                            for (int i = 0; i < dt.Rows.Count; i++)
+                            if (dt.Rows.Count > 0)
                             {
-                                int flgSubmittedForApproval = Convert.ToInt32(dt.Rows[i]["flgSubmittedForApproval"]);
-                                sb.Append("<tr flg='1' flgvalid='1' flgApproved='" + dt.Rows[i]["flgApproved"].ToString() + "' CycleApseApsrMapID='" + dt.Rows[i]["CycleApseApsrMapID"].ToString() + "' nomineid='" + dt.Rows[i]["NodeId"].ToString() + "' rpid='" + dt.Rows[i]["RltshpID"].ToString() + "'  newrpid='" + dt.Rows[i]["RltshpID"].ToString() + "'>");
-                                //if (flgSubmittedForApproval == 1 && Convert.ToInt32(dt.Rows[i]["flgApproved"]) == 0)
-                                //{
-                                //    sb.Append("<td class='text-center'><input type='checkbox' /></td>");
-                                //}
-                                //else
-                                //{
-                                //    sb.Append("<td class='text-center'></td>");
-                                //}
+                                for (int i = 0; i < dt.Rows.Count; i++)
+                                {
+                                    int flgSubmittedForApproval = Convert.ToInt32(dt.Rows[i]["flgSubmittedForApproval"]);
+                                    sb.Append("<tr flg='1' flgvalid='1' flgApproved='" + dt.Rows[i]["flgApproved"].ToString() + "' CycleApseApsrMapID='" + dt.Rows[i]["CycleApseApsrMapID"].ToString() + "' nomineid='" + dt.Rows[i]["NodeId"].ToString() + "' rpid='" + dt.Rows[i]["RltshpID"].ToString() + "'  newrpid='" + dt.Rows[i]["RltshpID"].ToString() + "'>");
+                                    //if (flgSubmittedForApproval == 1 && Convert.ToInt32(dt.Rows[i]["flgApproved"]) == 0)
+                                    //{
+                                    //    sb.Append("<td class='text-center'><input type='checkbox' /></td>");
+                                    //}
+                                    //else
+                                    //{
+                                    //    sb.Append("<td class='text-center'></td>");
+                                    //}
 
-                                sb.Append("<td>" + dt.Rows[i]["Relationship"].ToString() + "</td>");
-                                sb.Append("<td style='word-break:break-all'>" + dt.Rows[i]["FullName"].ToString() + "</td>");
-                                sb.Append("<td style='word-break:break-all'>" + dt.Rows[i]["EMailID"].ToString() + "</td>");
-                                sb.Append("<td>" + dt.Rows[i]["Function"].ToString() + "</td>");
-                                sb.Append("<td  style='word-break:break-all'>" + dt.Rows[i]["Department"].ToString() + "</td>");
-                                sb.Append("<td  style='word-break:break-all'>" + dt.Rows[i]["Designation"].ToString() + "</td>");
-                                sb.Append("<td>" + dt.Rows[i]["Status"].ToString() + "</td>");
-                                if (dt.Rows[i]["flgApproved"].ToString() == "0" && dt.Rows[i]["RltshpID"].ToString()!="4" && dt.Rows[i]["RltshpID"].ToString() != "1")
-                                {
-                                    sb.Append("<td class='text-center'  ><i class='fa fa-pencil' onclick='fnEditCategory(this)' title='click to edit' style='cursor:pointer;display:none'></i> <i class='fa fa-trash-o' onclick='fnRemoveFromDB(this)' style='color:red;cursor:pointer;margin-left:5px;display:none' title='click to delete'></i></td>");
+                                    sb.Append("<td>" + dt.Rows[i]["Relationship"].ToString() + "</td>");
+                                    sb.Append("<td style='word-break:break-all'>" + dt.Rows[i]["FullName"].ToString() + "</td>");
+                                    sb.Append("<td style='word-break:break-all'>" + dt.Rows[i]["EMailID"].ToString() + "</td>");
+                                    sb.Append("<td>" + dt.Rows[i]["Function"].ToString() + "</td>");
+                                    sb.Append("<td  style='word-break:break-all'>" + dt.Rows[i]["Department"].ToString() + "</td>");
+                                    sb.Append("<td  style='word-break:break-all'>" + dt.Rows[i]["Designation"].ToString() + "</td>");
+                                    sb.Append("<td>" + dt.Rows[i]["Status"].ToString() + "</td>");
+                                    if (dt.Rows[i]["flgApproved"].ToString() == "0" && dt.Rows[i]["RltshpID"].ToString() != "4" && dt.Rows[i]["RltshpID"].ToString() != "1")
+                                    {
+                                        sb.Append("<td class='text-center'  ><i class='fa fa-pencil' onclick='fnEditCategory(this)' title='click to edit' style='cursor:pointer;display:none'></i> <i class='fa fa-trash-o' onclick='fnRemoveFromDB(this)' style='color:red;cursor:pointer;margin-left:5px;display:none' title='click to delete'></i></td>");
+                                    }
+                                    else
+                                    {
+                                        sb.Append("<td class='text-center'  style='color:red;cursor:pointer'></td>");
+                                    }
+                                    sb.Append("</tr>");
                                 }
-                                else
-                                {
-                                    sb.Append("<td class='text-center'  style='color:red;cursor:pointer'></td>");
-                                }
-                                sb.Append("</tr>");
                             }
+                            else
+                            {
+                                sb.Append("<tr><td colspan='8' class='dt-empty p-2 text-center'>Rater nominations are not available yet</td></tr>");
+                            }
+                            
                             jsonData = "1|" + sb.ToString();
                         }
                     }
@@ -448,18 +456,32 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
             StringBuilder strBody = new StringBuilder();
             if (Scenario == 1)
             {
-                msg.Subject = "Your HCAS 360-Degree Feedback FY2025 Rater Approval Update";
+                //msg.Subject = "Your HCAS 360-Degree Feedback FY2025 Rater Approval Update";
+                msg.Subject = "360 Degree Feedback for " + FName + ": Kickoff Notice ";
 
                 strBody.Append("<font  style='COLOR: #000000; FONT-FAMILY: Arial'  size=2>");
 
-                strBody.Append("<p>Dear " + FName + ",</p>"); //// Participants Name WIll Come
-                strBody.Append("<p>Thank you for your nominating your raters for the HCAS 360-Degree Feedback FY2025. Your nominated raters have been reviewed by your manager/coach. Below are the next steps for you:</p>");
-                strBody.Append("<p>All your nominated raters have been approved. No further action is required at this stage. Please await the survey launch to complete your self-rating & provide feedback for others if you have been nominated. </p>");
+                strBody.Append("<p>Dear " + FName + ",</p>");
+                //// Participants Name WIll Come
+                //strBody.Append("<p>Thank you for your nominating your raters for the HCAS 360-Degree Feedback FY2025. Your nominated raters have been reviewed by your manager/coach. Below are the next steps for you:</p>");
+                //strBody.Append("<p>All your nominated raters have been approved. No further action is required at this stage. Please await the survey launch to complete your self-rating & provide feedback for others if you have been nominated. </p>");
+                //strBody.Append("<p>Should you have any questions or need assistance, please reach out to your talent advisors. </p>");
+                ////strBody.Append("<p>Your timely review will help ensure a smooth and effective feedback process. Should you have any questions or need assistance, please reach out to : <a style = 'COLOR: #000000; FONT-weight: bold' href = mailto:demer@deloitte.com> (demer@deloitte.com)</a>.</p>");
+                //strBody.Append("<p><b>Best Regards,</b></p>");
+                //strBody.Append("<p><b>Team Deloitte</b></p>");
+
+                strBody.Append("<p>We are pleased to inform you that the 360-Degree Feedback process has officially commenced, and the team selection has been approved.</p>");
+                strBody.Append("<p>The feedback raters given below, has been strategically selected to provide a comprehensive assessment of your strength and development areas:</p>");
+
+                strBody.Append("<p>Complete your Self Assessment which is designed to evaluate various competencies aligned with your professional development goals.<a href='" + WebSitePath + "'>" + WebSitePath + "</a></p>");
                 strBody.Append("<p>Should you have any questions or need assistance, please reach out to your talent advisors. </p>");
                 //strBody.Append("<p>Your timely review will help ensure a smooth and effective feedback process. Should you have any questions or need assistance, please reach out to : <a style = 'COLOR: #000000; FONT-weight: bold' href = mailto:demer@deloitte.com> (demer@deloitte.com)</a>.</p>");
-                strBody.Append("<p><b>Best Regards,</b></p>");
-                strBody.Append("<p><b>Team Deloitte</b></p>");
+                strBody.Append("<p>The deadline for approval is <strong>20-Feb-2025</strong>.</p>");
+                strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Pages/Home.aspx'>Talent business advisor</a>, or raise a ticket on : <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
+                strBody.Append("<p><b>Regards,</b></p>");
+                strBody.Append("<p><b>Talent team</b></p>");
 
+                strBody.Append("<p>Note: This is a system-generated email. Please do not reply to this ID.</p>");
 
                 strBody.Append("</font>");
 

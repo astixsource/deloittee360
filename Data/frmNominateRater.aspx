@@ -18,6 +18,13 @@
   color: #666666;
   cursor:default !important;
 }
+        .btns.disabled:hover,
+.btns:disabled:hover{
+	border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor:not-allowed;
+}
         table.table > tbody > tr:nth-child(even) {
             background-color: transparent !important;
         }
@@ -835,13 +842,15 @@
                                 fnShowmsg("Error:" + result.split("|")[1]);
                                 return false;
                             }
-                            $("#dvMsg").html("Your rater list is shared with your RM/Coach for their approval");
+                          
                             fnUpdateProgressbar();
                             fnGetNomineeDetails();
-
-                            setTimeout(function () {
-                                window.location.href = "frmNominateApproveNomination.aspx";
-                            }, 3000);
+                            if (flg == 1) {
+                                $("#dvMsg").html("Your rater list is shared with your RM/Coach for their approval");
+                                setTimeout(function () {
+                                    window.location.href = "frmNominateApproveNomination.aspx";
+                                }, 3000);
+                            }
 
                         }, function (result) {
                             $("#dvFadeForProcessing").hide();
@@ -878,7 +887,7 @@
                     </li>
                     <li><b>Peers:</b> Colleagues you work with (Min. 2)</li>
                     <li><b>Other Stakeholders:</b> Other stakeholders that do not map across the rater categories defined (Min. 2)</li>
-                    <li><b>Reporting Manager (RM)/Coach:</b> Your supervisory, responsible for your career (Auto-added, more raters can be added)</li>
+                    <li><b>Reporting Manager/Coach:</b> Your supervisory, responsible for your career (Auto-added, more raters can be added)</li>
                     <li><b>Review Partner:</b> Your project supervisor (Optional)</li>
                 </ul>
                 <p>
@@ -895,17 +904,17 @@
                 <table id="tblMainNominee" style="width: 100%;border-bottom:1px solid #e2eecb">
                     <thead>
                         <tr>
-                            <th style="width: 16%" >Category
+                            <th style="width: 14%" >Category
                             </th>
                             <th>Name
                             </th>
-                            <th style="width: 22%">Email ID
+                            <th style="width: 21%">Email ID
                             </th>
                             <th style="width: 8.5%">Function
                             </th>
                             <th style="width: 8%">Department
                             </th>
-                            <th style="width: 10.5%">Designation
+                            <th style="width: 13%">Designation
                             </th>
                             <th style="width: 12.5%">Status
                             </th>

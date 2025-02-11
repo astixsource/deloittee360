@@ -238,7 +238,7 @@
                         <td>
                             <strong>Scale</strong>
                         </td>
-                        <td><strong>Defination</strong></td>
+                        <td><strong>Definition</strong></td>
                     </tr>
                     <tr>
                         <td>

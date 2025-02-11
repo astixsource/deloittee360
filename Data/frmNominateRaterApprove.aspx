@@ -18,6 +18,13 @@
   color: #666666;
   cursor:default !important;
 }
+.btns.disabled:hover,
+.btns:disabled:hover{
+	border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor:not-allowed;
+}
         .main-content {
             max-width: 90%;
             width: 90%;
@@ -482,6 +489,7 @@
                         //  $(this).val((ui.item ? ui.item.InvCode : ''));
                         //alert(ui.item.FullName)
                         //tblMainNominee
+                        $("#tblMainNominee tbody").find("td.dt-empty").closest("tr").remove();
                         var str = "<tr flg='0' flgvalid='1' nomineid='" + ui.item.NodeID + "' minnominationpercategory='" + $("#MainContent_ddlRelatioShip option:selected").attr("minNominationperCategory") + "' rpid='" + $("#MainContent_ddlRelatioShip option:selected").val() + "' newrpid='" + $("#MainContent_ddlRelatioShip option:selected").val() + "'>";
                         str += "<td>" + $("#MainContent_ddlRelatioShip option:selected").attr("rptxt") + "</td>";
                         str += "<td>" + ui.item.FullName + "</td>";
@@ -890,19 +898,19 @@
                             <table>
                                 <tr>
                                     <td><i class="fa fa-circle" aria-hidden="true" style="color: #e1ac43; font-size: 15pt"></i></td>
-                                    <td><b>Pending Submission</b> – Team Member has not submitted raters yet</td>
+                                    <td><strong>Pending Submission</strong> - Team Member has not submitted raters yet</td>
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-circle" aria-hidden="true" style="color: #53cd8e; font-size: 15pt"></i></td>
-                                    <td><b>Submitted</b> – Team member has submitted raters</td>
+                                    <td><b>Submitted</b> - Team member has submitted raters</td>
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-refresh" aria-hidden="true" style="background-color: #5aadf9; color: #fff; padding: 2px;"></i></td>
-                                    <td><b>Pending Approval</b> – Submitted but not yet approved</td>
+                                    <td><b>Pending Approval</b> - Submitted but not yet approved</td>
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-check-square" aria-hidden="true" style="color: #59d68e; font-size: 15pt"></i></td>
-                                    <td><b>Approved</b> – Raters have been approved
+                                    <td><b>Approved</b> - Raters have been approved
                                     </td>
                                 </tr>
                             </table>
@@ -936,13 +944,13 @@
                                 <tr>
                                     <th style="width: 13%">Category</th>
                                     <th>Name</th>
-                                    <th style="width: 21%">Email ID
+                                    <th style="width: 20.5%">Email ID
                                     </th>
                                     <th style="width: 10%">Function
                                     </th>
                                     <th style="width: 9%">Department
                                     </th>
-                                    <th style="width: 10%">Designation
+                                    <th style="width: 10.5%">Designation
                                     </th>
                                     <th style="width: 14%">Status
                                     </th>
