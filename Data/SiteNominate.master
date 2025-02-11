@@ -26,7 +26,7 @@
   <script src="../Scripts/respond.min.js"></script>
 <![endif]-->
 </head>
-<body  oncontextmenu="return false">
+<body oncontextmenu="return false">
     <form runat="server">
         <asp:ScriptManager runat="server" ID="ScriptManager1" EnablePageMethods="true">
             <Services>
@@ -46,14 +46,13 @@
                     <!-- Header Navbar: style can be found in header.less -->
                     <div class="navbar-right">
                         <ul class="navtop">
-                            
- <li><asp:Panel ID="panelLogout" runat="server">
-     <a href="frmNominateApproveNomination.aspx" title="click to back home" class="btn" style="margin-right:10px"><span class="fa fa-home" ></span></a>
-     </asp:Panel>
-     </li>
-                               
-                            
-                             <li><a href="../Login.aspx" title="click to logout" class="btn"><span class="fa fa-sign-out"></span></a></li>
+
+                            <li>
+                                <asp:Panel ID="panelLogout" runat="server">
+                                    <a href="frmNominateApproveNomination.aspx" title="click to back home" class="link-btn"><span class="fa fa-home"></span></a>
+                                </asp:Panel>
+                            </li>
+                            <li><a href="../Login.aspx" title="click to logout" class="link-btn"><span class="fa fa-sign-out"></span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -64,12 +63,12 @@
                     <ul class="tabs">
                         <li class="active" data-class="01">Route Map</li>
                         <li data-class="02">Employee Information</li>
-                       
+
                     </ul>
                     <div class='tabs-content'>
                         <div class='01 tabs-body'>
                             <!--status-progress-->
-                                 <ul class="status-progress" id="ulstatusprogress">
+                            <ul class="status-progress" id="ulstatusprogress">
                                 <li class="active">
                                     <div class="status-lvl">
                                         Employee nominates raters
@@ -98,7 +97,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="status-lvl">
+                                    <div class="status-lvl last-child">
                                         Complete
                                         <div class="info">
                                             <i class="fa fa-info-circle"></i>
@@ -107,36 +106,48 @@
                                     </div>
                                 </li>
                             </ul>
-                            
-                             <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                             </asp:ContentPlaceHolder>
+
+                            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                            </asp:ContentPlaceHolder>
 
                         </div>
                         <div class='02 tabs-body'>
                             <table class="table">
                                 <tr>
-                                    <td style="width:15%">Name </td><td style="width:2%">:</td><td><%=Session("FullName") %></td>
+                                    <td style="width: 15%">Name </td>
+                                    <td style="width: 2%">:</td>
+                                    <td><%=Session("FullName") %></td>
                                 </tr>
                                 <tr>
-                                    <td>Email Id</td><td>:</td><td><%=Session("emailid") %></td>
+                                    <td>Email Id</td>
+                                    <td>:</td>
+                                    <td><%=Session("emailid") %></td>
                                 </tr>
-                                 <tr>
-                                    <td>Function</td><td>:</td><td><%=Session("function") %></td>
+                                <tr>
+                                    <td>Function</td>
+                                    <td>:</td>
+                                    <td><%=Session("function") %></td>
                                 </tr>
-                                 <tr>
-                                    <td>Department</td><td>:</td><td><%=Session("Department") %></td>
+                                <tr>
+                                    <td>Department</td>
+                                    <td>:</td>
+                                    <td><%=Session("Department") %></td>
                                 </tr>
-                                 <tr>
-                                    <td>Designation</td><td>:</td><td><%=Session("Desgination") %></td>
+                                <tr>
+                                    <td>Designation</td>
+                                    <td>:</td>
+                                    <td><%=Session("Desgination") %></td>
                                 </tr>
-                                 <tr>
-                                    <td>Reporting Manager</td><td>:</td><td><%=Session("RM") %></td>
+                                <tr>
+                                    <td>Reporting Manager</td>
+                                    <td>:</td>
+                                    <td><%=Session("RM") %></td>
                                 </tr>
                             </table>
                         </div>
                         <div class='03 tabs-body'>03</div>
                     </div>
-                   
+
                 </div>
             </div>
         </div>

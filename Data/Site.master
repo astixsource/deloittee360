@@ -45,19 +45,18 @@
                     <!-- Header Navbar: style can be found in header.less -->
                     <div class="navbar-right">
                         <ul class="navtop">
-                           <li><asp:Panel ID="panelLogout" runat="server">
-     <a href="frmNominateApproveNomination.aspx" class="btn" title="click to back home" style="margin-right:10px"><span class="fa fa-home" ></span></a>
-     </asp:Panel>
-     </li>
-                               
-                            
-                             <li><a href="../Login.aspx" class="btn" title="click to logout"><span class="fa fa-sign-out"></span></a></li>
+                            <li>
+                                <asp:Panel ID="panelLogout" runat="server">
+                                    <a href="frmNominateApproveNomination.aspx" class="link-btn" title="click to back home"><span class="fa fa-home"></span></a>
+                                </asp:Panel>
+                            </li>
+                            <li><a href="../Login.aspx" class="link-btn" title="click to logout"><span class="fa fa-sign-out"></span></a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="container-fluid">
-                <div class="container main-content" style="margin-top:50px">
+                <div class="container main-content">
                     <asp:ContentPlaceHolder ID="MainContent" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>

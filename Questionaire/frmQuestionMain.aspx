@@ -6,7 +6,7 @@
     <script src="../Scripts/Question.js"></script>
 
     <style type="text/css">
-        html, body {
+        /*html, body {
             max-width: 100%;
             overflow-x: hidden;
         }
@@ -18,7 +18,7 @@
         .container {
             margin: 20px auto;
             padding: 10px;
-            /*  max-width: 900px;*/
+              max-width: 900px;
         }
 
         .instructions {
@@ -26,7 +26,7 @@
             padding: 10px;
             border-left: 5px solid #4caf50;
             margin-bottom: 20px;
-        }
+        }*/
 
         table.no-border {
             width: 100%;
@@ -133,7 +133,7 @@
             display: inline-block;
         }
 
-        .text-center {
+        /*.text-center {
             text-align: center;
             margin-top: 20px;
         }
@@ -147,10 +147,9 @@
         }
 
         .btn {
-            padding: 12px 30px; /* Adjust padding for consistent size */
+            padding: 12px 30px; 
             font-size: 16px;
             border: none;
-            /* border-radius: 5px;*/
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
             text-align: center;
@@ -208,7 +207,7 @@
         .btn-danger {
             background-color: black !important;
             color: white;
-            /*padding: 12px 25px;*/ /* Match size with other buttons */
+            padding: 12px 25px;
         }
 
             .btn-danger:hover {
@@ -217,94 +216,71 @@
 
             .btn-danger:active {
                 background-color: #bd2130;
-            }
+            }*/
     </style>
-
-
-
-
-
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <!--Ques Heading-->
-    <div class="section-title" style="background-color: #88bd26; /*border-radius: 5px*/">
-        <%--<h3 class="text-center" style="color: white;">INSTRUCTIONS</h3>--%>
-        <h3 class="text-center" style="color: white;">WELCOME TO 360 Feedback Survey FY 2025<br />
-            <span class="text-center" style="color: white;" id="h6">Please respond to each statement on the scale provided alongside from "Always" to "Rarely".
-                You may ‘Save’ your responses to leave and come back later to complete the rest of the Survey.</span></h3>
-        <%--    <div class="title-line-center"></div>--%>
+    <div class="section-title">
+        <h3 class="text-center">WELCOME TO 360 Feedback Survey FY 2025</h3>
+        <div class="title-line-center"></div>    
+        <span class="text-center" id="h6">Please respond to each statement on the scale provided alongside from "Always" to "Rarely". You may ‘Save’ your responses to leave and come back later to complete the rest of the Survey.</span>
     </div>
 
     <!--Ques top header-->
     <div id="tblTopHeader" class="ques-header row">
         <!-- Proper Table Header -->
         <div class="col-md-12" id="h7">
-            <table  class="table table-bordered table-sm" style="width: 100%; border-collapse: collapse;">
-              <%--  <thead>
-                    <tr>
-                        <!-- Header for Statements -->
-                        <th style="background-color: #88bd26; color: white; width: 50%; text-align: center; padding: 10px; border: 10px solid white;">Competencies</th>
-                        <!-- Header for Rating Scale -->
-                        <th style="background-color: #88bd26; color: white; width: 50%; text-align: center; padding: 10px; border: 10px solid white;">Rating Scale</th>
-                    </tr>
-                </thead>--%>
+            <table class="table table-bordered table-sm" style="width: 100%; border-collapse: collapse;">
                 <tbody>
-                     <tr>
-                            <td>
-                                <strong>Scale</strong>
-                            </td>
-                            <td><strong>Defination</strong></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong>Always</strong>
-                            </td>
-                            <td>Consistently and continuously demonstrates the competency at a high level. They display exceptional proficiency in this competency, setting consistently high standards.</td>
-                        </tr>
+                    <tr>
+                        <td>
+                            <strong>Scale</strong>
+                        </td>
+                        <td><strong>Defination</strong></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Always</strong>
+                        </td>
+                        <td>Consistently and continuously demonstrates the competency at a high level. They display exceptional proficiency in this competency, setting consistently high standards.</td>
+                    </tr>
 
-                        <tr>
-                            <td>
-                                <strong>Often</strong>
-                            </td>
-                            <td>Demonstrates the competency most of the time, and it is a strong aspect of their performance. They frequently exhibit proficiency in this competency, exceeding expectations.</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong>Sometimes</strong>
-                            </td>
-                            <td>Demonstrates the competency regularly, but there is room for improvement. They show competence, but there are areas where their performance can be enhanced.
-
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong>Occasionally</strong>
-                            </td>
-                            <td>Demonstrates the competency on occasion, but it is not consistent. There are noticeable gaps in their proficiency, and it is not a regular occurrence.
-
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong>Rarely</strong>
-                            </td>
-                            <td>Competency is rarely demonstrated, and there is a significant need for improvement. It is seldom seen in their performance.
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <strong>Cannot Rate</strong>
-                            </td>
-                            <td>In case this behavior is not applicable to this professional.
-
-                            </td>
-                        </tr>
-
-                    </tbody>
+                    <tr>
+                        <td>
+                            <strong>Often</strong>
+                        </td>
+                        <td>Demonstrates the competency most of the time, and it is a strong aspect of their performance. They frequently exhibit proficiency in this competency, exceeding expectations.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Sometimes</strong>
+                        </td>
+                        <td>Demonstrates the competency regularly, but there is room for improvement. They show competence, but there are areas where their performance can be enhanced.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Occasionally</strong>
+                        </td>
+                        <td>Demonstrates the competency on occasion, but it is not consistent. There are noticeable gaps in their proficiency, and it is not a regular occurrence.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Rarely</strong>
+                        </td>
+                        <td>Competency is rarely demonstrated, and there is a significant need for improvement. It is seldom seen in their performance.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Cannot Rate</strong>
+                        </td>
+                        <td>In case this behavior is not applicable to this professional.</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
 
@@ -312,7 +288,7 @@
         <div class="col-md-6 ques-header-left">
             <table class="Questable" style="width: 100%; border-collapse: collapse;">
                 <tr>
-                   
+
                     <th style="color: white;" id="dvName">
                         <br>
                     </th>
@@ -327,7 +303,7 @@
                 <thead>
                     <tr>
                         <!-- Rating Scale Values -->
-                        <th style="width: 14.28%; text-align: center; padding: 5px;"><span id="Label0" >Always</span></th>
+                        <th style="width: 14.28%; text-align: center; padding: 5px;"><span id="Label0">Always</span></th>
                         <th style="width: 14.28%; text-align: center; padding: 5px;"><span id="Label1">Often</span></th>
                         <th style="width: 14.28%; text-align: center; padding: 5px;"><span id="Label2">Sometimes</span></th>
                         <th style="width: 14.28%; text-align: center; padding: 5px;"><span id="Label3">Occasionally</span></th>
@@ -357,50 +333,19 @@
         <div class="row mb-2">
             <div class="col-md-6 align-left-middile" id="tdCmmnt2" runat="server"><strong>Areas of development observed in the individual.</strong></div>
             <div class="col-md-6">
-                <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox2" runat="server"  CssClass="form-control" TextMode="MultiLine" Rows="4" ></asp:TextBox>
+                <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox2" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
             </div>
         </div>
-
-
-        <%--  <div class="row mb-2">
-            <div class="col-md-6 align-right-middile" id="tdCmmnt1" runat="server"><strong>Keeping your current role in mind, what would be described as your areas of strength?</strong></div>
-            <div class="col-md-6">
-                <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox1" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
-            </div>
-        </div>--%>
-
-        <%--  <div class="row mb-2">
-            <div class="col-md-6 align-right-middile" id="tdCmmnt3" runat="server"><strong>What are the areas you can develop further in order to be more effective in your current role?</strong></div>
-            <div class="col-md-6">
-                <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox3" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
-            </div>
-        </div>--%>
     </div>
-    <div style="text-align:right" id="tdPageNum1">
-     
+    <div style="text-align: right" id="tdPageNum1">
     </div>
-    <div class="row mt-3 mb-3">
-        <div class="col-md-11">
-            <div class="text-center">
-                <%--<div class="button-group">
-                  <input type="button" class="btn btn-previous" id="btnPrevious" onclick="fnPrevious()" value="Previous" />
-                  <input type="button" class="btn btn-next" id="btnNext" onclick="fnNext()" value="Save & Continue" />
-                  <input type="button" class="btn btn-submit" id="btnSubmit" onclick="FinalSubmit()" value="Submit" />
-              </div>--%>
-
-                <div class="button-group">
-                    <input type="button" class="btn btn-danger" id="btnSaveExit" onclick="fnSaveExit()" value="Exit">
-                    <input type="button" class="btn btn-previous" id="btnPrevious" onclick="fnPrevious()" value="Previous" style="display: none;">
-                    <input type="button" class="btn btn-next" id="btnNext" onclick="fnNext()" value="Save &amp; Continue" style="display: inline-block;">
-                    <input type="button" class="btn btn-submit" id="btnSubmit" onclick="FinalSubmit()" value="Submit" style="display: none;">
+   
+                <div class="button-group mt-3 mb-3">
+                    <input type="button" class="btns btn-danger" id="btnSaveExit" onclick="fnSaveExit()" value="Exit">
+                    <input type="button" class="btns btn-previous" id="btnPrevious" onclick="fnPrevious()" value="Previous" style="display: none;">
+                    <input type="button" class="btns btn-next" id="btnNext" onclick="fnNext()" value="Save &amp; Continue">
+                    <input type="button" class="btns btn-submit" id="btnSubmit" onclick="FinalSubmit()" value="Submit" style="display: none;">
                 </div>
-
-            </div>
-        </div>
-        <%-- <div class="col-md-1 text-right">
-            <input type="button" class="btn btn-danger" id="btnSaveExit" onclick="fnSaveExit()" value="Exit" />
-        </div>--%>
-    </div>
 
 
     <div id="dvinstruction" style="display: none;">

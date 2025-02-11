@@ -20,24 +20,7 @@
 
     <!-- jQuery -->
     <script src="Scripts/jqueryJS.js"></script>
-    <script src="Scripts/loginpageJS.js"></script>
-
-    <%-- <style>
-        body {
-        }
-
-        .top-left-logo {
-            position: absolute;
-            top: 10px; /* Adjust for vertical spacing */
-            left: 10px; /* Adjust for horizontal spacing */
-            z-index: 10; /* Ensure it stays above other elements */
-        }
-
-            .top-left-logo .top-logo {
-                width: 120px; /* Adjust size as needed */
-                height: auto; /* Maintain aspect ratio */
-            }
-    </style>--%>
+    <script src="Scripts/loginpageJS_v1.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -58,11 +41,6 @@
             <div class="container-fluid">
                 <div class="loginfrm cls-4">
                     <div class="login-box">
-                        <!-- Logo -->
-                        <%--<div class="login-logo">
-             <asp:Image ID="imgLogo1" runat="server" ImageUrl="~/Images/Deloitte-logo_Black.png" CssClass="ey-logo" />
-         </div>--%>
-
                         <!-- Login Title -->
                         <div class="login-box-msg">
                             <h3 class="title">Login</h3>
@@ -100,14 +78,11 @@
             </p>
         </div>
 
-         <div id="dvFadeForProcessing" style="display: block; position: fixed; text-align: center; z-index: 999999; top: 0; bottom: 0; left: 0; right: 0; opacity: .80; -moz-opacity: 0.8; filter: alpha(opacity=80); background-color: #ccc;">
-        <img src="../Images/loading.gif" style="width: 90px; height: 70px; position: relative; top: 50%; margin-top: -35px;" />
-    </div>
-      <%--  <div id="dvFadeForProcessing" style="display: none" align="center" class="clsloader">
-            <img src="../Images/loading.gif" style="margin-top: 200px;" />
-        </div>--%>
+        <div class="loader_bg" style="display:none" id="dvFadeForProcessing">
+            <div class="loader"></div>
+        </div>
         <asp:HiddenField runat="server" ID="hdnaccesstoken" />
-        <asp:HiddenField ID="hdnEmailId" runat="server"  />
+        <asp:HiddenField ID="hdnEmailId" runat="server" />
     </form>
 </body>
 </html>

@@ -65,15 +65,16 @@ function fnSendLogin() {
         dataType: "json",
         data: '{UserName:' + JSON.stringify(UserName) + ',Password:' + JSON.stringify(Password) + '}',
         success: function (response) {
-            $("#dvFadeForProcessing").css("display", "none");
+            //
             var strRep = response.d;
 
-            $("#dvFadeForProcessing").hide();
+            
             if (strRep.split("|")[0] == 1) {
                 //$("#dvFadeForProcessing").show();
                 window.location.href = strRep.split("|")[1];
             }
             else {
+                $("#dvFadeForProcessing").hide();
                 $("#dvMessage").html(strRep.split("|")[1]);
             }
         },

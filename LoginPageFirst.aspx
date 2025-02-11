@@ -21,23 +21,6 @@
     <!-- jQuery -->
     <script src="Scripts/jqueryJS.js"></script>
     <script src="Scripts/loginPageFirstJS.js"></script>
-
-    <%-- <style>
-        body {
-        }
-
-        .top-left-logo {
-            position: absolute;
-            top: 10px; /* Adjust for vertical spacing */
-            left: 10px; /* Adjust for horizontal spacing */
-            z-index: 10; /* Ensure it stays above other elements */
-        }
-
-            .top-left-logo .top-logo {
-                width: 120px; /* Adjust size as needed */
-                height: auto; /* Maintain aspect ratio */
-            }
-    </style>--%>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -58,11 +41,6 @@
             <div class="container-fluid">
                 <div class="loginfrm cls-4">
                     <div class="login-box">
-                        <!-- Logo -->
-                        <%--<div class="login-logo">
-             <asp:Image ID="imgLogo1" runat="server" ImageUrl="~/Images/Deloitte-logo_Black.png" CssClass="ey-logo" />
-         </div>--%>
-
                         <!-- Login Title -->
                         <div class="login-box-msg">
                             <h3 class="title">Login</h3>
@@ -73,19 +51,12 @@
                             <div class="frm-group">
                                 <label for="txtLoginID">Email</label>
                                 <div class="input-group">
-                                   <%-- <input type="text" id="txtLoginID" class="form-control" placeholder="Enter your Email" autocomplete="off" />--%>
-                                     <input type="text" id="txtLoginID" class="form-control"  disabled />
+                                    <%-- <input type="text" id="txtLoginID" class="form-control" placeholder="Enter your Email" autocomplete="off" />--%>
+                                    <input type="text" id="txtLoginID" class="form-control" disabled />
                                 </div>
                             </div>
-                         <%--   <div class="frm-group">
-                                <label for="txtPassword">Password</label>
-                                <div class="input-group">
-                                    <input type="password" id="txtPassword" class="form-control" placeholder="Enter your Password" autocomplete="off" />
-
-                                </div>
-                            </div>--%>
                             <input type="button" id="btnLoginSSO" value="Log-in with SSO" class="btns btn-submit w-100" />
-                             <input type="button" id="btnLogin" value="Log-in with password" class="btns btn-submit w-100" />
+                            <input type="button" id="btnLogin" value="Log-in with password" class="btns btn-submit w-100" />
                             <div class="text-center">
                                 <div id="dvMessage" runat="server" class="text-danger font-weight-bold"></div>
                             </div>
@@ -102,11 +73,16 @@
             </p>
         </div>
 
-        <div id="dvFadeForProcessing1" style="display: none" align="center" class="clsloader">
+        <%--<div id="dvFadeForProcessing1" style="display: none" align="center" class="clsloader">
             <img src="Images/loading.gif" style="margin-top: 200px;" />
+        </div>--%>
+        <div class="loader_bg" id="dvFadeForProcessing1"  style="display:none">
+            <div class="loader"></div>
         </div>
+
+
         <asp:HiddenField runat="server" ID="hdnaccesstoken" />
-        <asp:HiddenField ID="hdnEmailId" runat="server"  />
+        <asp:HiddenField ID="hdnEmailId" runat="server" />
     </form>
 </body>
 </html>

@@ -9,19 +9,29 @@
     <script src="../JDatatable/dataTables.fixedHeader.js"></script>
     <script src="../JDatatable/fixedHeader.dataTables.js"></script>
     <script src="../Scripts/progressbarJS.js"></script>
-    <style>
-        
+    <style type="text/css">
+        .btns.disabled,
+.btns:disabled,
+.btns[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor:default !important;
+}
         .main-content {
             max-width: 90%;
             width: 90%;
         }
-         table.table > tbody > tr:nth-child(even) {
-    background-color: transparent !important;
-}
-          table.table > thead > tr:last-child {
-    border-bottom: 2px solid #b0b0b0 !important;
-}
-        body {
+
+        table.table > tbody > tr:nth-child(even) {
+            background-color: transparent !important;
+        }
+
+        table.table > thead > tr:last-child {
+            border-bottom: 2px solid #b0b0b0 !important;
+        }
+
+       /* body {
             overflow-y: scroll;
         }
 
@@ -102,7 +112,7 @@
 
             .btn-danger:active {
                 background-color: #bd2130;
-            }
+            }*/
 
         .clsNomineebodycontainer {
             padding: 10px;
@@ -162,23 +172,24 @@
             padding: 3px 2px 3px 4px;
             margin-block: 2px;
             cursor: pointer;
-            display:table-cell;
-            width:100%;
-        }
-        .clsiconclass {
-           
-           font-size:24px !important;
-        }
-        .clsiconcontainer{
-            padding: 3px 2px 3px 4px;
-            display:table-cell;
+            display: table-cell;
+            width: 100%;
         }
 
-            div.clscoacheelist:hover {
-                border: 1px solid #354e09;
-                background-color: #000000;
-                color: #ffffff;
-            }
+        .clsiconclass {
+            font-size: 24px !important;
+        }
+
+        .clsiconcontainer {
+            padding: 3px 2px 3px 4px;
+            display: table-cell;
+        }
+
+        div.clscoacheelist:hover {
+            border: 1px solid #354e09;
+            background-color: #000000;
+            color: #ffffff;
+        }
 
         div.clsactive {
             border: 1px solid #354e09;
@@ -683,7 +694,7 @@
                     var rpid = arrCategories.eq(i).val();
                     var minnominationpercategory = arrCategories.eq(i).attr("minnominationpercategory");
                     if (minnominationpercategory > 0) {
-                       // alert("Total row:" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "\nminnominationpercategory:" + minnominationpercategory)
+                        // alert("Total row:" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "\nminnominationpercategory:" + minnominationpercategory)
                         if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length > 0) {
                             if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length < parseInt(minnominationpercategory)) {
                                 return "false|" + minnominationpercategory;
@@ -706,19 +717,19 @@
                     var rpid = arrCategories.eq(i).val();
                     var minnominationpercategory = arrCategories.eq(i).attr("minnominationpercategory");
                     var rptxt = arrCategories.eq(i).attr("rptxt");
-                   // if (minnominationpercategory > 0) {
-                        if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length > 0) {
-                            str += "<tr><td class='fw-bold'>" + rptxt + "</td>";
-                            str += "<td class='text-center'>" + (rpid == "1" ? "Auto Populated" : minnominationpercategory == 0 ? "Optional" : minnominationpercategory) + "</td>";
-                            str += "<td class='text-center'>" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "</td>";
-                            str += "</tr>";
-                        }
-                        else {
-                            str += "<tr><td class='fw-bold'>" + rptxt + "</td>";
-                            str += "<td class='text-center'>" + (rpid == "1" ? "Auto Populated" : minnominationpercategory == 0 ? "Optional" : minnominationpercategory) + "</td>";
-                            str += "<td class='text-center'>" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "</td>";
-                            str += "</tr>";
-                        }
+                    // if (minnominationpercategory > 0) {
+                    if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length > 0) {
+                        str += "<tr><td class='fw-bold'>" + rptxt + "</td>";
+                        str += "<td class='text-center'>" + (rpid == "1" ? "Auto Populated" : minnominationpercategory == 0 ? "Optional" : minnominationpercategory) + "</td>";
+                        str += "<td class='text-center'>" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "</td>";
+                        str += "</tr>";
+                    }
+                    else {
+                        str += "<tr><td class='fw-bold'>" + rptxt + "</td>";
+                        str += "<td class='text-center'>" + (rpid == "1" ? "Auto Populated" : minnominationpercategory == 0 ? "Optional" : minnominationpercategory) + "</td>";
+                        str += "<td class='text-center'>" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "</td>";
+                        str += "</tr>";
+                    }
                     //}
                 }
             }
@@ -727,7 +738,7 @@
 
         function fnSaveAndSubmit(flg) {
             var $trs = $("#tblMainNominee tr[flgvalid='1']");
-           
+
 
             if ($trs.length > 0) {
                 var str = IsValidateCategory();
@@ -746,8 +757,8 @@
 
             var LoginId = $("#MainContent_hdnLoginId").val();
             var str = "<div>Are you sure you want to approve the rater(s)?</div>";
-           
-           
+
+
             $("#dvDialog").html(str);
             $("#dvDialog").dialog({
                 title: "Confirmation :",
@@ -781,11 +792,11 @@
                                 fnShowmsg("Error:" + result.split("|")[1]);
                                 return false;
                             }
-                           // alert($("#MainContent_dvcoacheelist div.clsactive").parent("div")[0].outerHTML);
-                           
+                            // alert($("#MainContent_dvcoacheelist div.clsactive").parent("div")[0].outerHTML);
+
                             $("#MainContent_dvcoacheelist div.clsactive").parent("div").find("i").removeAttr("style").css({
                                 "color": "#59d68e",
-                                "font-size":"15pt"
+                                "font-size": "15pt"
                             });
                             $("#MainContent_dvcoacheelist div.clsactive").parent("div").find("i").removeAttr("class").attr("class", "fa fa-check-square clsiconclass clsnomineeapprove");
                             $("#MainContent_dvcoacheelist div.clsactive").click();
@@ -795,7 +806,7 @@
                                     window.location.href = "frmNominateApproveNomination.aspx";
                                 }, 3000);
                             }
-                           
+
                         }, function (result) {
                             $("#dvFadeForProcessing").hide();
                             fnShowmsg("Error:" + result._message);
@@ -871,23 +882,28 @@
             </div>
             <div style="font-size: 10pt">
                 Below is the list of your team members:
-                <br />Each name has an icon next to it indicating their current status:
+                <br />
+                Each name has an icon next to it indicating their current status:
                 <table style="width: 100%">
                     <tr>
                         <td>
                             <table>
                                 <tr>
-                                    <td><i class="fa fa-circle" aria-hidden="true" style="color:#e1ac43;font-size:15pt"></i></td><td><b>Pending Submission</b> – Team Member has not submitted raters yet</td>
+                                    <td><i class="fa fa-circle" aria-hidden="true" style="color: #e1ac43; font-size: 15pt"></i></td>
+                                    <td><b>Pending Submission</b> – Team Member has not submitted raters yet</td>
                                 </tr>
-                                 <tr>
-                                    <td><i class="fa fa-circle" aria-hidden="true" style="color:#53cd8e;font-size:15pt"></i></td><td><b>Submitted</b> – Team member has submitted raters</td>
+                                <tr>
+                                    <td><i class="fa fa-circle" aria-hidden="true" style="color: #53cd8e; font-size: 15pt"></i></td>
+                                    <td><b>Submitted</b> – Team member has submitted raters</td>
                                 </tr>
-                                 <tr>
-                                    <td><i class="fa fa-refresh" aria-hidden="true" style="background-color:#5aadf9;color:#fff;padding:2px;"></i></td><td><b>Pending Approval</b> – Submitted but not yet approved</td>
+                                <tr>
+                                    <td><i class="fa fa-refresh" aria-hidden="true" style="background-color: #5aadf9; color: #fff; padding: 2px;"></i></td>
+                                    <td><b>Pending Approval</b> – Submitted but not yet approved</td>
                                 </tr>
-                                 <tr>
-                                    <td><i class="fa fa-check-square" aria-hidden="true" style="color:#59d68e;font-size:15pt"></i></td><td><b>Approved</b> – Raters have been approved
-</td>
+                                <tr>
+                                    <td><i class="fa fa-check-square" aria-hidden="true" style="color: #59d68e; font-size: 15pt"></i></td>
+                                    <td><b>Approved</b> – Raters have been approved
+                                    </td>
                                 </tr>
                             </table>
                         </td>
@@ -900,7 +916,7 @@
                         </td>
                     </tr>
                 </table>
-               
+
             </div>
 
 
@@ -910,7 +926,7 @@
                     <div class="text-center">
                         <b>Your Team Members </b>
                     </div>
-                    <div runat="server" id="dvcoacheelist" style="overflow: auto; max-height: 380px;display:table;border-collapse:separate;border-spacing:.15rem">
+                    <div runat="server" id="dvcoacheelist" style="overflow: auto; max-height: 380px; display: table; border-collapse: separate; border-spacing: .15rem">
                     </div>
                 </div>
                 <div class="col-md-9" style="width: 82%">
@@ -918,7 +934,6 @@
                         <table id="tblMainNominee" style="width: 100%">
                             <thead>
                                 <tr>
-
                                     <th style="width: 13%">Category</th>
                                     <th>Name</th>
                                     <th style="width: 21%">Email ID
@@ -933,6 +948,7 @@
                                     </th>
                                     <th style="width: 5%; text-align: center">Action
                                     </th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -944,20 +960,17 @@
                         <table style="width: 100%; font-size: 9.5pt">
                             <tr>
                                 <th style="width: 28%">
-                                    <table style="width:100%">
+                                    <table style="width: 100%">
                                         <tr>
-                                            <td>
-Select Category:
+                                            <td>Select Category:
                                             </td>
                                             <td>
-                                                 <asp:DropDownList ID="ddlRelatioShip" Style="width:150px;height: 33px; border: 1px solid #c0c0c0" AppendDataBoundItems="true" runat="server" AutoPostBack="false">
-                                    <asp:ListItem Value="0">-----</asp:ListItem>
-                                </asp:DropDownList>
+                                                <asp:DropDownList ID="ddlRelatioShip" Style="width: 150px; height: 33px; border: 1px solid #c0c0c0" AppendDataBoundItems="true" runat="server" AutoPostBack="false">
+                                                    <asp:ListItem Value="0">-----</asp:ListItem>
+                                                </asp:DropDownList>
                                             </td>
                                         </tr>
                                     </table>
-                                    
-                               
                                 </th>
                                 <th>
                                     <input type="search" id="txtsearch" placeholder="Search raters by Emp Id, Name, Email ID" class="form-control w-100 d-inline-block clsSearchUser" />
@@ -966,11 +979,11 @@ Select Category:
                         </table>
                     </div>
                     <div class="button-group mb-3">
-                        <input type="button" class="btn btn-submit" id="btnAdd" value="Edit" onclick="fnAddRows()" style="display: inline-block;">
-                        <input type="button" class="btn btn-submit" id="btnSave" value="Approve" onclick="fnSaveAndSubmit(1)" style="display: inline-block;">
+                        <input type="button" class="btns btn-submit" id="btnAdd" value="Edit" onclick="fnAddRows()">
+                        <input type="button" class="btns btn-submit" id="btnSave" value="Approve" onclick="fnSaveAndSubmit(1)">
                         <%--<input type="button" class="btn btn-next" id="btnNext" value="Next" style="display: inline-block;">--%>
                     </div>
-                    <div id="dvMsg" style="font-weight:bold;font-size:11pt;text-align:center"></div>
+                    <div id="dvMsg" style="font-weight: bold; font-size: 11pt; text-align: center"></div>
                 </div>
             </div>
 
@@ -1014,8 +1027,11 @@ Select Category:
     <asp:HiddenField ID="hdnLoginId" runat="server" Value="0" />
     <div id="dvDialog" style="display: none"></div>
     <div id="dvAlert" style="display: none"></div>
-    <div id="dvFadeForProcessing" style="display: block; position: fixed; text-align: center; z-index: 999999; top: 0; bottom: 0; left: 0; right: 0; opacity: .80; -moz-opacity: 0.8; filter: alpha(opacity=80); background-color: #ccc;">
+      <div class="loader_bg" style="display:none" id="dvFadeForProcessing">
+            <div class="loader"></div>
+        </div>
+   <%-- <div id="dvFadeForProcessing" style="display: block; position: fixed; text-align: center; z-index: 999999; top: 0; bottom: 0; left: 0; right: 0; opacity: .80; -moz-opacity: 0.8; filter: alpha(opacity=80); background-color: #ccc;">
         <img src="../Images/loading.gif" style="width: 90px; height: 70px; position: relative; top: 50%; margin-top: -35px;" />
-    </div>
+    </div>--%>
 </asp:Content>
 

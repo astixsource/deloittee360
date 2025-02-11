@@ -214,7 +214,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                             {
                                 if (dt.Rows.Count > 0)
                                 {
-                                     fnSendMailToUsers(Convert.ToString(dt.Rows[0][0]), Convert.ToString(dt.Rows[0][1]));
+                                     fnSendMailToUsers(Convert.ToString(dt.Rows[0][0]), Convert.ToString(dt.Rows[0]["ParticipantName"]) , Convert.ToString(dt.Rows[0][1]));
                                 }
                             }
                         }
@@ -257,7 +257,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                     jsonData = "1|";
                     string FName = "";
                     string MailTo = "";
-                    string strStatus = fnSendMailToUsers(FName, MailTo);// Sent Mail to Coach/Coaches/Managers 
+                   // string strStatus = fnSendMailToUsers(FName, MailTo);// Sent Mail to Coach/Coaches/Managers 
                 }
             }
         }
@@ -273,7 +273,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
     }
 
 
-    public static string fnSendMailToUsers(string FName, string MailTo)
+    public static string fnSendMailToUsers(string FName, string PFName, string MailTo)
     {
         string strRespoonse = "1";
         try
@@ -327,7 +327,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
 
             }
 
-            msg.Subject = "Approve Nomination For Reportee ";
+            msg.Subject = "Review and Approve 360-Degree Feedback raters for your team members";
 
 
 
@@ -335,30 +335,17 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
             strBody.Append("<font  style='COLOR: #000000; FONT-FAMILY: Arial'  size=2>");
 
             strBody.Append("<p>Dear " + FName + ",</p>");
-            strBody.Append("<p>Your Reportee/s are nominated to be part of the annual HCAS 360-Degree Feedback program. As participants, your reportee/s have identified and submitted their rater nominations for review. Your role in this process is crucial to ensuring that each participant receives well-rounded and constructive feedback from the most relevant stakeholders.</p>");
-            strBody.Append("<p><strong>Action Required</strong></p>");
-            strBody.Append("<p>Please log in to the platform and review the rater nominations submitted by your reportees. You have the option to:</p>");
-            strBody.Append("<ul>");
-            strBody.Append("<li>Approve the entire list if all nominations are appropriate.</li>");
-            strBody.Append("<li>Request modification to specific nominations, if needed. In such cases, please provide a reason or suggest a suitable replacement within the same category.</li>");
-            strBody.Append("</ul>");
+            strBody.Append("<p>The '360-Degree Feedback' application is designed to enhance overall feedback and development processes within the organization. This tool focuses on offering a comprehensive view of an individual's competencies core to the Deloitte Future Leaders Framework and provides feedback from various sources.</p>");
+            strBody.Append("<p>We request your attention to review and approve the 360-Degree Feedback raters' list selected by " + PFName + ". The deadline for approval is <strong>20-Feb-2025</strong>.</p>");
+            strBody.Append("<p>If not approved by this date, the rater list will be auto approved and proceed to the next step. You can access and approve this document at the following URL: <a href='" + WebSitePath + "'>" + WebSitePath + "</a></p>");
 
 
-            strBody.Append("<p>Next Steps</p>");
-            strBody.Append("<ol>");
-            strBody.Append("<li>Access the platform using <a href='" + WebSitePath + "'>" + WebSitePath + "</a>.</li>");
-            strBody.Append("<li>Review the submitted rater nominations for your reportee/Coachee for relevance, diversity of perspectives, and alignment with feedback objectives.</li>");
-            strBody.Append("<li>Approve or suggest modifications as necessary.</li>");
-            strBody.Append("<li>Submit your approval/revisions by <strong>20-Feb-2025</strong>.</li>");
-            strBody.Append("</ol>");
+            strBody.Append("<p>The way forward involves triggering an assessment process semi-annually, where the selected list of raters will provide feedback through this tool.</p>");
+            strBody.Append("<p>If you have any questions, please connect with your Talent business advisor, or raise a ticket on HelpD. : <a style = 'COLOR: #000000; FONT-weight: bold' href = mailto:demer@deloitte.com> (demer@deloitte.com)</a>.</p>");
+            strBody.Append("<p><b>Regards,</b></p>");
+            strBody.Append("<p><b>Talent team</b></p>");
 
-
-            strBody.Append("<p>Please complete your assessment by <stromg>20th December 2024, 6:00 PM IST.<stromg></p>");
-            strBody.Append("<p>Your timely review will help ensure a smooth and effective feedback process. Should you have any questions or need assistance, please reach out to : <a style = 'COLOR: #000000; FONT-weight: bold' href = mailto:demer@deloitte.com> (demer@deloitte.com)</a>.</p>");
-            strBody.Append("<p><b>Best Regards,</b></p>");
-            strBody.Append("<p><b>Team Deloitte</b></p>");
-
-
+            strBody.Append("<p>Note: This is a system-generated email. Please do not reply to this ID.</p>");
             strBody.Append("</font>");
 
 

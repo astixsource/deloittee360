@@ -2,31 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <script src="../Scripts/DashboardJS.js"></script>
-
-     <style type="text/css">
-     .absolute-center {
-         display: flex;
-         align-items: center;
-         /*justify-content: center;*/
-         justify-content: space-around !important;
-     }
-
-     .btn-img {
-         padding: 1rem;
-         border: 2px solid transparent;
-         cursor: pointer;
-     }
-
-         .btn-img > img {
-             width: 100%;
-             display: block
-         }
-
-     .btn-img:hover {
-         border-color: #FF0000;
-     }
- </style>
-
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -41,29 +16,16 @@
                 <div class="col-3">
                     <div class="btn-img" id="btnParticipant"  onclick="fnNominateRater()">
                         <img src="../Images/1-dash.svg" alt="" class="" />
-                        <%--<button type="button" id="btnParticipant" class="btnDashboard" onclick="fnNominateRater()">
-                            <span class="circle"></span>
-                            Participant                        
-                        </button>--%>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="btn-img" id="btnCoach" onclick="fnOpenWelcomePage()">
                         <img src="../Images/2-dash.svg" alt="" class="" />
-                        <%--<button type="button" id="btnCoach" class="btnDashboard" onclick="fnOpenWelcomePage()">
-                            <span class="circle"></span>
-                            Coach                        
-                        </button>--%>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="btn-img" id="btnAppraiser" onclick="fnOpenWelcomePage()">
                         <img src="../Images/3-dash.svg" alt="" class="" />
-                        <%--<button type="button" id="btnAppraiser" class="btnDashboard" onclick="fnOpenWelcomePage()">
-                            <span class="circle"></span>
-                            Appraiser
-                        </button>--%>
-
                     </div>
                 </div>
             </div>

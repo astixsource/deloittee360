@@ -3,25 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <script src="../Scripts/instructionJS.js"></script>
     <script src="../Scripts/progressbarJS.js"></script>
-
-    <%-- <style>
-        table.bordered, table.bordered > tbody > tr td, table.bordered > tbody > tr th {
-            border: 1px solid #88bd26;
-        }
-
-        table.bordered {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .heading3 {
-            background-color: #88bd26;
-            color: white;
-            text-align: center;
-            font-size: 1.2rem;
-            padding: 6px;
-        }
-    </style>--%>
 </asp:Content>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">

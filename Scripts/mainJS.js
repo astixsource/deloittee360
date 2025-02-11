@@ -126,8 +126,8 @@ $(document).ready(function () {
     //});
 
     $("#FrmDetails, #dvInstructions, #dvDispPerson, #dvStatus").css({
-        /* height: $(window).height() - (h + 35),*/
-        width: "80%",
+        //height: $(window).height() - (h + 35),*/
+        //width: "80%",
         "overflow-y": "auto",
         "border": "none",
         "margin": "0 auto"
