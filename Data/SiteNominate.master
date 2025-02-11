@@ -74,7 +74,7 @@
                                         Employee nominates raters
                                         <div class="info">
                                             <i class="fa fa-info-circle"></i>
-                                            <span class="ecs_tooltip">Employees selects their raters across the categories.</span>
+                                            <span class="ecs_tooltip">Employee selects raters across categories.</span>
                                         </div>
                                     </div>
                                 </li>
@@ -83,7 +83,7 @@
                                         RM/Coach approves raters
                                         <div class="info">
                                             <i class="fa fa-info-circle"></i>
-                                            <span class="ecs_tooltip">Manager reviews nominated raters may add or remove names.</span>
+                                            <span class="ecs_tooltip">Manager reviews, edits, and approves nominated raters.</span>
                                         </div>
                                     </div>
                                 </li>

@@ -281,8 +281,7 @@
                 } else {
                     result = $('<tr style="margin-top:25px"></tr>')
                         .data('ui-autocomplete-item', item)
-                        //.append('<a class="mcacAnchor">' + item.label + '<div style="clear: both;"></div></a>')
-                        .append(item.label)
+                        .append($("#MainContent_ddlRelatioShip option:selected").val() == "5" ? "<a href='###' class='' onclick='fnAddNewStakeholder()'> Add New Stackholder </a>" : item.label)
                         .appendTo(ul);
                 }
 
@@ -868,7 +867,83 @@
         function fnGotosurveypage() {
             window.location.href = "Instruction.aspx?NodeID="
         }
-
+        function fnAddNewStakeholder() {
+            $("#divNewStakeholders").dialog({
+                title: "New Stakeholder Addition!",
+                modal: true,
+                width: "550",
+                height: "auto",
+                dialogClass: "alertcss",
+                close: function () {
+                    $(this).dialog('destroy');
+                },
+                buttons: [
+                    {
+                        text: "Save",
+                        "class": "btns btn-submit",
+                        click: function () {
+                            var LoginId = $("#MainContent_hdnLoginId").val();
+                            var $inputs = $("#tblNewStakeholders input");
+                            var st_name = $inputs.eq(0).val().trim();
+                            var st_email = $inputs.eq(1).val().trim();
+                            if (st_name == "") {
+                                fnShowmsg("Name can'nt be left blank!");
+                                $inputs.eq(0).focus();
+                                return false;
+                            }
+                            if (st_email == "") {
+                                fnShowmsg("Email Id can'nt be left blank!");
+                                $inputs.eq(1).focus();
+                                return false;
+                            }
+                            if (st_email.indexOf("@deloitte.com")<0) {
+                                fnShowmsg("Email Id must end with '@deloitte.com'!");
+                                $inputs.eq(1).focus();
+                                return false;
+                            }
+                            var st_function = $inputs.eq(2).val().trim();
+                            var st_dept = $inputs.eq(3).val().trim();
+                            var st_deg = $inputs.eq(4).val().trim();
+                            //alert("HI")
+                            PageMethods.fnSaveaNewStakeholder(LoginId, st_name, st_email, st_function, st_dept, st_deg, function (result) {
+                                $("#dvFadeForProcessing").hide();
+                                if (result.split("|")[0] == 2) {
+                                    fnShowmsg("Error:" + result.split("|")[1]);
+                                    return false;
+                                }
+                                if (result.split("|")[1] == 1) {
+                                    fnShowmsg("This email id is already exist in the system");
+                                    $inputs.eq(1).focus();
+                                    return false;
+                                }
+                                $("#divNewStakeholders").dialog('close');
+                                var str = "<tr flg='0' flgvalid='1' nomineid='" + result.split("|")[2] + "' minnominationpercategory='" + $("#MainContent_ddlRelatioShip option:selected").attr("minNominationperCategory") + "' rpid='" + $("#MainContent_ddlRelatioShip option:selected").val() + "'  newrpid='" + $("#MainContent_ddlRelatioShip option:selected").val() + "'>";
+                                str += "<td>" + $("#MainContent_ddlRelatioShip option:selected").attr("rptxt") + "</td>";
+                                str += "<td>" + st_name + "</td>";
+                                str += "<td>" + st_email + "</td>";
+                                str += "<td>" + st_function + "</td>";
+                                str += "<td>" + st_dept + "</td>";
+                                str += "<td>" + st_deg + "</td>";
+                                str += "<td>Initial draft</td>";
+                                str += "<td class='text-center'><i class='fa fa-pencil' onclick='fnEditCategory(this)' title='click to edit' style='cursor:pointer'></i> <i class='fa fa-trash-o' onclick='fnRemoverow(this)' style='color:red;cursor:pointer;margin-left:5px' title='click to delete'></i></td>";
+                                str += "</tr>";
+                                $("#tblMainNominee tbody").append(str);
+                            }, function (result) {
+                                $("#dvFadeForProcessing").hide();
+                                fnShowmsg("Error:" + result._message);
+                            });
+                        }
+                    },
+                    {
+                        text: "Cancel",
+                        "class": "btns btn-submit",
+                        click: function () {
+                            $("#divNewStakeholders").dialog('close');
+                        }
+                    }
+                ]
+            })
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
@@ -891,13 +966,13 @@
                     <li><b>Review Partner:</b> Your project supervisor (Optional)</li>
                 </ul>
                 <p>
-                    To help ensure a holistic feedback and maintains confidentiality, you will only be able to submit your nominations if these requirements are met. 
+                    To help ensure a holistic feedback and maintain confidentiality, you will only be able to submit your nominations if these requirements are met. 
                 </p>
                 <p>
-                    For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with @deloitte.com.
+                    For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must ends with @deloitte.com.
                 </p>
                 <p>
-                    As next step, once you submit your nominations, your manager can review, modify, and approve them.
+                    Next steps: once you submit your nominations, your manager can review, modify, and approve them.
                 </p>
             </div>
             <div id="btnMainbodyContainer">
@@ -945,6 +1020,41 @@
             </div>
             <div id="dvMsg" style="font-weight: bold; font-size: 11pt; text-align: center"></div>
         </div>
+    </div>
+
+     <div style="display: none" id="divNewStakeholders">
+        <table class="table" id="tblNewStakeholders">
+            <tr>
+                <td style="width: 20%">Name </td>
+                <td style="width: 2%">:</td>
+                <td>
+                    <input type="text" class="form-control form-control-sm" /></td>
+            </tr>
+            <tr>
+                <td>Email Id : </td>
+                <td>:</td>
+                <td>
+                    <input type="text" class="form-control form-control-sm" /></td>
+            </tr>
+            <tr>
+                <td>Function : </td>
+                <td>:</td>
+                <td>
+                    <input type="text" class="form-control form-control-sm" /></td>
+            </tr>
+            <tr>
+                <td>Department : </td>
+                <td>:</td>
+                <td>
+                    <input type="text" class="form-control form-control-sm" /></td>
+            </tr>
+            <tr>
+                <td>Designation : </td>
+                <td>:</td>
+                <td>
+                    <input type="text" class="form-control form-control-sm" /></td>
+            </tr>
+        </table>
     </div>
 
     <div id="dvDialog" style="display: none"></div>

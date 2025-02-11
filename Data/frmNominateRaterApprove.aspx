@@ -307,7 +307,7 @@
                     result = $('<tr style="margin-top:25px"></tr>')
                         .data('ui-autocomplete-item', item)
                         //.append('<a class="mcacAnchor">' + item.label + '<div style="clear: both;"></div></a>')
-                        .append($("#MainContent_ddlRelatioShip option:selected").text() == "Other Stakeholders" ? "<a href='###' class='' onclick='fnAddNewStakeholder()'> Add New Stackholder </a>" : item.label)
+                        .append($("#MainContent_ddlRelatioShip option:selected").val() == "5" ? "<a href='###' class='' onclick='fnAddNewStakeholder()'> Add New Stackholder </a>" : item.label)
                         .appendTo(ul);
                 }
 
@@ -544,6 +544,11 @@
                             }
                             if (st_email == "") {
                                 fnShowmsg("Email Id can'nt be left blank!");
+                                $inputs.eq(1).focus();
+                                return false;
+                            }
+                            if (st_email.indexOf("@deloitte.com") < 0) {
+                                fnShowmsg("Email Id must end with '@deloitte.com'!");
                                 $inputs.eq(1).focus();
                                 return false;
                             }

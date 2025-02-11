@@ -29,7 +29,7 @@
                 <h3 class="heading-3">HOW IT WORKS</h3>
                 <p>
                     <strong>FOR PARTICIPANTS:</strong><br />
-                    On the next screen, you will see five categories of identified appraisers. To ensure a comprehensive evaluation, you are required to submit a minimum of three raters per category. This minimum selection helps maintain the confidentiality of your evaluators.<br />
+                    On the next screen, you will see five categories of identified appraisers. To ensure a comprehensive evaluation, you are required to submit a minimum of two raters per category. This minimum selection helps maintain the confidentiality of your evaluators.<br />
                     <strong>Categories:</strong>
                 </p>
                 <ul>

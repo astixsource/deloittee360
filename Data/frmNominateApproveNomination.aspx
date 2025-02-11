@@ -19,20 +19,20 @@
 
     <div class="row absolute-center mt-4">
         <div class="col-4" id="div1" runat="server">
-            <h6 class="text-center">For participant, click on nominate to select raters:<br /><br /></h6>
+            <h6 class="text-center">For Participants: Click on ‘Nominate’ to select raters:<br /><br /></h6>
 
             <div class="btn-img" onclick="fnOPenPage(1)">
                 <img src="../Images/1-nom.svg" alt="" class="" />
             </div>
         </div>
         <div class="col-4" id="div2" runat="server">
-            <h6 class="text-center">For RM/Coach, click on below to review the raters selects by your team member:</h6>
+            <h6 class="text-center">For RM/Coach: Click on below icon to review your team members’ rater selections:</h6>
             <div class="btn-img" onclick="fnOPenPage(2)">
                 <img src="../Images/2-nom.svg" alt="" class="" />
             </div>
         </div>
         <div class="col-4" id="div3" runat="server">
-            <h6 class="text-center">For Survey, click on below to go to survey page:<br /><br /></h6>
+            <h6 class="text-center">For participants and raters: Click on ‘Start Survey’ to submit feedback:</h6>
             <div class="btn-img" onclick="fnOPenPage(3)">
                 <img src="../Images/3-nom.svg" alt="" class="" />
             </div>

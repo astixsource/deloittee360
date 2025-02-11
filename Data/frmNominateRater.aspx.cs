@@ -235,35 +235,37 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
     }
 
 
+
     [System.Web.Services.WebMethod()]
     public static string fnSaveaNewStakeholder(int LoginID, string st_name, string st_email, string st_function, string st_dept, string st_desig)
     {
-
-       
         string jsonData = "";
         try
         {
-
             using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
             {
-                using (SqlCommand command = new SqlCommand("spSaveNominationsFromUser", Scon))
+                using (SqlCommand command = new SqlCommand("spSaveIndUser", Scon))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.CommandTimeout = 0;
                     command.Parameters.AddWithValue("@LoginId", LoginID);
-                    Scon.Open();
-                    command.ExecuteNonQuery();
-                    Scon.Close();
-                    jsonData = "1|";
-                    string FName = "";
-                    string MailTo = "";
-                   // string strStatus = fnSendMailToUsers(FName, MailTo);// Sent Mail to Coach/Coaches/Managers 
+                    command.Parameters.AddWithValue("@FullName", st_name);
+                    command.Parameters.AddWithValue("@EmailId", st_email);
+                    command.Parameters.AddWithValue("@Function", st_function);
+                    command.Parameters.AddWithValue("@Department", st_dept);
+                    command.Parameters.AddWithValue("@Designation", st_desig);
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        using (DataTable dt = new DataTable())
+                        {
+                            da.Fill(dt);
+                            jsonData = "1|" + dt.Rows[0]["flgUserExist"].ToString() + "|" + Convert.ToString(dt.Rows[0]["EmpNodeId"]);
+                        }
+                    }
+
                 }
             }
         }
-
-
-
         catch (Exception e)
         {
             jsonData = "2|" + e.Message;
@@ -271,7 +273,6 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
 
         return jsonData;
     }
-
 
     public static string fnSendMailToUsers(string FName, string PFName, string MailTo)
     {
