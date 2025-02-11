@@ -233,7 +233,7 @@
             _renderMenu: function (ul, items) {
                 // $(ul).addClass("autocomplete-menu"); // Add class to style
                 if (this.options.showHeader) {
-                    var table = '<table id="tblPrdContainer" class="autocomplete-table clsheaderitem"><thead><tr>';
+                    var table = '<table id="tblPrdContainer" class="autocomplete-table clsheaderitem"><thead style="padding:0px"><tr>';
                     $.each(this.options.columns, function (index, item) {
                         table += ('<th style="padding:0 2px;width:' + item.width + ';">' + item.name + '</th>');
                     });
@@ -262,10 +262,10 @@
 
                         t += '<td style="padding:0 2px;word-break:break-all;width:' + column.width + ';">' + item[column.valueField ? column.valueField : index] + '</td>'
                     });
-                    result = $('<li></li>')
+                    result = $('<li style="padding: 5px 0px"></li>')
 
                         .data('ui-autocomplete-item', item)
-                        .append("<div><table class='autocomplete-table-row'><tr>" + t + "</tr></table></div>")
+                        .append("<div style='padding:0px'><table class='autocomplete-table-row' style='padding:0px'><tr>" + t + "</tr></table></div>")
                         //.append('<a class="mcacAnchor">' + t + '<div style="clear: both;"></div></a>')
                         //.append(t)
                         .appendTo(ul);
@@ -458,7 +458,7 @@
                 },
                 {
                     name: 'EmailId',
-                    width: '260px',
+                    width: '270px',
                     valueField: 'EMailID'
                 },
                 {
@@ -918,11 +918,11 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="8">Select Category:
+                            <th colspan="8" style="padding:0px 0px 0px 2px">Select Category:
                                 <asp:DropDownList ID="ddlRelatioShip" Style="height: 33px; width: 140px; border: 1px solid #c0c0c0" AppendDataBoundItems="true" runat="server" AutoPostBack="false">
                                     <asp:ListItem Value="0">-----</asp:ListItem>
                                 </asp:DropDownList>
-                                <input type="search" id="txtsearch" placeholder="Search raters by Emp Id, Name, Email ID" class="form-control w-75 d-inline-block clsSearchUser" />
+                                <input type="search" id="txtsearch" style="width:77.9%" placeholder="Search raters by Emp Id, Name, Email ID" class="form-control d-inline-block clsSearchUser" />
                             </th>
                         </tr>
                     </tfoot>

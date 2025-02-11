@@ -258,7 +258,7 @@
             _renderMenu: function (ul, items) {
                 // $(ul).addClass("autocomplete-menu"); // Add class to style
                 if (this.options.showHeader) {
-                    var table = '<table id="tblPrdContainer" class="autocomplete-table clsheaderitem"><thead><tr>';
+                    var table = '<table id="tblPrdContainer" class="autocomplete-table clsheaderitem"><thead style="padding:0px"><tr>';
                     $.each(this.options.columns, function (index, item) {
                         table += ('<th style="padding:0 2px;width:' + item.width + ';">' + item.name + '</th>');
                     });
@@ -287,10 +287,10 @@
 
                         t += '<td style="padding:0 2px;word-break:break-all;width:' + column.width + ';">' + item[column.valueField ? column.valueField : index] + '</td>'
                     });
-                    result = $('<li style="padding-right:0px !important"></li>')
+                    result = $('<li style="padding: 5px 0px"></li>')
 
                         .data('ui-autocomplete-item', item)
-                        .append("<div style='padding-right:0px'><table class='autocomplete-table-row'><tr>" + t + "</tr></table></div>")
+                        .append("<div style='padding:0px'><table class='autocomplete-table-row'><tr>" + t + "</tr></table></div>")
                         //.append('<a class="mcacAnchor">' + t + '<div style="clear: both;"></div></a>')
                         //.append(t)
                         .appendTo(ul);
