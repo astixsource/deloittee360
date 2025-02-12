@@ -599,8 +599,9 @@ Public Class E360WebService
                 '''''''TExtBox Afet Each Competency
                 strTable = strTable & "<tr>"
                 'strTable = strTable & "<td class='text-center'><b><i><u>" & "Comments for " & OldName & "</u></i> : Please provide your comments regarding the questions above (optional)</b></td>"
-                strTable = strTable & "<td class='text-center'><b><i><u>" & "Comments for " & OldName & "</u></i> : Additional Comments (optional)</b></td>"
+                'strTable = strTable & "<td class='text-center'><b><i><u>" & "Comments for " & OldName & "</u></i> : Additional Comments (optional)</b></td>"
                 'strTable = strTable & "<td colspan='2'><b><i></i>  Please provide your comments regarding the questions above (optional)</b></td>"
+                strTable = strTable & "<td class='text-left'><b><i>" & "Additional Comments for  " & OldName & "</i> (optional)</b></td>"
                 strTable = strTable & "</tr>"
                 strTable = strTable & "<tr>"
 

@@ -326,14 +326,14 @@
         <div class="row mb-2">
             <div class="col-md-6 align-left-middile" id="tdCmmnt1" runat="server"><strong>Overall strengths consistently demonstrated by the individual.</strong></div>
             <div class="col-md-6">
-                <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox1" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
+                <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox1" placeholder="Optional" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
             </div>
         </div>
 
         <div class="row mb-2">
             <div class="col-md-6 align-left-middile" id="tdCmmnt2" runat="server"><strong>Areas of development observed in the individual.</strong></div>
             <div class="col-md-6">
-                <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox2" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
+                <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox2" placeholder="Optional" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
             </div>
         </div>
     </div>
