@@ -71,10 +71,10 @@
                             <ul class="status-progress" id="ulstatusprogress">
                                 <li class="active">
                                     <div class="status-lvl">
-                                        Employee nominates raters
+                                        Professional nominates raters
                                         <div class="info">
                                             <i class="fa fa-info-circle"></i>
-                                            <span class="ecs_tooltip">Employee selects raters across categories.</span>
+                                            <span class="ecs_tooltip">Professional selects raters across categories.</span>
                                         </div>
                                     </div>
                                 </li>

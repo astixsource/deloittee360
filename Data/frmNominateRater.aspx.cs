@@ -342,7 +342,8 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
 
 
             strBody.Append("<p>The way forward involves triggering an assessment process semi-annually, where the selected list of raters will provide feedback through this tool.</p>");
-            strBody.Append("<p>If you have any questions, please connect with your Talent business advisor, or raise a ticket on HelpD. : <a style = 'COLOR: #000000; FONT-weight: bold' href = mailto:demer@deloitte.com> (demer@deloitte.com)</a>.</p>");
+            // strBody.Append("<p>If you have any questions, please connect with your Talent business advisor, or raise a ticket on HelpD. : <a style = 'COLOR: #000000; FONT-weight: bold' href = mailto:demer@deloitte.com> (demer@deloitte.com)</a>.</p>");
+            strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Pages/Home.aspx'>Talent business advisor</a>, or raise a ticket on : <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
             strBody.Append("<p><b>Regards,</b></p>");
             strBody.Append("<p><b>Talent team</b></p>");
 
