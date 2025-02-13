@@ -24,26 +24,16 @@ Partial Class Login
     Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load, Me.Load
         'btnLogin.Attributes.Add("onclick", "javascript:return fnValidate()")
         If Page.IsPostBack = False Then
+            Session("LoginID") = DBNull.Value
+            Response.Cache.SetCacheability(HttpCacheability.NoCache)
+            Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1))
+            Response.Cache.SetNoStore()
 
-            Session.Abandon()
-            Session.Clear()
-            Session.RemoveAll()
-            Response.Cookies.Add(New HttpCookie("ASP.NET_SessionId", ""))
             Email = Request.QueryString("Email")
             hdnEmailId.Value = Email.ToString()
-            'Dim cookietoken As String
-            'Dim formtoken As String
-            'AntiForgery.GetTokens(Nothing, cookietoken, formtoken)
-            'divAntiforgery.InnerHtml = cookietoken & ":" & formtoken
 
-            ' Set the anti-forgery cookie
-            'Dim antiForgeryCookie As New HttpCookie("__RequestVerificationToken", cookietoken) With {
-            '    .HttpOnly = True,
-            '    .Secure = Request.IsSecureConnection
-            '}
-            'Response.Cookies.Add(antiForgeryCookie)
-            ' Dim strConn1 As String = Convert.ToString(HttpContext.Current.Application("DbConnectionString"))
-            'hdnaccesstoken.Value = strConn1
+            hiddenCSRFToken.Value = Guid.NewGuid().ToString()
+            Session("CSRFToken") = hiddenCSRFToken.Value
         End If
     End Sub
 
@@ -157,6 +147,14 @@ Partial Class Login
         Dim strResponse As String = ""
         Try
 
+            Dim csrfTokenFromHeader = HttpContext.Current.Request.Headers("X-CSRF-Token")
+            Dim csrfTokenFromSession = Convert.ToString(HttpContext.Current.Session("CsrfToken"))
+            If (String.IsNullOrEmpty(csrfTokenFromHeader) Or csrfTokenFromHeader <> csrfTokenFromSession) Then
+                strResponse = "2|Error : Invalid CSRF Token !!!"
+                Return strResponse
+            End If
+
+
             'Dim strTokens = mydivant.InnerHtml
             'AntiForgery.Validate(strTokens.Split(":")(0), strTokens.Split(":")(1))
             'AntiForgery.Validate()
@@ -233,13 +231,15 @@ Partial Class Login
 
                 End If
                 drdr = Nothing
+                objCom2.Dispose()
                 Objcon2.Close()
+                Objcon2.Dispose()
             End If
         Catch ex As Exception
             strResponse = "2|Error : " & ex.Message
         Finally
-            objCom2.Dispose()
-            Objcon2.Dispose()
+
+
         End Try
 
         Return strResponse

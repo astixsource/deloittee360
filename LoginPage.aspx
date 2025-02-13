@@ -20,9 +20,9 @@
 
     <!-- jQuery -->
     <script src="Scripts/jqueryJS.js"></script>
-    <script src="Scripts/loginpageJS_v1.js"></script>
+    <script src="Scripts/loginpageJS_v2.js"></script>
 </head>
-<body>
+<body oncontextmenu="return false">
     <form id="form1" runat="server">
         <div class="full-background">
             <img src="Images/login-bg.jpg" class="bg-img" />
@@ -81,6 +81,8 @@
         <div class="loader_bg" style="display:none" id="dvFadeForProcessing">
             <div class="loader"></div>
         </div>
+        
+         <asp:HiddenField runat="server" ID="hiddenCSRFToken" />
         <asp:HiddenField runat="server" ID="hdnaccesstoken" />
         <asp:HiddenField ID="hdnEmailId" runat="server" />
     </form>

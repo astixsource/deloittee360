@@ -150,7 +150,7 @@ Partial Class Login
     Public Shared Function fnLoginFromDB(ByVal UserName As String) As String
 
         Dim strResponse As String = ""
-        strResponse = "1|LoginPageFirst.aspx?Email=" + UserName
+        strResponse = "1|LoginPageFirst.aspx?Email=" & HttpUtility.HtmlEncode(UserName)
 
 
         Return strResponse

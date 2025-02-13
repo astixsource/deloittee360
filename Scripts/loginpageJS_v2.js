@@ -57,12 +57,17 @@ function fnSendLogin() {
     }
     var UserName = document.getElementById("txtLoginID").value;
     var Password = document.getElementById("txtPassword").value;
+    var csrfToken = document.getElementById("hiddenCSRFToken").value;
+
     $("#dvFadeForProcessing").show();
     $.ajax({
         url: "LoginPage.aspx/fnLoginFromDB",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        headers: {
+            "X-CSRF-Token": csrfToken
+        },
         data: '{UserName:' + JSON.stringify(UserName) + ',Password:' + JSON.stringify(Password) + '}',
         success: function (response) {
             //

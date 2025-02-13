@@ -20,6 +20,14 @@
     </asp:ContentPlaceHolder>
     <script src="../Scripts/jquery.nicescroll.min.js"></script>
     <script src="../Scripts/siteJS.js"></script>
+     <script>
+        function fnnLogout() {
+            if (confirm("Do you really want to log out?")) {
+                window.location.href = "../Login.aspx";
+            }
+            return false
+        }
+     </script>
     <!-- WARNING: Respond.js doesn't work if you view the page via file: -->
     <!--[if lt IE 9]>
   <script src="../Scripts/html5shiv.min.js"></script>
@@ -50,7 +58,7 @@
                                     <a href="frmNominateApproveNomination.aspx" class="link-btn" title="click to back home"><span class="fa fa-home"></span></a>
                                 </asp:Panel>
                             </li>
-                            <li><a href="../Login.aspx" class="link-btn" title="click to logout"><span class="fa fa-sign-out"></span></a></li>
+                            <li><a href="###" onclick="fnnLogout()" class="link-btn" title="click to logout"><span class="fa fa-sign-out"></span></a></li>
                         </ul>
                     </div>
                 </div>
