@@ -11,20 +11,22 @@
     <script src="../Scripts/progressbarJS.js"></script>
     <style type="text/css">
         .btns.disabled,
-.btns:disabled,
-.btns[disabled]{
-  border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
-  cursor:default !important;
-}
-.btns.disabled:hover,
-.btns:disabled:hover{
-	border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
-  cursor:not-allowed;
-}
+        .btns:disabled,
+        .btns[disabled] {
+            border: 1px solid #999999;
+            background-color: #cccccc;
+            color: #666666;
+            cursor: default !important;
+        }
+
+            .btns.disabled:hover,
+            .btns:disabled:hover {
+                border: 1px solid #999999;
+                background-color: #cccccc;
+                color: #666666;
+                cursor: not-allowed;
+            }
+
         .main-content {
             max-width: 90%;
             width: 90%;
@@ -38,7 +40,7 @@
             border-bottom: 2px solid #b0b0b0 !important;
         }
 
-       /* body {
+        /* body {
             overflow-y: scroll;
         }
 
@@ -769,6 +771,7 @@
             }
 
             var LoginId = $("#MainContent_hdnLoginId").val();
+            var LevelId = $("#MainContent_hdnLevelId").val();
             var str = "<div>Are you sure you want to approve the rater(s)?</div>";
 
 
@@ -799,7 +802,7 @@
                         }
                         $("#dvFadeForProcessing").show();
                         $(this).dialog('close');
-                        PageMethods.fnSaveandDeleteNomineeData(LoginId, arr, 1, function (result) {
+                        PageMethods.fnSaveandDeleteNomineeData(LoginId, arr, 1, LevelId, function (result) {
                             $("#dvFadeForProcessing").hide();
                             if (result.split("|")[0] == 2) {
                                 fnShowmsg("Error:" + result.split("|")[1]);
@@ -835,6 +838,7 @@
 
         function fnRemoveFromDB(sender) {
             var LoginId = $("#MainContent_hdnLoginId").val();
+            var LevelId = $("#MainContent_hdnLevelId").val();
             var str = "<div>Are you sure you want to remove this rater?</div>";
             $("#dvDialog").html(str);
             $("#dvDialog").dialog({
@@ -855,7 +859,7 @@
                         });
                         $("#dvFadeForProcessing").show();
                         $(this).dialog('close');
-                        PageMethods.fnSaveandDeleteNomineeData(LoginId, arr, 0, function (result) {
+                        PageMethods.fnSaveandDeleteNomineeData(LoginId, arr, 0, LevelId, function (result) {
                             $("#dvFadeForProcessing").hide();
                             if (result.split("|")[0] == 2) {
                                 fnShowmsg("Error:" + result.split("|")[1]);
@@ -893,7 +897,7 @@
                 <h3 class="text-center">APPROVE RATERS</h3>
                 <div class="title-line-center"></div>
             </div>
-            <div style="font-size: 10pt">
+            <div style="font-size: 10pt" id="divContent_1" runat="server" attr="SMD">
                 Below is the list of your team members:
                 <br />
                 Each name has an icon next to it indicating their current status:
@@ -903,28 +907,28 @@
                             <table>
                                 <tr>
                                     <td><i class="fa fa-circle" aria-hidden="true" style="color: #e1ac43; font-size: 15pt"></i></td>
-                                    <td><strong>Pending Submission</strong> - Team Member has not submitted raters yet</td>
+                                    <td><strong>Pending Submission</strong> - Team Member is yet to raise the 360 nominations</td>
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-circle" aria-hidden="true" style="color: #53cd8e; font-size: 15pt"></i></td>
-                                    <td><b>Submitted</b> - Team member has submitted raters</td>
+                                    <td><b>Submitted</b> - Team member has initiated the 360-feedback form</td>
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-refresh" aria-hidden="true" style="background-color: #5aadf9; color: #fff; padding: 2px;"></i></td>
-                                    <td><b>Pending Approval</b> - Submitted but not yet approved</td>
+                                    <td><b>Pending Approval</b> - 360 nominations waiting for your approval.</td>
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-check-square" aria-hidden="true" style="color: #59d68e; font-size: 15pt"></i></td>
-                                    <td><b>Approved</b> - Raters have been approved
+                                    <td><b>Approved</b> -Nomination is approved
                                     </td>
                                 </tr>
                             </table>
                         </td>
-                        <td>
+                        <td style="vertical-align:top;width:50%">
                             <ul>
-                                <li>Review their submitted raters for relevance and completeness. You can edit stakeholder categories to ensure the best fit.</li>
+                                <li>Review the submitted nominations for relevance and completeness of the 360-feedback process. You can edit stakeholder categories to ensure the best fit.</li>
                                 <li>You can also add or remove stakeholders (Except for Self & RM/Coach) as needed.</li>
-                                <li>Once you are satisfied with the selections, click <b>"Approve"</b> to finalize for all your team members.</li>
+                                <li>Once you are satisfied with the selections, click <b>"Approve"</b> to finalise for all your team members.</li>
                             </ul>
                         </td>
                     </tr>
@@ -932,6 +936,44 @@
 
             </div>
 
+            <div style="font-size: 10pt" id="divContent_2" runat="server" attr="PED">
+                Below is the list of your team members:
+                <br />
+                Each name has an icon next to it indicating their current status:
+                <table style="width: 100%">
+                    <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td><i class="fa fa-circle" aria-hidden="true" style="color: #e1ac43; font-size: 15pt"></i></td>
+                                    <td><strong>Pending Submission</strong> - Team member is yet to raise the 360 nominations</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-circle" aria-hidden="true" style="color: #53cd8e; font-size: 15pt"></i></td>
+                                    <td><b>Submitted</b> - Team member has initiated the 360-feedback form</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-refresh" aria-hidden="true" style="background-color: #5aadf9; color: #fff; padding: 2px;"></i></td>
+                                    <td><b>Pending Approval</b> - 360 nominations waiting for your approval.</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-check-square" aria-hidden="true" style="color: #59d68e; font-size: 15pt"></i></td>
+                                    <td><b>Approved</b> - Nomination is approved
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="vertical-align:top;width:50%">
+                            <ul>
+                                <li>Review the submitted nominations for relevance and completeness of the 360-feedback process. You can edit stakeholder categories to ensure the best fit.</li>
+                                <li>You can also add or remove stakeholders (Except for Self and CDA) as needed.</li>
+                                <li>Once you are satisfied with the selections, click <b>"Approve"</b> to finalise for all your team members.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
 
 
             <div class="row">
@@ -1038,12 +1080,13 @@
     </div>
     <asp:HiddenField ID="hdnNodeId" runat="server" Value="0" />
     <asp:HiddenField ID="hdnLoginId" runat="server" Value="0" />
+    <asp:HiddenField ID="hdnLevelId" runat="server" Value="0" />
     <div id="dvDialog" style="display: none"></div>
     <div id="dvAlert" style="display: none"></div>
-      <div class="loader_bg" style="display:none" id="dvFadeForProcessing">
-            <div class="loader"></div>
-        </div>
-   <%-- <div id="dvFadeForProcessing" style="display: block; position: fixed; text-align: center; z-index: 999999; top: 0; bottom: 0; left: 0; right: 0; opacity: .80; -moz-opacity: 0.8; filter: alpha(opacity=80); background-color: #ccc;">
+    <div class="loader_bg" style="display: none" id="dvFadeForProcessing">
+        <div class="loader"></div>
+    </div>
+    <%-- <div id="dvFadeForProcessing" style="display: block; position: fixed; text-align: center; z-index: 999999; top: 0; bottom: 0; left: 0; right: 0; opacity: .80; -moz-opacity: 0.8; filter: alpha(opacity=80); background-color: #ccc;">
         <img src="../Images/loading.gif" style="width: 90px; height: 70px; position: relative; top: 50%; margin-top: -35px;" />
     </div>--%>
 </asp:Content>

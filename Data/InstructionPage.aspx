@@ -17,32 +17,68 @@
             </div>
         </div>
         <div class="col-md-7">
-            <div class="grid bg_two">
+            <div class="grid bg_two" id="divContent_1" runat="server" attr="SMD">
                 <h3 class="heading-3">ABOUT THE SURVEY</h3>
                 <p>
-                    As part of Deloitte&rsquo;s commitment to fostering growth and development, we are excited to introduce the 360-Degree Feedback Program for FY2025. This initiative is designed to provide a well-rounded perspective on leadership capabilities and personal attributes, aligned with the Deloitte Future Leaders Framework. By gathering feedback from multiple sources&mdash;including peers, direct reports, managers, coaches, and stakeholders&mdash;this program offers valuable insights into individual strengths and areas for growth.<br />
-                    <strong>Process:</strong><br />
-                    Participants will nominate raters, Coaches/Managers will approve nominations, and all stakeholders will complete the survey and follow the outlined guidelines within the specified timelines.
+                    <p>As part of Deloitte&rsquo;s commitment to fostering growth and development, the <strong>360-Degree Feedback Program for FY25</strong> provides valuable insights into your leadership capabilities and personal attributes. Aligned with the <strong>Deloitte Future Leaders Framework</strong>, this initiative gathers feedback from multiple sources, including <strong>peers, direct reports, managers, coaches, and stakeholders</strong>, to offer a well-rounded perspective on your strengths and areas for growth.</p>
                 </p>
+
+                <h3 class="heading-3">HOW IT WORKS</h3>
+                <p><strong>FOR PARTICIPANTS:</strong></p>
+                <ul>
+                    <li>You will <strong>nominate raters</strong> across five categories:
+                        <ul>
+                            <li><strong>Direct reports</strong> (minimum 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
+                            <li><strong>Peers</strong> (min. 2) &ndash; Would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
+                            <li><strong>Review partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
+                            <li><strong>Reporting Manager (RM)/Coach</strong> &ndash; Auto-added, with an option to add more raters</li>
+                            <li><strong>Other stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M,B&amp;C, Talent, RRO, Admin, IT, etc.</li>
+                        </ul>
+                    </li>
+                    <li>A <strong>minimum of two raters per category</strong> ensures confidentiality.</li>
+                    <li>Once submitted, your <strong>Coach/RM will review and approve</strong> your nominations.</li>
+                </ul>
+
+                <p><strong>For RM/Coaches (Rater Approval)</strong></p>
+                <ul>
+                    <li>You will review the raters nominated by your Team member.</li>
+                    <li>You can <strong>approve, reject, or edit/add </strong>new nominees within the category available.</li>
+                    <li>If rejecting, please provide a reason to ensure nominations are raised again correctly considering the reason provided.</li>
+                </ul>
+                <p>Stay engaged and complete the process within the <strong>specified timelines</strong> to make the most out of this self-developmental journey.</p>
+            </div>
+
+            <div class="grid bg_two" id="divContent_2" attr="PED" runat="server">
+                <h3 class="heading-3">ABOUT THE SURVEY</h3>
+                <p>As part of Deloitte&rsquo;s commitment to fostering growth and development, the <strong>360-Degree Feedback Program for FY25</strong> provides valuable insights into your leadership capabilities and personal attributes. Aligned with the <strong>Deloitte Future Leaders Framework</strong>, this initiative gathers feedback from multiple sources, including <strong>peers, direct reports, managers, coaches, and stakeholders</strong>, to offer a well-rounded perspective on your strengths and areas for growth.</p>
 
 
                 <h3 class="heading-3">HOW IT WORKS</h3>
                 <p>
-                    <strong>FOR PARTICIPANTS:</strong><br />
-                    On the next screen, you will see five categories of identified appraisers. To ensure a comprehensive evaluation, you are required to submit a minimum of two raters per category. This minimum selection helps maintain the confidentiality of your evaluators.<br />
-                    <strong>Categories:</strong>
+                    <strong>FOR PARTICIPANTS</strong><br />
                 </p>
                 <ul>
-                    <li><strong>Direct Reports: </strong>Team members who report to you (Min. 2)</li>
-                    <li><strong>Peers: </strong>Colleagues you work with (Min. 2)</li>
-                    <li><strong>Other Stakeholders: </strong>Other stakeholders that do not map across the rater categories defined (Min. 2)</li>
-                    <li><strong>Reporting Manager (RM)/Coach:</strong> Your supervisory, responsible for your career (Auto-added, more raters can be added)</li>
-                    <li><strong>Review Partner: </strong>Your project supervisor (Optional)</li>
+                    <li>You will <strong>nominate raters</strong> across five categories:</li>
+                    <ul>
+                        <li><strong>Direct reports</strong> (minimum 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
+                        <li><strong>Peers</strong> (min. 2) &ndash; Would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
+                        <li><strong>Career Development Advisor (CDA)</strong> &ndash; Auto-added</li>
+                        <li><strong>Review partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.&nbsp;</li>
+                        <li><strong>Other stakeholders</strong> (min. 2) &ndash; would include the professionals who cannot be</li>
+                    </ul>
+                    <li>A <strong>minimum of two raters per category</strong> ensures confidentiality.</li>
+                    <li>Once submitted, your <strong>CDA will review and approve</strong> your nominations.</li>
                 </ul>
-                <p>Upon submission, your selection will be sent to your coach/RM for approval. Please ensure your selection is confirmed, or take further action as prompted.<br />
-                    <strong>FOR RATER APPROVAL (FOR RM/COACHES)</strong><br />
-                    On the next screen, you will be able to see a list of raters nominated by your coachee. You will have the option to approve or reject individual entries or approve the entire list without changes.<br />
-                    If you reject any nominee, you must provide a reason or suggest a replacement within the same category. This will help ensure your reportee has the right set of stakeholder providing feedback.</p>
+
+                <p>
+                    <strong>For CDA (Nomination Approval)</strong><br />
+                </p>
+                <ul>
+                    <li>You will review the raters nominated by your Team Member.</li>
+                    <li>You can <strong>approve, reject, or edit/add </strong>new nominees within the category available.</li>
+                    <li>If rejecting, please provide a reason to ensure nominations are raised again correctly considering the reason provided.</li>
+                </ul>
+                <p>Stay engaged and complete the process within the <strong>specified timelines</strong> to make the most out of this self-developmental journey.</p>
             </div>
 
             <div class="text-center">

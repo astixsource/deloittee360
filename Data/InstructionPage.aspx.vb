@@ -16,6 +16,12 @@ Partial Class InstructionPage
         'panelLogout = DirectCast(Page.Master.FindControl("panelLogout"), Panel)
         'panelLogout.Visible = False
 
+        If Convert.ToString(Session("LevelId")) = "1" Then
+            divContent_2.Style.Add("display", "none")
+        Else
+            divContent_1.Style.Add("display", "none")
+        End If
+
     End Sub
     Protected Sub btnContiue_Click(sender As Object, e As EventArgs) Handles btnContiue.Click
         If Convert.ToString(Session("flgParticipant")) = "1" And Convert.ToString(Session("flgIsManager")) = "0" Then

@@ -43,13 +43,24 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
         {
             hdnLoginId.Value = Session["LoginId"].ToString();
             hdnNodeId.Value = Session["NodeId"].ToString();
-            
+            hdnLevelId.Value = Session["LevelId"].ToString();
+
+            if (hdnLevelId.Value == "1")
+            {
+                divContent_2.Style.Add("display", "none");
+            }
+            else
+            {
+                divContent_1.Style.Add("display", "none");
+            }
+
             fnFillCycle();
             fnGetApseListForManager();
         }
     }
     [System.Web.Services.WebMethod()]
-    public static string fnGetNominateList(int LoginId,int EmpNodeId) {
+    public static string fnGetNominateList(int LoginId, int EmpNodeId)
+    {
 
         using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
         {
@@ -64,7 +75,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                     using (DataTable dt = new DataTable())
                     {
                         da.Fill(dt);
-                     HttpContext.Current.Session["UserListForNominationForManager"] = dt;
+                        HttpContext.Current.Session["UserListForNominationForManager"] = dt;
                     }
                 }
             }
@@ -74,6 +85,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
 
     public void fnFillCycle()
     {
+        string levelid = hdnLevelId.Value;
         using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
         {
             using (SqlCommand command = new SqlCommand("spFillRltshp", Scon))
@@ -96,7 +108,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                                 }
                                 else
                                 {
-                                    lst.Text = dr["RltshpID"].ToString() == "1" ? dr["Descr"].ToString() + " (Auto populated)" : dr["Descr"].ToString() + " (Min. " + dr["minNominationperCategory"].ToString() + ")";
+                                    lst.Text = dr["RltshpID"].ToString() == "1" ? (levelid == "2" ? "Career Development Advisor (CDA)" : dr["Descr"].ToString()) + " (Auto populated)" : dr["Descr"].ToString() + " (Min. " + dr["minNominationperCategory"].ToString() + ")";
                                 }
                                 lst.Value = dr["RltshpID"].ToString();
                                 lst.Attributes.Add("rptxt", dr["Descr"].ToString());
@@ -149,7 +161,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                             {
                                 strIcon = "<i class=\"fa fa-check-square clsiconclass clsnomineeapprove\" aria-hidden=\"true\" style=\"color:#59d68e;font-size:15pt\"></i>";
                             }
-                            sb.Append("<div style='display:table-row'><div class='clscoacheelist' EmpNodeId='" + dr["EmpNodeId"].ToString() + "' onclick=\"fnGetNomineeDetails(this," + dr["EmpNodeId"].ToString() + ")\">" + dr["FullName"].ToString()+ "</div><div class='clsiconcontainer'>"+ strIcon+"</div></div>");
+                            sb.Append("<div style='display:table-row'><div class='clscoacheelist' EmpNodeId='" + dr["EmpNodeId"].ToString() + "' onclick=\"fnGetNomineeDetails(this," + dr["EmpNodeId"].ToString() + ")\">" + dr["FullName"].ToString() + "</div><div class='clsiconcontainer'>" + strIcon + "</div></div>");
                             i++;
                         }
                         dvcoacheelist.InnerHtml = sb.ToString();
@@ -163,6 +175,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
     public static string fnGetNomineeDetails(int loginId, int EmpNodeId)
     {
         string jsonData = "";
+        string levelid = Convert.ToString(HttpContext.Current.Session["LevelId"]);
         try
         {
             using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
@@ -196,7 +209,15 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                                     //    sb.Append("<td class='text-center'></td>");
                                     //}
 
-                                    sb.Append("<td>" + dt.Rows[i]["Relationship"].ToString() + "</td>");
+                                    if (levelid == "2" && dt.Rows[i]["RltshpID"].ToString() == "1")
+                                    {
+                                        sb.Append("<td>Career Development Advisor (CDA)</td>");
+                                    }
+                                    else
+                                    {
+                                        sb.Append("<td>" + dt.Rows[i]["Relationship"].ToString() + "</td>");
+                                    }
+                                    //sb.Append("<td>" + dt.Rows[i]["Relationship"].ToString() + "</td>");
                                     sb.Append("<td style='word-break:break-all'>" + dt.Rows[i]["FullName"].ToString() + "</td>");
                                     sb.Append("<td style='word-break:break-all'>" + dt.Rows[i]["EMailID"].ToString() + "</td>");
                                     sb.Append("<td>" + dt.Rows[i]["Function"].ToString() + "</td>");
@@ -218,7 +239,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                             {
                                 sb.Append("<tr><td colspan='8' class='dt-empty p-2 text-center'>Rater nominations are not available yet</td></tr>");
                             }
-                            
+
                             jsonData = "1|" + sb.ToString();
                         }
                     }
@@ -309,9 +330,9 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
     }
 
     [System.Web.Services.WebMethod()]
-    public static string fnSaveandDeleteNomineeData(int LoginID, object arrData, int flg)
+    public static string fnSaveandDeleteNomineeData(int LoginID, object arrData, int flg, int LevelId)
     {
-        int Scenario = 1;
+
         string jsonData = "";
         try
         {
@@ -337,7 +358,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                             {
                                 if (dt.Rows.Count > 0)
                                 {
-                                    string strStatus = fnSendMailToUsers(Scenario, Convert.ToString(dt.Rows[0]["ParticipantName"]), "", "", Convert.ToString(dt.Rows[0]["ParticipantEMailID"]), "");
+                                    string strStatus = fnSendMailToUsers(LevelId, Convert.ToString(dt.Rows[0]["ParticipantName"]), "", "", Convert.ToString(dt.Rows[0]["ParticipantEMailID"]), "");
                                 }
                             }
                         }
@@ -396,7 +417,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
 
 
 
-    public static string fnSendMailToUsers(int Scenario, string FName, string UserName, string Password, string MailTo, string Comment)
+    public static string fnSendMailToUsers(int LevelId, string FName, string UserName, string Password, string MailTo, string Comment)
     {
 
 
@@ -454,30 +475,25 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
             }
 
             StringBuilder strBody = new StringBuilder();
-            if (Scenario == 1)
+            if (LevelId == 1)
             {
-                //msg.Subject = "Your HCAS 360-Degree Feedback FY2025 Rater Approval Update";
+
                 msg.Subject = "360 Degree Feedback for " + FName + ": Kickoff Notice ";
 
                 strBody.Append("<font  style='COLOR: #000000; FONT-FAMILY: Arial'  size=2>");
 
-                strBody.Append("<p>Dear " + FName + ",</p>");
-                //// Participants Name WIll Come
-                //strBody.Append("<p>Thank you for your nominating your raters for the HCAS 360-Degree Feedback FY2025. Your nominated raters have been reviewed by your manager/coach. Below are the next steps for you:</p>");
-                //strBody.Append("<p>All your nominated raters have been approved. No further action is required at this stage. Please await the survey launch to complete your self-rating & provide feedback for others if you have been nominated. </p>");
-                //strBody.Append("<p>Should you have any questions or need assistance, please reach out to your talent advisors. </p>");
-                ////strBody.Append("<p>Your timely review will help ensure a smooth and effective feedback process. Should you have any questions or need assistance, please reach out to : <a style = 'COLOR: #000000; FONT-weight: bold' href = mailto:demer@deloitte.com> (demer@deloitte.com)</a>.</p>");
-                //strBody.Append("<p><b>Best Regards,</b></p>");
-                //strBody.Append("<p><b>Team Deloitte</b></p>");
-
+                strBody.Append("<p>Dear " + FName + ",</p>");     //// Participants Name WIll Come
                 strBody.Append("<p>We are pleased to inform you that the 360-Degree Feedback process has officially commenced, and the team selection has been approved.</p>");
                 strBody.Append("<p>The feedback raters given below, has been strategically selected to provide a comprehensive assessment of your strength and development areas:</p>");
 
-                strBody.Append("<p>Complete your Self Assessment which is designed to evaluate various competencies aligned with your professional development goals.<a href='" + WebSitePath + "'>" + WebSitePath + "</a></p>");
-                strBody.Append("<p>Should you have any questions or need assistance, please reach out to your talent advisors. </p>");
+
+                //[[List of raters & relationship]] Will Come Here
+
+                strBody.Append("<p>Complete your Self Assessment which is designed to evaluate various competencies aligned with your professional development goals.</p>");
+
                 //strBody.Append("<p>Your timely review will help ensure a smooth and effective feedback process. Should you have any questions or need assistance, please reach out to : <a style = 'COLOR: #000000; FONT-weight: bold' href = mailto:demer@deloitte.com> (demer@deloitte.com)</a>.</p>");
-                strBody.Append("<p>The deadline for approval is <strong>20-Feb-2025</strong>.</p>");
-                strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Pages/Home.aspx'>Talent business advisor</a>, or raise a ticket on : <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
+                strBody.Append("<p><strong>Timeline:</strong> Kindly complete the survey by <strong>20-Feb-2025</strong>.</p>");
+                strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on : <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
                 strBody.Append("<p><b>Regards,</b></p>");
                 strBody.Append("<p><b>Talent team</b></p>");
 

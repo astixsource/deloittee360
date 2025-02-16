@@ -11,20 +11,22 @@
     <script src="../Scripts/progressbarJS.js"></script>
     <style>
         .btns.disabled,
-.btns:disabled,
-.btns[disabled]{
-  border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
-  cursor:default !important;
-}
-        .btns.disabled:hover,
-.btns:disabled:hover{
-	border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
-  cursor:not-allowed;
-}
+        .btns:disabled,
+        .btns[disabled] {
+            border: 1px solid #999999;
+            background-color: #cccccc;
+            color: #666666;
+            cursor: default !important;
+        }
+
+            .btns.disabled:hover,
+            .btns:disabled:hover {
+                border: 1px solid #999999;
+                background-color: #cccccc;
+                color: #666666;
+                cursor: not-allowed;
+            }
+
         table.table > tbody > tr:nth-child(even) {
             background-color: transparent !important;
         }
@@ -760,21 +762,21 @@
                     var rpid = arrCategories.eq(i).val();
                     var minnominationpercategory = arrCategories.eq(i).attr("minnominationpercategory");
                     var rptxt = arrCategories.eq(i).attr("rptxt");
-                   // if (minnominationpercategory > 0) {
-                        if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length > 0) {
-                            str += "<tr><td class='fw-bold'>" + rptxt + "</td>";
-                            str += "<td class='text-center'>" + (rpid == "1" ? "Auto Populated" : minnominationpercategory == 0 ? "Optional" : minnominationpercategory) + "</td>";
-                            str += "<td class='text-center'>" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "</td>";
-                            str += "</tr>";
-                        }
-                        else {
-                            str += "<tr><td class='fw-bold'>" + rptxt + "</td>";
-                            str += "<td class='text-center'>" + (rpid == "1" ? "Auto Populated" : minnominationpercategory == 0 ? "Optional" : minnominationpercategory) + "</td>";
-                            str += "<td class='text-center'>" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "</td>";
-                            str += "</tr>";
-                        }
-                   // }
-                    
+                    // if (minnominationpercategory > 0) {
+                    if ($("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length > 0) {
+                        str += "<tr><td class='fw-bold'>" + rptxt + "</td>";
+                        str += "<td class='text-center'>" + (rpid == "1" ? "Auto Populated" : minnominationpercategory == 0 ? "Optional" : minnominationpercategory) + "</td>";
+                        str += "<td class='text-center'>" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "</td>";
+                        str += "</tr>";
+                    }
+                    else {
+                        str += "<tr><td class='fw-bold'>" + rptxt + "</td>";
+                        str += "<td class='text-center'>" + (rpid == "1" ? "Auto Populated" : minnominationpercategory == 0 ? "Optional" : minnominationpercategory) + "</td>";
+                        str += "<td class='text-center'>" + $("#tblMainNominee tbody tr[newrpid='" + rpid + "']").length + "</td>";
+                        str += "</tr>";
+                    }
+                    // }
+
                 }
             }
             return str;
@@ -841,11 +843,12 @@
                                 fnShowmsg("Error:" + result.split("|")[1]);
                                 return false;
                             }
-                          
+
                             fnUpdateProgressbar();
                             fnGetNomineeDetails();
                             if (flg == 1) {
-                                $("#dvMsg").html("Your rater list is shared with your RM/Coach for their approval");
+                                var LevelId = $("#MainContent_hdnLevelId").val();
+                                $("#dvMsg").html(LevelId == "2" ?"Your rater list is shared with your CDA for their approval":"Your rater list is shared with your RM/Coach for their approval");
                                 setTimeout(function () {
                                     window.location.href = "frmNominateApproveNomination.aspx";
                                 }, 3000);
@@ -896,7 +899,7 @@
                                 $inputs.eq(1).focus();
                                 return false;
                             }
-                            if (st_email.indexOf("@deloitte.com")<0) {
+                            if (st_email.indexOf("@deloitte.com") < 0) {
                                 fnShowmsg("Email Id must end with '@deloitte.com'!");
                                 $inputs.eq(1).focus();
                                 return false;
@@ -951,35 +954,48 @@
         <div class="col-md-12">
 
             <div class="section-title">
-                <h3 class="text-center">Nominate your Raters</h3>
+                <h3 class="text-center">Nominate your Raters- How to nominate raters.</h3>
                 <div class="title-line-center"></div>
             </div>
             <h6><b>What you should know before selecting your raters:</b></h6>
-            <div style="font-size: 10pt">
+            <div style="font-size: 10pt" id="divContent_1" runat="server" attr="SMD">
                 For each category, please ensure you meet the minimum nomination requirements as mentioned below:
-                <ul>
-                    <li><b>Direct Reports:</b> Team members who report to you (Min. 2)
-                    </li>
-                    <li><b>Peers:</b> Colleagues you work with (Min. 2)</li>
-                    <li><b>Other Stakeholders:</b> Other stakeholders that do not map across the rater categories defined (Min. 2)</li>
-                    <li><b>Reporting Manager/Coach:</b> Your supervisory, responsible for your career (Auto-added, more raters can be added)</li>
-                    <li><b>Review Partner:</b> Your project supervisor (Optional)</li>
-                </ul>
-                <p>
-                    To help ensure a holistic feedback and maintain confidentiality, you will only be able to submit your nominations if these requirements are met. 
-                </p>
-                <p>
-                    For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must ends with @deloitte.com.
-                </p>
-                <p>
-                    Next steps: once you submit your nominations, your manager can review, modify, and approve them.
-                </p>
+               <ul>
+                   <ul>
+                       <li><strong>Direct Reports</strong> (minimum. 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
+                       <li><strong>Peers</strong> (Min. 2) &ndash; Would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
+                       <li><strong>Review Partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
+                       <li><strong>Reporting Manager (RM)/Coach</strong> &ndash; Auto-added, with an option to add more raters</li>
+                       <li><strong>Other Stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M,B&amp;C, Talent, RRO, Admin, IT, etc.</li>
+                       <li>For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with @deloitte.com.</li>
+                   </ul>
+               </ul>
+                <p>To help ensure a holistic feedback and maintains confidentiality, you will only be able to submit your nominations if these requirements are met.</p>
+                <p>Once submitted, your <strong>Coach/RM will review and approve</strong> your nominations.</p>
             </div>
+
+            <div style="font-size: 10pt" id="divContent_2" attr="PED" runat="server">
+               For each category, please ensure you meet the minimum nomination requirements as mentioned below:
+                <ul>
+                    <ul>
+                        <li><strong>Direct Reports</strong> (minimum 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
+                        <li><strong>Peers</strong> (Min. 2) &ndash; Would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
+                        <li><strong>Review Partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
+                        <li><strong>Career Development Advisor (CDA)</strong> &ndash; Auto-added</li>
+                        <li><strong>Other Stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M, B&amp;C, Talent, RRO, Admin, IT, etc.</li>
+                        <li>For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with @deloitte.com.</li>
+                    </ul>
+                </ul>
+                <p>To help ensure holistic feedback and maintains confidentiality, you will only be able to submit your nominations if these requirements are met.</p>
+                <p>Once submitted, your <strong>CDA will review and approve</strong> your nominations.</p>
+            </div>
+
+
             <div id="btnMainbodyContainer">
-                <table id="tblMainNominee" style="width: 100%;border-bottom:1px solid #e2eecb">
+                <table id="tblMainNominee" style="width: 100%; border-bottom: 1px solid #e2eecb">
                     <thead>
                         <tr>
-                            <th style="width: 14%" >Category
+                            <th style="width: 14%">Category
                             </th>
                             <th>Name
                             </th>
@@ -1002,11 +1018,11 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="8" style="padding:0px 0px 0px 2px">Select Category:
+                            <th colspan="8" style="padding: 0px 0px 0px 2px">Select Category:
                                 <asp:DropDownList ID="ddlRelatioShip" Style="height: 33px; width: 140px; border: 1px solid #c0c0c0" AppendDataBoundItems="true" runat="server" AutoPostBack="false">
                                     <asp:ListItem Value="0">-----</asp:ListItem>
                                 </asp:DropDownList>
-                                <input type="search" id="txtsearch" style="width:77.9%" placeholder="Search raters by Emp Id, Name, Email ID" class="form-control d-inline-block clsSearchUser" />
+                                <input type="search" id="txtsearch" style="width: 77.9%" placeholder="Search raters by Emp Id, Name, Email ID" class="form-control d-inline-block clsSearchUser" />
                             </th>
                         </tr>
                     </tfoot>
@@ -1022,7 +1038,7 @@
         </div>
     </div>
 
-     <div style="display: none" id="divNewStakeholders">
+    <div style="display: none" id="divNewStakeholders">
         <table class="table" id="tblNewStakeholders">
             <tr>
                 <td style="width: 20%">Name </td>
@@ -1062,9 +1078,10 @@
     <asp:HiddenField ID="hdnLoginId" runat="server" Value="0" />
     <asp:HiddenField ID="hdnIsManager" runat="server" Value="0" />
     <asp:HiddenField ID="hdnNodeId" runat="server" Value="0" />
+    <asp:HiddenField ID="hdnLevelId" runat="server" Value="0" />
 
-   <div class="loader_bg" style="display:none" id="dvFadeForProcessing">
-            <div class="loader"></div>
-        </div>
+    <div class="loader_bg" style="display: none" id="dvFadeForProcessing">
+        <div class="loader"></div>
+    </div>
 </asp:Content>
 

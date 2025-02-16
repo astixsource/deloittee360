@@ -48,6 +48,18 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
             hdnLoginId.Value = Session["LoginId"].ToString();
             hdnNodeId.Value = Session["NodeId"].ToString();
             hdnIsManager.Value = Session["flgIsManager"].ToString();
+            hdnLevelId.Value = Session["LevelId"].ToString();
+
+
+            if (hdnLevelId.Value == "1")
+            {
+                divContent_2.Style.Add("display", "none");
+            }
+            else
+            {
+                divContent_1.Style.Add("display", "none");
+            }
+
             using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
             {
                 using (SqlCommand command = new SqlCommand("spGetUserListForNomination", Scon))
@@ -70,6 +82,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
     }
     public void fnFillCycle()
     {
+        string levelid = hdnLevelId.Value;
         using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
         {
             using (SqlCommand command = new SqlCommand("spFillRltshp", Scon))
@@ -92,7 +105,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                                 }
                                 else
                                 {
-                                    lst.Text = dr["RltshpID"].ToString()=="1"? dr["Descr"].ToString()+ " (Auto populated)" : dr["Descr"].ToString() + " (Min. " + dr["minNominationperCategory"].ToString() + ")";
+                                    lst.Text = dr["RltshpID"].ToString()=="1"? (levelid == "2" ? "Career Development Advisor (CDA)" : dr["Descr"].ToString())+ " (Auto populated)" : dr["Descr"].ToString() + " (Min. " + dr["minNominationperCategory"].ToString() + ")";
                                 }
                                 lst.Value = dr["RltshpID"].ToString();
                                 lst.Attributes.Add("rptxt", dr["Descr"].ToString());
@@ -338,12 +351,12 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
             strBody.Append("<p>Dear " + FName + ",</p>");
             strBody.Append("<p>The '360-Degree Feedback' application is designed to enhance overall feedback and development processes within the organization. This tool focuses on offering a comprehensive view of an individual's competencies core to the Deloitte Future Leaders Framework and provides feedback from various sources.</p>");
             strBody.Append("<p>We request your attention to review and approve the 360-Degree Feedback raters' list selected by " + PFName + ". The deadline for approval is <strong>20-Feb-2025</strong>.</p>");
-            strBody.Append("<p>If not approved by this date, the rater list will be auto approved and proceed to the next step. You can access and approve this document at the following URL: <a href='" + WebSitePath + "'>" + WebSitePath + "</a></p>");
+            strBody.Append("<p>If not approved by this date, the nominations list will be auto approved and proceed to the next step. You can access and approve this document at the following URL: <a href='" + WebSitePath + "'>" + WebSitePath + "</a></p>");
 
 
-            strBody.Append("<p>The way forward involves triggering an assessment process semi-annually, where the selected list of raters will provide feedback through this tool.</p>");
+            strBody.Append("<p>The way forward involves triggering a feedback process semi-annually, where the selected list of raters will provide feedback through this tool.</p>");
             // strBody.Append("<p>If you have any questions, please connect with your Talent business advisor, or raise a ticket on HelpD. : <a style = 'COLOR: #000000; FONT-weight: bold' href = mailto:demer@deloitte.com> (demer@deloitte.com)</a>.</p>");
-            strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Pages/Home.aspx'>Talent business advisor</a>, or raise a ticket on : <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
+            strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on : <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
             strBody.Append("<p><b>Regards,</b></p>");
             strBody.Append("<p><b>Talent team</b></p>");
 
@@ -373,6 +386,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
     public static string fnGetNomineeDetails(int loginId)
     {
         string jsonData = "";
+        string levelid = Convert.ToString(HttpContext.Current.Session["LevelId"]);
         try
         {
             using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
@@ -393,7 +407,15 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                             {
                                 int flgSubmittedForApproval = Convert.ToInt32(dt.Rows[i]["flgSubmittedForApproval"]);
                                 sb.Append("<tr flg='1' flgSubmittedForApproval='"+ flgSubmittedForApproval.ToString()+ "' flgvalid='" + (Convert.ToInt32(dt.Rows[i]["flgApproved"]) == 2 ? "0" : "1") + "' nomineid='" + dt.Rows[i]["NodeId"].ToString() + "' rpid='" + dt.Rows[i]["RltshpID"].ToString() + "' newrpid='"+ dt.Rows[i]["RltshpID"].ToString() + "'>");
-                                sb.Append("<td>" + dt.Rows[i]["Relationship"].ToString() + "</td>");
+                                if (levelid == "2" && dt.Rows[i]["RltshpID"].ToString()=="1")
+                                {
+                                    sb.Append("<td>Career Development Advisor (CDA)</td>");
+                                }
+                                else
+                                {
+                                    sb.Append("<td>" + dt.Rows[i]["Relationship"].ToString() + "</td>");
+                                }
+                               
                                 sb.Append("<td>" + dt.Rows[i]["FullName"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["EMailID"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Function"].ToString() + "</td>");
