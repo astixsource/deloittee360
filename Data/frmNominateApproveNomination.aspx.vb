@@ -22,6 +22,12 @@ Partial Class _Welcome
             div1.Style.Add("display", "none")
         End If
 
+        If Convert.ToString(Session("LevelId")) = "1" Then
+            dvRMCoach.InnerHtml = "For RM/Coach: Click on below icon to review your team members’ rater selections:"
+        Else
+            dvRMCoach.InnerHtml = "For CDA: Click on below icon to review your team members’ rater selections:"
+        End If
+
     End Sub
     'Protected Sub btnContiue_Click(sender As Object, e As EventArgs) Handles btnContiue.Click
     '    Response.Redirect("frmMain.aspx")

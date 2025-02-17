@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="col-4" id="div2" runat="server">
-            <h6 class="text-center">For RM/Coach: Click on below icon to review your team members’ rater selections:</h6>
+            <h6 class="text-center" id="dvRMCoach" runat="server">For RM/Coach: Click on below icon to review your team members’ rater selections:</h6>
             <div class="btn-img" onclick="fnOPenPage(2)">
                 <img src="../Images/2-nom.svg" alt="" class="" />
             </div>

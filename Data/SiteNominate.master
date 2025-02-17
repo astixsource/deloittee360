@@ -88,7 +88,8 @@
                                 </li>
                                 <li>
                                     <div class="status-lvl">
-                                        RM/Coach approves raters
+                                        <%=IIf(Convert.ToString(Session("LevelId")) = "2", " CDA approves raters", " RM/Coach approves raters") %>
+                                       
                                         <div class="info">
                                             <i class="fa fa-info-circle"></i>
                                             <span class="ecs_tooltip">Manager reviews, edits, and approves nominated raters.</span>
