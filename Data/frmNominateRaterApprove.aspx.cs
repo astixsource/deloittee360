@@ -209,7 +209,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                                     //    sb.Append("<td class='text-center'></td>");
                                     //}
 
-                                    if (levelid == "2" && dt.Rows[i]["RltshpID"].ToString() == "1")
+                                    if (dt.Rows[i]["LevelID"].ToString() == "2" && dt.Rows[i]["RltshpID"].ToString() == "1")
                                     {
                                         sb.Append("<td>Career Development Advisor (CDA)</td>");
                                     }
