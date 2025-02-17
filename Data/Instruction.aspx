@@ -28,7 +28,7 @@
                         <li>If you have not observed a particular behavior, select <strong>"Have Not Observed"</strong>.</li>
                         <li>Provide comments in the designated space if applicable.</li>
                     </ul>
-                    <p>The survey takes approximately <strong>15 minutes</strong> and should be completed in one sitting.</p>
+                    <p>The survey takes approximately <strong>10 minutes</strong> and should be completed in  <strong>one sitting</strong>.</p>
                     <p><strong>Note:</strong> Read each question carefully, as descriptions may vary based on the stakeholder&rsquo;s designation. The survey will conclude with <strong>two open-ended questions </strong>where you can add your comments.</p>
                 </div>
 
@@ -76,9 +76,9 @@
 
                         <tr>
                             <td>
-                                <strong>Have Not Observed</strong>
+                                <strong>No Rating</strong>
                             </td>
-                            <td>In case this behaviour is not applicable to this person.
+                            <td>In case this behaviour is not observed by you in the person.
                             </td>
                         </tr>
 

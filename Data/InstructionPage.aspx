@@ -64,7 +64,7 @@
                         <li><strong>Peers</strong> (min. 2) &ndash; Would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
                         <li><strong>Career Development Advisor (CDA)</strong> &ndash; Auto-added</li>
                         <li><strong>Review partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.&nbsp;</li>
-                        <li><strong>Other stakeholders</strong> (min. 2) &ndash; would include the professionals who cannot be</li>
+                        <li><strong>Other stakeholders</strong> (min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M, B&C, Talent, RRO, Admin, IT, etc.  </li>
                     </ul>
                     <li>A <strong>minimum of two raters per category</strong> ensures confidentiality.</li>
                     <li>Once submitted, your <strong>CDA will review and approve</strong> your nominations.</li>
