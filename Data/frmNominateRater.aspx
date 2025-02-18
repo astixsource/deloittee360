@@ -954,7 +954,7 @@
         <div class="col-md-12">
 
             <div class="section-title">
-                <h3 class="text-center">Nominate your Raters- How to nominate raters.</h3>
+                <h4 class="text-center">Nominate Raters - How to nominate raters?</h4>
                 <div class="title-line-center"></div>
             </div>
             <h6><b>What you should know before selecting your raters:</b></h6>

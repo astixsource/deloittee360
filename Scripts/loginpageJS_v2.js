@@ -76,7 +76,12 @@ function fnSendLogin() {
             
             if (strRep.split("|")[0] == 1) {
                 //$("#dvFadeForProcessing").show();
-                window.location.href = strRep.split("|")[1];
+                if (strRep.split("|")[2] == 1) {
+                    window.location.href = strRep.split("|")[1];
+                }
+                else {
+                    window.location.href ="Data/frmUndertakingPage.aspx?str="+strRep.split("|")[1];
+                }
             }
             else {
                 $("#dvFadeForProcessing").hide();

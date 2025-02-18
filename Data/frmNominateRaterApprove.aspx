@@ -894,7 +894,7 @@
         <div class="col-md-12" style="padding: 0px">
 
             <div class="section-title">
-                <h3 class="text-center">APPROVE RATERS - How to approve raters?</h3>
+                <h4 class="text-center">Approve Raters - How to approve raters?</h4>
                 <div class="title-line-center"></div>
             </div>
             <div style="font-size: 10pt" id="divContent_1" runat="server" attr="SMD">

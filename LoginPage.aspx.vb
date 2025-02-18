@@ -167,6 +167,7 @@ Partial Class Login
                 Dim chkRoleID As String = "0"
                 Dim varAuthenticate As Boolean = False
                 Dim NodeID As Integer = 1
+                Dim flgAgreement As String = "0"
                 Dim strConn As String = Convert.ToString(HttpContext.Current.Application("DbConnectionString"))
                 Objcon2 = New SqlConnection(strConn.Split("|")(0))
                 objCom2 = New SqlCommand("spSecUserLogin", Objcon2)
@@ -200,6 +201,7 @@ Partial Class Login
                     HttpContext.Current.Session("Desgination") = Convert.ToString(drdr.Item("Desgination"))
                     HttpContext.Current.Session("RM") = Convert.ToString(drdr.Item("ReportingManager"))
                     HttpContext.Current.Session("LevelId") = Convert.ToString(drdr.Item("LevelId"))
+                    flgAgreement = Convert.ToString(drdr.Item("flgAgreement"))
                     If Not IsDBNull(drdr.Item("CycleID")) Then
                         HttpContext.Current.Session("CycleID") = drdr.Item("CycleID")
                     Else
@@ -220,13 +222,13 @@ Partial Class Login
                     strResponse = drdr.Item("RoleID").ToString()
 
                     If drdr.Item("flgParticipant").ToString() = 1 Then
-                        strResponse = "1|Data/InstructionPage.aspx?NodeID="
+                        strResponse = "1|Data/InstructionPage.aspx?NodeID=|" + flgAgreement
                         'strResponse = "1|Data/frmNominateRater.aspx"  'Response.Redirect("Data/frmMain.aspx")
                     ElseIf drdr.Item("flgIsManager").ToString() = 1 Then
-                        strResponse = "1|Data/InstructionPage.aspx?NodeID="
+                        strResponse = "1|Data/InstructionPage.aspx?NodeID=|" + flgAgreement
                         '  strResponse = "1|Data/frmNominateApproveNomination.aspx"  'Response.Redirect("Data/frmMain.aspx")
                     Else
-                        strResponse = "1|Data/Instruction.aspx?NodeID="
+                        strResponse = "1|Data/Instruction.aspx?NodeID=|" + flgAgreement
                         'strResponse = "1|Data/Dashboard.aspx?NodeID="
 
                     End If

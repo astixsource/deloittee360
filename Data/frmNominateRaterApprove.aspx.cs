@@ -108,7 +108,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                                 }
                                 else
                                 {
-                                    lst.Text = dr["RltshpID"].ToString() == "1" ? (levelid == "2" ? "Career Development Advisor (CDA)" : dr["Descr"].ToString()) + " (Auto populated)" : dr["Descr"].ToString() + " (Min. " + dr["minNominationperCategory"].ToString() + ")";
+                                    lst.Text = dr["RltshpID"].ToString() == "1" ? (levelid == "2" ? "CDA" : dr["Descr"].ToString()) + " (Auto populated)" : dr["Descr"].ToString() + " (Min. " + dr["minNominationperCategory"].ToString() + ")";
                                 }
                                 lst.Value = dr["RltshpID"].ToString();
                                 lst.Attributes.Add("rptxt", dr["Descr"].ToString());
@@ -211,7 +211,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
 
                                     if (dt.Rows[i]["LevelID"].ToString() == "2" && dt.Rows[i]["RltshpID"].ToString() == "1")
                                     {
-                                        sb.Append("<td>Career Development Advisor (CDA)</td>");
+                                        sb.Append("<td>CDA</td>");
                                     }
                                     else
                                     {

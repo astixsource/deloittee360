@@ -7,7 +7,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="section-title">
-        <h3 class="text-center">360 Degree Feedback Survey 2025</h3>
+        <h3 class="text-center">Welcome to the 360-Degree Feedback Program FY25</h3>
         <div class="title-line-center"></div>
     </div>
     <div class="row g-0">
@@ -18,13 +18,13 @@
         </div>
         <div class="col-md-7">
             <div class="grid bg_two" id="divContent_1" runat="server" attr="SMD">
-                <h3 class="heading-3">ABOUT THE SURVEY</h3>
+                <h3 class="heading-3">About the Survey</h3>
                 <p>
                     <p>As part of Deloitte&rsquo;s commitment to fostering growth and development, the <strong>360-Degree Feedback Program for FY25</strong> provides valuable insights into your leadership capabilities and personal attributes. Aligned with the <strong>Deloitte Future Leaders Framework</strong>, this initiative gathers feedback from multiple sources, including <strong>peers, direct reports, managers, coaches, and stakeholders</strong>, to offer a well-rounded perspective on your strengths and areas for growth.</p>
                 </p>
 
-                <h3 class="heading-3">HOW IT WORKS</h3>
-                <p><strong>FOR PARTICIPANTS:</strong></p>
+                <h3 class="heading-3">How it works</h3>
+                <p><strong>For participants :</strong></p>
                 <ul>
                     <li>You will <strong>nominate raters</strong> across five categories:
                         <ul>
@@ -49,13 +49,13 @@
             </div>
 
             <div class="grid bg_two" id="divContent_2" attr="PED" runat="server">
-                <h3 class="heading-3">ABOUT THE SURVEY</h3>
+                <h3 class="heading-3">About the Survey</h3>
                 <p>As part of Deloitte&rsquo;s commitment to fostering growth and development, the <strong>360-Degree Feedback Program for FY25</strong> provides valuable insights into your leadership capabilities and personal attributes. Aligned with the <strong>Deloitte Future Leaders Framework</strong>, this initiative gathers feedback from multiple sources, including <strong>peers, direct reports, managers, coaches, and stakeholders</strong>, to offer a well-rounded perspective on your strengths and areas for growth.</p>
 
 
-                <h3 class="heading-3">HOW IT WORKS</h3>
+                <h3 class="heading-3">How it works</h3>
                 <p>
-                    <strong>FOR PARTICIPANTS</strong><br />
+                    <strong>For participants</strong><br />
                 </p>
                 <ul>
                     <li>You will <strong>nominate raters</strong> across five categories:</li>
@@ -69,7 +69,7 @@
                     <li>A <strong>minimum of two raters per category</strong> ensures confidentiality.</li>
                     <li>Once submitted, your <strong>CDA will review and approve</strong> your nominations.</li>
                 </ul>
-
+                <br />
                 <p>
                     <strong>For CDA (Nomination Approval)</strong><br />
                 </p>

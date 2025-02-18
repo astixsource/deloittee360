@@ -223,7 +223,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <!--Ques Heading-->
     <div class="section-title">
-        <h3 class="text-center">WELCOME TO 360 Feedback Survey FY 2025</h3>
+        <h3 class="text-center">WELCOME TO 360 Feedback Survey FY25</h3>
         <div class="title-line-center"></div>    
         <span class="text-center" id="h6">Please respond to each statement on the scale provided alongside from "Always" to "Rarely". You may ‘Save’ your responses to leave and come back later to complete the rest of the Survey.</span>
     </div>
@@ -276,9 +276,9 @@
                     </tr>
                     <tr>
                         <td>
-                            <strong>Cannot Rate</strong>
+                            <strong>No Rating</strong>
                         </td>
-                        <td>In case this behavior is not applicable to this professional.</td>
+                        <td>In case this behaviour is not applicable to this professional.</td>
                     </tr>
                 </tbody>
             </table>
@@ -308,7 +308,7 @@
                         <th style="width: 14.28%; text-align: center; padding: 5px;"><span id="Label2">Sometimes</span></th>
                         <th style="width: 14.28%; text-align: center; padding: 5px;"><span id="Label3">Occasionally</span></th>
                         <th style="width: 14.28%; text-align: center; padding: 5px;"><span id="Label4">Rarely</span></th>
-                        <th style="width: 14.28%; text-align: center; padding: 5px;"><span id="Label5">Cannot Rate</span></th>
+                        <th style="width: 14.28%; text-align: center; padding: 5px;"><span id="Label5">No Rating</span></th>
                     </tr>
                 </thead>
             </table>

@@ -13,7 +13,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="section-title">
-        <h3 class="text-center">360-Degree Feedback Dashboard</h3>
+        <h4 class="text-center">360-Degree Feedback Dashboard</h4>
         <div class="title-line-center"></div>
     </div>
 
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="col-4" id="div3" runat="server">
-            <h6 class="text-center">For participants and raters: Click on ‘Start Survey’ to submit feedback:</h6>
+            <h6 class="text-center">For Participants and Raters: Click on ‘Start Survey’ to submit feedback:</h6>
             <div class="btn-img" onclick="fnOPenPage(3)">
                 <img src="../Images/3-nom.svg" alt="" class="" />
             </div>

@@ -105,7 +105,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                                 }
                                 else
                                 {
-                                    lst.Text = dr["RltshpID"].ToString()=="1"? (levelid == "2" ? "Career Development Advisor (CDA)" : dr["Descr"].ToString())+ " (Auto populated)" : dr["Descr"].ToString() + " (Min. " + dr["minNominationperCategory"].ToString() + ")";
+                                    lst.Text = dr["RltshpID"].ToString()=="1"? (levelid == "2" ? "CDA" : dr["Descr"].ToString())+ " (Auto populated)" : dr["Descr"].ToString() + " (Min. " + dr["minNominationperCategory"].ToString() + ")";
                                 }
                                 lst.Value = dr["RltshpID"].ToString();
                                 lst.Attributes.Add("rptxt", dr["Descr"].ToString());
@@ -409,7 +409,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                                 sb.Append("<tr flg='1' flgSubmittedForApproval='"+ flgSubmittedForApproval.ToString()+ "' flgvalid='" + (Convert.ToInt32(dt.Rows[i]["flgApproved"]) == 2 ? "0" : "1") + "' nomineid='" + dt.Rows[i]["NodeId"].ToString() + "' rpid='" + dt.Rows[i]["RltshpID"].ToString() + "' newrpid='"+ dt.Rows[i]["RltshpID"].ToString() + "'>");
                                 if (levelid == "2" && dt.Rows[i]["RltshpID"].ToString()=="1")
                                 {
-                                    sb.Append("<td>Career Development Advisor (CDA)</td>");
+                                    sb.Append("<td>CDA</td>");
                                 }
                                 else
                                 {
