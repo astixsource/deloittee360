@@ -36,7 +36,7 @@ public partial class frmUndertakingPage : System.Web.UI.Page
         if (!IsPostBack)
         {
             hdnLoginId.Value = Session["LoginId"].ToString();
-            hdnLevelId.Value = Session["LevelId"].ToString();
+           // hdnLevelId.Value = Session["LevelId"].ToString();
         }
         Panel panelLogout;
         panelLogout = (Panel)Page.Master.FindControl("panelLogout");

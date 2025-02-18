@@ -556,7 +556,7 @@
                         str += "<td>" + ui.item.Department + "</td>";
                         str += "<td>" + ui.item.Designation + "</td>";
                         str += "<td>Initial draft</td>";
-                        str += "<td class='text-center'><i class='fa fa-pencil' onclick='fnEditCategory(this)' title='click to edit' style='cursor:pointer'></i> <i class='fa fa-trash-o' onclick='fnRemoveFromDB(this)' style='color:red;cursor:pointer;margin-left:5px' title='click to delete'></i></td>";
+                        str += "<td class='text-center'><i class='fa fa-pencil' onclick='fnEditCategory(this)' title='click to edit' style='cursor:pointer'></i> <i class='fa fa-trash-o' onclick='fnRemoverow(this)' style='color:red;cursor:pointer;margin-left:5px' title='click to delete'></i></td>";
                         str += "</tr>";
                         $("#tblMainNominee tbody").find("td.dt-empty").closest("tr").remove();
                         $("#tblMainNominee tbody").append(str);
