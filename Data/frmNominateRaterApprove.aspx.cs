@@ -54,7 +54,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                 divContent_1.Style.Add("display", "none");
             }
 
-            fnFillCycle();
+            // fnFillCycle();
             fnGetApseListForManager();
         }
     }
@@ -83,9 +83,9 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
         return "";
     }
 
-    public void fnFillCycle()
+    public static string fnFillCycle(string levelid)
     {
-        string levelid = hdnLevelId.Value;
+        string strRes = "";
         using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
         {
             using (SqlCommand command = new SqlCommand("spFillRltshp", Scon))
@@ -97,6 +97,10 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                     using (DataTable dt = new DataTable())
                     {
                         da.Fill(dt);
+                        StringBuilder stringBuilder = new StringBuilder();
+
+                        stringBuilder.Append("<option value='0' minNominationperCategory='0' selected>-----</option>");
+
                         foreach (DataRow dr in dt.Rows)
                         {
                             if (dr["RltshpID"].ToString() != "4")
@@ -104,18 +108,15 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                                 ListItem lst = new ListItem();
                                 if (dr["minNominationperCategory"].ToString() == "0")
                                 {
-                                    lst.Text = dr["Descr"].ToString() + " (Optional)";
+                                    stringBuilder.Append("<option value='" + dr["RltshpID"].ToString() + "' minNominationperCategory='" + dr["minNominationperCategory"].ToString() + "'>" + dr["Descr"].ToString() + " (Optional)</option>");
                                 }
                                 else
                                 {
-                                    lst.Text = dr["RltshpID"].ToString() == "1" ? (levelid == "2" ? "CDA" : dr["Descr"].ToString()) + " (Auto populated)" : dr["Descr"].ToString() + " (Min. " + dr["minNominationperCategory"].ToString() + ")";
+                                    stringBuilder.Append("<option value='" + dr["RltshpID"].ToString() + "' minNominationperCategory='" + dr["minNominationperCategory"].ToString() + "'>" + (dr["RltshpID"].ToString() == "1" ? ((levelid == "2" ? "CDA" : dr["Descr"].ToString()) + " (Auto populated)") : dr["Descr"].ToString() + " (Min. " + dr["minNominationperCategory"].ToString() + ")") + "</option>");
                                 }
-                                lst.Value = dr["RltshpID"].ToString();
-                                lst.Attributes.Add("rptxt", dr["Descr"].ToString());
-                                lst.Attributes.Add("minNominationperCategory", dr["minNominationperCategory"].ToString());
-                                ddlRelatioShip.Items.Add(lst);
                             }
                         }
+                        strRes = stringBuilder.ToString();
                         //ddlRelatioShip.DataSource = dt;
                         //ddlRelatioShip.DataTextField = "Descr";
                         //ddlRelatioShip.DataValueField = "RltshpID";
@@ -124,6 +125,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                 }
             }
         }
+        return strRes;
     }
     public void fnGetApseListForManager()
     {
@@ -175,7 +177,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
     public static string fnGetNomineeDetails(int loginId, int EmpNodeId)
     {
         string jsonData = "";
-        string levelid = Convert.ToString(HttpContext.Current.Session["LevelId"]);
+        string levelid = "0";
         try
         {
             using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
@@ -208,7 +210,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                                     //{
                                     //    sb.Append("<td class='text-center'></td>");
                                     //}
-
+                                    levelid = dt.Rows[i]["LevelID"].ToString();
                                     if (dt.Rows[i]["LevelID"].ToString() == "2" && dt.Rows[i]["RltshpID"].ToString() == "1")
                                     {
                                         sb.Append("<td>CDA</td>");
@@ -240,7 +242,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                                 sb.Append("<tr><td colspan='8' class='dt-empty p-2 text-center'>Rater nominations are not available yet</td></tr>");
                             }
 
-                            jsonData = "1|" + sb.ToString();
+                            jsonData = "1|" + sb.ToString() + "|" + fnFillCycle(levelid);
                         }
                     }
                 }

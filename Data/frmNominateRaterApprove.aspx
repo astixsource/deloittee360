@@ -345,11 +345,13 @@
                     fnShowmsg("Error:" + result.split("|")[1]);
                 } else {
                     $("#tblMainNominee tbody").html(result.split("|")[1]);
+
                     if ($("#tblMainNominee tbody tr[flgApproved='1']").length > 0) {
                         $("#btnSave,#btnAdd").prop("disabled", true);
                         $("#divaddratercon").hide();
                     }
                     else {
+                        $("#MainContent_ddlRelatioShip").html(result.split("|")[2]);
                         $("#btnSave,#btnAdd").prop("disabled", false);
                         fnGetNominateList(LoginId, nodeid);
                     }
