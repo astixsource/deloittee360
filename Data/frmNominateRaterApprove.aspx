@@ -909,7 +909,7 @@
                             <table>
                                 <tr>
                                     <td><i class="fa fa-circle" aria-hidden="true" style="color: #e1ac43; font-size: 15pt"></i></td>
-                                    <td><strong>Pending Submission</strong> - Team Member is yet to raise the 360 nominations</td>
+                                    <td><strong>Pending submission</strong> - Team Member is yet to raise the 360 nominations</td>
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-circle" aria-hidden="true" style="color: #53cd8e; font-size: 15pt"></i></td>
@@ -917,7 +917,7 @@
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-refresh" aria-hidden="true" style="background-color: #5aadf9; color: #fff; padding: 2px;"></i></td>
-                                    <td><b>Pending Approval</b> - 360 nominations waiting for your approval.</td>
+                                    <td><b>Pending approval</b> - 360 nominations waiting for your approval.</td>
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-check-square" aria-hidden="true" style="color: #59d68e; font-size: 15pt"></i></td>
@@ -948,7 +948,7 @@
                             <table>
                                 <tr>
                                     <td><i class="fa fa-circle" aria-hidden="true" style="color: #e1ac43; font-size: 15pt"></i></td>
-                                    <td><strong>Pending Submission</strong> - Team member is yet to raise the 360 nominations</td>
+                                    <td><strong>Pending submission</strong> - Team member is yet to raise the 360 nominations</td>
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-circle" aria-hidden="true" style="color: #53cd8e; font-size: 15pt"></i></td>
@@ -956,7 +956,7 @@
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-refresh" aria-hidden="true" style="background-color: #5aadf9; color: #fff; padding: 2px;"></i></td>
-                                    <td><b>Pending Approval</b> - 360 nominations waiting for your approval.</td>
+                                    <td><b>Pending approval</b> - 360 nominations waiting for your approval.</td>
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-check-square" aria-hidden="true" style="color: #59d68e; font-size: 15pt"></i></td>

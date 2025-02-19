@@ -962,11 +962,11 @@
                 For each category, please ensure you meet the minimum nomination requirements as mentioned below:
                <ul>
                    <ul>
-                       <li><strong>Direct Reports</strong> (minimum. 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
+                       <li><strong>Direct reports</strong> (minimum. 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
                        <li><strong>Peers</strong> (Min. 2) &ndash; Would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
-                       <li><strong>Review Partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
-                       <li><strong>Reporting Manager (RM)/Coach</strong> &ndash; Auto-added, with an option to add more raters</li>
-                       <li><strong>Other Stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M,B&amp;C, Talent, RRO, Admin, IT, etc.</li>
+                       <li><strong>Review partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
+                       <li><strong>Reporting manager (RM)/Coach</strong> &ndash; Auto-added, with an option to add more raters</li>
+                       <li><strong>Other stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M,B&amp;C, Talent, RRO, Admin, IT, etc.</li>
                        <li>For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with @deloitte.com.</li>
                    </ul>
                </ul>
@@ -978,11 +978,11 @@
                For each category, please ensure you meet the minimum nomination requirements as mentioned below:
                 <ul>
                     <ul>
-                        <li><strong>Direct Reports</strong> (minimum 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
+                        <li><strong>Direct reports</strong> (minimum 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
                         <li><strong>Peers</strong> (Min. 2) &ndash; Would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
-                        <li><strong>Review Partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
+                        <li><strong>Review partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
                         <li><strong>Career Development Advisor (CDA)</strong> &ndash; Auto-added</li>
-                        <li><strong>Other Stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M, B&amp;C, Talent, RRO, Admin, IT, etc.</li>
+                        <li><strong>Other stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M, B&amp;C, Talent, RRO, Admin, IT, etc.</li>
                         <li>For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with @deloitte.com.</li>
                     </ul>
                 </ul>

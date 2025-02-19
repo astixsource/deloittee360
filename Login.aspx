@@ -74,6 +74,7 @@
         <div class="loader_bg" id="dvFadeForProcessing1" style="display:none">
             <div class="loader"></div>
         </div>
+        <div id="dvprivacy" style="display:none"></div>
 
         <asp:HiddenField runat="server" ID="hdnaccesstoken" />
     </form>

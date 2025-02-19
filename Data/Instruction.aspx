@@ -17,7 +17,7 @@
         <div class="col-md-8">
             <div class="grid bg_two">
                 <h3 class="heading-3">About the Survey</h3>
-                <p>As part of Deloitte&rsquo;s commitment to fostering growth and development, we are excited to introduce the 360-Degree Feedback Program for FY2025. This initiative is designed to provide a well-rounded perspective on leadership capabilities and personal attributes, aligned with the Deloitte Future Leaders Framework. By gathering feedback from multiple sources&mdash;including peers, direct reports, managers, coaches, and stakeholders&mdash;this program offers valuable insights into individual strengths and areas for growth.</p>
+                <p>As part of Deloitte&rsquo;s commitment to fostering growth and development, we are excited to introduce the 360-Degree Feedback Program for FY25. This initiative is designed to provide a well-rounded perspective on leadership capabilities and personal attributes, aligned with the Deloitte Future Leaders Framework. By gathering feedback from multiple sources&mdash;including peers, direct reports, managers, coaches, and stakeholders&mdash;this program offers valuable insights into individual strengths and areas for growth.</p>
                 <h3 class="heading-3">How it works</h3>
                 <p>You will see a list of stakeholders who have nominated you as a rater across different categories, including your <strong>self-rating</strong>.</p>
                 <div style="font-size: 10pt">

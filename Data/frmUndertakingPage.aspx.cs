@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Web.Security;
 using System.Xml;
 using System.IO;
+using Azure.Core;
 
 public partial class frmUndertakingPage : System.Web.UI.Page
 {
@@ -28,15 +29,18 @@ public partial class frmUndertakingPage : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["LoginID"] == null)
+        if (Request.QueryString["flg"] != "1")
         {
-            Response.Redirect("../Login.aspx");
-            return;
-        }
-        if (!IsPostBack)
-        {
-            hdnLoginId.Value = Session["LoginId"].ToString();
-           // hdnLevelId.Value = Session["LevelId"].ToString();
+            if (Session["LoginID"] == null)
+            {
+                Response.Redirect("../Login.aspx");
+                return;
+            }
+            if (!IsPostBack)
+            {
+                hdnLoginId.Value = Session["LoginId"].ToString();
+                // hdnLevelId.Value = Session["LevelId"].ToString();
+            }
         }
         Panel panelLogout;
         panelLogout = (Panel)Page.Master.FindControl("panelLogout");
