@@ -53,6 +53,10 @@ Partial Class LoginPageFirst
     '    dvMessage.InnerText = ""
     'End Sub
 
+
+    Protected Sub btnLoginSSO_Click(sender As Object, e As EventArgs)
+        Response.Redirect("~/LoginPageSSO.aspx")
+    End Sub
 End Class
 
 

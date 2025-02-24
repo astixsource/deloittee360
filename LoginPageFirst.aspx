@@ -55,7 +55,7 @@
                                     <input type="text" id="txtLoginID" class="form-control" disabled />
                                 </div>
                             </div>
-                            <input type="button" id="btnLoginSSO" value="Log-in with SSO" class="btns btn-submit w-100" />
+                            <asp:Button ID="btnLoginSSO" Text="Log-in with SSO" runat="server" CssClass="btns btn-submit w-100" OnClick="btnLoginSSO_Click"  />
                             <input type="button" id="btnLogin" value="Log-in with password" class="btns btn-submit w-100" />
                             <div class="text-center">
                                 <div id="dvMessage" runat="server" class="text-danger font-weight-bold"></div>
