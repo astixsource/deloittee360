@@ -108,11 +108,11 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                                 ListItem lst = new ListItem();
                                 if (dr["minNominationperCategory"].ToString() == "0")
                                 {
-                                    stringBuilder.Append("<option value='" + dr["RltshpID"].ToString() + "' minNominationperCategory='" + dr["minNominationperCategory"].ToString() + "'>" + dr["Descr"].ToString() + " (Optional)</option>");
+                                    stringBuilder.Append("<option value='" + dr["RltshpID"].ToString() + "' minNominationperCategory='" + dr["minNominationperCategory"].ToString() + "' rptxt='"+ dr["Descr"].ToString() + "'>" + dr["Descr"].ToString() + " (Optional)</option>");
                                 }
                                 else
                                 {
-                                    stringBuilder.Append("<option value='" + dr["RltshpID"].ToString() + "' minNominationperCategory='" + dr["minNominationperCategory"].ToString() + "'>" + (dr["RltshpID"].ToString() == "1" ? ((levelid == "2" ? "CDA" : dr["Descr"].ToString()) + " (Auto populated)") : dr["Descr"].ToString() + " (Min. " + dr["minNominationperCategory"].ToString() + ")") + "</option>");
+                                    stringBuilder.Append("<option value='" + dr["RltshpID"].ToString() + "' minNominationperCategory='" + dr["minNominationperCategory"].ToString() + "'  rptxt='"+ dr["Descr"].ToString() + "'>" + (dr["RltshpID"].ToString() == "1" ? ((levelid == "2" ? "CDA" : dr["Descr"].ToString()) + " (Auto populated)") : dr["Descr"].ToString() + " (Min. " + dr["minNominationperCategory"].ToString() + ")") + "</option>");
                                 }
                             }
                         }

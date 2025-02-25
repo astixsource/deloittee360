@@ -18,7 +18,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8e65c428-4694-421a-825d-4d868eebdf62}</ProjectGuid>
     <SourceWebPhysicalPath>$(MSBuildThisFileDirectory)</SourceWebPhysicalPath>
-    <SourceWebVirtualPath>/Deloittee360</SourceWebVirtualPath>
+    <SourceWebVirtualPath>/Deloittee360_Development</SourceWebVirtualPath>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <SourceWebProject>
     </SourceWebProject>
