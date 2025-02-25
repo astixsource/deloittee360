@@ -353,14 +353,14 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                     command.Parameters.AddWithValue("@flgSubmit", 1);
                     using (SqlDataAdapter da = new SqlDataAdapter(command))
                     {
-                        using (DataTable dt = new DataTable())
+                        using (DataSet ds = new DataSet())
                         {
-                            da.Fill(dt);
+                            da.Fill(ds);
                             if (flg == 1)
                             {
-                                if (dt.Rows.Count > 0)
+                                if (ds.Tables[0].Rows.Count > 0)
                                 {
-                                    string strStatus = fnSendMailToUsers(LevelId, Convert.ToString(dt.Rows[0]["ParticipantName"]), "", "", Convert.ToString(dt.Rows[0]["ParticipantEMailID"]), "");
+                                    string strStatus = fnSendMailToUsers(LevelId, Convert.ToString(ds.Tables[0].Rows[0]["ParticipantName"]), "", "", Convert.ToString(ds.Tables[0].Rows[0]["ParticipantEMailID"]), Convert.ToString(ds.Tables[0].Rows[0]["DeadlineDate"]), "", ds.Tables[1]);
                                 }
                             }
                         }
@@ -419,10 +419,8 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
 
 
 
-    public static string fnSendMailToUsers(int LevelId, string FName, string UserName, string Password, string MailTo, string Comment)
+    public static string fnSendMailToUsers(int LevelId, string FName, string UserName, string Password, string MailTo, string DeadlineDate, string Comment, DataTable dtRelationShipData)
     {
-
-
         string strRespoonse = "1";
         try
         {
@@ -491,10 +489,28 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
 
                 //[[List of raters & relationship]] Will Come Here
 
+                strBody.Append("<table cellpadding='0' cellspacing='0' style='width:60%;'>");
+                strBody.Append("<tr><td style='text-align:center; border: 1px solid #666666; background: #44546a; width: 20%;color:white;'>Rater Name</td><td style='text-align:center; border: 1px solid #666666; background: #44546a;width: 20%;color:white;'>Relationship</td></tr>");
+
+                foreach (DataRow dr in dtRelationShipData.Rows)
+                {
+                    strBody.Append("<tr>");
+                    string RaterName = dr["RaterName"].ToString();
+                    string Relationship = dr["Relationship"].ToString();
+
+
+                    strBody.Append("<td style='text-align:center; border: 1px solid #666666; background: white; width: 20%;color:black;'>" + RaterName + "</td>");
+                    strBody.Append("<td style='text-align:center; border: 1px solid #666666; background: White; width: 20%;color:black;'>" + Relationship + "</td>");
+                    strBody.Append("</tr>");
+
+                }
+
+                strBody.Append("</table>");
+
                 strBody.Append("<p>Complete your Self Assessment which is designed to evaluate various competencies aligned with your professional development goals.</p>");
 
                 //strBody.Append("<p>Your timely review will help ensure a smooth and effective feedback process. Should you have any questions or need assistance, please reach out to : <a style = 'COLOR: #000000; FONT-weight: bold' href = mailto:demer@deloitte.com> (demer@deloitte.com)</a>.</p>");
-                strBody.Append("<p><strong>Timeline:</strong> Kindly complete the survey by <strong>20-Feb-2025</strong>.</p>");
+                strBody.Append("<p><b>Timeline:</b> Kindly complete the survey by  " + DeadlineDate + " .</p>");
                 strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on : <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
                 strBody.Append("<p><b>Regards,</b></p>");
                 strBody.Append("<p><b>Talent team</b></p>");
