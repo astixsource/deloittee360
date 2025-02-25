@@ -40,6 +40,7 @@ Partial Class LoginPageSSO
                 End Using
                 Dim userEmail As String = obj.fnGetUserDetail().Result
                 dvMessage.InnerHtml = emailId & ":" & userEmail
+                fnSignIn(userEmail)
             Catch ex As Exception
                 dvMessage.InnerHtml = ex.Message
                 Using logfile As New StreamWriter(Logpath, True)
@@ -47,10 +48,10 @@ Partial Class LoginPageSSO
                     logfile.WriteLine("Token:" & ex.Message)
                 End Using
             End Try
-            'fnSignIn(emailId, "")
+
         End If
     End Sub
-    Private Sub fnSignIn(ByVal emailId As String, ByVal gpId As String)
+    Private Sub fnSignIn(ByVal emailId As String)
         Dim strTicket As String
         Dim roleID As String
         Dim PassExpired As String = "0"
@@ -66,7 +67,7 @@ Partial Class LoginPageSSO
         objCom.CommandTimeout = 0
         Dim strConn As String = Convert.ToString(HttpContext.Current.Application("DbConnectionString"))
         objCon = New SqlConnection(strConn.Split("|")(0))
-        objCom = New SqlCommand("spSecUserLogin", objCon)
+        objCom = New SqlCommand("spSecUserLoginSSO", objCon)
         objCom.Parameters.AddWithValue("@UserName", ReplaceQuotes(Trim(HttpUtility.HtmlEncode(emailId))))
         objCom.Parameters.AddWithValue("@Password", ReplaceQuotes(Trim(HttpUtility.HtmlEncode(emailId))))
         objCom.Parameters.AddWithValue("@SessionID", HttpContext.Current.Session.SessionID)
@@ -80,7 +81,7 @@ Partial Class LoginPageSSO
         If objdr.HasRows Then
             objdr.Read()
             If (objdr("LoginID") = 0) Then
-                dvMessage.InnerText = "Invalid Login-Id or Password. Try Again !!"
+                dvMessage.InnerText = "This email (" & emailId & ") is not registedred in our system!"
             Else
                 HttpContext.Current.Session("RId") = objdr.Item("RoleID")
                 HttpContext.Current.Session("LoginId") = objdr.Item("LoginID")
