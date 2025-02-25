@@ -299,11 +299,10 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress("VAC Manager<" + fromMail + ">");
 
-            var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=eY/ca2ZawDDXmJx1KvbW0FXw5CbMmucrsW+mjBqE9urodCYTNJeiBeRq3vjX/s7cVlCymgjphLEPbeF9IJRSuw==";
+            var connectionString = ConfigurationManager.AppSettings["MailconnectionString"].ToString();
             var emailClient = new EmailClient(connectionString);
-
             var emailRecipients = new EmailRecipients();
-            if (ConfigurationSettings.AppSettings["flgActualUser"].ToString() == "1")
+            if (ConfigurationManager.AppSettings["flgActualUser"].ToString() == "1")
             {
                 if (MailTo != "")
                 {
@@ -314,7 +313,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                 }
 
                 // For BCC
-                string[] BCCEmailIDs = ConfigurationSettings.AppSettings["MailBcc"].Split(',');
+                string[] BCCEmailIDs = ConfigurationManager.AppSettings["MailBcc"].Split(',');
                 if (BCCEmailIDs.Length > 1)
                 {
                     for (int i = 0; i < BCCEmailIDs.Length; i++)
@@ -324,13 +323,13 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                 }
                 else
                 {
-                    emailRecipients.BCC.Add(new EmailAddress(ConfigurationSettings.AppSettings["MailBcc"]));
+                    emailRecipients.BCC.Add(new EmailAddress(ConfigurationManager.AppSettings["MailBcc"]));
                 }
 
             }
             else
             {
-                MailTo = ConfigurationSettings.AppSettings["MailTo"].ToString();
+                MailTo = ConfigurationManager.AppSettings["MailTo"].ToString();
                 if (MailTo != "")
                 {
                     for (int i = 0; i < MailTo.Split(',').Length; i++)
@@ -368,7 +367,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
 
             var emailContent = new EmailContent(msg.Subject) { PlainText = null, Html = strBody.ToString() };
             var emailMessage = new EmailMessage(
-                senderAddress: ConfigurationSettings.AppSettings["MailSender"],      //The email address of the domain registered with the Communication Services resource
+                senderAddress: ConfigurationManager.AppSettings["MailSender"],      //The email address of the domain registered with the Communication Services resource
                 recipients: emailRecipients,
                 content: emailContent);
 
