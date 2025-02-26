@@ -299,7 +299,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress("VAC Manager<" + fromMail + ">");
 
-            var connectionString = ConfigurationManager.AppSettings["MailconnectionString"].ToString();
+            var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=" + Convert.ToString(HttpContext.Current.Application["AzureMailconnectionString"]);
             var emailClient = new EmailClient(connectionString);
             var emailRecipients = new EmailRecipients();
             if (ConfigurationManager.AppSettings["flgActualUser"].ToString() == "1")

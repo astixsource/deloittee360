@@ -20,7 +20,7 @@ public class clsADUserInfo
 {
 
 	private string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
-	private string appKey = ConfigurationManager.AppSettings["ida:ClientSecret"];
+	private string appKey = Convert.ToString(HttpContext.Current.Application["SSO_clientSecret"]);
     private string TenantId = ConfigurationManager.AppSettings["ida:TenantId"];
     private string aadInstance = EnsureTrailingSlash(ConfigurationManager.AppSettings["ida:AADInstance"]);
     private string graphResourceID = "https://graph.microsoft.com";//"https://graph.windows.net";

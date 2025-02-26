@@ -432,7 +432,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress("VAC Manager<" + fromMail + ">");
 
-            var connectionString = ConfigurationManager.AppSettings["MailconnectionString"].ToString();
+            var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=" + Convert.ToString(HttpContext.Current.Application["AzureMailconnectionString"]);
             var emailClient = new EmailClient(connectionString);
 
             var emailRecipients = new EmailRecipients();

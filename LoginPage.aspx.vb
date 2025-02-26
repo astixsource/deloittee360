@@ -158,11 +158,8 @@ Partial Class Login
             'Dim strTokens = mydivant.InnerHtml
             'AntiForgery.Validate(strTokens.Split(":")(0), strTokens.Split(":")(1))
             'AntiForgery.Validate()
-            If HttpUtility.HtmlEncode(UserName) = "astix" And HttpUtility.HtmlEncode(Password) = "admin" Then
-                strResponse = "1|AdminReports/frmStatusReport.aspx"
-                'strResponse = "1|AdminReports/AdminDashboard.aspx"
-            Else
-                Dim PassChangeFirst As String = "0"
+
+            Dim PassChangeFirst As String = "0"
                 Dim flgAgreementsigned As String = "0"
                 Dim chkRoleID As String = "0"
                 Dim varAuthenticate As Boolean = False
@@ -227,6 +224,9 @@ Partial Class Login
                     ElseIf drdr.Item("flgIsManager").ToString() = 1 Then
                         strResponse = "1|Data/InstructionPage.aspx?NodeID=|" + flgAgreement
                         '  strResponse = "1|Data/frmNominateApproveNomination.aspx"  'Response.Redirect("Data/frmMain.aspx")
+                    ElseIf drdr.Item("flgIsAdmin").ToString() = 1 Then
+                        strResponse = "1|AdminReports/AdminDashboard.aspx?NodeID=|" + flgAgreement
+                        '  strResponse = "1|Data/frmNominateApproveNomination.aspx"  'Response.Redirect("Data/frmMain.aspx")
                     Else
                         strResponse = "1|Data/Instruction.aspx?NodeID=|" + flgAgreement
                         'strResponse = "1|Data/Dashboard.aspx?NodeID="
@@ -238,7 +238,7 @@ Partial Class Login
                 objCom2.Dispose()
                 Objcon2.Close()
                 Objcon2.Dispose()
-            End If
+
         Catch ex As Exception
             strResponse = "2|Error : " & ex.Message
         Finally

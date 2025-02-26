@@ -10,14 +10,18 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["LoginId"] == null)
-        {
-            Response.Redirect("../../Login.aspx");
-        }
-        else
-        {
-            dvLinks.InnerHtml = CreateLinks();
-        }
+        //if (Session["LoginId"] == null)
+        //{
+        //    Response.Redirect("../../Login.aspx");
+        //}
+        //else
+        //{
+        //    dvLinks.InnerHtml = CreateLinks();
+        //}
+        dvLinks.InnerHtml = CreateLinks();
+        Panel panelLogout;
+        panelLogout = (Panel)Page.Master.FindControl("panelLogout");
+        panelLogout.Visible = false;
     }
     private string CreateLinks()
     {
@@ -27,61 +31,39 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         sb.Append("<tr>");
         sb.Append("<td rowspan='9' style='width:170px; color:#044d91; text-align:center; font-weight: 500;text-transform: uppercase;'>Manage Process</td>");
 
-        //sb.Append("<tr>");
-        //sb.Append("<td><a href='../MasterForms/frmSendEmailInvite_AzureServices.aspx' class='btn-one col-12'>Users Invitation Mail</a></td>");
-        //sb.Append("<td>");
-        //sb.Append("<ul class='mb-0 pl-3'><li>Send Invitation Mail to Users</li></ul>");
-        //sb.Append("</td>");
-        //sb.Append("</tr>");
-        //sb.Append("</tr>");
 
         sb.Append("<tr>");
-        sb.Append("<td><a href='../MasterForms/frmSendEmailInvite_APSE_AzureServices.aspx' class='btn-one col-12'>APSE Invitation Mail : Only Self</a></td>");
+        sb.Append("<td><a href='../AdminReports/frmSendEmailInvite_ToParticipants.aspx' class='btn-one col-12'>Launch Notification</a></td>");
         sb.Append("<td>");
-        sb.Append("<ul class='mb-0 pl-3'><li>Send Invitation Mail to APSE : Only Self</li></ul>");
+        sb.Append("<ul class='mb-0 pl-3'><li>Launch Notification : To Participants</li></ul>");
         sb.Append("</td>");
         sb.Append("</tr>");
-        sb.Append("</tr>");
+   
 
         sb.Append("<tr>");
-        sb.Append("<td><a href='../MasterForms/frmSendEmailInvite_APSR_AzureServices.aspx' class='btn-one col-12'>APSR Invitation Mail : Only Raters</a></td>");
+        sb.Append("<td><a href='../AdminReports/frmSend_Review_Approve_Email_ToManager.aspx' class='btn-one col-12'>Review and Approve 360-Degree Feedback raters for your team members </a></td>");
         sb.Append("<td>");
-        sb.Append("<ul class='mb-0 pl-3'><li>Send Invitation Mail to APSR : Only Raters</li></ul>");
+        sb.Append("<ul class='mb-0 pl-3'><li>Review and Approve 360-Degree Feedback raters for your team members : To Manager </li></ul>");
         sb.Append("</td>");
         sb.Append("</tr>");
-        sb.Append("</tr>");
+   
 
         sb.Append("<tr>");
-        sb.Append("<td><a href='../MasterForms/frmSendEmailInvite_APSE_APSR_AzureServices.aspx' class='btn-one col-12'>APSE & APSR Invitation Mail: Both(Self + Rater)</a></td>");
+        sb.Append("<td><a href='../AdminReports/frmSendEmail_KickOffNotice_Mail3.aspx' class='btn-one col-12'>360 Degree Feedback for <Emp Name>: Kickoff Notice </a></td>");
         sb.Append("<td>");
-        sb.Append("<ul class='mb-0 pl-3'><li>Send Invitation Mail to APSE & APSR : Both(Self + Rater)</li></ul>");
+        sb.Append("<ul class='mb-0 pl-3'><li>360 Degree Feedback for <Emp Name>: Kickoff Notice </li></ul>");
         sb.Append("</td>");
-        sb.Append("</tr>");
         sb.Append("</tr>");
 
 
         sb.Append("<tr>");
-        sb.Append("<td><a href='../MasterForms/frmSendEmailInvite_Reminders_APSE_AzureServices.aspx' class='btn-one col-12'>APSE Reminders Mail : Only Self</a></td>");
+        sb.Append("<td><a href='../AdminReports/frmSendEmail_Feedbackforyourstakeholders_Mail4.aspx' class='btn-one col-12'>360 Degree Feedback for your stakeholders: Survey Launch </a></td>");
         sb.Append("<td>");
-        sb.Append("<ul class='mb-0 pl-3'><li>Send Reminders Mail to APSE : Only Self</li></ul>");
+        sb.Append("<ul class='mb-0 pl-3'><li>360 Degree Feedback for your stakeholders: Survey Launch </li></ul>");
         sb.Append("</td>");
-        sb.Append("</tr>");
         sb.Append("</tr>");
 
-        sb.Append("<tr>");
-        sb.Append("<td><a href='../MasterForms/frmSendEmailInvite_Reminders_APSR_AzureServices.aspx' class='btn-one col-12'>APSR Reminders Mail: Only Raters</a></td>");
-        sb.Append("<td>");
-        sb.Append("<ul class='mb-0 pl-3'><li>Send Reminders Mail to APSR : Only Raters</li></ul>");
-        sb.Append("</td>");
-        sb.Append("</tr>");
-        sb.Append("</tr>");
-
-        sb.Append("<tr>");
-        sb.Append("<td><a href='../MasterForms/frmSendEmailInvite_Reminders_APSE__APSR_AzureServices.aspx' class='btn-one col-12'>APSE & APSR Reminders Mail : Both(Self + Rater)</a></td>");
-        sb.Append("<td>");
-        sb.Append("<ul class='mb-0 pl-3'><li>Send Reminders Mail to APSR & APSR : Both(Self + Rater)</li></ul>");
-        sb.Append("</td>");
-        sb.Append("</tr>");
+       
         sb.Append("</tr>");
         return sb.ToString();
     }
