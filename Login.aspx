@@ -20,7 +20,7 @@
 
     <!-- jQuery -->
     <script src="Scripts/jqueryJS.js"></script>
-    <script src="Scripts/loginJS.js"></script>
+    <script src="Scripts/loginJS1.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -54,7 +54,6 @@
                                     <input type="text" id="txtLoginID" class="form-control" placeholder="Enter your Email" autocomplete="off" />
                                 </div>
                             </div>
-                            <input type="button" id="btnLogin" value="Next" class="btns btn-submit w-100" />
                             <div class="text-center">
                                 <div id="dvMessage" runat="server" class="text-danger font-weight-bold"></div>
                             </div>
