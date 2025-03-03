@@ -53,14 +53,14 @@
                         </span></a>
                     <!-- Header Navbar: style can be found in header.less -->
                     <div class="navbar-right">
+                        <asp:Panel ID="panelLogout" runat="server">
                         <ul class="navtop">
                             <li>
-                                <asp:Panel ID="panelLogout" runat="server">
                                     <a href="frmNominateApproveNomination.aspx" class="link-btn" title="click to back home"><span class="fa fa-home"></span></a>
-                                </asp:Panel>
                             </li>
                             <li><a href="###" onclick="fnnLogout()" class="link-btn" title="click to logout"><span class="fa fa-sign-out"></span></a></li>
                         </ul>
+                             </asp:Panel>
                     </div>
                 </div>
             </div>

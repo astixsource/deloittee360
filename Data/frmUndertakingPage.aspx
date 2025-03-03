@@ -169,9 +169,15 @@
     </div>
 
     <div class="text-center">
+        
+          <asp:Button ID="btnback" class="btns btn-submit" runat="server" Text="Back" OnClick="btnback_Click" />
+        <div id="dvbtncontainer" runat="server">
+
+       
         <input type="Checkbox" id="chkAgree" />
         <input type="button" id="btnAgree" value="I Agree" class="btns btn-submit" onclick="fnChkAgree()" />
         <asp:Button ID="btnSubmit" Style="display: none" runat="server" Text="I Agree" OnClick="btnSubmit_Click" />
+             </div>
     </div>
     <div id="dvMsg" runat="server" class="m-3"></div>
     <%--   <input type="hidden" id="hdnAgree" runat="server" value="0">--%>

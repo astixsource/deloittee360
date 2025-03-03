@@ -29,8 +29,10 @@ public partial class frmUndertakingPage : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request.QueryString["flg"] != "1")
+        if (Request.QueryString["flg"] == "1")
         {
+            btnback.Visible = false;
+            dvbtncontainer.Visible = true;
             if (Session["LoginID"] == null)
             {
                 Response.Redirect("../Login.aspx");
@@ -42,9 +44,15 @@ public partial class frmUndertakingPage : System.Web.UI.Page
                 // hdnLevelId.Value = Session["LevelId"].ToString();
             }
         }
-        Panel panelLogout;
-        panelLogout = (Panel)Page.Master.FindControl("panelLogout");
-        panelLogout.Visible = false;
+        else
+        {
+            Panel panelLogout;
+            panelLogout = (Panel)Page.Master.FindControl("panelLogout");
+            panelLogout.Visible = false;
+            dvbtncontainer.Visible = false;
+            btnback.Visible = true;
+        }
+          
 
 
 
@@ -69,7 +77,6 @@ public partial class frmUndertakingPage : System.Web.UI.Page
              cmd.ExecuteNonQuery();
             strReturn = "1^";
             cmd.Dispose();
-
 			Response.Redirect("../"+Request.QueryString["str"].ToString());
         }
         catch (Exception ex)
@@ -85,5 +92,10 @@ public partial class frmUndertakingPage : System.Web.UI.Page
         }
 
         
+    }
+
+    protected void btnback_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Login.aspx");
     }
 }

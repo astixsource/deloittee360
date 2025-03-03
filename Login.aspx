@@ -55,6 +55,7 @@
                                 </div>
                             </div>
                             <input type="button" id="btnLogin" value="Next" class="btns btn-submit w-100" />
+                            <a href="Data/frmUndertakingPage.aspx" style="font-size:11px;font-style:italic">Privacy Statement</a>
                             <div class="text-center">
                                 <div id="dvMessage" runat="server" class="text-danger font-weight-bold"></div>
                             </div>

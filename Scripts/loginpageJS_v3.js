@@ -80,7 +80,7 @@ function fnSendLogin() {
                     window.location.href = strRep.split("|")[1];
                 }
                 else {
-                    window.location.href ="Data/frmUndertakingPage.aspx?str="+strRep.split("|")[1];
+                    window.location.href ="Data/frmUndertakingPage.aspx?flg=1&str="+strRep.split("|")[1];
                 }
             }
             else {
