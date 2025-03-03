@@ -51,6 +51,9 @@ public class clsADUserInfo
         string mail = data["mail"];
         return mail;
     }
+
+
+
     public async Task<string> fnGetToken()
     {
         return await GetTokenForApplication();

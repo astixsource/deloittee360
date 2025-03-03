@@ -1,11 +1,12 @@
 ﻿Imports System.Web.Security
 Imports System.Data.SqlClient
 Imports Microsoft.Owin.Security.OpenIdConnect
-Imports Microsoft.Owin.Security
 Imports System.Data
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
 Imports Azure.Communication
 Imports System.IO
+Imports System.Security.Claims
+Imports Microsoft.Owin.Security
 
 Partial Class LoginPageSSO
     Inherits System.Web.UI.Page
@@ -28,24 +29,49 @@ Partial Class LoginPageSSO
             }, OpenIdConnectAuthenticationDefaults.AuthenticationType)
             Return
         Else
+            Dim emailId As String = ""
+            Dim userEmail As String = ""
+            Dim upn As String = ""
+            Dim name As String = ""
             Try
 
+                Dim user As ClaimsIdentity = TryCast(HttpContext.Current.GetOwinContext().Authentication.User.Identity, ClaimsIdentity)
+                Using logfile As New StreamWriter(Logpath, True)
+                    If user IsNot Nothing Then
+                        'For Each claim As Claim In user.Claims
+                        '    logfile.WriteLine("Claim Type:" & claim.Type & ", Value" & claim.Value)
+                        'Next
 
-                Dim obj As New clsADUserInfo()
-                Dim token As String = obj.fnGetToken().Result
-                Dim emailId = HttpContext.Current.GetOwinContext().Authentication.User.FindAll("email").FirstOrDefault.Value
+                        emailId = user.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")?.Value
+                        upn = user.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn")?.Value
+                        name = user.FindFirst("name")?.Value
+                        userEmail = user.FindFirst(ClaimTypes.Email)?.Value
+                    End If
+
+
+                End Using
+
+                'Dim token As String = obj.fnGetToken().Result
                 Using logfile As New StreamWriter(Logpath, True)
                     logfile.WriteLine("Date- " & DateTime.Now.ToString())
-                    logfile.WriteLine("Token:" & token)
+                    ' logfile.WriteLine("Token:" & token)
+                    logfile.WriteLine("emailId:" & emailId)
+                    logfile.WriteLine("upn:" & upn)
+                    logfile.WriteLine("name:" & name)
+                    logfile.WriteLine("userEmail:" & userEmail)
                 End Using
-                Dim userEmail As String = obj.fnGetUserDetail().Result
-                dvMessage.InnerHtml = emailId & ":" & userEmail
-                fnSignIn(userEmail)
+                'Dim userEmail As String = obj.fnGetUserDetail().Result
+                dvMessage.InnerHtml = emailId '& ":" & userEmail
+                fnSignIn(emailId)
             Catch ex As Exception
                 dvMessage.InnerHtml = ex.Message
                 Using logfile As New StreamWriter(Logpath, True)
                     logfile.WriteLine("Date- " & DateTime.Now.ToString())
-                    logfile.WriteLine("Token:" & ex.Message)
+                    ' logfile.WriteLine("Token:" & token)
+                    logfile.WriteLine("emailId:" & emailId)
+                    logfile.WriteLine("upn:" & upn)
+                    logfile.WriteLine("name:" & name)
+                    logfile.WriteLine("userEmail:" & userEmail)
                 End Using
             End Try
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Login.aspx.vb" Inherits="Login" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" EnableEventValidation="false" CodeFile="Login.aspx.vb" Inherits="Login" %>
 
 <!DOCTYPE html>
 <html>
@@ -20,7 +20,7 @@
 
     <!-- jQuery -->
     <script src="Scripts/jqueryJS.js"></script>
-    <script src="Scripts/loginJS1.js"></script>
+    <script src="Scripts/loginJS2.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -31,7 +31,7 @@
             <div class="main-header">
                 <div class="container">
                     <!-- Logo -->
-                    <a href="#" class="logo">
+                    <a href="####" class="logo">
                         <!-- logo for regular state and mobile devices -->
                         <span class="logo-lg">
                             <asp:Image ID="imgTopLeftLogo" runat="server" ImageUrl="~/Images/Deloitte-logo_White.png" />
@@ -54,6 +54,7 @@
                                     <input type="text" id="txtLoginID" class="form-control" placeholder="Enter your Email" autocomplete="off" />
                                 </div>
                             </div>
+                            <input type="button" id="btnLogin" value="Next" class="btns btn-submit w-100" />
                             <div class="text-center">
                                 <div id="dvMessage" runat="server" class="text-danger font-weight-bold"></div>
                             </div>
@@ -73,9 +74,8 @@
         <div class="loader_bg" style="display:none" id="dvFadeForProcessing">
      <div class="loader"></div>
  </div>
-        <div id="dvprivacy" style="display:none"></div>
-
-        <asp:HiddenField runat="server" ID="hdnaccesstoken" />
+        <asp:HiddenField runat="server" ID="hiddenCSRFToken" />
+<asp:HiddenField ID="hdnEmailId" runat="server" />
     </form>
 </body>
 </html>

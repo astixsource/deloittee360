@@ -19,8 +19,8 @@
         if (Application["DbConnectionString"] == null)
         {
             string keyVaultUri = ConfigurationManager.AppSettings["_AzureKeyVaultUri"];
-            string _server = "srv-sqldeloitte.database.windows.net";// ConfigurationManager.AppSettings["_server"];
-            string _database = "db_Deloitte_HCAS_360_Dev";// ConfigurationManager.AppSettings["_database"];
+            string _server = ConfigurationManager.AppSettings["_server"];
+            string _database =ConfigurationManager.AppSettings["_database"];
             string _tenantId = ConfigurationManager.AppSettings["_tenantId"];
             string _clientId = ConfigurationManager.AppSettings["_clientId"];
             string _token = "";

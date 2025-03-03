@@ -21,15 +21,19 @@ Partial Class LoginPageFirst
 
     Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load, Me.Load
         'btnLogin.Attributes.Add("onclick", "javascript:return fnValidate()")
-        If Page.IsPostBack = False Then
+        If Session("UserExistEmail") Is Nothing Then
+            Response.Redirect("~/Login.aspx")
+            Return
+        End If
 
-            Session.Abandon()
-            Session.Clear()
-            Session.RemoveAll()
-            Response.Cookies.Add(New HttpCookie("ASP.NET_SessionId", ""))
+        If Session("UserExistEmail") <> Request.QueryString("Email") Then
+            Response.Redirect("~/Login.aspx")
+            Return
+        End If
+
+        If Page.IsPostBack = False Then
             Email = Request.QueryString("Email")
             hdnEmailId.Value = Email.ToString()
-
         End If
     End Sub
 

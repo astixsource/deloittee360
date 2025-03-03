@@ -15,6 +15,13 @@ $(document).ready(function () {
     $("#btnLogin").click(function () {
         fnSendLogin();
     })
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Prevent form submission
+            fnSendLogin();
+        }
+    });
 })
 
 function fnReset() {
@@ -57,31 +64,32 @@ function fnSendLogin() {
     //    return false;
     //}
     var UserName = document.getElementById("txtLoginID").value;
-    window.location.href = "LoginPageFirst.aspx?Email=" + UserName;
-    /*var Password = document.getElementById("txtPassword").value;*/
+    var csrfToken = document.getElementById("hiddenCSRFToken").value;
     $("#dvFadeForProcessing").show();
-    //$.ajax({
-    //    url: "Login.aspx/fnLoginFromDB",
-    //    type: "POST",
-    //    contentType: "application/json; charset=utf-8",
-    //    dataType: "json",
-    //    data: '{UserName:' + JSON.stringify(UserName) + '}',
-    //    success: function (response) {
-    //        $("#dvFadeForProcessing").css("display", "none");
-    //        var strRep = response.d;
+    $.ajax({
+        url: "Login.aspx/fnLoginFromDB",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            "X-CSRF-Token": csrfToken
+        },
+        data: '{UserName:' + JSON.stringify(UserName) + '}',
+        success: function (response) {
+            $("#dvFadeForProcessing").css("display", "none");
+            var strRep = response.d;
 
-    //        $("#dvFadeForProcessing").hide();
-    //        if (strRep.split("|")[0] == 1) {
-    //            //$("#dvFadeForProcessing").show();
-    //            window.location.href = strRep.split("|")[1];
-    //        }
-    //        else {
-    //            $("#dvMessage").html(strRep.split("|")[1]);
-    //        }
-    //    },
-    //    error: function (msg) {
-    //        $("#dvFadeForProcessing").css("display", "none");
-    //        alert(msg.responseText);
-    //    }
-    //});
+            $("#dvFadeForProcessing").hide();
+            if (strRep.split("|")[0] == 1) {
+                window.location.href = strRep.split("|")[1];
+            }
+            else {
+                $("#dvMessage").html(strRep.split("|")[1]);
+            }
+        },
+        error: function (msg) {
+            $("#dvFadeForProcessing").css("display", "none");
+            alert(msg.responseText);
+        }
+    });
 }

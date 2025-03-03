@@ -7,40 +7,30 @@ Imports System.Web.Helpers
 Imports Azure.Identity
 Imports Azure.Core
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
+Imports Azure.Communication
 
 
 Partial Class Login
     Inherits System.Web.UI.Page
 
 
+    Dim Email As String
     Dim strLocalIP As String
     Dim drdr As SqlDataReader
     Dim objCon As SqlConnection
     Dim objCom As SqlCommand
-    Dim _tenantId As String = ConfigurationManager.AppSettings("_tenantId")
-    Dim _clientId As String = ConfigurationManager.AppSettings("_clientId")
 
     Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load, Me.Load
         'btnLogin.Attributes.Add("onclick", "javascript:return fnValidate()")
         If Page.IsPostBack = False Then
 
-            Session.Abandon()
-            Session.Clear()
-            Session.RemoveAll()
-            Response.Cookies.Add(New HttpCookie("ASP.NET_SessionId", ""))
-            'Dim cookietoken As String
-            'Dim formtoken As String
-            'AntiForgery.GetTokens(Nothing, cookietoken, formtoken)
-            'divAntiforgery.InnerHtml = cookietoken & ":" & formtoken
+            Session("LoginID") = DBNull.Value
+            Response.Cache.SetCacheability(HttpCacheability.NoCache)
+            Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1))
+            Response.Cache.SetNoStore()
 
-            ' Set the anti-forgery cookie
-            'Dim antiForgeryCookie As New HttpCookie("__RequestVerificationToken", cookietoken) With {
-            '    .HttpOnly = True,
-            '    .Secure = Request.IsSecureConnection
-            '}
-            'Response.Cookies.Add(antiForgeryCookie)
-            ' Dim strConn1 As String = Convert.ToString(HttpContext.Current.Application("DbConnectionString"))
-            'hdnaccesstoken.Value = strConn1
+            hiddenCSRFToken.Value = Guid.NewGuid().ToString()
+            Session("CSRFToken") = hiddenCSRFToken.Value
         End If
     End Sub
 
@@ -149,10 +139,51 @@ Partial Class Login
     'End Sub
     <System.Web.Services.WebMethod()>
     Public Shared Function fnLoginFromDB(ByVal UserName As String) As String
-
+        Dim Objcon2 As SqlConnection
+        Dim objCom2 As SqlCommand
         Dim strResponse As String = ""
-        strResponse = "1|LoginPageFirst.aspx?Email=" & HttpUtility.HtmlEncode(UserName)
+        Try
 
+            Dim csrfTokenFromHeader = HttpContext.Current.Request.Headers("X-CSRF-Token")
+            Dim csrfTokenFromSession = Convert.ToString(HttpContext.Current.Session("CsrfToken"))
+            If (String.IsNullOrEmpty(csrfTokenFromHeader) Or csrfTokenFromHeader <> csrfTokenFromSession) Then
+                strResponse = "2|Error : Invalid CSRF Token !!!"
+                Return strResponse
+            End If
+            Dim PassChangeFirst As String = "0"
+            Dim flgAgreementsigned As String = "0"
+            Dim chkRoleID As String = "0"
+            Dim varAuthenticate As Boolean = False
+            Dim NodeID As Integer = 1
+            Dim flgAgreement As String = "0"
+            Dim strConn As String = Convert.ToString(HttpContext.Current.Application("DbConnectionString"))
+            Objcon2 = New SqlConnection(strConn.Split("|")(0))
+            objCom2 = New SqlCommand("spCheckUserExist", Objcon2)
+            objCom2.Parameters.AddWithValue("@EmailId", ReplaceQuotes(Trim(HttpUtility.HtmlEncode(UserName))))
+            objCom2.CommandType = CommandType.StoredProcedure
+            objCom2.CommandTimeout = 0
+            Dim drdr As SqlDataReader
+            Dim cycleName As String = ""
+            Objcon2.Open()
+            drdr = objCom2.ExecuteReader
+            drdr.Read()
+            If (drdr.HasRows) Then
+                HttpContext.Current.Session("UserExistEmail") = HttpUtility.HtmlEncode(UserName)
+                strResponse = "1|LoginPageFirst.aspx?Email=" & HttpUtility.HtmlEncode(UserName)
+            Else
+                strResponse = "2|This email id is not exist in the system, Kindly enter correct email id!!"
+            End If
+            drdr = Nothing
+            objCom2.Dispose()
+            Objcon2.Close()
+            Objcon2.Dispose()
+
+        Catch ex As Exception
+            strResponse = "2|Error : " & ex.Message
+        Finally
+
+
+        End Try
 
         Return strResponse
     End Function

@@ -26,7 +26,7 @@ public partial class StartupAuth
     private static string postLogoutRedirectUri = ConfigurationManager.AppSettings["ida:PostLogoutRedirectUri"];
     private static string postRedirectUri = ConfigurationManager.AppSettings["ida:PostRedirectUri"];
 
-    public static readonly string Authority = aadInstance + "common";
+    public static readonly string Authority = "https://login.microsoftonline.com/"+ tenantId;
 
     // This is the resource ID of the AAD Graph API.  We'll need this to request a token to call the Graph API.
     string graphResourceId = "https://graph.microsoft.com";//"https://graph.windows.net";
@@ -41,6 +41,8 @@ public partial class StartupAuth
                 ClientId = clientId,
                 Authority = Authority,
                 PostLogoutRedirectUri = postLogoutRedirectUri,
+                ResponseType = "code id_token",
+                Scope = "openid profile email https://graph.microsoft.com/.default",
 
                 TokenValidationParameters = new TokenValidationParameters
                 {
