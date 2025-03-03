@@ -42,10 +42,10 @@ Partial Class LoginPageSSO
                         '    logfile.WriteLine("Claim Type:" & claim.Type & ", Value" & claim.Value)
                         'Next
 
-                        emailId = user.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")?.Value
-                        upn = user.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn")?.Value
-                        name = user.FindFirst("name")?.Value
-                        userEmail = user.FindFirst(ClaimTypes.Email)?.Value
+                        emailId = user.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name").Value
+                        upn = user.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn").Value
+                        name = user.FindFirst("name").Value
+                        ' userEmail = user.FindFirst(ClaimTypes.Email).Value
                     End If
 
 
@@ -61,7 +61,7 @@ Partial Class LoginPageSSO
                     logfile.WriteLine("userEmail:" & userEmail)
                 End Using
                 'Dim userEmail As String = obj.fnGetUserDetail().Result
-                dvMessage.InnerHtml = emailId '& ":" & userEmail
+                ' dvMessage.InnerHtml = emailId '& ":" & userEmail
                 fnSignIn(emailId)
             Catch ex As Exception
                 dvMessage.InnerHtml = ex.Message
