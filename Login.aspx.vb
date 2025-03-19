@@ -23,7 +23,7 @@ Partial Class Login
     Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load, Me.Load
         'btnLogin.Attributes.Add("onclick", "javascript:return fnValidate()")
         If Page.IsPostBack = False Then
-
+            Session("flgSSOEnabled") = DBNull.Value
             Session("LoginID") = DBNull.Value
             Response.Cache.SetCacheability(HttpCacheability.NoCache)
             Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1))
@@ -169,9 +169,10 @@ Partial Class Login
             drdr.Read()
             If (drdr.HasRows) Then
                 HttpContext.Current.Session("UserExistEmail") = HttpUtility.HtmlEncode(UserName)
+                HttpContext.Current.Session("flgSSOEnabled") = drdr.Item("flgSSOEnabled").ToString()
                 strResponse = "1|LoginPageFirst.aspx?Email=" & HttpUtility.HtmlEncode(UserName)
             Else
-                strResponse = "2|This email id is not exist in the system, Kindly enter correct email id!!"
+                strResponse = "2|Please check if you’ve entered the correct email ID. This email does not exist in our system."
             End If
             drdr = Nothing
             objCom2.Dispose()

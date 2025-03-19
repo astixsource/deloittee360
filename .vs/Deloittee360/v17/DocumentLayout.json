@@ -1,0 +1,119 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0320C35B-C6F3-8E07-752F-09215D347FD6}|D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development|d:\\onedrive - astix infolytics pvt. ltd\\mukhtyardata\\hr applications working\\deloitte working\\deloittee360_development\\login.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{0320C35B-C6F3-8E07-752F-09215D347FD6}|D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development|solutionrelative:login.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0320C35B-C6F3-8E07-752F-09215D347FD6}|D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development|D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{0320C35B-C6F3-8E07-752F-09215D347FD6}|D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development|solutionrelative:login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0320C35B-C6F3-8E07-752F-09215D347FD6}|D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development|d:\\onedrive - astix infolytics pvt. ltd\\mukhtyardata\\hr applications working\\deloitte working\\deloittee360_development\\questionaire\\frmquestionmain.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{0320C35B-C6F3-8E07-752F-09215D347FD6}|D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development|solutionrelative:questionaire\\frmquestionmain.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\EY Working\\Deloitte_E360\\.vs\\Deloitte_360\\config\\applicationhost.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0320C35B-C6F3-8E07-752F-09215D347FD6}|D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development|D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development\\global.asax||{4D30FDB3-AB3E-4810-B6F2-64627BCCA384}",
+      "RelativeMoniker": "D:0:0:{0320C35B-C6F3-8E07-752F-09215D347FD6}|D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development|solutionrelative:global.asax||{4D30FDB3-AB3E-4810-B6F2-64627BCCA384}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0320C35B-C6F3-8E07-752F-09215D347FD6}|D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development|D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{0320C35B-C6F3-8E07-752F-09215D347FD6}|D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development|solutionrelative:web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Login.aspx.vb",
+              "DocumentMoniker": "D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development\\Login.aspx.vb",
+              "RelativeDocumentMoniker": "Login.aspx.vb",
+              "ToolTip": "D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development\\Login.aspx.vb",
+              "RelativeToolTip": "Login.aspx.vb",
+              "ViewState": "AgIAAJUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-03-11T14:31:42.899Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "frmQuestionMain.aspx.vb",
+              "DocumentMoniker": "D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development\\Questionaire\\frmQuestionMain.aspx.vb",
+              "RelativeDocumentMoniker": "Questionaire\\frmQuestionMain.aspx.vb",
+              "ToolTip": "D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development\\Questionaire\\frmQuestionMain.aspx.vb",
+              "RelativeToolTip": "Questionaire\\frmQuestionMain.aspx.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-03-11T14:31:29.297Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Global.asax",
+              "DocumentMoniker": "D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development\\Global.asax",
+              "RelativeDocumentMoniker": "Global.asax",
+              "ToolTip": "D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development\\Global.asax",
+              "RelativeToolTip": "Global.asax",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEUSURBVDhPpZMxboNAEEUHcMUxKB1xC0qaxJItcQig5QS0iCMkaWzJSUPJLcAukUJyBlpb/4txooDXcvKkYf8Ou39nl8WSXwzDcBqlEdd1OXfWIAzDsTcliiIGgMlVg7f9\u002B5j55mn1yDYIAknTlNrm807qupaiKKj/ZABgAu4ywLY0lIsB9q5foKoqWSwcsaZHNIEGmNh1HRNZljFsx5bPr56tCVsnx3HMidAIaOT6/sNYCe09zxPf92W5fJCX51cGNHJ45xiq4BtdebPeyHa3ZUBrJTcr\u002BA\u002BWnjxWQtlYGaCK4/EgeZ6zP3e98bVooIeIPUMD7L1pGinLktoITNq25T1IkoTxMzcOm\u002BVyOtcG6m87j8gZGImeeMaYXXAAAAAASUVORK5CYII=",
+              "WhenOpened": "2025-03-11T14:31:29.68Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Login.aspx",
+              "DocumentMoniker": "D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development\\Login.aspx",
+              "RelativeDocumentMoniker": "Login.aspx",
+              "ToolTip": "D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development\\Login.aspx",
+              "RelativeToolTip": "Login.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-03-11T14:31:29.682Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Web.config",
+              "DocumentMoniker": "D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development\\Web.config",
+              "RelativeDocumentMoniker": "Web.config",
+              "ToolTip": "D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\HR Applications Working\\Deloitte Working\\Deloittee360_Development\\Web.config",
+              "RelativeToolTip": "Web.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-03-11T14:31:29.683Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "applicationhost.config",
+              "DocumentMoniker": "D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\EY Working\\Deloitte_E360\\.vs\\Deloitte_360\\config\\applicationhost.config",
+              "RelativeDocumentMoniker": "..\\..\\..\\EY Working\\Deloitte_E360\\.vs\\Deloitte_360\\config\\applicationhost.config",
+              "ToolTip": "D:\\OneDrive - Astix Infolytics Pvt. Ltd\\MukhtyarData\\EY Working\\Deloitte_E360\\.vs\\Deloitte_360\\config\\applicationhost.config",
+              "RelativeToolTip": "..\\..\\..\\EY Working\\Deloitte_E360\\.vs\\Deloitte_360\\config\\applicationhost.config",
+              "ViewState": "AQIAAOsAAAAAAAAAAAAUwAcBAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-01-08T07:40:34.578Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

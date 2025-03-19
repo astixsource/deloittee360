@@ -20,7 +20,7 @@
 
     <!-- jQuery -->
     <script src="Scripts/jqueryJS.js"></script>
-    <script src="Scripts/loginpageJS_v3.js"></script>
+    <script src="Scripts/loginpageJS_v4.js"></script>
 </head>
 <body oncontextmenu="return false">
     <form id="form1" runat="server">

@@ -32,6 +32,11 @@ Partial Class LoginPageFirst
         End If
 
         If Page.IsPostBack = False Then
+            If Convert.ToString(Session("flgSSOEnabled")) = "1" Then
+                btnLogin.Style.Add("display", "none")
+            Else
+                btnLoginSSO.Style.Add("display", "none")
+            End If
             Email = Request.QueryString("Email")
             hdnEmailId.Value = Email.ToString()
         End If
