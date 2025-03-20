@@ -159,12 +159,12 @@
                 </li>
             </ul>
             <p>However, we may still retain a copy of the relevant information for as long as necessary to comply with applicable laws or professional standards, or as long as the period in which litigation or investigations might arise in respect of our services.</p>
-            <p>To exercise any of your rights under applicable law described above regarding our use of personal information, please contact us at <a href="mailto:_________@deloitte.com.">_________@deloitte.com.</a></p>
+            <p>To exercise any of your rights under applicable law described above regarding our use of personal information, please contact us at <a href="mailto:360feedback@deloitte.com">360feedback@deloitte.com.</a></p>
             <p>Applicable laws may also give you the right to lodge a complaint with a local supervisory authority related to this Privacy Statement.</p>
             <p>We will not discriminate against you for exercising any of your rights with respect to personal information.</p>
             <p>In addition to describing our current privacy practices, this Privacy Statement also describes the categories of personal information we collected or disclosed. We may modify or amend this Privacy Statement from time to time at our discretion. When we make changes to this Privacy Statement, we will amend the revision date at the top of this page and the modified or amended Privacy Statement shall apply to personal information as of that revision date. We encourage you to review this Privacy Statement periodically to be informed about how we are protecting your personal information.</p>
             <p><strong>Contact us</strong></p>
-            <p>If you have any questions or concerns regarding this Privacy Statement or you are unsatisfied with the way in which personal information has been processed or the manner in which a privacy query or request that you have raised has been handled, please contact by emailing <a href="mailto:_________@deloitte.com.">_________@deloitte.com.</a></p>
+            <p>If you have any questions or concerns regarding this Privacy Statement or you are unsatisfied with the way in which personal information has been processed or the manner in which a privacy query or request that you have raised has been handled, please contact by emailing <a href="mailto:360feedback@deloitte.com">360feedback@deloitte.com.</a></p>
         </div>
     </div>
 
