@@ -10,16 +10,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=10,IE=edge,chrome=1">
     <title>HCAS 360</title>
 
-    <%--<link href="../Images/favicon1.ico" rel="shortcut icon" type="image/x-icon" />--%>
+    <link href="../Images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="../Content/font-awesome.css" rel="stylesheet" type="text/css" />
     <link href="../Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="../Content/Site.css" rel="stylesheet" type="text/css" />
+    <%--<link href="../Content/jquery-ui.css" rel="stylesheet" type="text/css" />--%>
 
     <script src="../Scripts/jqueryJS.js" type="text/javascript"></script>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
     <script src="../Scripts/jquery.nicescroll.min.js"></script>
     <script src="../Scripts/siteJS.js"></script>
+    <%--<script src="../Scripts/jquery-ui.js"></script>--%>
     <script>
         function fnnLogout() {
             if (confirm("Do you really want to log out?")) {
@@ -54,13 +56,12 @@
                     <!-- Header Navbar: style can be found in header.less -->
                     <div class="navbar-right">
                         <ul class="navtop">
-
                             <li>
                                 <asp:Panel ID="panelLogout" runat="server">
-                                    <a href="frmNominateApproveNomination.aspx" title="click to back home" class="link-btn"><span class="fa fa-home"></span></a>
+                                    <a href="frmNominateApproveNomination.aspx" title="click to back home" class="link-btn"><img src="../Images/home.svg" /> <%--<span class="fa fa-home"></span>--%></a>
                                 </asp:Panel>
                             </li>
-                            <li><a href="###" onclick="fnnLogout()" title="click to logout" class="link-btn"><span class="fa fa-sign-out"></span></a></li>
+                            <li><a href="###" onclick="fnnLogout()" title="click to logout" class="link-btn"><img src="../Images/logout.svg" /><%--<span class="fa fa-sign-out"></span>--%></a></li>
                         </ul>
                     </div>
                 </div>
@@ -71,7 +72,6 @@
                     <ul class="tabs">
                         <li class="active" data-class="01">Route Map</li>
                         <li data-class="02">Employee Information</li>
-
                     </ul>
                     <div class='tabs-content'>
                         <div class='01 tabs-body'>

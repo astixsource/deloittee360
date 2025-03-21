@@ -4,7 +4,7 @@
     $('.full-background').css('backgroundImage', 'url(' + $url + ')');
 
     $(".loginfrm").css({
-        'margin-top': ($(window).height() - ($(".loginfrm").outerHeight() + 56)) / 2 + "px",
+        'margin-top': ($(window).height() - ($(".loginfrm").outerHeight() + 26)) / 2 + "px",
         'margin-left': ($(window).width() - $('.loginfrm').outerWidth()) * 1 / 8 + "px"
     });
 });

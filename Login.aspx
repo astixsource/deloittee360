@@ -9,13 +9,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <title>HCAS 360</title>
-    <%--<link href="Images/favicon.ico" rel="shortcut icon" type="image/x-icon" />--%>
+    <link href="Images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- CSS Files -->
     <%--<link href="Content/font-awesome.css" rel="stylesheet" type="text/css" />--%>
     <link href="Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <%--<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">--%>
 
 
     <!-- jQuery -->

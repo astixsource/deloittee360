@@ -13,7 +13,7 @@ body {
     margin: 0px;
     padding: 0px;
     background-color: #D0D0CE;
-    font-size: 10pt;
+    font-size: .85rem;
     font-family: 'Open Sans',  sans-serif;
 }
 
@@ -513,25 +513,35 @@ ul.navtop {
 
         ul.navtop li a.link-btn {
             color: #ed1c24;
-            font-size: 10pt;
+            font-size: 1.5rem;
             display: inline-block;
-            padding: 5px 10px;
+            padding: .188rem .313rem;
+            margin-right: .5rem;
             text-decoration: none;
             letter-spacing: 0.06em;
             text-transform: uppercase;
-            border-radius: 5px;
             outline: none;
-            border: 1px solid #86BC25;
-            background: #86BC25;
+            /*border: 1px solid #86BC25;
+            border-radius: 5px;
+            background: #86BC25;*/
             color: #fff;
             transition: color 1000ms ease 0s, background-color 1500ms ease 0s !important;
         }
 
             ul.navtop li a.link-btn:hover {
-                color: #fff;
-                background: #6F9A1F;
+                color: #86BC25;
+                /*background: #6F9A1F;*/
                 transition: color 1000ms ease 0s, background-color 1500ms ease 0s;
             }
+
+        ul.navtop li:last-child a.link-btn {
+            margin-right: 0;
+        }
+
+        ul.navtop li a.link-btn > img {
+            width: auto;
+            height: 22px;
+        }
 
 #dvEng {
     background-color: #f3f3f3;
@@ -894,7 +904,35 @@ table.survey-table {
     color: white;
 }
 
-table.feedback_tbl > thead > tr > th {
+table.feedback_tbl {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+    table.feedback_tbl > thead > * > * {
+        color: #636A6F;
+        font-weight: normal;
+        text-align: left;
+    }
+
+    table.feedback_tbl > tbody > * > * {
+        font-size: .85rem;
+    }
+
+    table.feedback_tbl > thead > * > *,
+    table.feedback_tbl > tbody > * > * {
+        padding: .25rem;
+        line-height: 1.15;
+        border-bottom: 1px solid #D6D6D4;
+    }
+
+    table.feedback_tbl > tbody > *:nth-child(2n+1) > * {
+        background: #F5F5F5;
+    }
+
+
+/*table.feedback_tbl > thead > tr > th {
     background: #8CC63F;
     border: 1px solid #FFF;
     vertical-align: bottom;
@@ -910,7 +948,7 @@ table.feedback_tbl,
 table.feedback_tbl > tbody > tr > td {
     border: 1px solid #b7bfc6;
     background: #FFFFFF;
-}
+}*/
 
 .Completed {
     color: #449d44;
@@ -1056,46 +1094,6 @@ table.feedback_tbl > tbody > tr > td {
     .statement-row input {
         margin: 0 5px;
     }
-
-/* Button Group */
-.button-group {
-    text-align: center;
-    margin-top: 20px;
-}
-
-/*.btn {
-    padding: 10px 20px;
-    font-size: 14px;
-    border: none;
-   border-radius: 5px;
-    cursor: pointer;
-    margin-left: -12px;
-    margin-top: 12px;
-}
-
-.btn:hover {
-    opacity: 0.9;
-}*/
-
-.save-continue {
-    background-color: #4caf50;
-    color: white;
-}
-
-.previous {
-    background-color: #ffa726;
-    color: white;
-}
-
-.submit {
-    background-color: #388e3c;
-    color: white;
-}
-
-.exit {
-    background-color: #e53935;
-    color: white;
-}
 
 /*-----------------------------------/
 /---------- login Box css -----------/
@@ -1447,10 +1445,11 @@ input {
     display: inline-block;
     /*width: 100%;*/
     padding: 8px 15px;
-    background-color: #007CB0;
+    background-color: transparent;
     color: #fff;
     text-align: center;
     border-radius: 0;
+    outline: none;
     border: none;
     font-size: 16px;
     text-transform: uppercase;
@@ -1460,7 +1459,7 @@ input {
 }
 
     .btns:hover {
-        background-color: #005f8a;
+        background-color: transparent;
     }
 
     .btns.btn-submit {
@@ -1505,14 +1504,51 @@ input {
         }
 
     .btns.btn-danger {
-        background-color: black !important;
-        color: white;
+        background-color: #DC3545 !important;
+        color: #fff;
     }
 
         .btns.btn-danger:hover {
-            background-color: black !important;
+            background-color: #BB2D3B;
+            border-color: #B02A37;
         }
 
+    .btns.btn-dark {
+        background-color: #212529 !important;
+        color: #fff;
+    }
+
+        .btns.btn-dark:hover {
+            /*background-color: black !important;*/
+            background-color: #424649;
+            border-color: #373B3E;
+        }
+
+/* Button Group */
+.button-group {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.save-continue {
+    background-color: #4caf50;
+    color: white;
+}
+
+.previous {
+    background-color: #ffa726;
+    color: white;
+}
+
+.submit {
+    background-color: #388e3c;
+    color: white;
+}
+
+.exit {
+    background-color: #e53935;
+    color: white;
+}
 
 
 /* Text Center Alignment */

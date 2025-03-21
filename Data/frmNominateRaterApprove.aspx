@@ -4,6 +4,7 @@
     <link href="../Content/jquery-ui.css" rel="stylesheet" />
     <link href="../JDatatable/dataTables.dataTables.css" rel="stylesheet" />
     <link href="../JDatatable/fixedHeader.dataTables.css" rel="stylesheet" />
+
     <script src="../Scripts/jquery-ui.js"></script>
     <script src="../JDatatable/dataTables.js"></script>
     <script src="../JDatatable/dataTables.fixedHeader.js"></script>
@@ -40,89 +41,6 @@
             border-bottom: 2px solid #b0b0b0 !important;
         }
 
-        /* body {
-            overflow-y: scroll;
-        }
-
-        .button-group {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            gap: 15px;
-            margin-left: 15px;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            text-align: center;
-        }
-
-            .btn:hover {
-                transform: translateY(-2px);
-            }
-
-            .btn:active {
-                transform: translateY(0);
-            }
-
-        .btn-previous {
-            background-color: #6c757d;
-            color: white;
-        }
-
-            .btn-previous:hover {
-                background-color: #5a6268;
-            }
-
-            .btn-previous:active {
-                background-color: #495057;
-            }
-
-        .btn-next {
-            background-color: #88bd26 !important;
-            color: white;
-        }
-
-            .btn-next:hover {
-                background-color: #5e6271 !important;
-                color: white;
-            }
-
-            .btn-next:active {
-                background-color: #1e7e34;
-            }
-
-        .btn-submit {
-            background-color: #88bd26 !important;
-            color: white;
-        }
-
-            .btn-submit:hover {
-                background-color: #5e6271 !important;
-                color: white;
-            }
-
-            .btn-submit:active {
-                background-color: #1e7e34;
-            }
-
-        .btn-danger {
-            background-color: black !important;
-            color: white;
-        }
-
-            .btn-danger:hover {
-                background-color: black !important;
-            }
-
-            .btn-danger:active {
-                background-color: #bd2130;
-            }*/
-
         .clsNomineebodycontainer {
             padding: 10px;
         }
@@ -151,27 +69,32 @@
             border-radius: 0px !important;
         }
 
-
-
-        table.dataTable > tbody > tr > th, table.dataTable > tbody > tr > td {
-            padding: 2px 2px;
-            border: 1px solid #e3efcc;
-            font-size: 9pt;
+        table.dataTable > thead > * > * {
+            color: #636A6F;
+            font-weight: normal;
+            text-align: left;
         }
 
-        table.dataTable > tfoot > tr > th {
-            padding: 2px 2px;
-            border: 1px solid #e3efcc;
+        table.dataTable > tbody > * > * {
+            font-size: .85rem;
+        }
+
+        table.dataTable > thead > * > *,
+        table.dataTable > tbody > * > *,
+        table.dataTable > tfoot > * > * {
+            padding: .25rem;
+            line-height: 1.15;
+            border-bottom: 1px solid #D6D6D4;
+        }
+
+        table.dataTable > tfoot > * > * {
+            /*border: 1px solid #e3efcc;*/
             border-top: 2px solid #a6a6a6;
-            font-size: 10pt;
         }
 
-        table.dataTable > thead > tr > th, table.dataTable > thead > tr > td {
-            padding: 2px 2px;
-            border: 1px solid #e3efcc;
-            background-color: #86bc25;
-            color: #ffffff;
-            font-size: 10.5pt;
+        table.table > tbody > *:nth-child(2n+1) > *,
+        table.dataTable > tbody > *:nth-child(2n+1) > * {
+            background: #F5F5F5;
         }
 
         div.clscoacheelist {
@@ -532,6 +455,9 @@
                 close: function () {
                     $(this).dialog('destroy');
                 },
+                open: function () {
+                    $(this).next().find("button").removeClass("ui-button ui-corner-all ui-widget");
+                },
                 buttons: [
                     {
                         text: "Save",
@@ -689,10 +615,13 @@
                     $(this).dialog('destroy');
                     $("#dvAlert").html("");
                 },
+                open: function () {
+                    $(this).next().find("button").removeClass("ui-button ui-corner-all ui-widget");
+                },
                 buttons: [
                     {
                         text: "OK",
-                        "class": "btns btn-submit",
+                        "class": "btns btn-dark",
                         click: function () {
                             $("#dvAlert").dialog('close');
                         }
@@ -787,54 +716,64 @@
                     $(this).dialog('destroy');
                     $("#dvDialog").html("");
                 },
-                buttons: {
-                    "Yes": function () {
-                        var ApseNodeId = $("#MainContent_dvcoacheelist div.clsactive").attr("EmpNodeId");
-                        var arr = [];
-                        for (var i = 0; i < $trs.length; i++) {
-                            var RltshpId = 0;
-                            if ($trs.eq(i).find("td").eq(0).find("select").length > 0) {
-                                RltshpId = $trs.eq(i).find("td").eq(0).find("select").find("option:selected").val();
-                            } else {
-                                RltshpId = $trs.eq(i).attr("rpid");
+                open: function () {
+                    $(this).next().find("button").removeClass("ui-button ui-corner-all ui-widget");
+                },
+                buttons: [
+                    {
+                        text: "Yes",
+                        class: "btns btn-submit",
+                        click: function () {
+                            var ApseNodeId = $("#MainContent_dvcoacheelist div.clsactive").attr("EmpNodeId");
+                            var arr = [];
+                            for (var i = 0; i < $trs.length; i++) {
+                                var RltshpId = 0;
+                                if ($trs.eq(i).find("td").eq(0).find("select").length > 0) {
+                                    RltshpId = $trs.eq(i).find("td").eq(0).find("select").find("option:selected").val();
+                                } else {
+                                    RltshpId = $trs.eq(i).attr("rpid");
+                                }
+                                arr.push({
+                                    ApseNodeId: ApseNodeId, ApsrNodeId: $trs.eq(i).attr("nomineid"), RltshpId: RltshpId, flgAction: 0
+                                });
                             }
-                            arr.push({
-                                ApseNodeId: ApseNodeId, ApsrNodeId: $trs.eq(i).attr("nomineid"), RltshpId: RltshpId, flgAction: 0
+                            $("#dvFadeForProcessing").show();
+                            $(this).dialog('close');
+                            PageMethods.fnSaveandDeleteNomineeData(LoginId, arr, 1, LevelId, function (result) {
+                                $("#dvFadeForProcessing").hide();
+                                if (result.split("|")[0] == 2) {
+                                    fnShowmsg("Error:" + result.split("|")[1]);
+                                    return false;
+                                }
+                                // alert($("#MainContent_dvcoacheelist div.clsactive").parent("div")[0].outerHTML);
+
+                                $("#MainContent_dvcoacheelist div.clsactive").parent("div").find("i").removeAttr("style").css({
+                                    "color": "#59d68e",
+                                    "font-size": "15pt"
+                                });
+                                $("#MainContent_dvcoacheelist div.clsactive").parent("div").find("i").removeAttr("class").attr("class", "fa fa-check-square clsiconclass clsnomineeapprove");
+                                $("#MainContent_dvcoacheelist div.clsactive").click();
+                                if ($("#MainContent_dvcoacheelist div.clscoacheelist").length == $("#MainContent_dvcoacheelist i.clsnomineeapprove").length) {
+                                    $("#dvMsg").html("You have approved all nominations");
+                                    setTimeout(function () {
+                                        window.location.href = "frmNominateApproveNomination.aspx";
+                                    }, 3000);
+                                }
+
+                            }, function (result) {
+                                $("#dvFadeForProcessing").hide();
+                                fnShowmsg("Error:" + result._message);
                             });
                         }
-                        $("#dvFadeForProcessing").show();
-                        $(this).dialog('close');
-                        PageMethods.fnSaveandDeleteNomineeData(LoginId, arr, 1, LevelId, function (result) {
-                            $("#dvFadeForProcessing").hide();
-                            if (result.split("|")[0] == 2) {
-                                fnShowmsg("Error:" + result.split("|")[1]);
-                                return false;
-                            }
-                            // alert($("#MainContent_dvcoacheelist div.clsactive").parent("div")[0].outerHTML);
-
-                            $("#MainContent_dvcoacheelist div.clsactive").parent("div").find("i").removeAttr("style").css({
-                                "color": "#59d68e",
-                                "font-size": "15pt"
-                            });
-                            $("#MainContent_dvcoacheelist div.clsactive").parent("div").find("i").removeAttr("class").attr("class", "fa fa-check-square clsiconclass clsnomineeapprove");
-                            $("#MainContent_dvcoacheelist div.clsactive").click();
-                            if ($("#MainContent_dvcoacheelist div.clscoacheelist").length == $("#MainContent_dvcoacheelist i.clsnomineeapprove").length) {
-                                $("#dvMsg").html("You have approved all nominations");
-                                setTimeout(function () {
-                                    window.location.href = "frmNominateApproveNomination.aspx";
-                                }, 3000);
-                            }
-
-                        }, function (result) {
-                            $("#dvFadeForProcessing").hide();
-                            fnShowmsg("Error:" + result._message);
-                        });
                     },
-                    "No": function () {
-
-                        $(this).dialog('close');
+                    {
+                        text: "No",
+                        class: "btns btn-danger",
+                        click: function () {
+                            $(this).dialog('close');
+                        }
                     }
-                }
+                ]
             })
         }
 
@@ -852,8 +791,14 @@
                     $(this).dialog('destroy');
                     $("#dvDialog").html("");
                 },
-                buttons: {
-                    "Yes": function () {
+                open: function () {
+                    $(this).next().find("button").removeClass("ui-button ui-corner-all ui-widget");
+                },
+                buttons: [
+                    {
+                        text: "Yes",
+                        class: "btns btn-submit",
+                    click: function () {
                         var arr = [];
                         var ApseNodeId = $("#MainContent_dvcoacheelist div.clsactive").attr("EmpNodeId");
                         arr.push({
@@ -875,11 +820,16 @@
                             $("#dvFadeForProcessing").hide();
                             fnShowmsg("Error:" + result._message);
                         });
-                    },
-                    "No": function () {
-                        $(this).dialog('close');
                     }
-                }
+                },
+                    {
+                        text: "No",
+                        class: "btns btn-danger",
+                        click: function () {
+                            $(this).dialog('close');
+                        }
+                    }
+                ]
             })
 
         }
@@ -900,33 +850,42 @@
                 <div class="title-line-center"></div>
             </div>
             <div style="font-size: 10pt" id="divContent_1" runat="server" attr="SMD">
-                Below is the list of your team members:
+                <p>
+                    Below is the list of your team members:
                 <br />
-                Each name has an icon next to it indicating their current status:
+                    Each name has an icon next to it indicating their current status:
+                </p>
                 <table style="width: 100%">
                     <tr>
                         <td>
                             <table>
                                 <tr>
-                                    <td><i class="fa fa-circle" aria-hidden="true" style="color: #e1ac43; font-size: 15pt"></i></td>
+                                    <%--<td><i class="fa fa-circle" aria-hidden="true" style="color: #ED8B00; font-size: 15pt"></i></td>--%>
+                                    <td>
+                                        <img src="../Images/pending-submis.svg" style="width: 20px; height: 20px;" /></td>
                                     <td><strong>Pending submission</strong> - Team Member is yet to raise the 360 nominations</td>
                                 </tr>
                                 <tr>
-                                    <td><i class="fa fa-circle" aria-hidden="true" style="color: #53cd8e; font-size: 15pt"></i></td>
+                                    <%--<td><i class="fa fa-circle" aria-hidden="true" style="color: #43B02A; font-size: 15pt"></i></td>--%>
+                                    <td>
+                                        <img src="../Images/submission.svg" style="width: 20px; height: 20px;" /></td>
                                     <td><b>Submitted</b> - Team member has initiated the 360-feedback form</td>
                                 </tr>
                                 <tr>
-                                    <td><i class="fa fa-refresh" aria-hidden="true" style="background-color: #5aadf9; color: #fff; padding: 2px;"></i></td>
+                                    <%--<td><i class="fa fa-refresh" aria-hidden="true" style="background-color: #0076A8; color: #fff; padding: 2px;"></i></td>--%>
+                                    <td>
+                                        <img src="../Images/refresh.svg" style="width: 20px; height: 20px;" /></td>
                                     <td><b>Pending approval</b> - 360 nominations waiting for your approval.</td>
                                 </tr>
                                 <tr>
-                                    <td><i class="fa fa-check-square" aria-hidden="true" style="color: #59d68e; font-size: 15pt"></i></td>
-                                    <td><b>Approved</b> -Nomination is approved
-                                    </td>
+                                    <%--<td><i class="fa fa-check-square" aria-hidden="true" style="color: #26890D; font-size: 15pt"></i></td>--%>
+                                    <td>
+                                        <img src="../Images/approved.svg" style="width: 20px; height: 20px;" /></td>
+                                    <td><b>Approved</b> -Nomination is approved</td>
                                 </tr>
                             </table>
                         </td>
-                        <td style="vertical-align:top;width:50%">
+                        <td style="vertical-align: top; width: 50%">
                             <ul>
                                 <li>Review the submitted nominations for relevance and completeness of the 360-feedback process. You can edit stakeholder categories to ensure the best fit.</li>
                                 <li>You can also add or remove stakeholders (Except for Self & RM/Coach) as needed.</li>
@@ -939,33 +898,42 @@
             </div>
 
             <div style="font-size: 10pt" id="divContent_2" runat="server" attr="PED">
-                Below is the list of your team members:
+                <p>
+                    Below is the list of your team members:
                 <br />
-                Each name has an icon next to it indicating their current status:
+                    Each name has an icon next to it indicating their current status:
+                </p>
                 <table style="width: 100%">
                     <tr>
                         <td>
                             <table>
                                 <tr>
-                                    <td><i class="fa fa-circle" aria-hidden="true" style="color: #e1ac43; font-size: 15pt"></i></td>
+                                    <%--<td><i class="fa fa-circle" aria-hidden="true" style="color: #ED8B00; font-size: 15pt"></i></td>--%>
+                                    <td>
+                                        <img src="../Images/pending-submis.svg" style="width: 20px; height: 20px;" /></td>
                                     <td><strong>Pending submission</strong> - Team member is yet to raise the 360 nominations</td>
                                 </tr>
                                 <tr>
-                                    <td><i class="fa fa-circle" aria-hidden="true" style="color: #53cd8e; font-size: 15pt"></i></td>
+                                    <%--<td><i class="fa fa-circle" aria-hidden="true" style="color: #43B02A; font-size: 15pt"></i></td>--%>
+                                    <td>
+                                        <img src="../Images/submission.svg" style="width: 20px; height: 20px;" /></td>
                                     <td><b>Submitted</b> - Team member has initiated the 360-feedback form</td>
                                 </tr>
                                 <tr>
-                                    <td><i class="fa fa-refresh" aria-hidden="true" style="background-color: #5aadf9; color: #fff; padding: 2px;"></i></td>
+                                    <%--<td><i class="fa fa-refresh" aria-hidden="true" style="background-color: #0076A8; color: #fff; padding: 2px;"></i></td>--%>
+                                    <td>
+                                        <img src="../Images/refresh.svg" style="width: 20px; height: 20px;" /></td>
                                     <td><b>Pending approval</b> - 360 nominations waiting for your approval.</td>
                                 </tr>
                                 <tr>
-                                    <td><i class="fa fa-check-square" aria-hidden="true" style="color: #59d68e; font-size: 15pt"></i></td>
-                                    <td><b>Approved</b> - Nomination is approved
-                                    </td>
+                                    <%--<td><i class="fa fa-check-square" aria-hidden="true" style="color: #26890D; font-size: 15pt"></i></td>--%>
+                                    <td>
+                                        <img src="../Images/approved.svg" style="width: 20px; height: 20px;" /></td>
+                                    <td><b>Approved</b> - Nomination is approved</td>
                                 </tr>
                             </table>
                         </td>
-                        <td style="vertical-align:top;width:50%">
+                        <td style="vertical-align: top; width: 50%">
                             <ul>
                                 <li>Review the submitted nominations for relevance and completeness of the 360-feedback process. You can edit stakeholder categories to ensure the best fit.</li>
                                 <li>You can also add or remove stakeholders (Except for Self and CDA) as needed.</li>
@@ -1005,7 +973,6 @@
                                     </th>
                                     <th style="width: 5%; text-align: center">Action
                                     </th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -1023,7 +990,7 @@
                                             </td>
                                             <td>
                                                 <asp:DropDownList ID="ddlRelatioShip" Style="width: 150px; height: 33px; border: 1px solid #c0c0c0" AppendDataBoundItems="true" runat="server" AutoPostBack="false">
-                                                    <asp:ListItem Value="0">-----</asp:ListItem>
+                                                    <asp:ListItem Value="0">-- Lable --</asp:ListItem>
                                                 </asp:DropDownList>
                                             </td>
                                         </tr>

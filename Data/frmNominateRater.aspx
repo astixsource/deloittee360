@@ -4,12 +4,13 @@
     <link href="../Content/jquery-ui.css" rel="stylesheet" />
     <link href="../JDatatable/dataTables.dataTables.css" rel="stylesheet" />
     <link href="../JDatatable/fixedHeader.dataTables.css" rel="stylesheet" />
+
     <script src="../Scripts/jquery-ui.js"></script>
     <script src="../JDatatable/dataTables.js"></script>
     <script src="../JDatatable/dataTables.fixedHeader.js"></script>
     <script src="../JDatatable/fixedHeader.dataTables.js"></script>
     <script src="../Scripts/progressbarJS.js"></script>
-    <style>
+    <style type="text/css">
         .btns.disabled,
         .btns:disabled,
         .btns[disabled] {
@@ -38,93 +39,6 @@
         .mcacAnchor {
             font-size: 12px;
         }
-        /*.main-content {
-            max-width: 97%;
-            width: 97%;
-        }
-
-        body {
-            overflow-y: scroll;
-        }*/
-
-        /*.button-group {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            gap: 15px;
-            margin-left: 15px;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            text-align: center;
-        }
-
-            .btn:hover {
-                transform: translateY(-2px);
-            }
-
-            .btn:active {
-                transform: translateY(0);
-            }
-
-        .btn-previous {
-            background-color: #6c757d;
-            color: white;
-        }
-
-            .btn-previous:hover {
-                background-color: #5a6268;
-            }
-
-            .btn-previous:active {
-                background-color: #495057;
-            }
-
-        .btn-next {
-            background-color: #88bd26 !important;
-            color: white;
-        }
-
-            .btn-next:hover {
-                background-color: #5e6271 !important;
-                color: white;
-            }
-
-            .btn-next:active {
-                background-color: #1e7e34;
-            }
-
-        .btn-submit {
-            background-color: #88bd26 !important;
-            color: white;
-        }
-
-            .btn-submit:hover {
-                background-color: #5e6271 !important;
-                color: white;
-            }
-
-            .btn-submit:active {
-                background-color: #1e7e34;
-            }
-
-        .btn-danger {
-            background-color: black !important;
-            color: white;
-        }
-
-            .btn-danger:hover {
-                background-color: black !important;
-            }
-
-            .btn-danger:active {
-                background-color: #bd2130;
-            }*/
 
         .clsNomineebodycontainer {
             padding: 10px;
@@ -154,27 +68,32 @@
             border-radius: 0px !important;
         }
 
-
-
-        table.dataTable > tbody > tr > th, table.dataTable > tbody > tr > td {
-            padding: 2px 3px;
-            border: 1px solid #e3efcc;
-            font-size: 9.5pt;
+        table.dataTable > thead > * > * {
+            color: #636A6F;
+            font-weight: normal;
+            text-align: left;
         }
 
-        table.dataTable > tfoot > tr > th {
-            padding: 2px 3px;
-            border: 1px solid #e3efcc;
+        table.dataTable > tbody > * > * {
+            font-size: .85rem;
+        }
+
+        table.dataTable > thead > * > *,
+        table.dataTable > tbody > * > *,
+        table.dataTable > tfoot > * > * {
+            padding: .25rem;
+            line-height: 1.15;
+            border-bottom: 1px solid #D6D6D4;
+        }
+
+        table.dataTable > tfoot > * > * {
+            /*border: 1px solid #e3efcc;*/
             border-top: 2px solid #a6a6a6;
-            font-size: 10pt;
         }
 
-        table.dataTable > thead > tr > th, table.dataTable > thead > tr > td {
-            padding: 2px 3px;
-            border: 1px solid #e3efcc;
-            background-color: #86bc25;
-            color: #ffffff;
-            font-size: 10.5pt;
+        table.table > tbody > *:nth-child(2n+1) > *,
+        table.dataTable > tbody > *:nth-child(2n+1) > * {
+            background: #F5F5F5;
         }
 
         .ui-autocomplete {
@@ -664,10 +583,13 @@
                     $(this).dialog('destroy');
                     $("#dvAlert").html("");
                 },
+                open: function () {
+                    $(this).next().find("button").removeClass("ui-button ui-corner-all ui-widget");
+                },
                 buttons: [
                     {
                         text: "OK",
-                        "class": "btns btn-submit",
+                        class: "btns btn-dark",
                         click: function () {
                             $("#dvAlert").dialog('close');
                         }
@@ -690,33 +612,44 @@
                     $(this).dialog('destroy');
                     $("#dvDialog").html("");
                 },
-                buttons: {
-                    "Yes": function () {
-                        var arr = [];
-                        var ApseNodeId = $("#MainContent_hdnNodeId").val();
-                        arr.push({
-                            ApseNodeId: ApseNodeId, ApsrNodeId: $(sender).closest("tr").attr("nomineid"), RltshpId: $(sender).closest("tr").attr("rpid"), flgAction: 1
-                        });
-                        $("#dvFadeForProcessing").show();
-                        $(this).dialog('close');
-                        PageMethods.fnSaveandDeleteNomineeData(LoginId, arr, 0, function (result) {
-                            $("#dvFadeForProcessing").hide();
-                            if (result.split("|")[0] == 2) {
-                                fnShowmsg("Error:" + result.split("|")[1]);
-                                return false;
-                            }
-                            fnGetNomineeDetails();
-                            fnUpdateProgressbar();
+                open: function () {
+                    $(this).next().find("button").removeClass("ui-button ui-corner-all ui-widget");
+                },
+                buttons: [
+                    {
+                        text: "Yes",
+                        "class": "btns btn-submit",
+                        click: function () {
+                            var arr = [];
+                            var ApseNodeId = $("#MainContent_hdnNodeId").val();
+                            arr.push({
+                                ApseNodeId: ApseNodeId, ApsrNodeId: $(sender).closest("tr").attr("nomineid"), RltshpId: $(sender).closest("tr").attr("rpid"), flgAction: 1
+                            });
+                            $("#dvFadeForProcessing").show();
+                            $(this).dialog('close');
+                            PageMethods.fnSaveandDeleteNomineeData(LoginId, arr, 0, function (result) {
+                                $("#dvFadeForProcessing").hide();
+                                if (result.split("|")[0] == 2) {
+                                    fnShowmsg("Error:" + result.split("|")[1]);
+                                    return false;
+                                }
+                                fnGetNomineeDetails();
+                                fnUpdateProgressbar();
 
-                        }, function (result) {
-                            $("#dvFadeForProcessing").hide();
-                            fnShowmsg("Error:" + result._message);
-                        });
+                            }, function (result) {
+                                $("#dvFadeForProcessing").hide();
+                                fnShowmsg("Error:" + result._message);
+                            });
+                        }
                     },
-                    "No": function () {
-                        $(this).dialog('close');
+                    {
+                        text: "No",
+                        "class": "btns btn-danger",
+                        Click: function () {
+                            $(this).dialog('close');
+                        }
                     }
-                }
+                ]
             })
 
         }
@@ -820,50 +753,60 @@
                     $(this).dialog('destroy');
                     $("#dvDialog").html("");
                 },
-                buttons: {
-                    "Yes": function () {
-                        var arr = [];
-                        var ApseNodeId = $("#MainContent_hdnNodeId").val();
-                        for (var i = 0; i < $trs.length; i++) {
-                            var RltshpId = 0;
-                            if ($trs.eq(i).find("td").eq(0).find("select").length > 0) {
-                                RltshpId = $trs.eq(i).find("td").eq(0).find("select").find("option:selected").val();
-                            } else {
-                                RltshpId = $trs.eq(i).attr("rpid");
+                open: function () {
+                    $(this).next().find("button").removeClass("ui-button ui-corner-all ui-widget");
+                },
+                buttons: [
+                    {
+                        text: "Yes",
+                        class: "btns btn-submit",
+                        click: function () {
+                            var arr = [];
+                            var ApseNodeId = $("#MainContent_hdnNodeId").val();
+                            for (var i = 0; i < $trs.length; i++) {
+                                var RltshpId = 0;
+                                if ($trs.eq(i).find("td").eq(0).find("select").length > 0) {
+                                    RltshpId = $trs.eq(i).find("td").eq(0).find("select").find("option:selected").val();
+                                } else {
+                                    RltshpId = $trs.eq(i).attr("rpid");
+                                }
+                                arr.push({
+                                    ApseNodeId: ApseNodeId, ApsrNodeId: $trs.eq(i).attr("nomineid"), RltshpId: RltshpId, flgAction: 0
+                                });
                             }
-                            arr.push({
-                                ApseNodeId: ApseNodeId, ApsrNodeId: $trs.eq(i).attr("nomineid"), RltshpId: RltshpId, flgAction: 0
+                            $("#dvFadeForProcessing").show();
+                            $(this).dialog('close');
+                            PageMethods.fnSaveandDeleteNomineeData(LoginId, arr, flg, function (result) {
+                                $("#dvFadeForProcessing").hide();
+                                if (result.split("|")[0] == 2) {
+                                    fnShowmsg("Error:" + result.split("|")[1]);
+                                    return false;
+                                }
+
+                                fnUpdateProgressbar();
+                                fnGetNomineeDetails();
+                                if (flg == 1) {
+                                    var LevelId = $("#MainContent_hdnLevelId").val();
+                                    $("#dvMsg").html(LevelId == "2" ? "Your rater list is shared with your CDA for their approval" : "Your rater list is shared with your RM/Coach for their approval");
+                                    setTimeout(function () {
+                                        window.location.href = "frmNominateApproveNomination.aspx";
+                                    }, 3000);
+                                }
+
+                            }, function (result) {
+                                $("#dvFadeForProcessing").hide();
+                                fnShowmsg("Error:" + result._message);
                             });
                         }
-                        $("#dvFadeForProcessing").show();
-                        $(this).dialog('close');
-                        PageMethods.fnSaveandDeleteNomineeData(LoginId, arr, flg, function (result) {
-                            $("#dvFadeForProcessing").hide();
-                            if (result.split("|")[0] == 2) {
-                                fnShowmsg("Error:" + result.split("|")[1]);
-                                return false;
-                            }
-
-                            fnUpdateProgressbar();
-                            fnGetNomineeDetails();
-                            if (flg == 1) {
-                                var LevelId = $("#MainContent_hdnLevelId").val();
-                                $("#dvMsg").html(LevelId == "2" ?"Your rater list is shared with your CDA for their approval":"Your rater list is shared with your RM/Coach for their approval");
-                                setTimeout(function () {
-                                    window.location.href = "frmNominateApproveNomination.aspx";
-                                }, 3000);
-                            }
-
-                        }, function (result) {
-                            $("#dvFadeForProcessing").hide();
-                            fnShowmsg("Error:" + result._message);
-                        });
                     },
-                    "No": function () {
-
-                        $(this).dialog('close');
+                    {
+                        text: "No",
+                        class: "btns btn-danger",
+                        click: function () {
+                            $(this).dialog('close');
+                        }
                     }
-                }
+                ]
             })
         }
 
@@ -879,6 +822,9 @@
                 dialogClass: "alertcss",
                 close: function () {
                     $(this).dialog('destroy');
+                },
+                open: function () {
+                    $(this).next().find("button").removeClass("ui-button ui-corner-all ui-widget");
                 },
                 buttons: [
                     {
@@ -959,71 +905,58 @@
             </div>
             <h6><b>What you should know before selecting your raters:</b></h6>
             <div style="font-size: 10pt" id="divContent_1" runat="server" attr="SMD">
-                For each category, please ensure you meet the minimum nomination requirements as mentioned below:
-               <ul>
-                   <ul>
-                       <li><strong>Direct reports</strong> (minimum. 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
-                       <li><strong>Peers</strong> (Min. 2) &ndash; would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
-                       <li><strong>Review partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
-                       <li><strong>Reporting manager (RM)/Coach</strong> &ndash; Auto-added, with an option to add more raters</li>
-                       <li><strong>Other stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M,B&amp;C, Talent, RRO, Admin, IT, etc.</li>
-                       <li>For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with @deloitte.com.</li>
-                   </ul>
-               </ul>
+                <p>>For each category, please ensure you meet the minimum nomination requirements as mentioned below:</p>
+                <ul>
+                    <li><strong>Direct reports</strong> (minimum. 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
+                    <li><strong>Peers</strong> (Min. 2) &ndash; would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
+                    <li><strong>Review partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
+                    <li><strong>Reporting manager (RM)/Coach</strong> &ndash; Auto-added, with an option to add more raters</li>
+                    <li><strong>Other stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M,B&amp;C, Talent, RRO, Admin, IT, etc.</li>
+                    <li>For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with @deloitte.com.</li>
+                </ul>
                 <p>To help ensure a holistic feedback and maintains confidentiality, you will only be able to submit your nominations if these requirements are met.</p>
                 <p>Once submitted, your <strong>Coach/RM will review and approve</strong> your nominations.</p>
             </div>
 
             <div style="font-size: 10pt" id="divContent_2" attr="PED" runat="server">
-               For each category, please ensure you meet the minimum nomination requirements as mentioned below:
+                <p>For each category, please ensure you meet the minimum nomination requirements as mentioned below:</p>
                 <ul>
-                    <ul>
-                        <li><strong>Direct reports</strong> (minimum 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
-                        <li><strong>Peers</strong> (Min. 2) &ndash; would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
-                        <li><strong>Review partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
-                        <li><strong>Career Development Advisor (CDA)</strong> &ndash; Auto-added</li>
-                        <li><strong>Other stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M, B&amp;C, Talent, RRO, Admin, IT, etc.</li>
-                        <li>For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with @deloitte.com.</li>
-                    </ul>
+                    <li><strong>Direct reports</strong> (minimum 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
+                    <li><strong>Peers</strong> (Min. 2) &ndash; would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
+                    <li><strong>Review partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
+                    <li><strong>Career Development Advisor (CDA)</strong> &ndash; Auto-added</li>
+                    <li><strong>Other stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M, B&amp;C, Talent, RRO, Admin, IT, etc.</li>
+                    <li>For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with @deloitte.com.</li>
                 </ul>
                 <p>To help ensure holistic feedback and maintains confidentiality, you will only be able to submit your nominations if these requirements are met.</p>
                 <p>Once submitted, your <strong>CDA will review and approve</strong> your nominations.</p>
             </div>
 
-
             <div id="btnMainbodyContainer">
                 <table id="tblMainNominee" style="width: 100%; border-bottom: 1px solid #e2eecb">
                     <thead>
                         <tr>
-                            <th style="width: 14%">Category
-                            </th>
-                            <th>Name
-                            </th>
-                            <th style="width: 21%">Email ID
-                            </th>
-                            <th style="width: 8.5%">Function
-                            </th>
-                            <th style="width: 8%">Department
-                            </th>
-                            <th style="width: 13%">Designation
-                            </th>
-                            <th style="width: 12.5%">Status
-                            </th>
-                            <th style="width: 4%; text-align: center">Action
-                            </th>
-
+                            <th style="width: 14%">Category</th>
+                            <th>Name</th>
+                            <th style="width: 21%">Email ID</th>
+                            <th style="width: 8.5%">Function</th>
+                            <th style="width: 8%">Department</th>
+                            <th style="width: 13%">Designation</th>
+                            <th style="width: 12.5%">Status</th>
+                            <th style="width: 4%; text-align: center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="8" style="padding: 0px 0px 0px 2px">Select Category:
-                                <asp:DropDownList ID="ddlRelatioShip" Style="height: 33px; width: 140px; border: 1px solid #c0c0c0" AppendDataBoundItems="true" runat="server" AutoPostBack="false">
-                                    <asp:ListItem Value="0">-----</asp:ListItem>
+                            <th colspan="2" width="34%">Select Category:
+                                <asp:DropDownList ID="ddlRelatioShip" Style="width: 60%; height: 30px; border: 1px solid #c0c0c0" AppendDataBoundItems="true" runat="server" AutoPostBack="false">
+                                    <asp:ListItem Value="0">-- Lable --</asp:ListItem>
                                 </asp:DropDownList>
-                                <input type="search" id="txtsearch" style="width: 77.9%" placeholder="Search raters by Emp Id, Name, Email ID" class="form-control d-inline-block clsSearchUser" />
                             </th>
+                            <th colspan="6" width="66%">
+                                <input type="search" id="txtsearch" placeholder="Search raters by Emp Id, Name, Email ID" class="form-control form-control-sm clsSearchUser" /></th>
                         </tr>
                     </tfoot>
                 </table>

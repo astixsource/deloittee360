@@ -149,19 +149,23 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                             string strIcon = "";
                             if (dr["StatusID"].ToString() == "1")
                             {
-                                strIcon = "<i class=\"fa fa-circle clsiconclass\" aria-hidden=\"true\" style=\"color:#e1ac43;font-size:15pt\"></i>";
+                                strIcon = "<img src=\"../Images/pending-submis.svg\" style=\"width:20px; height:20px;\" />";
+                                //strIcon = "<i class=\"fa fa-circle clsiconclass\" aria-hidden=\"true\" style=\"color:#ED8B00;font-size:15pt\"></i>";
                             }
                             else if (dr["StatusID"].ToString() == "2")
                             {
-                                strIcon = "<i class=\"fa fa-circle clsiconclass\" aria-hidden=\"true\" style=\"color:#53cd8e;font-size:15pt\"></i>";
+                                strIcon = "<img src=\"../Images/submission.svg\" style=\"width:20px; height:20px;\" />";
+                                //strIcon = "<i class=\"fa fa-circle clsiconclass\" aria-hidden=\"true\" style=\"color:#43b02a;font-size:15pt\"></i>";
                             }
                             else if (dr["StatusID"].ToString() == "3")
                             {
-                                strIcon = "<i class=\"fa fa-refresh clsiconclass\" aria-hidden=\"true\" style=\"background-color:#5aadf9;color:#fff;font-size:15pt\"></i>";
+                                strIcon = "<img src=\"../Images/refresh.svg\" style=\"width:20px; height:20px;\" />";
+                                //strIcon = "<i class=\"fa fa-refresh clsiconclass\" aria-hidden=\"true\" style=\"background-color:#0076A8;color:#fff;font-size:15pt\"></i>";
                             }
                             else
                             {
-                                strIcon = "<i class=\"fa fa-check-square clsiconclass clsnomineeapprove\" aria-hidden=\"true\" style=\"color:#59d68e;font-size:15pt\"></i>";
+                                strIcon = "<img src=\"../Images/approved.svg\" style=\"width:20px; height:20px;\" />";
+                                //strIcon = "<i class=\"fa fa-check-square clsiconclass clsnomineeapprove\" aria-hidden=\"true\" style=\"color:#26890D;font-size:15pt\"></i>";
                             }
                             sb.Append("<div style='display:table-row'><div class='clscoacheelist' EmpNodeId='" + dr["EmpNodeId"].ToString() + "' onclick=\"fnGetNomineeDetails(this," + dr["EmpNodeId"].ToString() + ")\">" + dr["FullName"].ToString() + "</div><div class='clsiconcontainer'>" + strIcon + "</div></div>");
                             i++;

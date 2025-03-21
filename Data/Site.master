@@ -10,25 +10,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=10,IE=edge,chrome=1">
     <title>HCAS 360</title>
 
-    <%--<link href="../Images/favicon1.ico" rel="shortcut icon" type="image/x-icon" />--%>
+    <link href="../Images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="../Content/font-awesome.css" rel="stylesheet" type="text/css" />
     <link href="../Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="../Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="../Content/jquery-ui.css" rel="stylesheet" />
+    <%--<link href="../Content/jquery-ui.css" rel="stylesheet" type="text/css" />--%>
+
+
     <script src="../Scripts/jqueryJS.js" type="text/javascript"></script>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
     <script src="../Scripts/jquery.nicescroll.min.js"></script>
     <script src="../Scripts/siteJS.js"></script>
-    <script src="../Scripts/jquery-ui.js"></script>
-     <script>
+    <%--<script src="../Scripts/jquery-ui.js"></script>--%>
+    <script>
         function fnnLogout() {
             if (confirm("Do you really want to log out?")) {
                 window.location.href = "../Login.aspx";
             }
             return false
         }
-     </script>
+    </script>
     <!-- WARNING: Respond.js doesn't work if you view the page via file: -->
     <!--[if lt IE 9]>
   <script src="../Scripts/html5shiv.min.js"></script>
@@ -54,13 +56,11 @@
                     <!-- Header Navbar: style can be found in header.less -->
                     <div class="navbar-right">
                         <asp:Panel ID="panelLogout" runat="server">
-                        <ul class="navtop">
-                            <li>
-                                    <a href="frmNominateApproveNomination.aspx" class="link-btn" title="click to back home"><span class="fa fa-home"></span></a>
-                            </li>
-                            <li><a href="###" onclick="fnnLogout()" class="link-btn" title="click to logout"><span class="fa fa-sign-out"></span></a></li>
-                        </ul>
-                             </asp:Panel>
+                            <ul class="navtop">
+                                <li><a href="frmNominateApproveNomination.aspx" class="link-btn" title="click to back home"><img src="../Images/home.svg" /><%--<span class="fa fa-home"></span>--%></a></li>
+                                <li><a href="###" onclick="fnnLogout()" class="link-btn" title="click to logout"><img src="../Images/logout.svg" /><%--<span class="fa fa-sign-out"></span>--%></a></li>
+                            </ul>
+                        </asp:Panel>
                     </div>
                 </div>
             </div>

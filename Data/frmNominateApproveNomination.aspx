@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <script src="../Scripts/progressbarJS.js"></script>
 
-    <script>
+    <script type="text/javascript">
         function fnOPenPage(flg) {
             window.location.href = flg == 1 ? "frmNominateRater.aspx" : flg == 2 ? "frmNominateRaterApprove.aspx" : "Instruction.aspx";
         }
@@ -19,7 +19,7 @@
 
     <div class="row absolute-center mt-4">
         <div class="col-4" id="div1" runat="server">
-            <h6 class="text-center">For Participants: Click on ‘Nominate’ to select raters:<br /><br /></h6>
+            <h6 class="text-center">For Participants: Click on ‘Nominate’ to <br /> select raters:</h6>
 
             <div class="btn-img" onclick="fnOPenPage(1)">
                 <img src="../Images/1-nom.svg" alt="" class="" />
