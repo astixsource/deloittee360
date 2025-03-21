@@ -31,8 +31,8 @@
             //string _clientSecret = secretClient.GetSecret("DeloitteProdDBConnection").Value.Value;
             // Application["_clientSecret"] = _clientSecret;
 
-            Application["SSO_clientSecret"] ="";// secretClient.GetSecret("Secret-SSO-Deloitte").Value.Value;
-            Application["AzureMailconnectionString"] ="";// secretClient.GetSecret("Secret-AzureMailconnectionString-Deloitte").Value.Value;
+            Application["SSO_clientSecret"] = secretClient.GetSecret("Secret-SSO-Deloitte").Value.Value;
+            Application["AzureMailconnectionString"] =secretClient.GetSecret("Secret-AzureMailconnectionString-Deloitte").Value.Value;
 
             // Retrieve the secrets
             string _dbUserName = "sqladmin";// secretClient.GetSecret("Secret-PRODDB-Username").Value.Value;
