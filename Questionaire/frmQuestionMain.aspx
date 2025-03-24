@@ -224,7 +224,7 @@
     <!--Ques Heading-->
     <div class="section-title">
         <h3 class="text-center">WELCOME TO 360 Feedback Survey FY25</h3>
-        <div class="title-line-center"></div>    
+        <div class="title-line-center"></div>
         <span class="text-center" id="h6">Please respond to each statement on the scale provided alongside from "Always" to "Rarely". You may ‘Save’ your responses to leave and come back later to complete the rest of the Survey.</span>
     </div>
 
@@ -326,26 +326,27 @@
         <div class="row mb-2">
             <div class="col-md-6 align-left-middile" id="tdCmmnt1" runat="server"><strong>Overall strengths consistently demonstrated by the individual.</strong></div>
             <div class="col-md-6">
-                <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox1" placeholder="Optional" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
+                <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox1" Style="background-color: #fff !important; border: 1px solid #000; border-radius: 0px;" placeholder="Optional" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
             </div>
         </div>
 
         <div class="row mb-2">
             <div class="col-md-6 align-left-middile" id="tdCmmnt2" runat="server"><strong>Areas of development observed in the individual.</strong></div>
             <div class="col-md-6">
-                <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox2" placeholder="Optional" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
+                <asp:TextBox onkeypress="fnCheckLength(this);" ID="Textbox2" Style="background-color: #fff !important; border: 1px solid #000; border-radius: 0px;" placeholder="Optional" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
             </div>
         </div>
     </div>
+
     <div style="text-align: right" id="tdPageNum1">
     </div>
-   
-                <div class="button-group mt-3 mb-3">
-                    <input type="button" class="btns btn-danger" id="btnSaveExit" onclick="fnSaveExit()" value="Exit">
-                    <input type="button" class="btns btn-previous" id="btnPrevious" onclick="fnPrevious()" value="Previous" style="display: none;">
-                    <input type="button" class="btns btn-next" id="btnNext" onclick="fnNext()" value="Save &amp; Continue">
-                    <input type="button" class="btns btn-submit" id="btnSubmit" onclick="FinalSubmit()" value="Submit" style="display: none;">
-                </div>
+
+    <div class="button-group mt-3 mb-3">
+        <input type="button" class="btns btn-danger" id="btnSaveExit" onclick="fnSaveExit()" value="Exit">
+        <input type="button" class="btns btn-previous" id="btnPrevious" onclick="fnPrevious()" value="Previous" style="display: none;">
+        <input type="button" class="btns btn-next" id="btnNext" onclick="fnNext()" value="Save &amp; Continue">
+        <input type="button" class="btns btn-submit" id="btnSubmit" onclick="FinalSubmit()" value="Submit" style="display: none;">
+    </div>
 
 
     <div id="dvinstruction" style="display: none;">

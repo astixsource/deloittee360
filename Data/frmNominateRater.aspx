@@ -952,7 +952,7 @@
                         <tr>
                             <th colspan="2" width="34%">Select Category:
                                 <asp:DropDownList ID="ddlRelatioShip" Style="width: 60%; height: 30px; border: 1px solid #c0c0c0" AppendDataBoundItems="true" runat="server" AutoPostBack="false">
-                                    <asp:ListItem Value="0">-- Lable --</asp:ListItem>
+                                    <asp:ListItem Value="0">-- Label --</asp:ListItem>
                                 </asp:DropDownList>
                             </th>
                             <th colspan="6" width="66%">
