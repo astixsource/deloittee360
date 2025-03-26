@@ -44,7 +44,21 @@ function fnKeyPress() {
     document.getElementById("dvMessage").innerText = "";
 }
 
-function fnSendLogin() {
+function encryptData(data, secretKey) {
+    return CryptoJS.AES.encrypt(data, secretKey).toString();
+}
+
+async function hashData(data) {
+    const encoder = new TextEncoder();
+    const dataBuffer = encoder.encode(data);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
+    return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+async function encodeBase64(data) {
+    return btoa(data);
+}
+
+async function fnSendLogin() {
     if (document.getElementById("txtLoginID").value == "") {
         alert("User name can't be left blank");
         document.getElementById("txtLoginID").focus();
@@ -59,6 +73,10 @@ function fnSendLogin() {
     var Password = document.getElementById("txtPassword").value;
     var csrfToken = document.getElementById("hiddenCSRFToken").value;
 
+
+    var hashedUsername = await encodeBase64(UserName);
+    var hashedPassword = await encodeBase64(Password);
+
     $("#dvFadeForProcessing").show();
     $.ajax({
         url: "LoginPage.aspx/fnLoginFromDB",
@@ -68,7 +86,7 @@ function fnSendLogin() {
         headers: {
             "X-CSRF-Token": csrfToken
         },
-        data: '{UserName:' + JSON.stringify(UserName) + ',Password:' + JSON.stringify(Password) + '}',
+        data: '{UserName:' + JSON.stringify(hashedUsername) + ',Password:' + JSON.stringify(hashedPassword) + '}',
         success: function (response) {
             //
             var strRep = response.d;

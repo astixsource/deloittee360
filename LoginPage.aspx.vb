@@ -140,6 +140,17 @@ Partial Class Login
     '    End Try
 
     'End Sub
+
+    Public Shared Function HashData(ByVal input As String) As String
+        Using sha256 As System.Security.Cryptography.SHA256 = sha256.Create()
+            Dim bytes As Byte() = sha256.ComputeHash(Encoding.UTF8.GetBytes(input))
+            Return BitConverter.ToString(bytes).Replace("-", "").ToLower()
+        End Using
+    End Function
+    Public Shared Function DecodeBase64(ByVal base64Encoded As String) As String
+        Dim base64Bytes As Byte() = Convert.FromBase64String(base64Encoded)
+        Return Encoding.UTF8.GetString(base64Bytes)
+    End Function
     <System.Web.Services.WebMethod()>
     Public Shared Function fnLoginFromDB(ByVal UserName As String, ByVal Password As String) As String
         Dim Objcon2 As SqlConnection
@@ -154,7 +165,8 @@ Partial Class Login
                 Return strResponse
             End If
 
-
+            UserName = DecodeBase64(UserName)
+            Password = DecodeBase64(Password)
             'Dim strTokens = mydivant.InnerHtml
             'AntiForgery.Validate(strTokens.Split(":")(0), strTokens.Split(":")(1))
             'AntiForgery.Validate()

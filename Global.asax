@@ -23,6 +23,7 @@
             string _database =ConfigurationManager.AppSettings["_database"];
             string _tenantId = ConfigurationManager.AppSettings["_tenantId"];
             string _clientId = ConfigurationManager.AppSettings["_clientId"];
+            string _skey = ConfigurationManager.AppSettings["_skey"];
             string _token = "";
             string connectionString = "";
             //Application["DbConnectionString"] = "";
@@ -31,8 +32,9 @@
             //string _clientSecret = secretClient.GetSecret("DeloitteProdDBConnection").Value.Value;
             // Application["_clientSecret"] = _clientSecret;
 
-            Application["SSO_clientSecret"] = secretClient.GetSecret("Secret-SSO-Deloitte").Value.Value;
-            Application["AzureMailconnectionString"] =secretClient.GetSecret("Secret-AzureMailconnectionString-Deloitte").Value.Value;
+            //Application["SSO_clientSecret"] = secretClient.GetSecret("Secret-SSO-Deloitte").Value.Value;
+            //Application["_skey"] = _skey;// secretClient.GetSecret("Secret-skey-Deloitte").Value.Value;
+            //Application["AzureMailconnectionString"] =secretClient.GetSecret("Secret-AzureMailconnectionString-Deloitte").Value.Value;
 
             // Retrieve the secrets
             string _dbUserName = "sqladmin";// secretClient.GetSecret("Secret-PRODDB-Username").Value.Value;

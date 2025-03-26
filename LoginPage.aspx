@@ -20,7 +20,8 @@
 
     <!-- jQuery -->
     <script src="Scripts/jqueryJS.js"></script>
-    <script src="Scripts/loginpageJS_v4.js"></script>
+    <script src="Scripts/loginpageJS_v5.js"></script>
+    <script src="Scripts/crypto-js.min.js"></script>
 </head>
 <body oncontextmenu="return false">
     <form id="form1" runat="server">
