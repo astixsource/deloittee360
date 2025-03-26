@@ -58,5 +58,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'wa-del01-deloitte360-prod'
-          slot-name: 'staging'
+          slot-name: 'Production'
           package: ./
