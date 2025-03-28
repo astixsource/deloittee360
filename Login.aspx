@@ -32,7 +32,7 @@
                     <a href="####" class="logo">
                         <!-- logo for regular state and mobile devices -->
                         <span class="logo-lg">
-                            <asp:Image ID="imgTopLeftLogo" runat="server" ImageUrl="~/Images/Deloitte-logo_White.png" />
+                            <asp:Image ID="imgTopLeftLogo" runat="server" ImageUrl="~/Images/deloitte_ds_logo.svg" />
                         </span></a>
                 </div>
             </div>

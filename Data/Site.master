@@ -23,7 +23,7 @@
     <script src="../Scripts/jquery.nicescroll.min.js"></script>
     <script src="../Scripts/siteJS.js"></script>
     <%--<script src="../Scripts/jquery-ui.js"></script>--%>
-    <script>
+    <script type="text/javascript">
         function fnnLogout() {
             if (confirm("Do you really want to log out?")) {
                 window.location.href = "../Login.aspx";
@@ -51,7 +51,7 @@
                     <a href="#" class="logo">
                         <!-- logo for regular state and mobile devices -->
                         <span class="logo-lg">
-                            <asp:Image ID="imgLogo1" runat="server" ImageUrl="~/Images/Deloitte-logo_White.png" title="logo" />
+                            <asp:Image ID="imgLogo1" runat="server" ImageUrl="~/Images/deloitte_ds_logo.svg" title="logo" />
                         </span></a>
                     <!-- Header Navbar: style can be found in header.less -->
                     <div class="navbar-right">

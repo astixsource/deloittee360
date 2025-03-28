@@ -448,7 +448,7 @@ span.ecs_tooltip {
 .main-header {
     width: 100%;
     position: fixed;
-    min-height: 3rem;
+    min-height: 3.75rem;
     /* border-bottom: 4px solid #0896d8;*/
     background: rgba(0, 0, 0, 0.99);
     padding: 0 1rem;
@@ -471,7 +471,7 @@ span.ecs_tooltip {
     }
 
         .main-header .logo > .logo-lg > img {
-            max-width: 146px;
+            width: 240px;
             padding: 10px 5px;
         }
 
@@ -508,7 +508,7 @@ ul.navtop {
         display: inline-block;
         list-style-type: none;
         position: relative;
-        margin-top: 8px;
+        margin-top: 0.75rem;
     }
 
         ul.navtop li a.link-btn {
