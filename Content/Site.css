@@ -204,6 +204,8 @@ ol, ul {
     text-align: left;
     list-style: none;
     padding: 0;
+    margin-left: -12px;
+    margin-right: -12px;
     margin-bottom: 0;
     box-shadow: 0 0.46875rem 2.1875rem rgba(4,9,20,0.03),0 0.9375rem 1.40625rem rgba(4,9,20,0.03),0 0.25rem 0.53125rem rgba(4,9,20,0.05),0 0.125rem 0.1875rem rgba(4,9,20,0.03);
 }
@@ -471,8 +473,8 @@ span.ecs_tooltip {
     }
 
         .main-header .logo > .logo-lg > img {
-            width: 240px;
-            padding: 10px 5px;
+            width: 106px;
+            padding: 18px 5px;
         }
 
         .main-header .logo .logo-lg {
@@ -738,7 +740,7 @@ Content Area (right)
     position: relative;
     padding-bottom: 30px;
     background: rgba(255,255,255,.99);
-    margin-top: 49px;
+    margin-top: 58px;
     box-shadow: 0 5px 4px -3px rgba(0,0,0,.35);
     -webkit-box-shadow: 0 5px 4px -3px rgba(0,0,0,.35);
     -moz-box-shadow: 0 5px 4px -3px rgba(0,0,0,.35);

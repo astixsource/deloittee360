@@ -6,10 +6,10 @@
 $(function () {
     if (isIE()) {
         //alert('It is InternetExplorer');
-        $(".main-header").css("display", "block"), $("img.logo").css("margin-top", "8px");
+        $(".main-header").css("display", "block"), $("img.logo").css("margin", "18px 5px");
     } else {
         //alert('It is NOT InternetExplorer');
-        $(".main-header").css("display", "flex")
+        $(".main-header").css("display", "block")
     }
 
     $("img.bg-img").hide();
