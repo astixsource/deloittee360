@@ -450,7 +450,7 @@ span.ecs_tooltip {
 .main-header {
     width: 100%;
     position: fixed;
-    min-height: 3.75rem;
+    height: 3.5rem;
     /* border-bottom: 4px solid #0896d8;*/
     background: rgba(0, 0, 0, 0.99);
     padding: 0 1rem;
@@ -510,7 +510,7 @@ ul.navtop {
         display: inline-block;
         list-style-type: none;
         position: relative;
-        margin-top: 0.75rem;
+        margin-top: 0.7rem;
     }
 
         ul.navtop li a.link-btn {
