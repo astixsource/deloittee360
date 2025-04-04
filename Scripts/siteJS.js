@@ -12,6 +12,17 @@ $(function () {
         $(".main-header").css("display", "block")
     }
 
+    $("body").niceScroll({
+        scrollspeed: 0,
+        mousescrollstep: 0,
+        cursorborder: 0,
+        cursorwidth: 10,
+        cursorcolor: '#808080',
+        cursorborderradius: 50,
+        autohidemode: true,
+        horizrailenabled: false
+    });
+
     $("img.bg-img").hide();
     var $url = $("img.bg-img").attr("src");
     $('.full-background_one').css('backgroundImage', 'url(' + $url + ')');
@@ -38,7 +49,7 @@ $(function () {
             //$('.main-header').css('background', 'rgba(0, 0, 0, 0.25)')
         }
     });
-
+    
     /* ------------------ for tabs script ------------------ */
     $('.tabs-content > .tabs-body:first').show();
     $('.tabs > li').click(function () {
