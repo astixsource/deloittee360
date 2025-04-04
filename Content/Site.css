@@ -2,10 +2,27 @@
 /*@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');*/
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
-html {
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none;
+ /*html {
+   -webkit-user-select: none;  Safari */
+    /*-ms-user-select: none;  IE 10 and IE 11
+    user-select: none; */
+    /*overflow: scroll;  Allows scrolling */
+    /*scrollbar-width: none;  Firefox */
+    /*-ms-overflow-style: none;  Internet Explorer & Edge 
+}*/
+
+/*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}*/
+
+*,
+:after,
+:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
@@ -15,14 +32,9 @@ body {
     background-color: #D0D0CE;
     font-size: .85rem;
     font-family: 'Open Sans',  sans-serif;
-}
-
-*,
-:after,
-:before {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+    /*overflow: scroll;  Allows scrolling */
+    /*scrollbar-width: none;  Firefox */
+    /*-ms-overflow-style: none;  Internet Explorer & Edge */
 }
 
 .loader_bg {
@@ -473,7 +485,8 @@ span.ecs_tooltip {
     }
 
         .main-header .logo > .logo-lg > img {
-            width: 106px;
+            width: auto;
+            height: 56px;
             padding: 18px 5px;
         }
 
@@ -740,7 +753,7 @@ Content Area (right)
     position: relative;
     padding-bottom: 30px;
     background: rgba(255,255,255,.99);
-    margin-top: 58px;
+    margin-top: 56px;
     box-shadow: 0 5px 4px -3px rgba(0,0,0,.35);
     -webkit-box-shadow: 0 5px 4px -3px rgba(0,0,0,.35);
     -moz-box-shadow: 0 5px 4px -3px rgba(0,0,0,.35);

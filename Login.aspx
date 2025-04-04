@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <input type="button" id="btnLogin" value="Next" class="btns btn-submit w-100" />
-                            <a href="Data/frmUndertakingPage.aspx" style="font-size:11px;font-style:italic">Privacy Statement</a>
+                            <a href="Data/frmUndertakingPage.aspx" style="font-size: 11px; font-style: italic">Privacy Statement</a>
                             <div class="text-center">
                                 <div id="dvMessage" runat="server" class="text-danger font-weight-bold"></div>
                             </div>
@@ -70,11 +70,11 @@
             </p>
         </div>
 
-        <div class="loader_bg" style="display:none" id="dvFadeForProcessing">
-     <div class="loader"></div>
- </div>
+        <div class="loader_bg" style="display: none" id="dvFadeForProcessing">
+            <div class="loader"></div>
+        </div>
         <asp:HiddenField runat="server" ID="hiddenCSRFToken" />
-<asp:HiddenField ID="hdnEmailId" runat="server" />
+        <asp:HiddenField ID="hdnEmailId" runat="server" />
     </form>
 </body>
 </html>

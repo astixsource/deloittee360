@@ -22,13 +22,14 @@
     <script src="../Scripts/jquery.nicescroll.min.js"></script>
     <script src="../Scripts/siteJS.js"></script>
     <%--<script src="../Scripts/jquery-ui.js"></script>--%>
-    <script>
+    <script type="text/javascript">
         function fnnLogout() {
             if (confirm("Do you really want to log out?")) {
                 window.location.href = "../Login.aspx";
             }
             return false
         }
+        
     </script>
     <!-- WARNING: Respond.js doesn't work if you view the page via file: -->
     <!--[if lt IE 9]>
@@ -58,10 +59,13 @@
                         <ul class="navtop">
                             <li>
                                 <asp:Panel ID="panelLogout" runat="server">
-                                    <a href="frmNominateApproveNomination.aspx" title="click to back home" class="link-btn"><img src="../Images/home.svg" /> <%--<span class="fa fa-home"></span>--%></a>
+                                    <a href="frmNominateApproveNomination.aspx" title="click to back home" class="link-btn">
+                                        <img src="../Images/home.svg" />
+                                        <%--<span class="fa fa-home"></span>--%></a>
                                 </asp:Panel>
                             </li>
-                            <li><a href="###" onclick="fnnLogout()" title="click to logout" class="link-btn"><img src="../Images/logout.svg" /><%--<span class="fa fa-sign-out"></span>--%></a></li>
+                            <li><a href="###" onclick="fnnLogout()" title="click to logout" class="link-btn">
+                                <img src="../Images/logout.svg" /><%--<span class="fa fa-sign-out"></span>--%></a></li>
                         </ul>
                     </div>
                 </div>
@@ -89,7 +93,7 @@
                                 <li>
                                     <div class="status-lvl">
                                         <%=IIf(Convert.ToString(Session("LevelId")) = "2", " CDA approves raters", " RM/Coach approves raters") %>
-                                       
+
                                         <div class="info">
                                             <i class="fa fa-info-circle"></i>
                                             <span class="ecs_tooltip">Manager reviews, edits, and approves nominated raters.</span>
