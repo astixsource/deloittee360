@@ -2,20 +2,48 @@
 /*@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');*/
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
- /*html {
-   -webkit-user-select: none;  Safari */
-    /*-ms-user-select: none;  IE 10 and IE 11
-    user-select: none; */
-    /*overflow: scroll;  Allows scrolling */
-    /*scrollbar-width: none;  Firefox */
-    /*-ms-overflow-style: none;  Internet Explorer & Edge 
-}*/
+html {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    scrollbar-gutter: stable;
+    overflow-y:scroll
+    /* overflow: scroll;  Allows scrolling 
+    scrollbar-width: none;  Firefox 
+    -ms-overflow-style: none;  Internet Explorer & Edge */
+}
 
 /*::-webkit-scrollbar {
   width: 0;
   height: 0;
   display: none;
 }*/
+
+/* Apply to an element or globally */
+* {
+    scrollbar-color: #888 #f1f1f1; /* thumb color track color */
+    scrollbar-width: thin; /* auto | thin | none */
+}
+/* Scrollbar Track */
+::-webkit-scrollbar {
+    width: 5px; /* or height for horizontal scroll */
+}
+
+/* Scrollbar Track Background */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Scrollbar Thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+    /* On hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
 
 *,
 :after,
@@ -32,6 +60,9 @@ body {
     background-color: #D0D0CE;
     font-size: .85rem;
     font-family: 'Open Sans',  sans-serif;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     /*overflow: scroll;  Allows scrolling */
     /*scrollbar-width: none;  Firefox */
     /*-ms-overflow-style: none;  Internet Explorer & Edge */
@@ -1230,7 +1261,7 @@ input {
 .login-box {
     background: #ffffff;
     border-bottom: 1px solid #ddd;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     padding-top: 2rem;
     box-sizing: border-box;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -1303,7 +1334,12 @@ input {
         margin-bottom: 15px !important;
     }
 
+.form-control,
 .form-ctrl {
+    border-radius: 0 !important;
+}
+
+/*.form-ctrl {
     font-size: 14px;
     color: #000000;
     line-height: 1.2;
@@ -1360,7 +1396,7 @@ input {
     background: #f9f9f9;
     border-color: #88bd26;
     outline: none;
-    /*padding-left: 5px;*/
+    padding-left: 5px;
 }
 
     .form-ctrl:focus + .form-ctrl-icon::after,
@@ -1376,7 +1412,7 @@ input {
 
 .has-val.form-ctrl {
     padding-left: 5px;
-}
+}*/
 
 
 /* Footer */

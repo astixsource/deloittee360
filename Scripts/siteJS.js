@@ -3,6 +3,7 @@
     var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
     return is_ie;
 }
+
 $(function () {
     if (isIE()) {
         //alert('It is InternetExplorer');
@@ -12,16 +13,18 @@ $(function () {
         $(".main-header").css("display", "block")
     }
 
-    $("body").niceScroll({
-        scrollspeed: 0,
-        mousescrollstep: 0,
-        cursorborder: 0,
-        cursorwidth: 10,
-        cursorcolor: '#808080',
-        cursorborderradius: 50,
-        autohidemode: true,
-        horizrailenabled: false
-    });
+
+    //$("html").niceScroll();
+    //$("body").niceScroll({
+    //    scrollspeed: 0,
+    //    mousescrollstep: 0,
+    //    cursorborder: 0,
+    //    cursorwidth: 8,
+    //    cursorcolor: '#808080',
+    //    cursorborderradius: 4,
+    //    autohidemode: false,
+    //    horizrailenabled: false
+    //});
 
     $("img.bg-img").hide();
     var $url = $("img.bg-img").attr("src");

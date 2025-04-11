@@ -288,7 +288,6 @@
         <div class="col-md-6 ques-header-left">
             <table class="Questable" style="width: 100%; border-collapse: collapse;">
                 <tr>
-
                     <th style="color: white;" id="dvName">
                         <br>
                     </th>
