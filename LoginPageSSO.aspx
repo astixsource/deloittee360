@@ -18,7 +18,11 @@
     <!-- jQuery -->
 <script src="Scripts/jqueryJS.js"></script>
 <script src="Scripts/loginpageJS_v2.js"></script>
-   
+    <style>
+     html,body {
+         overflow:hidden !important;
+     }
+ </style>
 </head>
 <body onload="fnSetFocus();">
     <form id="form1" runat="server">

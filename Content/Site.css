@@ -6,7 +6,6 @@ html {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    scrollbar-gutter: stable;
     overflow-y:scroll
     /* overflow: scroll;  Allows scrolling 
     scrollbar-width: none;  Firefox 

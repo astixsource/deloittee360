@@ -19,6 +19,11 @@
     <!-- jQuery -->
     <script src="Scripts/jqueryJS.js"></script>
     <script src="Scripts/loginJS2.js"></script>
+    <style>
+        html,body {
+            overflow:hidden !important;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">

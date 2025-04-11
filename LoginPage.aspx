@@ -22,6 +22,11 @@
     <script src="Scripts/jqueryJS.js"></script>
     <script src="Scripts/loginpageJS_v5.js"></script>
     <script src="Scripts/crypto-js.min.js"></script>
+     <style>
+     html,body {
+         overflow:hidden !important;
+     }
+ </style>
 </head>
 <body oncontextmenu="return false">
     <form id="form1" runat="server">
