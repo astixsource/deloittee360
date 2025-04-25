@@ -159,7 +159,7 @@ Partial Class LoginPageSSO
 
         End If
 
-        Response.Redirect(strResponse)
+        ' Response.Redirect(strResponse)
         If flgAgreement = 1 Then
             Response.Redirect(strResponse)
         Else

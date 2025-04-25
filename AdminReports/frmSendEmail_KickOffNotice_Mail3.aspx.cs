@@ -41,9 +41,9 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
                 fnFillCycle();
             }
         }
-        Panel panelLogout;
-        panelLogout = (Panel)Page.Master.FindControl("panelLogout");
-        panelLogout.Visible = false;
+        //Panel panelLogout;
+        //panelLogout = (Panel)Page.Master.FindControl("panelLogout");
+        //panelLogout.Visible = false;
     }
 
     public void fnFillCycle()
@@ -266,7 +266,8 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress("VAC Manager<" + fromMail + ">");
 
-            var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=" + Convert.ToString(HttpContext.Current.Application["AzureMailconnectionString"]);
+            //var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=" + Convert.ToString(HttpContext.Current.Application["AzureMailconnectionString"]);
+            var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=eY/ca2ZawDDXmJx1KvbW0FXw5CbMmucrsW+mjBqE9urodCYTNJeiBeRq3vjX/s7cVlCymgjphLEPbeF9IJRSuw==";
 
             var emailClient = new EmailClient(connectionString);
 
@@ -325,14 +326,14 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
 
 
             strBody.Append("<p>Dear " + ParticipantName + ",</p>");
-            strBody.Append("<p>We are pleased to inform you that the '360-Degree Feedback' process has officially commenced, and the participant's selection has been approved.</p>");
+            strBody.Append("<p>We are pleased to inform you that the 360-Degree Feedback process has officially commenced, and the participants selection has been approved.</ p>");
             strBody.Append("<p>The professionals listed below have been strategically selected to provide a comprehensive assessment of your strength and development areas:</p>");
 
             // List will Come Here
 
 
-            strBody.Append("<table cellpadding='0' cellspacing='0' style='width:60%; border: 1px solid #666666;'>");
-            strBody.Append("<tr><td style='text-align:center; border: 1px solid #666666; background: #44546a; width: 20%;color:white;'>Rater Name</td><td style='text-align:center; border: 1px solid #666666; background: #44546a;width: 20%;color:white;'>Relationship</td></tr>");
+            strBody.Append("<table cellpadding='0' cellspacing='0' style='width:60%; border: 1px solid #020202;'>");
+            strBody.Append("<tr><td style='text-align:center; border: 1px solid #020202; background: #020202; width: 20%;color:white;'>Rater Name</td><td style='text-align:center; border: 1px solid #020202; background: #020202;width: 20%;color:white;'>Relationship</td></tr>");
 
             foreach (DataRow dr in dtRelationshipDetail_FilterData.Rows)
             {
@@ -341,8 +342,8 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
                 string Relationship = dr["Relationship"].ToString();
               
 
-                strBody.Append("<td style='text-align:center; border: 1px solid #666666; background: white; width: 20%;color:black;'>" + RaterName + "</td>");
-                strBody.Append("<td style='text-align:center; border: 1px solid #666666; background: White; width: 20%;color:black;'>" + Relationship + "</td>");
+                strBody.Append("<td style='text-align:center; border: 1px solid #020202; background: white; width: 20%;color:black;'>" + RaterName + "</td>");
+                strBody.Append("<td style='text-align:center; border: 1px solid #020202; background: White; width: 20%;color:black;'>" + Relationship + "</td>");
                 strBody.Append("</tr>");
 
             }
@@ -356,7 +357,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
 
             strBody.Append("<p><b>Next steps:</b></p>");
 
-            strBody.Append("<p>Complete your self-assessment which is designed to evaluate various competencies aligned with your professional development goals.</p>");
+            strBody.Append("<p>Complete your self-assessment which is designed to evaluate various competencies aligned with your professional development goals. You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: (platform URL will come later)</p>");
             strBody.Append("<p><b>Timeline:</b> Kindly complete the survey by  " + DeadlineDate + " .</p>");
             strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
           

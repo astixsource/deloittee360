@@ -1,40 +1,30 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Data/Site.master" AutoEventWireup="true" CodeFile="frmSend_Review_Approve_Email_ToManager.aspx.cs" EnableEventValidation="false" Inherits="frmSend_Review_Approve_Email_ToManager" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminReports/AdminSite.master" AutoEventWireup="true" CodeFile="frmSend_Review_Approve_Email_ToManager.aspx.cs" EnableEventValidation="false" Inherits="frmSend_Review_Approve_Email_ToManager" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
-    <%--<script src="https://code.jquery.com/jquery-3.4.1.js"></script>--%>
-    <style>
-        tr.clstrgdmapped > td{
-            background-color:#f5f5f5;
-        }
+    <script type="text/javascript">
 
-    </style>
-    <script>
-      
         $(document).ready(function () {
             //fnDSEList();
-                      
+
         });
 
-        function fnValidaterUserType()
-        {
+        function fnValidaterUserType() {
             var UserType = $("#MainContent_ddlUserType").val();
             var CycleId = $("#MainContent_ddlCycle").val().split("^")[0];
             if (CycleId == "0") {
                 alert("Please select the batch")
                 return false;
             }
-            if(UserType == "0")
-            {
+            if (UserType == "0") {
                 alert("Please select the user type")
                 return false;
             }
-            
+
         }
         var MappingStatus = 0;
         function fnUserList() {
 
-            if (fnValidaterUserType() == false)
-            {
+            if (fnValidaterUserType() == false) {
                 return false;
             }
             var CycleId = $("#MainContent_ddlCycle").val().split("^")[0];
@@ -47,13 +37,12 @@
             //alert("MeetingCreationStatus=" + MailCreationStatus)
             $("#anchorbtn_other").hide();
             $("#anchorbtn_gd").hide();
-            if (CycleId == 0)
-            {
-                
+            if (CycleId == 0) {
+
                 $("#MainContent_divdrmmain").show();
                 $("#anchorbtn_other").hide();
                 $("#MainContent_divdrmmain")[0].innerHTML = "";
-                return false;   
+                return false;
             }
 
             //if (MailCreationStatus != 3)
@@ -74,10 +63,10 @@
                     $("#MainContent_divdrmmain")[0].innerHTML = "No Participant Found!!!";
                 }
                 else {
-                   
+
                     $("#MainContent_divdrmmain").show();
                     $("#anchorbtn_other").show();
-                   
+
                     $("#MainContent_divdrmmain")[0].innerHTML = result.split("|")[0];
                     //---- this code add by satish --- //
                     $("#MainContent_divdrmmain").prepend("<div id='tblheader'></div>");
@@ -101,7 +90,7 @@
                         $(".mergerow").closest('tr').find('td').css('border-top', '2px solid black');
                     }
                     var activeIndex = parseInt($("#tablist").find("a.active").closest("li").index()) + 1;
-                  //  fnShowDataAssigned(activeIndex);
+                    //  fnShowDataAssigned(activeIndex);
                 }
             },
                 function (result) {
@@ -110,9 +99,9 @@
                 }
             )
         }
-       
+
     </script>
-    
+
 
     <script>
 
@@ -143,7 +132,7 @@
 
             var ArrDataSaving = []; var ArrDataMails = [];
             var hdnFlagValue = $("#MainContent_hdnMailFlag").val(1);
-         
+
             // if (flg == 1) {
             //str.Append("<tr UserType= '" + UserType + "' EmailID = '" + EmailID +"'  EmpNodeID = '" + EmpNodeID +"' Fname ='" + Fname + "'  calenderstarttime='" + Calenderstarttime + "' calenderendtime='" + Calenderendtime + "' OrientationTime='"+ OrientationTime + "'>");
 
@@ -152,7 +141,7 @@
                 var ParticipantID = $(this).closest("tr").attr("ParticipantID");
                 var ParticipantName = $(this).closest("tr").attr("ParticipantName");
                 var ParticipantEmpCode = $(this).closest("tr").attr("ParticipantEmpCode");
-            
+
                 var ParticipantEMailID = $(this).closest("tr").attr("ParticipantEMailID");
                 var ParticipantLevelID = $(this).closest("tr").attr("ParticipantLevelID");
                 var ParticipantUserType = $(this).closest("tr").attr("ParticipantUserType");
@@ -167,21 +156,21 @@
 
 
                 var DeadlineDate = $(this).closest("tr").attr("DeadlineDate");
-               
-                ArrDataSaving.push({ ParticipantID: ParticipantID, ParticipantName: ParticipantName, ParticipantEmpCode: ParticipantEmpCode, ParticipantEMailID: ParticipantEMailID, MailStatus: '', ParticipantLevelID: ParticipantLevelID, ParticipantUserType: ParticipantUserType, ManagerId: ManagerId, ManagerName: ManagerName, ManagerEmpCode: ManagerEmpCode, ManagerEMailID: ManagerEMailID,  ManagerUserName: ManagerUserName, ManagerPassword: ManagerPassword, DeadlineDate: DeadlineDate });
+
+                ArrDataSaving.push({ ParticipantID: ParticipantID, ParticipantName: ParticipantName, ParticipantEmpCode: ParticipantEmpCode, ParticipantEMailID: ParticipantEMailID, MailStatus: '', ParticipantLevelID: ParticipantLevelID, ParticipantUserType: ParticipantUserType, ManagerId: ManagerId, ManagerName: ManagerName, ManagerEmpCode: ManagerEmpCode, ManagerEMailID: ManagerEMailID, ManagerUserName: ManagerUserName, ManagerPassword: ManagerPassword, DeadlineDate: DeadlineDate });
             });
 
-         
+
             if (ArrDataSaving.length == 0) {
                 alert("Kindly Select atleast one checkbox!")
                 return false;
             }
-           
+
             //$.extend(ArrDataSaving, ArrDataSavingGD);
             $("#dvFadeForProcessing").show();
             PageMethods.fnSave(ArrDataSaving, fnSave_Success, fnFailed, flgStatus);
         }
-       
+
         function fnSave_Success(result, flgStatus) {
             $("#dvFadeForProcessing").hide();
             if (result.split("|")[0] == "0") {
@@ -207,9 +196,9 @@
                         var MailStatus = tbl[i]["MailStatus"];
                         var ParticipantName = tbl[i]["ParticipantName"];
                         var EmailId = tbl[i]["ParticipantEMailID"];
-                       
+
                         var strColor = "";
-                                             
+
                         strHTML += ("<tr " + strColor + ">");
                         strHTML += "<td  style='" + style + ";text-align:center;padding:3px'>" + cnt + "</td>";
                         strHTML += "<td  style='" + style + ";text-align:left;padding:3px'>" + ParticipantName + "</td>";
@@ -217,12 +206,12 @@
                         strHTML += "<td  style='" + style + ";text-align:left;padding:3px'>" + MailStatus + "</td>";
                         strHTML += ("</tr>");
                         cnt++;
-                       
-                       
+
+
                     }
-                  
+
                     strHTML += ("</tbody></table>");
-                   
+
                 }
                 $("#dvAlert")[0].innerHTML = strHTML;
                 $("#dvAlert").dialog({
@@ -232,7 +221,7 @@
                     height: "450",
                     close: function () {
                         $(this).dialog('destroy');
-                      
+
                     },
                     buttons: {
                         "OK": function () {
@@ -241,7 +230,7 @@
                     }
                 })
 
-             //   $("#tbldbrlist  input[type=checkbox]:checked").closest("tr").attr("flgDisplayRow", "2");
+                //   $("#tbldbrlist  input[type=checkbox]:checked").closest("tr").attr("flgDisplayRow", "2");
                 $("#tbldbrlist  input[type=checkbox]:checked").prop("checked", false);
                 var i = parseInt($("#tablist").find("a.active").closest("li").index()) + 1
                 $("#hdnChkFlag").val(0);
@@ -289,7 +278,7 @@
                 return false;
             }
             //    alert(CycleID)
-           
+
 
             OldActive = X;
             if (X == 1)   ////// For New User mail
@@ -325,52 +314,39 @@
         <h3 class="text-center">Review and Approve 360-Degree Feedback Nomination </h3>
         <div class="title-line-center"></div>
     </div>
-    <div class="form-group row" >
-        <label for="ac" class="col-sm-2 col-form-label">Select Batch :</label>
-        <div class="col-sm-4">
-            <asp:DropDownList runat="server" ID="ddlCycle"  CssClass="form-control">
-            </asp:DropDownList>
-        </div>       
-    </div>
-     <div class="form-group row" >
-        <label for="ac" class="col-sm-2 col-form-label">Select User Type :</label>
-        <div class="col-sm-4">
-            <asp:DropDownList runat="server" ID="ddlUserType"  CssClass="form-control">
-                <asp:ListItem Value="0">- Select - </asp:ListItem>
-                   <asp:ListItem Value="1" Selected="True">Manager</asp:ListItem>
-<%--                   <asp:ListItem Value="2">Admin User Mail</asp:ListItem>
-                   <asp:ListItem Value="3">Sample User Mail</asp:ListItem>--%>
-            </asp:DropDownList>
-        </div>       
-    </div>
-    
-    <div class="form-group row" >
-        <label for="ac" class="col-sm-2 col-form-label">&nbsp;</label>
-        <div class="col-sm-4">
-            <input type="button" id="btnShowUsers" value="Show Users" onclick="fnUserList()" class="btns btn-submit btns-small">
-            
-        </div>       
-    </div>
-    <div class="body-content">
-       <%-- <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist" id="tablist">
-            <li><a class="nav-link active" onclick="fnShowDataAssigned(1)" style="cursor:pointer">New Users Scheduler Email</a></li>
-            <li ><a  class="nav-link"  onclick="fnShowDataAssigned(2)" style="cursor:pointer">Updated Scheduler Mail</a></li>
-            <li style="display:none"><a class="nav-link " onclick="fnShowDataAssigned(3)" style="cursor:pointer">Resend Scheduler Email</a></li>
-        </ul>--%>
 
-             <div class="tab-content">
-      
-        <!-- Tab panes -->
-             <div id="divdrmmain" runat="server" style="min-height:300px"></div>
-    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group row">
+                <label for="ac" class="col-sm-4 col-form-label">Select Batch :</label>
+                <div class="col-sm-8">
+                    <asp:DropDownList runat="server" ID="ddlCycle" CssClass="form-control">
+                    </asp:DropDownList>
+                </div>
+            </div>
         </div>
+        <div class="col-md-5">
+            <div class="form-group row">
+                <label for="ac" class="col-sm-5 col-form-label">Select User Type :</label>
+                <div class="col-sm-7">
+                    <asp:DropDownList runat="server" ID="ddlUserType" CssClass="form-control">
+                        <asp:ListItem Value="0">- Select - </asp:ListItem>
+                        <asp:ListItem Value="1" Selected="True">Manager</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <input type="button" id="btnShowUsers" value="Show Users" onclick="fnUserList()" class="btns small btn-submit">
+        </div>
+    </div>
 
+    <div id="divdrmmain" runat="server" style="min-height: 300px; margin-top: 10px;"></div>
 
     <div class="text-center" id="divBTNS" style="display: none;">
         <a href="###" class="btns btn-submit" onclick="return fnSave(1)" id="anchorbtn_other" style="display: none">Send Mail</a>
     </div>
-   
+
 
     <div id="dvDialog" style="display: none"></div>
     <div id="dvAlert" style="display: none;"></div>
@@ -379,6 +355,6 @@
     </div>
     <asp:HiddenField runat="server" ID="hdnLoginId" Value="0" />
     <asp:HiddenField runat="server" ID="hdnMenuId" Value="0" />
-     <asp:HiddenField runat="server" ID="hdnMailFlag" Value="0" />
+    <asp:HiddenField runat="server" ID="hdnMailFlag" Value="0" />
 </asp:Content>
 

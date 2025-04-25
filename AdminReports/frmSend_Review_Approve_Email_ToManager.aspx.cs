@@ -41,9 +41,9 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
                 fnFillCycle();
             }
         }
-        Panel panelLogout;
-        panelLogout = (Panel)Page.Master.FindControl("panelLogout");
-        panelLogout.Visible = false;
+        //Panel panelLogout;
+        //panelLogout = (Panel)Page.Master.FindControl("panelLogout");
+        //panelLogout.Visible = false;
     }
 
     public void fnFillCycle()
@@ -292,7 +292,8 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress("VAC Manager<" + fromMail + ">");
 
-            var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=" + Convert.ToString(HttpContext.Current.Application["AzureMailconnectionString"]);
+            //  var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=" + Convert.ToString(HttpContext.Current.Application["AzureMailconnectionString"]);
+            var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=eY/ca2ZawDDXmJx1KvbW0FXw5CbMmucrsW+mjBqE9urodCYTNJeiBeRq3vjX/s7cVlCymgjphLEPbeF9IJRSuw==";
             var emailClient = new EmailClient(connectionString);
 
             var emailRecipients = new EmailRecipients();
@@ -343,11 +344,13 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
             strBody.Append("<font  style='COLOR: #000000; FONT-FAMILY: Arial'  size=2>");
 
             strBody.Append("<p>Dear " + ManagerName + ",</p>");
-            strBody.Append("<p>The '360-Degree Feedback' application is designed to enhance overall feedback and development processes within the organisation. This tool focuses on offering a comprehensive view of an individual's competencies core to the Deloitte Future Leaders Framework and provides feedback from various sources.</p>");
-            strBody.Append("<p>We request your attention to review and approve the '360 - Degree Feedback' nominations raised by " + ParticipantName + ". The deadline for approval is " + DeadlineDate + " </p>");
-            strBody.Append("<p>If not approved by this date, the participant list will be auto-approved and proceed to the next step. You can access and approve this document at the following URL : <a href=" + WebSitePath + ">" + WebSitePath + "</a></p>");
-            strBody.Append("<p><b>Login ID: " + ManagerName + "</b></p>");
-            strBody.Append("<p><b>Password: " + ManagerPassword + "</b></p>");
+            strBody.Append("<p>The 360-Degree Feedback application is designed to enhance overall feedback and development processes within the organisation. This tool focuses on offering a comprehensive view of an individual's competencies core to the Deloitte Future Leaders Framework and provides feedback from various sources.</p>");
+            strBody.Append("<p>We request your attention to review and approve the 360-Degree Feedback nominations raised by " + ParticipantName + ". The deadline for approval is " + DeadlineDate + " </p>");
+            strBody.Append("<p>If not approved by this date, the participant list will be auto-approved and proceed to the next step.</p>");
+            strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through the following URL: (platform URL will come later)</p>");
+            //strBody.Append("<p>If not approved by this date, the participant list will be auto-approved and proceed to the next step. You can access and approve this document at the following URL : <a href=" + WebSitePath + ">" + WebSitePath + "</a></p>");
+            //strBody.Append("<p><b>Login ID: " + ManagerName + "</b></p>");
+            //strBody.Append("<p><b>Password: " + ManagerPassword + "</b></p>");
 
             strBody.Append("<p>The way forward involves triggering an assessment process, where the selected list of participants will provide feedback through this tool.</p>");
             strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");

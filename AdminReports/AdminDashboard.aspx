@@ -1,8 +1,17 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Data/Site.master" AutoEventWireup="true" CodeFile="AdminDashboard.aspx.cs" Inherits="AdminReports_AdminDashboard" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminReports/AdminSite.master" AutoEventWireup="true" CodeFile="AdminDashboard.aspx.cs" Inherits="AdminReports_AdminDashboard" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#home').hide();
+        });
+    </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-    <div id="dvLinks" runat="server" class="clearfix"></div>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
+    <div class="section-title">
+        <h3 class="text-center">Admin Dashboard</h3>
+        <div class="title-line-center"></div>
+    </div>
+    <div id="dvLinks" runat="server"></div>
 </asp:Content>
 

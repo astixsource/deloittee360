@@ -436,7 +436,8 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress("VAC Manager<" + fromMail + ">");
 
-            var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=" + Convert.ToString(HttpContext.Current.Application["AzureMailconnectionString"]);
+            //var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=" + Convert.ToString(HttpContext.Current.Application["AzureMailconnectionString"]);
+            var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=eY/ca2ZawDDXmJx1KvbW0FXw5CbMmucrsW+mjBqE9urodCYTNJeiBeRq3vjX/s7cVlCymgjphLEPbeF9IJRSuw==";
             var emailClient = new EmailClient(connectionString);
 
             var emailRecipients = new EmailRecipients();
@@ -487,14 +488,14 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                 strBody.Append("<font  style='COLOR: #000000; FONT-FAMILY: Arial'  size=2>");
 
                 strBody.Append("<p>Dear " + FName + ",</p>");     //// Participants Name WIll Come
-                strBody.Append("<p>We are pleased to inform you that the 360-Degree Feedback process has officially commenced, and the team selection has been approved.</p>");
-                strBody.Append("<p>The feedback raters given below, has been strategically selected to provide a comprehensive assessment of your strength and development areas:</p>");
+                strBody.Append("<p>We are pleased to inform you that the 360-Degree Feedback process has officially commenced, and the participants selection has been approved.</ p>");
+                strBody.Append("<p>The professionals listed below have been strategically selected to provide a comprehensive assessment of your strength and development areas:</p>");
 
 
                 //[[List of raters & relationship]] Will Come Here
 
-                strBody.Append("<table cellpadding='0' cellspacing='0' style='width:60%;'>");
-                strBody.Append("<tr><td style='text-align:center; border: 1px solid #666666; background: #44546a; width: 20%;color:white;'>Rater Name</td><td style='text-align:center; border: 1px solid #666666; background: #44546a;width: 20%;color:white;'>Relationship</td></tr>");
+                strBody.Append("<table cellpadding='0' cellspacing='0' style='width:60%;border: 1px solid #020202;'>");
+                strBody.Append("<tr><td style='text-align:center; border: 1px solid #020202; background: #020202; width: 20%;color:white;'>Rater Name</td><td style='text-align:center; border: 1px solid #020202; background: #020202;width: 20%;color:white;'>Relationship</td></tr>");
 
                 foreach (DataRow dr in dtRelationShipData.Rows)
                 {
@@ -503,52 +504,50 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                     string Relationship = dr["Relationship"].ToString();
 
 
-                    strBody.Append("<td style='text-align:center; border: 1px solid #666666; background: white; width: 20%;color:black;'>" + RaterName + "</td>");
-                    strBody.Append("<td style='text-align:center; border: 1px solid #666666; background: White; width: 20%;color:black;'>" + Relationship + "</td>");
+                    strBody.Append("<td style='text-align:center; border: 1px solid #020202; background: white; width: 20%;color:black;'>" + RaterName + "</td>");
+                    strBody.Append("<td style='text-align:center; border: 1px solid #020202; background: White; width: 20%;color:black;'>" + Relationship + "</td>");
                     strBody.Append("</tr>");
 
                 }
 
                 strBody.Append("</table>");
 
-                strBody.Append("<p>Complete your Self Assessment which is designed to evaluate various competencies aligned with your professional development goals.</p>");
+          
+                strBody.Append("<p>Complete your self-assessment which is designed to evaluate various competencies aligned with your professional development goals. You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: (platform URL will come later)</p>");
+                strBody.Append("<p><b>Timeline:</b> Kindly complete the survey by  " + DeadlineDate + " .</p>");
+                strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
 
-                //strBody.Append("<p>Your timely review will help ensure a smooth and effective feedback process. Should you have any questions or need assistance, please reach out to : <a style = 'COLOR: #000000; FONT-weight: bold' href = mailto:demer@deloitte.com> (demer@deloitte.com)</a>.</p>");
-                strBody.Append("<p><b>Timeline:</b> Kindly complete the survey by  " + DeadlineDate + " .</p>");
-                strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on : <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
-                strBody.Append("<p><b>Regards,</b></p>");
-                strBody.Append("<p><b>Talent team</b></p>");
 
                 strBody.Append("<p>Note: This is a system-generated email. Please do not reply to this ID.</p>");
 
                 strBody.Append("</font>");
 
             }
-            else
-            {
-                msg.Subject = "Your HCAS 360-Degree Feedback FY2025 Rater Approval Update";
+            //else
+            //{
+            //    msg.Subject = "Your HCAS 360-Degree Feedback FY2025 Rater Approval Update";
 
-                strBody.Append("<font  style='COLOR: #000000; FONT-FAMILY: Arial'  size=2>");
+            //    strBody.Append("<font  style='COLOR: #000000; FONT-FAMILY: Arial'  size=2>");
 
-                strBody.Append("<p>Dear " + FName + ",</p>"); // Participants Name WIll Come
-                strBody.Append("<p>Thank you for your nominating your raters for the HCAS 360-Degree Feedback FY2025. Your nominated raters have been reviewed by your manager/coach. </p>");
-                strBody.Append("<p>Below are the next steps for you:</p>");
-                strBody.Append("<p>Some of your nominated raters were not approved and your manager/coach has shared below feedback:</p>");
-                strBody.Append("<p>" + Comment + ",</p>"); // When Comment WIll Come then Code need to uncomment
-                strBody.Append("<p>Please log-into the platform once again and update your rater selection accordingly before resubmitting for approval.</p>");
-                strBody.Append("<p>URL <a href='" + WebSitePath + "'>" + WebSitePath + "</a>.</p>");
-                strBody.Append("<p><b>Login ID: " + UserName + "</b></p>");
-                strBody.Append("<p><b>Password: " + Password + "</b></p>");
+            //    strBody.Append("<p>Dear " + FName + ",</p>"); // Participants Name WIll Come
+            //    strBody.Append("<p>Thank you for your nominating your raters for the HCAS 360-Degree Feedback FY2025. Your nominated raters have been reviewed by your manager/coach. </p>");
+            //    strBody.Append("<p>Below are the next steps for you:</p>");
+            //    strBody.Append("<p>Some of your nominated raters were not approved and your manager/coach has shared below feedback:</p>");
+            //    strBody.Append("<p>" + Comment + ",</p>"); // When Comment WIll Come then Code need to uncomment
+            //    strBody.Append("<p>Please log-into the platform once again and update your rater selection accordingly before resubmitting for approval.</p>");
+            //    strBody.Append("<p>URL <a href='" + WebSitePath + "'>" + WebSitePath + "</a>.</p>");
+            //    strBody.Append("<p><b>Login ID: " + UserName + "</b></p>");
+            //    strBody.Append("<p><b>Password: " + Password + "</b></p>");
 
-                strBody.Append("<p>Once you updated your raters, please await the survey launch to complete your self-rating & provide feedback for others if you have been nominated. </p>");
-                strBody.Append("<p>Should you have any questions or need assistance, please reach out to your talent advisors.</p>");
-                strBody.Append("<p><b>Best Regards,</b></p>");
-                strBody.Append("<p><b>Team Deloitte</b></p>");
+            //    strBody.Append("<p>Once you updated your raters, please await the survey launch to complete your self-rating & provide feedback for others if you have been nominated. </p>");
+            //    strBody.Append("<p>Should you have any questions or need assistance, please reach out to your talent advisors.</p>");
+            //    strBody.Append("<p><b>Best Regards,</b></p>");
+            //    strBody.Append("<p><b>Team Deloitte</b></p>");
 
 
-                strBody.Append("</font>");
+            //    strBody.Append("</font>");
 
-            }
+            //}
 
 
 
