@@ -29,7 +29,14 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         //dvLinks.Style.Add("font-size", "15px");
         sb.Append("<table class='table-style'");
         sb.Append("<tr>");
-        sb.Append("<td rowspan='5'>Manage Process</td>");
+        sb.Append("<td rowspan='11'>Manage Process</td>");
+
+        sb.Append("<tr>");
+        sb.Append("<td><a href='../AdminReports/frmStatusReport.aspx' class='btn-one w-100'>E360 Status Report</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>E360 Status Report</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
 
 
         sb.Append("<tr>");
@@ -63,7 +70,47 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         sb.Append("</td>");
         sb.Append("</tr>");
 
-       
+
+        sb.Append("<tr>");
+        sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_InitiateYour360Degree_FeedbackForm_Mail6.aspx' class='btn-one w-100'>Reminder: Initiate Your 360-Degree Feedback Form</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>Reminder: Initiate Your 360-Degree Feedback Form</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
+
+
+        sb.Append("<tr>");
+        sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_Review_and_Approve360Degree_FeedbackNomination_Mail7.aspx' class='btn-one w-100'>Reminder: Review and Approve 360-Degree Feedback Nomination</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>Reminder: Review and Approve 360-Degree Feedback Nomination</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
+
+
+        sb.Append("<tr>");
+        sb.Append("<td><a href='../AdminReports/frmSendEmail_Urgent_InitiateYour360Degree_FeedbackForm_Mail8.aspx' class='btn-one w-100'>Urgent: Initiate Your 360-Degree Feedback Form</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>Urgent: Initiate Your 360-Degree Feedback Form</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
+
+
+        sb.Append("<tr>");
+        sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_PendingNotificationof360Degree_FeedbackForm_Mail9.aspx' class='btn-one w-100'>Reminder: Pending Notification of 360-Degree Feedback Form</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>Reminder: Pending Notification of 360-Degree Feedback Form</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
+
+
+        sb.Append("<tr>");
+        sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_PendingNotificationof360Degree_FeedbackForm_Mail10.aspx' class='btn-one w-100'>Reminder: Pending Notification of 360-Degree Feedback Form</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>Reminder: Pending Notification of 360-Degree Feedback Form</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
+
+
         sb.Append("</tr>");
         return sb.ToString();
     }
