@@ -308,7 +308,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             }
 
 
-            msg.Subject = "Reminder: Pending Notification of 360-Degree Feedback Form";
+            msg.Subject = "Reminder: Pending Notification of 360-Degree Feedback Form - Participants";
 
 
 
@@ -325,7 +325,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             //strBody.Append("<p><b>Login ID: " + ParticipantUserName + "</b></p>");
             //strBody.Append("<p><b>Password: " + ParticipantPassword + "</b></p>");
 
-            strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: (platform URL will come later)</p>");
+            strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
 
             strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
           

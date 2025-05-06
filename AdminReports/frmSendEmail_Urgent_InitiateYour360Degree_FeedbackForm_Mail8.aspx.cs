@@ -319,7 +319,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             strBody.Append("<p>Dear " + ParticipantName + ",</p>");
             strBody.Append("<p>This is a reminder to initiate your 360-Degree Feedback form for your holistic assessment, which was due on " + DeadlineDate + ". Your active participation is highly appreciated.</p>");
 
-            strBody.Append("<p>Please note that your 360-Degree Feedback Form 2024–25 is now available at the following URL: (platform URL). You can login to the platform via Single Sign On (SSO) using your Deloitte credentials.</p>");
+            strBody.Append("<p>Please note that your 360-Degree Feedback Form 2024–25 is now available at the following URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a>. You can login to the platform via Single Sign On (SSO) using your Deloitte credentials.</p>");
 
 
              

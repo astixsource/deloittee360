@@ -164,90 +164,92 @@
         }
 
         function fnSave_Success(result, flgStatus) {
+            alert("Mail Sent Successfully.");
             $("#dvFadeForProcessing").hide();
-            if (result.split("|")[0] == "0") {
-                var tbl = $.parseJSON(result.split("|")[1]);
-                var strHTML = "";
-                if (tbl.length > 0) {
+        
+            //if (result.split("|")[0] == "0") {
+            //    var tbl = $.parseJSON(result.split("|")[1]);
+            //    var strHTML = "";
+            //    if (tbl.length > 0) {
 
-                    var style = "border-left: 1px solid #A0A0A0; border-bottom: 1px solid #A0A0A0;font-family:arial narrow;font-size:9pt;";
-                    strHTML += "Kindly find below Mail status for each participant.</br>";
-                    strHTML += ("<table cellpadding='2' cellspacing='0' style='font-family:arial narrow;font-size:8.5pt;border-right: 1px solid #A0A0A0; border-top: 1px solid #A0A0A0;text-align:center;width:100%'><thead>");
-                    strHTML += ("<tr bgcolor='#26a6e7'>");
-                    strHTML += "<th  style='" + style + ";color:#fff;text-align:left;padding:3px'>Sr.No</th>";
-                    strHTML += "<th  style='" + style + ";color:#fff;text-align:left;padding:3px'>Participant Name</th>";
-                    strHTML += "<th  style='" + style + ";color:#fff;text-align:left;padding:3px'>EmailId</th>";
-                    strHTML += "<th  style='" + style + ";color:#fff;text-align:left;padding:3px'>Mail Status</th>";
-                    strHTML += ("</tr></thead><tbody>");
-                    //MeetingStartTime
-                    var flgvalid = true;
-                    var Oldparticipantcyclemappingid = 0;
-                    var cnt = 1;
-                    for (var i in tbl) {
-                        var ParticipantAssessorMappingId = 0;// tbl[i]["ParticipantAssessorMappingId"];
-                        var MailStatus = tbl[i]["MailStatus"];
-                        var ParticipantName = tbl[i]["ParticipantName"];
-                        var EmailId = tbl[i]["ParticipantEMailID"];
+            //        var style = "border-left: 1px solid #A0A0A0; border-bottom: 1px solid #A0A0A0;font-family:arial narrow;font-size:9pt;";
+            //        strHTML += "Kindly find below Mail status for each participant.</br>";
+            //        strHTML += ("<table cellpadding='2' cellspacing='0' style='font-family:arial narrow;font-size:8.5pt;border-right: 1px solid #A0A0A0; border-top: 1px solid #A0A0A0;text-align:center;width:100%'><thead>");
+            //        strHTML += ("<tr bgcolor='#26a6e7'>");
+            //        strHTML += "<th  style='" + style + ";color:#fff;text-align:left;padding:3px'>Sr.No</th>";
+            //        strHTML += "<th  style='" + style + ";color:#fff;text-align:left;padding:3px'>Participant Name</th>";
+            //        strHTML += "<th  style='" + style + ";color:#fff;text-align:left;padding:3px'>EmailId</th>";
+            //        strHTML += "<th  style='" + style + ";color:#fff;text-align:left;padding:3px'>Mail Status</th>";
+            //        strHTML += ("</tr></thead><tbody>");
+            //        //MeetingStartTime
+            //        var flgvalid = true;
+            //        var Oldparticipantcyclemappingid = 0;
+            //        var cnt = 1;
+            //        for (var i in tbl) {
+            //            var ParticipantAssessorMappingId = 0;// tbl[i]["ParticipantAssessorMappingId"];
+            //            var MailStatus = tbl[i]["MailStatus"];
+            //            var ParticipantName = tbl[i]["ParticipantName"];
+            //            var EmailId = tbl[i]["ParticipantEMailID"];
 
-                        var strColor = "";
+            //            var strColor = "";
 
-                        strHTML += ("<tr " + strColor + ">");
-                        strHTML += "<td  style='" + style + ";text-align:center;padding:3px'>" + cnt + "</td>";
-                        strHTML += "<td  style='" + style + ";text-align:left;padding:3px'>" + ParticipantName + "</td>";
-                        strHTML += "<td  style='" + style + ";text-align:left;padding:3px'>" + EmailId + "</td>";
-                        strHTML += "<td  style='" + style + ";text-align:left;padding:3px'>" + MailStatus + "</td>";
-                        strHTML += ("</tr>");
-                        cnt++;
+            //            strHTML += ("<tr " + strColor + ">");
+            //            strHTML += "<td  style='" + style + ";text-align:center;padding:3px'>" + cnt + "</td>";
+            //            strHTML += "<td  style='" + style + ";text-align:left;padding:3px'>" + ParticipantName + "</td>";
+            //            strHTML += "<td  style='" + style + ";text-align:left;padding:3px'>" + EmailId + "</td>";
+            //            strHTML += "<td  style='" + style + ";text-align:left;padding:3px'>" + MailStatus + "</td>";
+            //            strHTML += ("</tr>");
+            //            cnt++;
 
 
-                    }
+            //        }
 
-                    strHTML += ("</tbody></table>");
+            //        strHTML += ("</tbody></table>");
 
-                }
-                $("#dvAlert")[0].innerHTML = strHTML;
-                $("#dvAlert").dialog({
-                    title: "Alert!",
-                    modal: true,
-                    width: "750",
-                    height: "450",
-                    close: function () {
-                        $(this).dialog('destroy');
+            //    }
+            //    $("#dvAlert")[0].innerHTML = strHTML;
+            //    $("#dvAlert").dialog({
+            //        title: "Alert!",
+            //        modal: true,
+            //        width: "750",
+            //        height: "450",
+            //        close: function () {
+            //            $(this).dialog('destroy');
 
-                    },
-                    buttons: {
-                        "OK": function () {
-                            $(this).dialog('close');
-                        }
-                    }
-                })
+            //        },
+            //        buttons: {
+            //            "OK": function () {
+            //                $(this).dialog('close');
+            //            }
+            //        }
+            //    })
 
-                //   $("#tbldbrlist  input[type=checkbox]:checked").closest("tr").attr("flgDisplayRow", "2");
-                $("#tbldbrlist  input[type=checkbox]:checked").prop("checked", false);
-                var i = parseInt($("#tablist").find("a.active").closest("li").index()) + 1
-                $("#hdnChkFlag").val(0);
-                fnShowDataAssigned(i);
-                $("#loader").hide();
-                fnUserList();
+            //    //   $("#tbldbrlist  input[type=checkbox]:checked").closest("tr").attr("flgDisplayRow", "2");
+            //    $("#tbldbrlist  input[type=checkbox]:checked").prop("checked", false);
+            //    var i = parseInt($("#tablist").find("a.active").closest("li").index()) + 1
+            //    $("#hdnChkFlag").val(0);
+            //    fnShowDataAssigned(i);
+            //    $("#loader").hide();
+            //    fnUserList();
 
-            }
-            else {
-                $("#dvAlert")[0].innerHTML = "Oops! Something went wrong. Please try again.</br>Error:" + result.split("|")[1];
-                $("#dvAlert").dialog({
-                    title: "Error:",
-                    modal: true,
-                    width: "auto",
-                    height: "auto",
-                    close: function () {
-                        $(this).dialog('destroy');
-                    },
-                    buttons: {
-                        "OK": function () {
-                            $(this).dialog('close');
-                        }
-                    }
-                })
-            }
+            //}
+            //else {
+            //    $("#dvAlert")[0].innerHTML = "Oops! Something went wrong. Please try again.</br>Error:" + result.split("|")[1];
+            //    $("#dvAlert").dialog({
+            //        title: "Error:",
+            //        modal: true,
+            //        width: "auto",
+            //        height: "auto",
+            //        close: function () {
+            //            $(this).dialog('destroy');
+            //        },
+            //        buttons: {
+            //            "OK": function () {
+            //                $(this).dialog('close');
+            //            }
+            //        }
+            //    })
+            //}
         }
 
         function fnFailed(result) {

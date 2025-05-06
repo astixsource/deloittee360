@@ -344,17 +344,17 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
 
             strBody.Append("<p><b>Process overview:</b></p>");
 
-            strBody.Append("<p>Selection: You have been selected as one of the participants for the '360-Degree Feedback' process. Your participation has been approved by respective stakeholder's Manager/Coach/CDA.</p>");
-            strBody.Append("<p>Feedback survey: The feedback survey, tailored to rate various competencies aligned with our Deloitte Future Leader Framework (DFLF) can be accessed here: (Document Link) will come here. </p>");
+            strBody.Append("<p>Selection: You have been selected as one of the participants for the 360-Degree Feedback process. Your participation has been approved by respective stakeholder's Reporting Manager/Coach/CDA.</p>");
+            strBody.Append("<p>Feedback survey: The feedback survey, tailored to rate various competencies aligned with our Deloitte Future Leader Framework (DFLF) can be accessed here: <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Pages/360-Degree-Framework-Toolkit.aspx'>DOC_ACCESS_URL</a> </p>");
             strBody.Append("<p><b>Your role:</b></p>");
             strBody.Append("<p>Your feedback, based on your experience working with the above mentioned practitioners, will contribute significantly to their professional growth.</p>");
             strBody.Append("<p>Please provide candid and constructive feedback to ensure a well-rounded assessment.</p>");
 
 
             strBody.Append("<p><b>Timeline:</b> Kindly complete the survey by  " + DeadlineDate + " .</p>");
-            strBody.Append("<p>You can login to the platform via Single Sign On(SSO) using your Deloitte credentials through this URL: (platform URL will come later)</p>");
+            strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
             
-            strBody.Append("<p>Your commitment to this process is highly appreciated, and your input is integral to the success of this initiative.</p>");
+            strBody.Append("<p>Your commitment to this process is highly appreciated, and your input is integral to the success of this initiatives.</p>");
             strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
             strBody.Append("<p>Thank you for your time and collaboration.</p>");
             //strBody.Append("<p>Regards,</p>");

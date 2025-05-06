@@ -345,7 +345,7 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
 
             strBody.Append("<p>Dear " + ManagerName + ",</p>");
             strBody.Append("<p>We request your attention to review and approve the 360-Degree Feedback nominations selected by  " + ParticipantName + ". The deadline for approval is " + DeadlineDate + " </p>");
-            strBody.Append("<p>If not approved by this date, the nominee list will be auto-approved and proceed to the next step. To view and approve the list, you can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: (platform URL will come later)</p>");
+            strBody.Append("<p>If not approved by this date, the nominee list will be auto-approved and proceed to the next step. To view and approve the list, you can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
             //strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through the following URL: (platform URL will come later)</p>");
             //strBody.Append("<p>If not approved by this date, the participant list will be auto-approved and proceed to the next step. You can access and approve this document at the following URL : <a href=" + WebSitePath + ">" + WebSitePath + "</a></p>");
             //strBody.Append("<p><b>Login ID: " + ManagerName + "</b></p>");

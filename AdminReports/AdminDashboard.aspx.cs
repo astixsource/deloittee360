@@ -96,17 +96,17 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
 
 
         sb.Append("<tr>");
-        sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_PendingNotificationof360Degree_FeedbackForm_Mail9.aspx' class='btn-one w-100'>Reminder: Pending Notification of 360-Degree Feedback Form</a></td>");
+        sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_PendingNotificationof360Degree_FeedbackForm_Mail9.aspx' class='btn-one w-100'>Reminder: Pending Notification of 360-Degree Feedback Form- Receipent</a></td>");
         sb.Append("<td>");
-        sb.Append("<ul class=''><li>Reminder: Pending Notification of 360-Degree Feedback Form</li></ul>");
+        sb.Append("<ul class=''><li>Reminder: Pending Notification of 360-Degree Feedback Form - Receipent</li></ul>");
         sb.Append("</td>");
         sb.Append("</tr>");
 
 
         sb.Append("<tr>");
-        sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_PendingNotificationof360Degree_FeedbackForm_Mail10.aspx' class='btn-one w-100'>Reminder: Pending Notification of 360-Degree Feedback Form</a></td>");
+        sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_PendingNotificationof360Degree_FeedbackForm_Mail10.aspx' class='btn-one w-100'>Reminder: Pending Notification of 360-Degree Feedback Form- Participants</a></td>");
         sb.Append("<td>");
-        sb.Append("<ul class=''><li>Reminder: Pending Notification of 360-Degree Feedback Form</li></ul>");
+        sb.Append("<ul class=''><li>Reminder: Pending Notification of 360-Degree Feedback Form - Participants</li></ul>");
         sb.Append("</td>");
         sb.Append("</tr>");
 

@@ -318,15 +318,17 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             strBody.Append("<p>Dear " + ParticipantName + ",</p>");
             strBody.Append("<p>The 360-Degree Feedback application is designed to enhance overall feedback and development processes within the organisation. This tool focuses on offering a comprehensive view of an individual's competencies core to the Deloitte Future Leaders Framework and provides feedback from various sources.</p>");
             
-            strBody.Append("<p>Please note that your 360-Degree Feedback Form 2024–25 is now available. You can access this document at the following URL:  <a href=" + WebSitePath + ">" + WebSitePath + "</a></p>");
-            strBody.Append("<p><b>Login ID: " + ParticipantUserName + "</b></p>");
-            strBody.Append("<p><b>Password: " + ParticipantPassword + "</b></p>");
+            strBody.Append("<p>Please note that your 360-Degree Feedback Form 2024–25 is now available. You can access this document at the following URL: <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Pages/360-Degree-Framework-Toolkit.aspx'>DOC_ACCESS_URL</a></p>");
+
+            // //< a href = " + WebSitePath + " > " + WebSitePath + " </ a >
+            // strBody.Append("<p><b>Login ID: " + ParticipantUserName + "</b></p>");
+            //strBody.Append("<p><b>Password: " + ParticipantPassword + "</b></p>");
 
 
             strBody.Append("<p>We request you to:</p>");
             strBody.Append("<p>1. Initiate your 360-Degree Feedback Form</p>");
             strBody.Append("<p>2. Ensure your Reporting Manager/Coach/CDA approves the nominations</p>");
-            strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: (platform URL will come later). The way forward involves triggering a process, where the selected list of participants will provide feedback through this tool.</p>");
+            strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a>. The way forward involves triggering a process, where the selected list of participants will provide feedback through this tool.</p>");
             strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
           
             //strBody.Append("<p>Regards,</p>");
