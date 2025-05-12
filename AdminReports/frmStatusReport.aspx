@@ -3,23 +3,24 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <div align="center">
-        <table >
-            <tr>
-                <td style="font-size: 22px">Select Cycle:</td>
-                <td style="padding: 10px">
-                    <asp:DropDownList ID="ddlCycle" CssClass="form-control" Style="width: 195px" runat="server">
-                    </asp:DropDownList></td>
-                <td style="padding: 10px">
-                    <asp:Button ID="btnShow" runat="server" Text="Show Report" CssClass="btns btn-submit w-100"
-                        OnClick="btnShow_Click" /></td>
-                <td style="padding: 10px">
-                    <asp:Button ID="btnExportReport" runat="server" Text="Export To Excel" CssClass="btns btn-submit w-100"
-                        OnClick="btnExportReport_Click" /></td>
-            </tr>
-        </table>
+    <table style="margin: 0 auto">
+        <tr>
+            <td style="font-size: 22px">Select Cycle:</td>
+            <td style="padding: 10px">
+                <asp:DropDownList ID="ddlCycle" CssClass="form-control" Style="width: 195px" runat="server">
+                </asp:DropDownList></td>
+            <td style="padding: 10px">
+                <asp:Button ID="btnShow" runat="server" Text="Show Report" CssClass="btns btn-submit w-100"
+                    OnClick="btnShow_Click" /></td>
+            <td style="padding: 10px">
+                <asp:Button ID="btnExportReport" runat="server" Text="Export To Excel" CssClass="btns btn-submit w-100"
+                    OnClick="btnExportReport_Click" /></td>
+        </tr>
+    </table>
+    <div class="search-container">
+        <input type="search" class="form-control" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
     </div>
-    <br />
     <asp:GridView ID="grdWSMapping" runat="server" BorderWidth="1" align="center" class="table table-bordered table-sm mt-3" Width="80%" EmptyDataText="There is no record found" BorderStyle="Solid"
         ForeColor="#333333" AutoGenerateColumns="False" HeaderStyle-VerticalAlign="Middle">
         <HeaderStyle VerticalAlign="Middle" />

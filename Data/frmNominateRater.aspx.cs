@@ -299,8 +299,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress("VAC Manager<" + fromMail + ">");
 
-            //var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=" + Convert.ToString(HttpContext.Current.Application["AzureMailconnectionString"]);
-            var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=eY/ca2ZawDDXmJx1KvbW0FXw5CbMmucrsW+mjBqE9urodCYTNJeiBeRq3vjX/s7cVlCymgjphLEPbeF9IJRSuw==";
+            var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=" + Convert.ToString(HttpContext.Current.Application["AzureMailconnectionString"]);
             var emailClient = new EmailClient(connectionString);
             var emailRecipients = new EmailRecipients();
             if (ConfigurationManager.AppSettings["flgActualUser"].ToString() == "1")
@@ -353,7 +352,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
            // strBody.Append("<p>We request your attention to review and approve the 360-Degree Feedback raters' list selected by " + PFName + ". The deadline for approval is <strong>20-Feb-2025</strong>.</p>");
             strBody.Append("<p>We request your attention to review and approve the 360-Degree Feedback nominations raised by " + PFName + ". </p>");
             strBody.Append("<p>If not approved by this date, the participant list will be auto-approved and proceed to the next step.</p>");
-            strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through the following URL: (platform URL will come later)</p>");
+            strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
             //strBody.Append("<p>If not approved by this date, the participant list will be auto-approved and proceed to the next step. You can access and approve this document at the following URL : <a href=" + WebSitePath + ">" + WebSitePath + "</a></p>");
             //strBody.Append("<p><b>Login ID: " + ManagerName + "</b></p>");
             //strBody.Append("<p><b>Password: " + ManagerPassword + "</b></p>");

@@ -303,14 +303,14 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="section-title clearfix">
-        <h3 class="text-center">360 Degree Feedback : Launch Notification </h3>
+        <h3 class="text-center">360 Degree Feedback: Launch Notification </h3>
         <div class="title-line-center"></div>
     </div>
     <div class="row">
         <div class="col-md-5">
             <div class="form-group row">
-                <label for="ac" class="col-sm-4 col-form-label">Select Batch :</label>
-                <div class="col-sm-8">
+                <label for="ac" class="col-sm-3 col-form-label">Select Batch :</label>
+                <div class="col-sm-8" style="text-align:left">
                     <asp:DropDownList runat="server" ID="ddlCycle" CssClass="form-control">
                     </asp:DropDownList>
                 </div>
@@ -318,8 +318,8 @@
         </div>
         <div class="col-md-5">
             <div class="form-group row">
-                <label for="ac" class="col-sm-5 col-form-label">Select User Type :</label>
-                <div class="col-sm-7">
+                <label for="ac" class="col-sm-3 col-form-label">Select User Type :</label>
+                <div class="col-sm-7" >
                     <asp:DropDownList runat="server" ID="ddlUserType" CssClass="form-control">
                         <asp:ListItem Value="0">- Select - </asp:ListItem>
                         <asp:ListItem Value="1" Selected="True">Participant</asp:ListItem>

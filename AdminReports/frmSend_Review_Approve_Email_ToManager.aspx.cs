@@ -121,7 +121,7 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
 
                 string ss = "";
 
-                str.Append("<th style='width:3%' >SrNo</th>");
+                str.Append("<th style='width:3%' >S.N.</th>");
                 for (int j = 0; j < Ds.Tables[0].Columns.Count; j++)
                 {
                     if (SkipColumn.Contains(Ds.Tables[0].Columns[j].ColumnName))
@@ -178,7 +178,7 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
 
                     }
 
-                    str.Append("<td><input type='checkbox' flg='1' value='1'></td>");
+                    str.Append("<td style='text-align:center'><input type='checkbox' flg='1' value='1'></td>");
 
                 }
 
@@ -292,8 +292,7 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress("VAC Manager<" + fromMail + ">");
 
-            //  var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=" + Convert.ToString(HttpContext.Current.Application["AzureMailconnectionString"]);
-            var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=eY/ca2ZawDDXmJx1KvbW0FXw5CbMmucrsW+mjBqE9urodCYTNJeiBeRq3vjX/s7cVlCymgjphLEPbeF9IJRSuw==";
+            var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=" + Convert.ToString(HttpContext.Current.Application["AzureMailconnectionString"]);
             var emailClient = new EmailClient(connectionString);
 
             var emailRecipients = new EmailRecipients();

@@ -65,7 +65,7 @@ public partial class AdminReports_frmStatusReportNew : System.Web.UI.Page
         objCom.CommandTimeout = 0;
         SqlDataAdapter da = new SqlDataAdapter(objCom);
         DataSet ds = new DataSet();
-        da.Fill(ds);
+       da.Fill(ds);
         dt = new DataTable();
         dt.Clear();
         da.Fill(dt);
