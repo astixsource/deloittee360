@@ -1,4 +1,4 @@
-﻿<%@ Master Language="VB" AutoEventWireup="true" CodeFile="Site.master.vb" Inherits="SiteMaster" %>
+﻿<%@ Master Language="VB" AutoEventWireup="true" CodeFile="SiteQuestionnaire.master.vb" Inherits="SiteQuestionnaire" %>
 
 <!DOCTYPE html>
 
@@ -56,7 +56,7 @@
                     <div class="navbar-right">
                         <asp:Panel ID="panelLogout" runat="server">
                             <ul class="navtop">
-                                <li><a href="frmNominateApproveNomination.aspx" class="link-btn" title="click to back home">
+                                <li><a href="../Data/frmNominateApproveNomination.aspx" class="link-btn" title="click to back home">
                                     <img src="../Images/home.svg" /><%--<span class="fa fa-home"></span>--%></a></li>
                                 <li><a href="###" onclick="fnnLogout()" class="link-btn" title="click to logout">
                                     <img src="../Images/logout.svg" /><%--<span class="fa fa-sign-out"></span>--%></a></li>

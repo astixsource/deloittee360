@@ -180,6 +180,11 @@
             text-align: left;
             color: #000000 !important;
         }
+        
+                .ui-autocomplete-loading {
+    background: white url('../../images/loading.gif') right center no-repeat;
+}
+        
     </style>
     <script>
         $.widget('custom.mcautocomplete', $.ui.autocomplete, {
@@ -339,18 +344,18 @@
                 },
                 {
                     name: 'Function',
-                    width: '90px',
+                    width: '200px',
                     valueField: 'Function'
                 }
                     ,
                 {
                     name: 'Department',
-                    width: '80px',
+                    width: '200px',
                     valueField: 'Department'
                 },
                 {
                     name: 'Designation',
-                    width: '120px',
+                    width: '130px',
                     valueField: 'Designation'
                 }
                 ],
@@ -541,6 +546,10 @@
             }
         }
 
+        function fnChangeCategory(sender) {
+            $(sender).closest("tr").attr("newrpid", $(sender).val());
+        }
+
         function fnShowHideDiv(sender) {
             if ($(sender).find("i.fa").hasClass("fa-arrow-circle-o-down")) {
                 $("div.clsNomineebodycontainer").hide();
@@ -705,7 +714,7 @@
             var LevelId = $("#MainContent_hdnLevelId").val();
             var str = "<div>Are you sure you want to approve the rater(s)?</div>";
 
-
+           
             $("#dvDialog").html(str);
             $("#dvDialog").dialog({
                 title: "Confirmation :",
@@ -798,30 +807,30 @@
                     {
                         text: "Yes",
                         class: "btns btn-submit",
-                    click: function () {
-                        var arr = [];
-                        var ApseNodeId = $("#MainContent_dvcoacheelist div.clsactive").attr("EmpNodeId");
-                        arr.push({
-                            ApseNodeId: ApseNodeId, ApsrNodeId: $(sender).closest("tr").attr("nomineid"), RltshpId: $(sender).closest("tr").attr("rpid"), flgAction: 1
-                        });
-                        $("#dvFadeForProcessing").show();
-                        $(this).dialog('close');
-                        PageMethods.fnSaveandDeleteNomineeData(LoginId, arr, 0, LevelId, function (result) {
-                            $("#dvFadeForProcessing").hide();
-                            if (result.split("|")[0] == 2) {
-                                fnShowmsg("Error:" + result.split("|")[1]);
-                                return false;
-                            }
-                            if ($("#MainContent_dvcoacheelist div").length > 0) {
-                                $("#MainContent_dvcoacheelist div.clsactive").click();
-                            }
+                        click: function () {
+                            var arr = [];
+                            var ApseNodeId = $("#MainContent_dvcoacheelist div.clsactive").attr("EmpNodeId");
+                            arr.push({
+                                ApseNodeId: ApseNodeId, ApsrNodeId: $(sender).closest("tr").attr("nomineid"), RltshpId: $(sender).closest("tr").attr("rpid"), flgAction: 1
+                            });
+                            $("#dvFadeForProcessing").show();
+                            $(this).dialog('close');
+                            PageMethods.fnSaveandDeleteNomineeData(LoginId, arr, 0, LevelId, function (result) {
+                                $("#dvFadeForProcessing").hide();
+                                if (result.split("|")[0] == 2) {
+                                    fnShowmsg("Error:" + result.split("|")[1]);
+                                    return false;
+                                }
+                                if ($("#MainContent_dvcoacheelist div").length > 0) {
+                                    $("#MainContent_dvcoacheelist div.clsactive").click();
+                                }
 
-                        }, function (result) {
-                            $("#dvFadeForProcessing").hide();
-                            fnShowmsg("Error:" + result._message);
-                        });
-                    }
-                },
+                            }, function (result) {
+                                $("#dvFadeForProcessing").hide();
+                                fnShowmsg("Error:" + result._message);
+                            });
+                        }
+                    },
                     {
                         text: "No",
                         class: "btns btn-danger",

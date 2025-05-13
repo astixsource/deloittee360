@@ -163,7 +163,7 @@ Partial Class LoginPageSSO
         If flgAgreement = 1 Then
             Response.Redirect(strResponse)
         Else
-            Response.Redirect("Data/frmUndertakingPage.aspx?str=" & strResponse)
+            Response.Redirect("Data/frmConsentform.aspx?str=" & strResponse)
         End If
 
 

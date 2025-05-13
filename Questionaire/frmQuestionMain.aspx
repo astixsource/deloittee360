@@ -1,9 +1,9 @@
-﻿<%@ Page Language="VB" MasterPageFile="~/Data/Site.master" AutoEventWireup="false" CodeFile="frmQuestionMain.aspx.vb" Inherits="Questionaire_frmQuestionMain" %>
+﻿<%@ Page Language="VB" MasterPageFile="~/Data/SiteQuestionnaire.master" AutoEventWireup="false" CodeFile="frmQuestionMain.aspx.vb" Inherits="Questionaire_frmQuestionMain" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <link href="../Content/jquery-ui.css" rel="stylesheet" type="text/css" />
     <script src="../Scripts/jquery-ui.js" type="text/javascript"></script>
-    <script src="../Scripts/Question.js"></script>
+    <script src="../Scripts/Question_v1.js"></script>
 
     <style type="text/css">
         /*html, body {

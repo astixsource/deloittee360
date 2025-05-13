@@ -21,7 +21,15 @@ Partial Class Questionaire_frmQuestionMain
         hdnLevelID.Value = LevelID
         Dim panelLogout As Panel
         panelLogout = DirectCast(Page.Master.FindControl("panelLogout"), Panel)
-        panelLogout.Visible = False
+        Dim panelLogout1 As Panel
+        panelLogout1 = DirectCast(Page.Master.FindControl("panelLogoutWithOutHome"), Panel)
+        If Convert.ToString(Session("flgParticipant")) = "0" And Convert.ToString(Session("flgIsManager")) = "0" Then
+            panelLogout.Visible = False
+            panelLogout1.Visible = True
+        Else
+            panelLogout.Visible = True
+            panelLogout1.Visible = False
+        End If
 
     End Sub
 

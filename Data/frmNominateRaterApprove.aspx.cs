@@ -277,9 +277,14 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                 {
                     strsearchfield += " and Searchfield LIKE '%" + filterArray[i] + "%'";
                 }
-                if (dt.Select(strsearchfield).Length > 0)
+                var rows = dt.AsEnumerable().Where(row =>
+            filterArray.All(filter =>
+                row.Field<string>("Searchfield").IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0));
+
+                var resultRows = rows.Take(40).ToList();
+                if (resultRows.Any())
                 {
-                    DataTable dtMain = dt.Select(strsearchfield).Take(40).CopyToDataTable();
+                    DataTable dtMain = resultRows.CopyToDataTable();
                     jsonData = JsonConvert.SerializeObject(dtMain, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
                     jsonData = "1^" + jsonData;
                     dtMain.Dispose();

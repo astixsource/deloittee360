@@ -51,6 +51,8 @@
             var RspID = document.getElementById("MainContent_hdnRspID").value;
             var PGNmbr = document.getElementById("MainContent_hdnPGNmbr").value;
             var MaxPGNmbr = document.getElementById("MainContent_hdnMaxPGNmbr").value;
+            //$("#tblTopHeader").show();
+            $("#h6,#h7").show();
             //alert("A-11");
             if (PGNmbr < MaxPGNmbr) {
                 //  alert("A");

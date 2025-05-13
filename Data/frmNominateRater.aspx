@@ -125,6 +125,9 @@
             width: 100%;
         }
 
+        .ui-autocomplete-loading {
+    background: white url('../../images/loading.gif') right center no-repeat;
+}
         .ui-menu-item {
             list-style: none;
             padding: 5px;
@@ -385,23 +388,23 @@
                 },
                 {
                     name: 'EmailId',
-                    width: '270px',
+                    width: '260px',
                     valueField: 'EMailID'
                 },
                 {
                     name: 'Function',
-                    width: '110px',
+                    width: '205px',
                     valueField: 'Function'
                 }
                     ,
                 {
                     name: 'Department',
-                    width: '110px',
+                    width: '205px',
                     valueField: 'Department'
                 },
                 {
                     name: 'Designation',
-                    width: '130px',
+                    width: '135px',
                     valueField: 'Designation'
                 }
                 ],

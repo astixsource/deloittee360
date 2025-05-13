@@ -132,16 +132,21 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
             DataTable dt = (DataTable)HttpContext.Current.Session["UserListForNomination"];
             if (dt.Rows.Count > 0)
             {
-                string[] filterArray = searchText.Split(',');
-
+               // string[] filterArray = searchText.Split(',');
+                string[] filterArray = searchText.Split(',').Select(x => x.Trim()).ToArray();
                 string strsearchfield = "Searchfield LIKE '%" + filterArray[0] + "%'";
                 for (int i = 1; i < filterArray.Length; i++)
                 {
                     strsearchfield += " and Searchfield LIKE '%" + filterArray[i] + "%'";
                 }
-                if (dt.Select(strsearchfield).Length > 0)
+                var rows = dt.AsEnumerable().Where(row =>
+            filterArray.All(filter =>
+                row.Field<string>("Searchfield").IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0));
+
+                var resultRows = rows.Take(40).ToList();
+                if (resultRows.Any())
                 {
-                    DataTable dtMain = dt.Select(strsearchfield).Take(40).CopyToDataTable();
+                    DataTable dtMain = resultRows.CopyToDataTable();
                     jsonData = JsonConvert.SerializeObject(dtMain, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
                     jsonData = "1^" + jsonData;
                     dtMain.Dispose();
