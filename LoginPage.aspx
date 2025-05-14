@@ -8,8 +8,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>HCAS 360</title>
-    <%--<link href="Images/favicon.ico" rel="shortcut icon" type="image/x-icon" />--%>
+    <title>Deloitte 360</title>
+    <link href="Images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- CSS Files -->
     <%--<link href="Content/font-awesome.css" rel="stylesheet" type="text/css" />--%>
     <link href="Content/Site.css" rel="stylesheet" type="text/css" />

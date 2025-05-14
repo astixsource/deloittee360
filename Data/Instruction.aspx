@@ -26,7 +26,7 @@
                         <li>Click on the <strong>hyperlink</strong> for the relevant category to begin the survey for that stakeholder.</li>
                         <li>You will be presented with a series of behaviours specific to your stakeholder&rsquo;s role.</li>
                         <li>Rate each behaviour on a <strong>5-point scale</strong> from <strong>&ldquo;5 - Always&rdquo;</strong> to <strong>&ldquo;1 - Rarely&rdquo;</strong>.</li>
-                        <li>If you have not observed a particular behaviour, select <strong>"Have Not Observed"</strong>.</li>
+                        <li>If you have not observed a particular behaviour, select <strong>"No Rating"</strong>.</li>
                         <li>Provide comments in the designated space if applicable.</li>
                     </ul>
                     <p>The survey takes approximately <strong>10 minutes</strong> and should be completed in  <strong>one sitting</strong>.</p>
@@ -78,7 +78,7 @@
                             <td>
                                 <strong>No Rating</strong>
                             </td>
-                            <td>In case this behaviour is not observed by you in the person.
+                            <td>Did not have a chance to observe this person.
                             </td>
                         </tr>
 

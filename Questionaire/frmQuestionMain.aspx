@@ -278,7 +278,7 @@
                         <td>
                             <strong>No Rating</strong>
                         </td>
-                        <td>In case this behaviour is not applicable to this professional.</td>
+                        <td>Did not have a chance to observe this person.</td>
                     </tr>
                 </tbody>
             </table>

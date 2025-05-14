@@ -138,13 +138,13 @@
 
             var cntOneTonOne = 0; var OldParticipantCycleMappingId = 0; var startTime = ""; var timeselected = 0;
             $("#MainContent_divdrmmain").find("#tbldbrlist input[flg=1]:checked").each(function () {
-                var ParticipantID = $(this).closest("tr").attr("ParticipantID");
-                var ParticipantName = $(this).closest("tr").attr("ParticipantName");
-                var ParticipantEmpCode = $(this).closest("tr").attr("ParticipantEmpCode");
+                //var ParticipantID = $(this).closest("tr").attr("ParticipantID");
+                //var ParticipantName = $(this).closest("tr").attr("ParticipantName");
+                //var ParticipantEmpCode = $(this).closest("tr").attr("ParticipantEmpCode");
 
-                var ParticipantEMailID = $(this).closest("tr").attr("ParticipantEMailID");
-                var ParticipantLevelID = $(this).closest("tr").attr("ParticipantLevelID");
-                var ParticipantUserType = $(this).closest("tr").attr("ParticipantUserType");
+                //var ParticipantEMailID = $(this).closest("tr").attr("ParticipantEMailID");
+                //var ParticipantLevelID = $(this).closest("tr").attr("ParticipantLevelID");
+                //var ParticipantUserType = $(this).closest("tr").attr("ParticipantUserType");
 
                 var ManagerId = $(this).closest("tr").attr("ManagerId");
                 var ManagerName = $(this).closest("tr").attr("ManagerName");
@@ -157,7 +157,7 @@
 
                 var DeadlineDate = $(this).closest("tr").attr("DeadlineDate");
 
-                ArrDataSaving.push({ ParticipantID: ParticipantID, ParticipantName: ParticipantName, ParticipantEmpCode: ParticipantEmpCode, ParticipantEMailID: ParticipantEMailID, MailStatus: '', ParticipantLevelID: ParticipantLevelID, ParticipantUserType: ParticipantUserType, ManagerId: ManagerId, ManagerName: ManagerName, ManagerEmpCode: ManagerEmpCode, ManagerEMailID: ManagerEMailID, ManagerUserName: ManagerUserName, ManagerPassword: ManagerPassword, DeadlineDate: DeadlineDate });
+                ArrDataSaving.push({ MailStatus: '',  ManagerId: ManagerId, ManagerName: ManagerName, ManagerEmpCode: ManagerEmpCode, ManagerEMailID: ManagerEMailID, ManagerUserName: ManagerUserName, ManagerPassword: ManagerPassword, DeadlineDate: DeadlineDate });
             });
 
 

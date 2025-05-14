@@ -87,6 +87,8 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
               };
             Ds = clsDbCommand.ExecuteQueryReturnDataSet(storedProcName, con, sp);
 
+            HttpContext.Current.Session["dtRelationshipDetail"] = Ds.Tables[1];
+
 
             StringBuilder str = new StringBuilder();
             StringBuilder str1 = new StringBuilder();
@@ -141,12 +143,12 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
 
                     // ManagerId	ManagerName	ManagerEmpCode	ManagerEMailID	ManagerUserName	ManagerPassword
 
-                    string ParticipantID = Ds.Tables[0].Rows[i]["ParticipantID"].ToString();
-                    string ParticipantName = Ds.Tables[0].Rows[i]["ParticipantName"].ToString();
-                    string ParticipantEmpCode = Ds.Tables[0].Rows[i]["ParticipantEmpCode"].ToString();
-                    string ParticipantEMailID = Ds.Tables[0].Rows[i]["ParticipantEMailID"].ToString();
-                    string ParticipantLevelID = Ds.Tables[0].Rows[i]["LevelID"].ToString();
-                    string ParticipantUserType = Ds.Tables[0].Rows[i]["UserType"].ToString();
+                    //string ParticipantID = Ds.Tables[0].Rows[i]["ParticipantID"].ToString();
+                    //string ParticipantName = Ds.Tables[0].Rows[i]["ParticipantName"].ToString();
+                    //string ParticipantEmpCode = Ds.Tables[0].Rows[i]["ParticipantEmpCode"].ToString();
+                    //string ParticipantEMailID = Ds.Tables[0].Rows[i]["ParticipantEMailID"].ToString();
+                    //string ParticipantLevelID = Ds.Tables[0].Rows[i]["LevelID"].ToString();
+                    //string ParticipantUserType = Ds.Tables[0].Rows[i]["UserType"].ToString();
 
 
 
@@ -162,7 +164,7 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
 
 
 
-                    str.Append("<tr ParticipantID = '" + ParticipantID + "' ParticipantName = '" + ParticipantName + "' ParticipantEmpCode = '" + ParticipantEmpCode + "'  ParticipantEMailID = '" + ParticipantEMailID + "' ParticipantLevelID ='" + ParticipantLevelID + "'  ParticipantUserType ='" + ParticipantUserType + "' ManagerId = '" + ManagerId + "' ManagerName = '" + ManagerName + "' ManagerEmpCode = '" + ManagerEmpCode + "' ManagerEMailID = '" + ManagerEMailID + "' ManagerUserName = '" + ManagerUserName + "' ManagerPassword = '" + ManagerPassword + "' DeadlineDate = '" + DeadlineDate + "'   > ");
+                    str.Append("<tr  ManagerId = '" + ManagerId + "' ManagerName = '" + ManagerName + "' ManagerEmpCode = '" + ManagerEmpCode + "' ManagerEMailID = '" + ManagerEMailID + "' ManagerUserName = '" + ManagerUserName + "' ManagerPassword = '" + ManagerPassword + "' DeadlineDate = '" + DeadlineDate + "'   > ");
                     str.Append("<td style='text-align:center'>" + (i + 1) + "</td>");
                     for (int j = 0; j < Ds.Tables[0].Columns.Count; j++)
                     {
@@ -228,15 +230,7 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
             {
                 try
                 {
-                    string ParticipantID = drow["ParticipantID"].ToString();
-                    string ParticipantName = drow["ParticipantName"].ToString();
-                    string ParticipantEmpCode = drow["ParticipantEmpCode"].ToString();
-                    string ParticipantEMailID = drow["ParticipantEMailID"].ToString();
-                    string ParticipantLevelID = drow["ParticipantLevelID"].ToString();
-                    string ParticipantUserType = drow["ParticipantUserType"].ToString();
-
-
-
+          
                     string ManagerId = drow["ManagerId"].ToString();
                     string ManagerName = drow["ManagerName"].ToString();
                     string ManagerEmpCode = drow["ManagerEmpCode"].ToString();
@@ -250,12 +244,12 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
 
 
 
-                    string strStatus = fnSendICSFIleToUsers(ParticipantID, ParticipantName, ParticipantEmpCode, ParticipantEMailID, ParticipantLevelID, ParticipantUserType, ManagerId, ManagerName, ManagerEmpCode, ManagerEMailID, ManagerUserName, ManagerPassword, DeadlineDate);
+                    string strStatus = fnSendICSFIleToUsers(ManagerId, ManagerName, ManagerEmpCode, ManagerEMailID, ManagerUserName, ManagerPassword, DeadlineDate);
                     drow["MailStatus"] = strStatus == "1" ? "Mail Sent" : strStatus;
 
                     if (strStatus == "1")
                     {
-                        fnUpdateMailSp("spMailUpdateLog", ParticipantID, "1", "2", "1", Scon);
+                        fnUpdateMailSp("spMailUpdateLog", ManagerId, "1", "2", "1", Scon);
                     }
 
 
@@ -278,7 +272,7 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
 
 
     //ParticipantID, ParticipantName, ParticipantEmpCode, ParticipantEMailID, ParticipantLevelID, ParticipantUserType, ManagerId, ManagerName, ManagerEmpCode, ManagerEMailID, ManagerUserName, ManagerPassword, DeadlineDate
-    public static string fnSendICSFIleToUsers(string ParticipantID, string ParticipantName, string ParticipantEmpCode, string ParticipantEMailID, string ParticipantLevelID, string ParticipantUserType, string ManagerId, string ManagerName, string ManagerEmpCode, string ManagerEMailID, string ManagerUserName, string ManagerPassword, string DeadlineDate)
+    public static string fnSendICSFIleToUsers(string ManagerId, string ManagerName, string ManagerEmpCode, string ManagerEMailID, string ManagerUserName, string ManagerPassword, string DeadlineDate)
     {
         string strRespoonse = "1";
         try
@@ -342,16 +336,50 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
             StringBuilder strBody = new StringBuilder();
             strBody.Append("<font  style='COLOR: #000000; FONT-FAMILY: Arial'  size=2>");
 
+
+
+            DataTable dt = (DataTable)HttpContext.Current.Session["dtRelationshipDetail"];
+            DataRow[] dr_FilterData = dt.Select("ManagerId= " + ManagerId);
+            DataTable dtRelationshipDetail_FilterData = dr_FilterData.CopyToDataTable();
+
             strBody.Append("<p>Dear " + ManagerName + ",</p>");
-            strBody.Append("<p>We request your attention to review and approve the 360-Degree Feedback nominations selected by  " + ParticipantName + ". The deadline for approval is " + DeadlineDate + " </p>");
+            strBody.Append("<p>We request your attention to review and approve the 360-Degree Feedback nominations selected by below list of professionals. The deadline for approval is " + DeadlineDate + ".</p>");
+
+
+            //Table List Will Come Start  Participant Name will come under the Table
+
+
+            strBody.Append("<table cellpadding='0' cellspacing='0' style='width:60%;border: 1px solid #020202;'>");
+            strBody.Append("<tr><td style='text-align:center; border: 1px solid #020202; background: #020202; width: 20%;color:white;'>Participant Name</td></tr>");
+
+            foreach (DataRow dr in dtRelationshipDetail_FilterData.Rows)
+            {
+                strBody.Append("<tr>");
+                string ParticipantName = dr["ParticipantName"].ToString();
+                //string Relationship = dr["Relationship"].ToString();
+
+
+                strBody.Append("<td style='text-align:center; border: 1px solid #020202; background: white; width: 20%;color:black;'>" + ParticipantName + "</td>");
+                //strBody.Append("<td style='text-align:center; border: 1px solid #020202; background: White; width: 20%;color:black;'>" + Relationship + "</td>");
+                strBody.Append("</tr>");
+
+            }
+
+            strBody.Append("</table>");
+
+
+            //Table List Will Come End
+
+
+
             strBody.Append("<p>If not approved by this date, the nominee list will be auto-approved and proceed to the next step. To view and approve the list, you can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
             //strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through the following URL: (platform URL will come later)</p>");
             //strBody.Append("<p>If not approved by this date, the participant list will be auto-approved and proceed to the next step. You can access and approve this document at the following URL : <a href=" + WebSitePath + ">" + WebSitePath + "</a></p>");
             //strBody.Append("<p><b>Login ID: " + ManagerName + "</b></p>");
             //strBody.Append("<p><b>Password: " + ManagerPassword + "</b></p>");
 
-            
-            strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
+            strBody.Append("<p>If you have any questions, please connect with PED Matters team.</p>");
+            //  strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
 
             //strBody.Append("<p>Regards,</p>");
             //strBody.Append("<p>Talent team</p>");
