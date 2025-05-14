@@ -152,7 +152,7 @@
                                     <td><%=Session("Desgination") %></td>
                                 </tr>
                                 <tr>
-                                    <td>Reporting Manager</td>
+                                    <td>RM/Coach/CDA</td>
                                     <td>:</td>
                                     <td><%=Session("RM") %></td>
                                 </tr>
