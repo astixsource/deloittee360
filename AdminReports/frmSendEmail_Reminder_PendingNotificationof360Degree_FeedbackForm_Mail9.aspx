@@ -306,6 +306,22 @@
 
         }
     </script>
+     <script type="text/javascript">
+         function TypeSearch() {
+             var searchtxt = $("#txtTypeSearch").val().toUpperCase().trim();
+             if (searchtxt.length > 2) {
+                 $("#tbldbrlist").find("tbody").eq(0).find("tr").css("display", "none");
+                 $("#tbldbrlist").find("tbody").eq(0).find("tr").each(function () {
+                     if ($(this)[0].innerHTML.toUpperCase().indexOf(searchtxt) > -1) {
+                         $(this).css("display", "table-row");
+                     }
+                 });
+             }
+             else {
+                 $("#tbldbrlist").find("tbody").eq(0).find("tr").css("display", "table-row");
+             }
+         }
+     </script>
 </asp:Content>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="Server">
@@ -315,18 +331,18 @@
     </div>
 
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-3">
             <div class="form-group row">
                 <label for="ac" class="col-sm-4 col-form-label">Select Batch :</label>
-                <div class="col-sm-8">
+                <div class="col-sm-7">
                     <asp:DropDownList runat="server" ID="ddlCycle" CssClass="form-control">
                     </asp:DropDownList>
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="form-group row">
-                <label for="ac" class="col-sm-5 col-form-label">Select User Type :</label>
+                <label for="ac" class="col-sm-4 col-form-label">Select User Type :</label>
                 <div class="col-sm-7">
                     <asp:DropDownList runat="server" ID="ddlUserType" CssClass="form-control">
                         <asp:ListItem Value="0">- Select - </asp:ListItem>
@@ -337,6 +353,9 @@
         </div>
         <div class="col-md-2">
             <input type="button" id="btnShowUsers" value="Show Users" onclick="fnUserList()" class="btns small btn-submit">
+        </div>
+          <div class="col-md-3 search-container">
+            <input type="text" id="txtTypeSearch" class="form-control" placeholder="Type atleast 3 charcters to Search" onkeyup="TypeSearch();" />
         </div>
     </div>
 

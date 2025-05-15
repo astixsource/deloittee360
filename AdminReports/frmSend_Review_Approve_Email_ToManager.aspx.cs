@@ -353,7 +353,7 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
             //strBody.Append("<p><b>Password: " + ManagerPassword + "</b></p>");
 
             strBody.Append("<p>The way forward involves triggering an assessment process, where the selected list of participants will provide feedback through this tool.</p>");
-            strBody.Append("<p>If you have any questions, please connect with PED Matters team.</p>");
+            strBody.Append("<p>If you have any questions, please connect with Partner and ED Matters team, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
             // strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
 
             //strBody.Append("<p>Regards,</p>");

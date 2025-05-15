@@ -365,13 +365,15 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                         using (DataSet ds = new DataSet())
                         {
                             da.Fill(ds);
-                            //if (flg == 1)
-                            //{
-                            //    if (ds.Tables[0].Rows.Count > 0)
-                            //    {
-                            //        string strStatus = fnSendMailToUsers(LevelId, Convert.ToString(ds.Tables[0].Rows[0]["ParticipantName"]), "", "", Convert.ToString(ds.Tables[0].Rows[0]["ParticipantEMailID"]), Convert.ToString(ds.Tables[0].Rows[0]["DeadlineDate"]), "", ds.Tables[1]);
-                            //    }
-                            //}
+                            /*
+                            if (flg == 1)
+                            {
+                                if (ds.Tables[0].Rows.Count > 0)
+                                {
+                                    string strStatus = fnSendMailToUsers(LevelId, Convert.ToString(ds.Tables[0].Rows[0]["ParticipantName"]), "", "", Convert.ToString(ds.Tables[0].Rows[0]["ParticipantEMailID"]), Convert.ToString(ds.Tables[0].Rows[0]["DeadlineDate"]), "", ds.Tables[1]);
+                                }
+                            }
+                            */
                         }
                     }
                     jsonData = "1|";

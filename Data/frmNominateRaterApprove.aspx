@@ -760,9 +760,10 @@
                                     "color": "#59d68e",
                                     "font-size": "15pt"
                                 });
-                                $("#MainContent_dvcoacheelist div.clsactive").parent("div").find("i").removeAttr("class").attr("class", "fa fa-check-square clsiconclass clsnomineeapprove");
+                                $("#MainContent_dvcoacheelist div.clsactive").parent("div").find("img").removeAttr("class").attr("class", "clsnomineeapprove");
+                                $("#MainContent_dvcoacheelist div.clsactive").parent("div").find("img").attr("src", "../Images/approved.svg");
                                 $("#MainContent_dvcoacheelist div.clsactive").click();
-                                if ($("#MainContent_dvcoacheelist div.clscoacheelist").length == $("#MainContent_dvcoacheelist i.clsnomineeapprove").length) {
+                                if ($("#MainContent_dvcoacheelist div.clscoacheelist").length == $("#MainContent_dvcoacheelist img.clsnomineeapprove").length) {
                                     $("#dvMsg").html("You have approved all nominations");
                                     setTimeout(function () {
                                         window.location.href = "frmNominateApproveNomination.aspx";

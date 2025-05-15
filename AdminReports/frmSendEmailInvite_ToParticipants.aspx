@@ -299,6 +299,23 @@
 
         }
     </script>
+
+    <script type="text/javascript">
+        function TypeSearch() {
+            var searchtxt = $("#txtTypeSearch").val().toUpperCase().trim();
+            if (searchtxt.length > 2) {
+                $("#tbldbrlist").find("tbody").eq(0).find("tr").css("display", "none");
+                $("#tbldbrlist").find("tbody").eq(0).find("tr").each(function () {
+                    if ($(this)[0].innerHTML.toUpperCase().indexOf(searchtxt) > -1) {
+                        $(this).css("display", "table-row");
+                    }
+                });
+            }
+            else {
+                $("#tbldbrlist").find("tbody").eq(0).find("tr").css("display", "table-row");
+            }
+        }
+    </script>
 </asp:Content>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="Server">
@@ -306,20 +323,20 @@
         <h3 class="text-center">360 Degree Feedback: Launch Notification </h3>
         <div class="title-line-center"></div>
     </div>
-    <div class="row">
-        <div class="col-md-5">
+     <div class="row">
+        <div class="col-md-3">
             <div class="form-group row">
-                <label for="ac" class="col-sm-3 col-form-label">Select Batch :</label>
-                <div class="col-sm-8" style="text-align:left">
+                <label for="ac" class="col-sm-4 col-form-label">Select Batch :</label>
+                <div class="col-sm-7" style="text-align: left">
                     <asp:DropDownList runat="server" ID="ddlCycle" CssClass="form-control">
                     </asp:DropDownList>
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="form-group row">
-                <label for="ac" class="col-sm-3 col-form-label">Select User Type :</label>
-                <div class="col-sm-7" >
+                <label for="ac" class="col-sm-4 col-form-label">Select User Type :</label>
+                <div class="col-sm-7">
                     <asp:DropDownList runat="server" ID="ddlUserType" CssClass="form-control">
                         <asp:ListItem Value="0">- Select - </asp:ListItem>
                         <asp:ListItem Value="1" Selected="True">Participant</asp:ListItem>
@@ -330,8 +347,12 @@
         <div class="col-md-2">
             <input type="button" id="btnShowUsers" value="Show Users" onclick="fnUserList()" class="btns small btn-submit">
         </div>
+        <div class="col-md-3 search-container">
+            <input type="text" id="txtTypeSearch" class="form-control" placeholder="Type atleast 3 charcters to Search" onkeyup="TypeSearch();" />
+        </div>
     </div>
 
+  
     <!-- Tab panes -->
     <div id="divdrmmain" runat="server" style="min-height: 300px; margin-top: 10px;"></div>
 
