@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Data/Site.master" AutoEventWireup="true" CodeFile="frmConsentform.aspx.cs" Inherits="frmConsentform" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Data/SiteConsent.master" AutoEventWireup="true" CodeFile="frmConsentform.aspx.cs" Inherits="frmConsentform" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <style type="text/css">

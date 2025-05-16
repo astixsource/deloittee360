@@ -402,7 +402,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
         Scmd.Connection = Scon1;
         Scmd.CommandText = SPName;
         Scmd.Parameters.AddWithValue("@UserID", EmpNodeID);
-        Scmd.Parameters.AddWithValue("@MailType", 1);
+        Scmd.Parameters.AddWithValue("@MailType", 9);
         Scmd.Parameters.AddWithValue("@CycApseAssmntTypeMapID", 1);
 
         Scmd.CommandType = CommandType.StoredProcedure;

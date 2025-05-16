@@ -255,7 +255,7 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
 
                     if (strStatus == "1")
                     {
-                        fnUpdateMailSp("spMailUpdateLog", ParticipantID, "1", "2", "1", Scon);
+                        fnUpdateMailSp("spMailUpdateLog", ManagerId, "1", "2", "1", Scon);
                     }
 
 
@@ -409,7 +409,7 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
         Scmd.Connection = Scon1;
         Scmd.CommandText = SPName;
         Scmd.Parameters.AddWithValue("@UserID", EmpNodeID);
-        Scmd.Parameters.AddWithValue("@MailType", 1);
+        Scmd.Parameters.AddWithValue("@MailType", 2);
         Scmd.Parameters.AddWithValue("@CycApseAssmntTypeMapID", 1);
 
         Scmd.CommandType = CommandType.StoredProcedure;
