@@ -204,7 +204,7 @@ Public Class E360WebService
             strTable = strTable & "<div class='section-title'><h3 class='text-center'>Survey Landing page</h3><div class='title-line-center'></div></div><ul class='mb-3'><li>Below is a comprehensive list of pending actions to ensure completion of the 360-degree feedback for yourself and all stakeholder who have nominated you as a rater.</li><li>The table indicates your relationship to the named individual.</li><li>Clicking on the hyperlinked statement in the &lsquo;Action Pending&rsquo; column will direct you to respective survey form.</li><li>Please complete all actions by the due date to ensure a smooth evaluation process for everyone involved.</li></ul>"
 
             strTable &= "<table class='feedback_tbl' id='tblPreNominated'>"
-            strTable &= "<thead><tr><th width='1%'>S.No.</th><th width='22%' align='left'>Stakeholder Name</th><th width='22%' align='left'>Relationship to Stakeholder</th><th width='12%' align='left'>Function</th><th width='12%' align='left'>Department</th><th width='12%' align='left'>Designation</th><th width='12%' align='left'>Action</th><th width='15%' align='left'>Due Date</th></thead><tbody>"
+            strTable &= "<thead><tr><th width='1%'>S.No.</th><th width='18%' align='left'>Stakeholder Name</th><th width='18%' align='left'>Relationship to Stakeholder</th><th width='12%' align='left'>Function</th><th width='12%' align='left'>Department</th><th width='12%' align='left'>Designation</th><th width='12%' align='left'>Action</th><th width='15%' align='left'>Due Date</th></thead><tbody>"
             If (drdr.HasRows = False) Then
                 strTable &= "<tr><td colspan='8'>No surveys are assigned yet</td></tr>"
             Else

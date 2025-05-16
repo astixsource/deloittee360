@@ -333,7 +333,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
 
 
             strBody.Append("<p>We request you to:</p>");
-            strBody.Append("<p>1. Initiate your 360-Degree Feedback Form</p>");
+            strBody.Append("<p>1. Initiate selection of your raters for 360-Degree Feedback form by " + DeadlineDate + "</p>");
             strBody.Append("<p>2. Ensure your Reporting Manager/Coach/CDA approves the nominations</p>");
             strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a>. The way forward involves triggering a process, where the selected list of participants will provide feedback through this tool.</p>");
             strBody.Append("<p>If you have any questions, please connect with Partner and ED Matters team, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
