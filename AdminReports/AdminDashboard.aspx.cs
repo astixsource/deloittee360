@@ -43,6 +43,24 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         sb.Append("</tr>");
 
 
+
+        sb.Append("<tr>");
+        sb.Append("<td>Nomination Status Report</td>");
+        sb.Append("<td><a href='../AdminReports/frmNominationStatusReport.aspx' class='btn-one w-100'>Nomination Status Report</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>Nomination Status Report</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
+
+        sb.Append("<tr>");
+        sb.Append("<td>Nomination Approval Status Report</td>");
+        sb.Append("<td><a href='../AdminReports/frmNominationApprovalStatusReport.aspx' class='btn-one w-100'>Nomination Approval Status Report</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>Nomination Approval Status Report</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
+
+
         sb.Append("<tr>");
         sb.Append("<td>Email Notification: Invite</td>");
         sb.Append("<td><a href='../AdminReports/frmSendEmailInvite_ToParticipants.aspx' class='btn-one w-100'>Launch Notification</a></td>");
@@ -50,7 +68,7 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         sb.Append("<ul class=''><li>Launch Notification : To Participants</li></ul>");
         sb.Append("</td>");
         sb.Append("</tr>");
-   
+
 
         sb.Append("<tr>");
         sb.Append("<td>Email Notification: Invite</td>");
@@ -59,7 +77,7 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         sb.Append("<ul class=''><li>Review and Approve 360-Degree Feedback raters for your team members : To Manager </li></ul>");
         sb.Append("</td>");
         sb.Append("</tr>");
-   
+
 
         sb.Append("<tr>");
         sb.Append("<td>Email Notification: Invite</td>");
@@ -125,7 +143,7 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
 
 
         sb.Append("</tr></tbody>");
-       // sb.Append("</table>");
+        // sb.Append("</table>");
         return sb.ToString();
     }
 

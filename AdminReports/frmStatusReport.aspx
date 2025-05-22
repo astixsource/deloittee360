@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminReports/AdminSite.master" AutoEventWireup="true" CodeFile="frmStatusReport.aspx.cs" Inherits="AdminReports_frmStatusReportNew" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/AdminReports/AdminSite.master" AutoEventWireup="true" CodeFile="frmStatusReport.aspx.cs" Inherits="AdminReports_frmStatusReportNew" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <script type="text/javascript">
@@ -46,34 +46,46 @@
         <HeaderStyle VerticalAlign="Middle" />
         <FooterStyle BackColor="#507CD1" Font-Bold="false" ForeColor="White" />
         <Columns>
-            <asp:BoundField DataField="ApseEmpCode" HeaderStyle-ForeColor="#F4F4F4" HeaderText="ApseEmpCode" HeaderStyle-HorizontalAlign="left"
-                SortExpression="ApseEmpCode" NullDisplayText="0">
+            <asp:BoundField DataField="Participant Code" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Participant Code" HeaderStyle-HorizontalAlign="left"
+                SortExpression="Participant Code" NullDisplayText="0">
                 <HeaderStyle ForeColor="#F4F4F4" HorizontalAlign="left" Width="8%" VerticalAlign="Middle" />
                 <ItemStyle HorizontalAlign="left" Width="8%" Font-Size="10" />
             </asp:BoundField>
 
-            <asp:BoundField DataField="ApseName" HeaderStyle-ForeColor="#F4F4F4" HeaderText="ApseName" HeaderStyle-HorizontalAlign="left"
-                SortExpression="ApseName" NullDisplayText="0">
+            <asp:BoundField DataField="Participant Name" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Participant Name" HeaderStyle-HorizontalAlign="left"
+                SortExpression="Participant Name" NullDisplayText="0">
                 <HeaderStyle ForeColor="#F4F4F4" HorizontalAlign="left" Width="13%" VerticalAlign="Middle" />
                 <ItemStyle HorizontalAlign="left" Width="13%" Font-Size="10" />
             </asp:BoundField>
 
-            <asp:BoundField DataField="ApsemailID" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Apse EmailID" HeaderStyle-HorizontalAlign="left"
-                SortExpression="ApsemailID" NullDisplayText="0">
+            <asp:BoundField DataField="Participant Email Id" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Participant Email Id" HeaderStyle-HorizontalAlign="left"
+                SortExpression="Participant Email Id" NullDisplayText="0">
                 <HeaderStyle ForeColor="#F4F4F4" HorizontalAlign="left" Width="10%" VerticalAlign="Middle" />
                 <ItemStyle HorizontalAlign="left" Width="5%" Font-Size="10" />
             </asp:BoundField>
 
 
-            <asp:BoundField DataField="ApsrName" Visible="false" HeaderStyle-ForeColor="#F4F4F4" HeaderText="ApsrName" HeaderStyle-HorizontalAlign="left"
-                SortExpression="ApsrName" NullDisplayText="0">
+            <asp:BoundField DataField="Participant Level" Visible="false" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Participant Level" HeaderStyle-HorizontalAlign="left"
+                SortExpression="Participant Level" NullDisplayText="0">
                 <HeaderStyle ForeColor="#F4F4F4" Width="13%" HorizontalAlign="left" VerticalAlign="Middle" />
                 <ItemStyle HorizontalAlign="left" Width="13%" Font-Size="10" />
             </asp:BoundField>
 
 
-            <asp:BoundField DataField="ApsrEmailID" HeaderStyle-ForeColor="#F4F4F4" HeaderText="ApsrEmailID" HeaderStyle-HorizontalAlign="left"
-                SortExpression="ApsrEmailID" NullDisplayText="0">
+            <asp:BoundField DataField="Rater Code" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Rater Code" HeaderStyle-HorizontalAlign="left"
+                SortExpression="Rater Code" NullDisplayText="0">
+                <HeaderStyle ForeColor="#F4F4F4" Width="17%" HorizontalAlign="left" VerticalAlign="Middle" />
+                <ItemStyle HorizontalAlign="left" Width="15%" Font-Size="10" />
+            </asp:BoundField>
+
+              <asp:BoundField DataField="Rater Name" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Rater Name" HeaderStyle-HorizontalAlign="left"
+                SortExpression="Rater Name" NullDisplayText="0">
+                <HeaderStyle ForeColor="#F4F4F4" Width="17%" HorizontalAlign="left" VerticalAlign="Middle" />
+                <ItemStyle HorizontalAlign="left" Width="15%" Font-Size="10" />
+            </asp:BoundField>
+
+              <asp:BoundField DataField="Rater Email Id" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Rater Email Id" HeaderStyle-HorizontalAlign="left"
+                SortExpression="Rater Email Id" NullDisplayText="0">
                 <HeaderStyle ForeColor="#F4F4F4" Width="17%" HorizontalAlign="left" VerticalAlign="Middle" />
                 <ItemStyle HorizontalAlign="left" Width="15%" Font-Size="10" />
             </asp:BoundField>
@@ -98,4 +110,3 @@
         <EditRowStyle BackColor="#ef4522" />
     </asp:GridView>
 </asp:Content>
-

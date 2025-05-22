@@ -648,7 +648,7 @@
                     {
                         text: "No",
                         "class": "btns btn-danger",
-                        Click: function () {
+                        click: function () {
                             $(this).dialog('close');
                         }
                     }

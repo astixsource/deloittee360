@@ -32,12 +32,12 @@
             //string _clientSecret = secretClient.GetSecret("DeloitteProdDBConnection").Value.Value;
             // Application["_clientSecret"] = _clientSecret;
 
-             Application["SSO_clientSecret"] = secretClient.GetSecret("Secret-SSO-Deloitte").Value.Value;
+            Application["SSO_clientSecret"] = secretClient.GetSecret("Secret-SSO-Deloitte").Value.Value;
             ///Application["_skey"] = _skey;// secretClient.GetSecret("Secret-skey-Deloitte").Value.Value;
-             Application["AzureMailconnectionString"] = secretClient.GetSecret("Secret-AzureMailconnectionString-Deloitte").Value.Value;
+            Application["AzureMailconnectionString"] = secretClient.GetSecret("Secret-AzureMailconnectionString-Deloitte").Value.Value;
             // Retrieve the secrets
             string _dbUserName =secretClient.GetSecret("Secret-PRODDB-Username").Value.Value;
-            string _dbPassword =secretClient.GetSecret("Secret-PRODDB-Password").Value.Value;
+            string _dbPassword = secretClient.GetSecret("Secret-PRODDB-Password").Value.Value;
             // Construct the SQL connection string
             connectionString = "server=" + _server + ";database=" + _database + ";uid=" + _dbUserName + ";pwd=" + _dbPassword + ";connection timeout=0";
 

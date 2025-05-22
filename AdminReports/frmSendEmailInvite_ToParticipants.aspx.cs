@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -325,7 +325,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             strBody.Append("<p>Dear " + ParticipantName + ",</p>");
             strBody.Append("<p>The 360-Degree Feedback application is designed to enhance overall feedback and development processes within the organisation. This tool focuses on offering a comprehensive view of an individual's competencies core to the Deloitte Future Leaders Framework and provides feedback from various sources.</p>");
             
-            strBody.Append("<p>Please note that your 360-Degree Feedback Form 2024–25 is now available. You can access this document at the following URL: <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Pages/360-Degree-Framework-Toolkit.aspx'>360 Feedback Toolkit</a></p>");
+            strBody.Append("<p>Please note that your 360 - Degree Feedback Form 2024-25 is now available. To know more about the survey, you can access the <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Pages/360-Degree-Framework-Toolkit.aspx'>360 Feedback Toolkit</a></p>");
 
             // //< a href = " + WebSitePath + " > " + WebSitePath + " </ a >
             // strBody.Append("<p><b>Login ID: " + ParticipantUserName + "</b></p>");

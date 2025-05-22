@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Configuration;
 using System.Data;
@@ -99,16 +99,19 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                             if (dr["RltshpID"].ToString() != "4")
                             {
                                 ListItem lst = new ListItem();
-                                if (dr["minNominationperCategory"].ToString() == "0")
-                                {
-                                    lst.Text = dr["Descr"].ToString() + " (Optional)";
-                                }
-                                else
-                                {
-                                    lst.Text = dr["RltshpID"].ToString()=="1"? (levelid == "2" ? "CDA" : dr["Descr"].ToString())+ " (Auto populated)" : dr["Descr"].ToString() + " (Min. " + dr["minNominationperCategory"].ToString() + ")";
-                                }
-                                lst.Value = dr["RltshpID"].ToString();
-                                lst.Attributes.Add("rptxt", dr["Descr"].ToString());
+ string strText = "";
+ if (dr["minNominationperCategory"].ToString() == "0")
+ {
+     strText = dr["Descr"].ToString() + " (Optional)";
+ }
+ else
+ {
+     strText = dr["RltshpID"].ToString()=="1"? (levelid == "2" ? "CDA" : dr["Descr"].ToString())+ " (Auto populated)" : dr["Descr"].ToString() + " (Min. " + dr["minNominationperCategory"].ToString() + ")";
+ }
+
+ lst.Text = strText;
+ lst.Value = dr["RltshpID"].ToString();
+ lst.Attributes.Add("rptxt", strText);
                                 lst.Attributes.Add("minNominationperCategory", dr["minNominationperCategory"].ToString());
                                 ddlRelatioShip.Items.Add(lst);
                             }
