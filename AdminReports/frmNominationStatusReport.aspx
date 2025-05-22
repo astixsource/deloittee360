@@ -84,8 +84,8 @@
                 </asp:DropDownList>
             </td>
 
-            <td style="font-size: 15px">Select Status:</td>
-            <td style="padding: 10px">
+            <td style="font-size: 15px;display:none">Select Status:</td>
+            <td style="padding: 10px;display:none">
                 <asp:DropDownList runat="server" ID="ddlStatus" CssClass="form-control">
                     <asp:ListItem Value="0" Selected="True">- ALL - </asp:ListItem>
                     <asp:ListItem Value="1">Not Submitted</asp:ListItem>
