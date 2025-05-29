@@ -482,8 +482,15 @@
                                 $inputs.eq(1).focus();
                                 return false;
                             }
-                            if (st_email.indexOf("@deloitte.com") < 0) {
-                                fnShowmsg("Email Id must end with '@deloitte.com'!");
+                            //if (st_email.indexOf("@deloitte.co") < 0) {
+                            //    fnShowmsg("Email Id must end with '@deloitte.co'!");
+                            //    $inputs.eq(1).focus();
+                            //    return false;
+                            //}
+                            const emailPattern = /^[a-zA-Z0-9._%+-]+@deloitte\.com$|^[a-zA-Z0-9._%+-]+@deloitte\.co\.[a-zA-Z]{2,}$/;
+
+                            if (!emailPattern.test(st_email)) {
+                                fnShowmsg("Email must be from 'deloitte.com' or 'deloitte.co.&lt;country code&gt;' (e.g., deloitte.co.uk)");
                                 $inputs.eq(1).focus();
                                 return false;
                             }

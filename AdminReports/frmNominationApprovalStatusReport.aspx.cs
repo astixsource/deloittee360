@@ -139,7 +139,7 @@ public partial class frmNominationApprovalStatusReport : System.Web.UI.Page
         //SqlConnection Scon = new SqlConnection(ConfigurationManager.AppSettings["strConn"]);
         SqlCommand Scmd = new SqlCommand();
         Scmd.Connection = Scon;
-        Scmd.CommandText = "[spRptGetNominationStatus]";
+        Scmd.CommandText = "[spRptGetNominationApprovalStatus]";
         Scmd.Parameters.AddWithValue("@CycleId", ddlCycle.SelectedValue);
         // Scmd.Parameters.AddWithValue("@ReportDate", hdnReportDate.Value);
         Scmd.CommandType = CommandType.StoredProcedure;
