@@ -848,8 +848,10 @@
                                 $inputs.eq(1).focus();
                                 return false;
                             }
-                            if (st_email.indexOf("@deloitte.com") < 0) {
-                                fnShowmsg("Email Id must end with '@deloitte.com'!");
+                            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]*deloitte[a-zA-Z0-9.-]*\.[a-zA-Z]{2,}$/;
+
+                            if (!emailPattern.test(st_email)) {
+                                fnShowmsg("Email must be a valid Deloitte domain (e.g., deloitte.com, deloitte.co.uk)");
                                 $inputs.eq(1).focus();
                                 return false;
                             }

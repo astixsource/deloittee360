@@ -487,13 +487,14 @@
                             //    $inputs.eq(1).focus();
                             //    return false;
                             //}
-                            const emailPattern = /^[a-zA-Z0-9._%+-]+@deloitte\.com$|^[a-zA-Z0-9._%+-]+@deloitte\.co\.[a-zA-Z]{2,}$/;
+                            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]*deloitte[a-zA-Z0-9.-]*\.[a-zA-Z]{2,}$/;
 
                             if (!emailPattern.test(st_email)) {
-                                fnShowmsg("Email must be from 'deloitte.com' or 'deloitte.co.&lt;country code&gt;' (e.g., deloitte.co.uk)");
+                                fnShowmsg("Email must be a valid Deloitte domain (e.g., deloitte.com, deloitte.co.uk)");
                                 $inputs.eq(1).focus();
                                 return false;
                             }
+
                             var st_function = $inputs.eq(2).val().trim();
                             var st_dept = $inputs.eq(3).val().trim();
                             var st_deg = $inputs.eq(4).val().trim();
