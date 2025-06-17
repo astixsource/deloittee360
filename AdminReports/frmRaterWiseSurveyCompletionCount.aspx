@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminReports/AdminSite.master" AutoEventWireup="true" CodeFile="frmStatusReport.aspx.cs" Inherits="AdminReports_frmNominationStatusReport" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminReports/AdminSite.master" AutoEventWireup="true" CodeFile="frmRaterWiseSurveyCompletionCount.aspx.cs" Inherits="AdminReports_frmNominationStatusReport" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <link href="../Content/jquery-ui.css" rel="stylesheet" />
@@ -82,24 +82,29 @@
             }
         }
 
-        function fnOpenSurvey(ParticipantName, RaterName, RspID, ctrl) {
+        function fnReOpen(ParticipantName, ApseNodeId, flgApproved, flgFeedbackStarted, ctrl) {
             //alert("Hi");
             //alert(flgApproved)
 
             var LoginId = $("#MainContent_hdnLoginId").val();
             var CycleID = $("#MainContent_ddlCycle").val();
             var str = "";
-
-            str = "<div>Are you sure for re - opening of Survey for " + ParticipantName + " submitted by " + RaterName + "</div>";
-
+            if (flgApproved == 1 && flgFeedbackStarted == 1) {
+                str = "<div>Nominations are approved already & atleast 1 rater has started providing feedback also. Are you sure for moving the nominations to editable stage?</div>";
+            }
+            else if (flgApproved == 1 && flgFeedbackStarted == 0) {
+                str = "<div>Nominations are approved already. Are you sure for moving the nominations to editable stage?</div>";
+            }
+            if (flgApproved == 0) {
+                str = "<div>Are you sure for moving the nominations to editable stage?</div>";
+            }
 
 
             $("#dvDialog").html(str);
             $("#dvDialog").dialog({
-                /*title: "Open Survey for this user: " + ParticipantName,*/
-                title: "Re- open Survey for " + ParticipantName + " submitted by " + RaterName,
+                title: "Reset Nomination for : " + ParticipantName,
                 modal: true,
-                width: "700",
+                width: "300",
                 height: "auto",
                 close: function () {
                     $(this).dialog('destroy');
@@ -109,35 +114,35 @@
                 //    $(this).next().find("button").removeClass("ui-button ui-corner-all ui-widget");
                 //},
                 buttons: [
-                {
-                    text: "Yes",
-                    class: "btns btn-submit",
-                    click: function () {
+                    {
+                        text: "Yes",
+                        class: "btns btn-submit",
+                        click: function () {
 
-                        $("#dvFadeForProcessing").show();
-                        $(this).dialog('close');
-                        PageMethods.fnReOpen_Result(RspID, CycleID, LoginId, function (result) {
-                            fnGetDetails();
-                            $("#dvFadeForProcessing").hide();
-                            if (result.split("|")[0] == 2) {
-                                fnShowmsg("Error:" + result.split("|")[1]);
-                                return false;
-                            }
+                            $("#dvFadeForProcessing").show();
+                            $(this).dialog('close');
+                            PageMethods.fnReOpen_Result(ApseNodeId, CycleID, LoginId, function (result) {
+                                fnGetDetails();
+                                $("#dvFadeForProcessing").hide();
+                                if (result.split("|")[0] == 2) {
+                                    fnShowmsg("Error:" + result.split("|")[1]);
+                                    return false;
+                                }
 
-                        }, function (result) {
-                            $("#dvFadeForProcessing").hide();
-                            fnShowmsg("Error:" + result._message);
-                        });
+                            }, function (result) {
+                                $("#dvFadeForProcessing").hide();
+                                fnShowmsg("Error:" + result._message);
+                            });
+                        }
+                    },
+                    {
+                        text: "No",
+                        class: "btns btn-danger",
+                        click: function () {
+                            $(this).dialog('close');
+                        }
                     }
-                },
-                {
-                    text: "No",
-                    class: "btns btn-danger",
-                    click: function () {
-                        $(this).dialog('close');
-                    }
-                }
-            ]
+                ]
             })
 
         }
@@ -245,12 +250,10 @@
     <%-- <div id="loader" style="position: fixed; height: 100%; width: 100%; left: 0%; top: 0%; display: none;">
         <img src="../Images/blue-loading.gif" alt="loader" style="margin-left: 45%; margin-top: 20%;" />
     </div>--%>
-
-    <div style="text-align: center">
-        <h3 class="text-center" style="background-color: #88bd26; color: white;">Survey Status Report </h3>
-    </div>
+       <div style="text-align: center">
+       <h3 class="text-center" style="background-color: #88bd26; color: white;">Rater Wise Survey Completion Count Report </h3>
+   </div>
     <table style="margin: 0 auto">
-
         <tr>
             <td style="font-size: 15px">Select Batch:</td>
             <td style="padding: 10px">
@@ -258,8 +261,8 @@
                 </asp:DropDownList>
             </td>
 
-            <td style="font-size: 15px;">Select Status:</td>
-            <td style="padding: 10px;">
+            <td style="font-size: 15px; display:none" >Select Status:</td>
+            <td style="padding: 10px;  display:none">
                 <asp:DropDownList runat="server" ID="ddlStatus" Style="width: auto" CssClass="form-control">
                     <%--        <asp:ListItem Value="0" Selected="True">- ALL - </asp:ListItem>
                     <asp:ListItem Value="1">Not Submitted</asp:ListItem>

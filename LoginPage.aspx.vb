@@ -209,8 +209,10 @@ Partial Class Login
                     HttpContext.Current.Session("Department") = Convert.ToString(drdr.Item("Department"))
                     HttpContext.Current.Session("Desgination") = Convert.ToString(drdr.Item("Desgination"))
                     HttpContext.Current.Session("RM") = Convert.ToString(drdr.Item("ReportingManager"))
-                    HttpContext.Current.Session("LevelId") = Convert.ToString(drdr.Item("LevelId"))
-                    flgAgreement = Convert.ToString(drdr.Item("flgAgreement"))
+                HttpContext.Current.Session("LevelId") = Convert.ToString(drdr.Item("LevelId"))
+                HttpContext.Current.Session("IsNominationSubmissionEnable") = Convert.ToString(drdr.Item("IsNominationSubmissionEnable"))
+                HttpContext.Current.Session("IsApprovalEnable") = Convert.ToString(drdr.Item("IsApprovalEnable"))
+                flgAgreement = Convert.ToString(drdr.Item("flgAgreement"))
                     If Not IsDBNull(drdr.Item("CycleID")) Then
                         HttpContext.Current.Session("CycleID") = drdr.Item("CycleID")
                     Else

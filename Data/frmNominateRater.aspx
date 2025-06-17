@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Data/SiteNominate.master" AutoEventWireup="true" CodeFile="frmNominateRater.aspx.cs" Inherits="Data_frmNominateRater" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Data/SiteNominate.master" AutoEventWireup="true" CodeFile="frmNominateRater.aspx.cs" Inherits="Data_frmNominateRater" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <link href="../Content/jquery-ui.css" rel="stylesheet" />
@@ -850,11 +850,11 @@
                             }
                             const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]*deloitte[a-zA-Z0-9.-]*\.[a-zA-Z]{2,}$/;
 
-                            if (!emailPattern.test(st_email)) {
-                                fnShowmsg("Email must be a valid Deloitte domain (e.g., deloitte.com, deloitte.co.uk)");
-                                $inputs.eq(1).focus();
-                                return false;
-                            }
+ if (!emailPattern.test(st_email)) {
+     fnShowmsg("Email must be a valid Deloitte domain (e.g., deloitte.com, deloitte.co.uk)");
+     $inputs.eq(1).focus();
+     return false;
+ }
                             var st_function = $inputs.eq(2).val().trim();
                             var st_dept = $inputs.eq(3).val().trim();
                             var st_deg = $inputs.eq(4).val().trim();
@@ -917,8 +917,8 @@
                     <li><strong>Review partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
                     <li><strong>Reporting manager (RM)/Coach</strong> &ndash; Auto-added, with an option to add more raters</li>
                     <li><strong>Other stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M,B&amp;C, Talent, RRO, Admin, IT, etc.</li>
-                    <li>For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with @deloitte.com.</li>
-                </ul>
+                    <li>For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with a valid Deloitte domain (e.g., deloitte.com, deloitte.co.uk)</li>
+                  </ul>
                 <p>To help ensure a holistic feedback and maintains confidentiality, you will only be able to submit your nominations if these requirements are met.</p>
                 <p>Once submitted, your <strong>Coach/RM will review and approve</strong> your nominations.</p>
             </div>
@@ -931,8 +931,8 @@
                     <li><strong>Review partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
                     <li><strong>Career Development Advisor (CDA)</strong> &ndash; Auto-added</li>
                     <li><strong>Other stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M, B&amp;C, Talent, RRO, Admin, IT, etc.</li>
-                    <li>For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with @deloitte.com.</li>
-                </ul>
+                   <li>For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with a valid Deloitte domain (e.g., deloitte.com, deloitte.co.uk)</li>
+ </ul>
                 <p>To help ensure holistic feedback and maintains confidentiality, you will only be able to submit your nominations if these requirements are met.</p>
                 <p>Once submitted, your <strong>CDA will review and approve</strong> your nominations.</p>
             </div>

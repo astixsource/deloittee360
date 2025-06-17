@@ -62,6 +62,15 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
 
 
         sb.Append("<tr>");
+        sb.Append("<td>Rater Wise Survey Completion Count Report</td>");
+        sb.Append("<td><a href='../AdminReports/frmRaterWiseSurveyCompletionCount.aspx' class='btn-one w-100'>Rater Wise Survey Completion Count Report</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>Rater Wise Survey Completion Count Report</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
+
+
+        sb.Append("<tr>");
         sb.Append("<td>Email Notification: Invite</td>");
         sb.Append("<td><a href='../AdminReports/frmSendEmailInvite_ToParticipants.aspx' class='btn-one w-100'>Launch Notification</a></td>");
         sb.Append("<td>");

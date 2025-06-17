@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Data/SiteNominate.master" AutoEventWireup="true" CodeFile="frmNominateRaterApprove.aspx.cs" Inherits="frmNominateRaterApprove" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Data/SiteNominate.master" AutoEventWireup="true" CodeFile="frmNominateRaterApprove.aspx.cs" Inherits="frmNominateRaterApprove" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <link href="../Content/jquery-ui.css" rel="stylesheet" />
@@ -482,19 +482,13 @@
                                 $inputs.eq(1).focus();
                                 return false;
                             }
-                            //if (st_email.indexOf("@deloitte.co") < 0) {
-                            //    fnShowmsg("Email Id must end with '@deloitte.co'!");
-                            //    $inputs.eq(1).focus();
-                            //    return false;
-                            //}
-                            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]*deloitte[a-zA-Z0-9.-]*\.[a-zA-Z]{2,}$/;
+                             const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]*deloitte[a-zA-Z0-9.-]*\.[a-zA-Z]{2,}$/;
 
-                            if (!emailPattern.test(st_email)) {
-                                fnShowmsg("Email must be a valid Deloitte domain (e.g., deloitte.com, deloitte.co.uk)");
-                                $inputs.eq(1).focus();
-                                return false;
-                            }
-
+ if (!emailPattern.test(st_email)) {
+     fnShowmsg("Email must be a valid Deloitte domain (e.g., deloitte.com, deloitte.co.uk)");
+     $inputs.eq(1).focus();
+     return false;
+ }
                             var st_function = $inputs.eq(2).val().trim();
                             var st_dept = $inputs.eq(3).val().trim();
                             var st_deg = $inputs.eq(4).val().trim();
@@ -931,12 +925,11 @@
                                         <img src="../Images/pending-submis.svg" style="width: 20px; height: 20px;" /></td>
                                     <td><strong>Pending submission</strong> - Team member is yet to raise the 360 nominations</td>
                                 </tr>
-                                <tr>
-                                    <%--<td><i class="fa fa-circle" aria-hidden="true" style="color: #43B02A; font-size: 15pt"></i></td>--%>
-                                    <td>
-                                        <img src="../Images/submission.svg" style="width: 20px; height: 20px;" /></td>
-                                    <td><b>Submitted</b> - Team member has initiated the 360-feedback form</td>
-                                </tr>
+                                 <%--<tr>
+     <td>
+         <img src="../Images/submission.svg" style="width: 20px; height: 20px;" /></td>
+     <td><b>Submitted</b> - Team member has initiated the 360-feedback form</td>
+ </tr>--%>
                                 <tr>
                                     <%--<td><i class="fa fa-refresh" aria-hidden="true" style="background-color: #0076A8; color: #fff; padding: 2px;"></i></td>--%>
                                     <td>

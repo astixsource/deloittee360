@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/Data/SiteNominate.master" AutoEventWireup="true" CodeFile="frmNominateApproveNomination.aspx.vb" Inherits="_Welcome" %>
+<%@ Page Title="" Language="VB" MasterPageFile="~/Data/SiteNominate.master" AutoEventWireup="true" CodeFile="frmNominateApproveNomination.aspx.vb" Inherits="_Welcome" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <script src="../Scripts/progressbarJS.js"></script>
@@ -21,13 +21,13 @@
         <div class="col-4" id="div1" runat="server">
             <h6 class="text-center">For Participants: Click on ‘Nominate’ to <br /> select raters:</h6>
 
-            <div class="btn-img" onclick="fnOPenPage(1)">
+            <div class="btn-img <%=IIf(Convert.ToString(Session("IsNominationSubmissionEnable")) = "1", "btn disabled", "") %>" onclick="fnOPenPage(1)">
                 <img src="../Images/1-nom.svg" alt="" class="" />
             </div>
         </div>
         <div class="col-4" id="div2" runat="server">
             <h6 class="text-center" id="dvRMCoach" runat="server">For RM/Coach: Click on below icon to review your team members’ rater selections:</h6>
-            <div class="btn-img" onclick="fnOPenPage(2)">
+            <div class="btn-img <%=IIf(Convert.ToString(Session("IsApprovalEnable")) = "1", "btn disabled", "") %>" onclick="fnOPenPage(2)">
                 <img src="../Images/2-nom.svg" alt="" class="" />
             </div>
         </div>

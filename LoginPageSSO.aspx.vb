@@ -121,6 +121,8 @@ Partial Class LoginPageSSO
                 HttpContext.Current.Session("Desgination") = Convert.ToString(objdr.Item("Desgination"))
                 HttpContext.Current.Session("RM") = Convert.ToString(objdr.Item("ReportingManager"))
                 HttpContext.Current.Session("LevelId") = Convert.ToString(objdr.Item("LevelId"))
+                HttpContext.Current.Session("IsNominationSubmissionEnable") = Convert.ToString(objdr.Item("IsNominationSubmissionEnable"))
+                HttpContext.Current.Session("IsApprovalEnable") = Convert.ToString(objdr.Item("IsApprovalEnable"))
                 flgAgreement = Convert.ToString(objdr.Item("flgAgreement"))
                 If Not IsDBNull(objdr.Item("CycleID")) Then
                     HttpContext.Current.Session("CycleID") = objdr.Item("CycleID")
