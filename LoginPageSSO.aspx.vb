@@ -3,7 +3,7 @@ Imports System.Data.SqlClient
 Imports Microsoft.Owin.Security.OpenIdConnect
 Imports System.Data
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
-Imports Azure.Communication
+'Imports Azure.Communication
 Imports System.IO
 Imports System.Security.Claims
 Imports Microsoft.Owin.Security

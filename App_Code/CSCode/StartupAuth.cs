@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using System.IdentityModel.Claims;
-using System.Threading.Tasks;
 using System.Web;
 using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
