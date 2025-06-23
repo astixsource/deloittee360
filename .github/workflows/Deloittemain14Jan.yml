@@ -35,7 +35,7 @@ jobs:
     runs-on: windows-latest
     #environment: Production  # This is where manual approval is required
     environment:
-      name: 'staging'
+      name: 'Staging'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
