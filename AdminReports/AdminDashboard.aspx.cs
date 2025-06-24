@@ -151,8 +151,17 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         sb.Append("</tr>");
 
 
-        sb.Append("</tr></tbody>");
-        // sb.Append("</table>");
+        sb.Append("<tr>");
+        sb.Append("<td>Edit Nomination</td>");
+        sb.Append("<td><a href='../AdminReports/frmNominateRater.aspx' class='btn-one w-100'>Edit Nomination</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>Edit or Update Nomination Details</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
+
+
+        sb.Append("</tbody>");
+         sb.Append("</table>");
         return sb.ToString();
     }
 
