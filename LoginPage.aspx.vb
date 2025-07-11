@@ -212,6 +212,10 @@ Partial Class Login
                 HttpContext.Current.Session("LevelId") = Convert.ToString(drdr.Item("LevelId"))
                 HttpContext.Current.Session("IsNominationSubmissionEnable") = Convert.ToString(drdr.Item("IsNominationSubmissionEnable"))
                 HttpContext.Current.Session("IsApprovalEnable") = Convert.ToString(drdr.Item("IsApprovalEnable"))
+                HttpContext.Current.Session("flgDisable360Process") = drdr.Item("flgDisable360Process").ToString()
+                HttpContext.Current.Session("NominationRatersDate") = drdr.Item("NominationRatersDate").ToString()
+                HttpContext.Current.Session("ApproverRatersDate") = drdr.Item("ApproverRatersDate").ToString()
+                HttpContext.Current.Session("SurveyCompletionDate") = drdr.Item("SurveyCompletionDate").ToString()
                 flgAgreement = Convert.ToString(drdr.Item("flgAgreement"))
                     If Not IsDBNull(drdr.Item("CycleID")) Then
                         HttpContext.Current.Session("CycleID") = drdr.Item("CycleID")

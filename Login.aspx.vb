@@ -170,7 +170,12 @@ Partial Class Login
             If (drdr.HasRows) Then
                 HttpContext.Current.Session("UserExistEmail") = HttpUtility.HtmlEncode(UserName)
                 HttpContext.Current.Session("flgSSOEnabled") = drdr.Item("flgSSOEnabled").ToString()
-                strResponse = "1|LoginPageFirst.aspx?Email=" & HttpUtility.HtmlEncode(UserName)
+                HttpContext.Current.Session("flgDisable360Process") = drdr.Item("flgDisable360Process").ToString()
+                If (HttpContext.Current.Session("flgDisable360Process") = 1) Then
+                    strResponse = "2|Survey has been closed Now."
+                Else
+                    strResponse = "1|LoginPageFirst.aspx?Email=" & HttpUtility.HtmlEncode(UserName)
+                End If
             Else
                 strResponse = "2|Please check if you’ve entered the correct email ID. This email does not exist in our system."
             End If

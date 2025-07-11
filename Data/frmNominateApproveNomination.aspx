@@ -33,7 +33,7 @@
         </div>
         <div class="col-4" id="div3" runat="server">
             <h6 class="text-center">For Participants and Raters: Click on 'Start Survey' to submit feedback:</h6>
-            <div class="btn-img" onclick="fnOPenPage(3)">
+            <div class="btn-img" <%=IIf(Convert.ToString(Session("flgDisable360Process")) = "1", "btn disabled", "") %>" onclick="fnOPenPage(3)">
                 <img src="../Images/3-nom.svg" alt="" class="" />
             </div>
         </div>

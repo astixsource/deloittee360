@@ -86,7 +86,7 @@
                                         Professional nominates raters
                                         <div class="info">
                                             <i class="fa fa-info-circle"></i>
-                                            <span class="ecs_tooltip">Professional selects raters across categories by 20 June 2025.</span>
+                                            <span class="ecs_tooltip">Professional selects raters across categories by <%=Convert.ToString(Session("NominationRatersDate")) %>.</span>
                                         </div>
                                     </div>
                                 </li>
@@ -96,7 +96,7 @@
 
                                         <div class="info">
                                             <i class="fa fa-info-circle"></i>
-                                            <span class="ecs_tooltip">CDA reviews and approves nominated raters by 20 June 2025.</span>
+                                            <span class="ecs_tooltip">CDA reviews and approves nominated raters by <%=Convert.ToString(Session("ApproverRatersDate")) %>.</span>
                                         </div>
                                     </div>
                                 </li>
@@ -105,7 +105,7 @@
                                         Complete 360 evaluation
                                         <div class="info">
                                             <i class="fa fa-info-circle"></i>
-                                            <span class="ecs_tooltip">All nominated raters complete the 360 Survey by 30 June 2025</span>
+                                            <span class="ecs_tooltip">All nominated raters complete the 360 Survey by <%=Convert.ToString(Session("SurveyCompletionDate")) %></span>
                                         </div>
                                     </div>
                                 </li>
