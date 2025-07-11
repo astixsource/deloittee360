@@ -35,7 +35,7 @@ jobs:
     runs-on: windows-latest
     #environment: Production  # This is where manual approval is required
     environment:
-      name: 'Production'
+      name: 'Staging'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -58,5 +58,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'wa-del01-deloitte360-prod'
-          slot-name: 'Production'
+          slot-name: 'staging'
           package: ./
