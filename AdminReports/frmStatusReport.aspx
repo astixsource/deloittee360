@@ -1,112 +1,301 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/AdminReports/AdminSite.master" AutoEventWireup="true" CodeFile="frmStatusReport.aspx.cs" Inherits="AdminReports_frmStatusReportNew" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminReports/AdminSite.master" AutoEventWireup="true" CodeFile="frmStatusReport.aspx.cs" Inherits="AdminReports_frmNominationStatusReport" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
+    <link href="../Content/jquery-ui.css" rel="stylesheet" />
+    <link href="../JDatatable/dataTables.dataTables.css" rel="stylesheet" />
+    <link href="../JDatatable/fixedHeader.dataTables.css" rel="stylesheet" />
+
+    <script src="../Scripts/jquery-ui.js"></script>
+    <script src="../JDatatable/dataTables.js"></script>
+    <script src="../JDatatable/dataTables.fixedHeader.js"></script>
+    <script src="../JDatatable/fixedHeader.dataTables.js"></script>
+    <script src="../Scripts/progressbarJS.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            fnGetDetails();
+        });
+
+        function fnGetDetails() {
+            var CycleID = $("#MainContent_ddlCycle").val();
+            var StatusID = $("#MainContent_ddlStatus").val();
+            var LoginId = $("#MainContent_hdnLoginId").val();
+
+            $("#loader").css("display", "block");
+            $("#fade").css("display", "inline");
+            PageMethods.GetDetails(CycleID, StatusID, GetDetails_pass, GetDetails_fail);
+        }
+        function GetDetails_pass(res) {
+            $("#loader").css("display", "none");
+            $("#fade").css("display", "none");
+
+            $("#txtTypeSearch").val("");
+            if (res.split("|^|")[0] == "0") {
+
+                $("#dvContainer").html("<div id='divRptHeader' style='display: none;'>" + res.split("|^|")[1] + "</div><div id='divRptBody' style='overflow: auto; height: 590px;'>" + res.split("|^|")[1] + "</div>");
+                $("#divRptHeader").find("tbody").remove();
+
+                $("#divRptBody").css("height", ($(window).height() - ($("#dvBanner").height() + $("#dvHeading").height() + $("#dvFilter").height() + $("#divRptHeader").height() + 60) + "px"));
+
+                for (i = 0; i < $("#divRptHeader").find("th").length - 2; i++) {
+                    var rt_wid = $("#divRptBody").find("th")[i].clientWidth;
+                    $("#divRptBody").find("th").eq(i).css("width", rt_wid);
+                    //$("#divRptBody").find("th").eq(i).css("min-width", rt_wid);
+                    $("#divRptHeader").find("th").eq(i).css("width", rt_wid);
+                    //$("#divRptHeader").find("th").eq(i).css("min-width", rt_wid);
+                }
+
+                $("#divRptBody").find("table").css("margin-top", "-" + $("#divRptHeader")[0].offsetHeight + "px");
+            }
+            else {
+                $("#dvContainer").html("<div class='error'>Error :  " + res.split("|^|")[1] + "</div>");
+            }
+        }
+        function GetDetails_fail(res) {
+            $("#dvContainer").html("<div class='error'>Error :  " + res.Message + "</div>");
+        }
+
+
+
+        function fnDownload() {
+            $("#MainContent_hdnReportDate").val($("#txtDate").val());
+            $("#MainContent_btnDownload").click();
+
+            AlertMsg("Please wait, Your downloading will start shortly .. !", 0);
+        }
+    </script>
+
     <script type="text/javascript">
         function TypeSearch() {
             var searchtxt = $("#txtTypeSearch").val().toUpperCase().trim();
             if (searchtxt.length > 2) {
-                $("#MainContent_grdWSMapping").find("tbody").eq(0).find("tr").css("display", "none");
-                $("#MainContent_grdWSMapping").find("tbody").eq(0).find("tr").each(function () {
+                //alert($("#divRptBody").find("#tblRpt").find("tbody").find("tr").length)
+                $("#divRptBody").find("#tblRpt").find("tbody").find("tr").css("display", "none");
+                $("#divRptBody").find("#tblRpt").find("tbody").find("tr").each(function () {
                     if ($(this)[0].innerHTML.toUpperCase().indexOf(searchtxt) > -1) {
                         $(this).css("display", "table-row");
                     }
                 });
-                $("#MainContent_grdWSMapping").find("tbody").eq(0).find("tr").eq(0).css("display", "table-row");
             }
             else {
-                $("#MainContent_grdWSMapping").find("tbody").eq(0).find("tr").css("display", "table-row");
+                $("#divRptBody").find("#tblRpt").find("tbody").find("tr").css("display", "table-row");
             }
         }
+
+        function fnOpenSurvey(ParticipantName, RaterName, RspID, ctrl) {
+            //alert("Hi");
+            //alert(flgApproved)
+
+            var LoginId = $("#MainContent_hdnLoginId").val();
+            var CycleID = $("#MainContent_ddlCycle").val();
+            var str = "";
+
+            str = "<div>Are you sure for re - opening of Survey for " + ParticipantName + " submitted by " + RaterName + "</div>";
+
+
+
+            $("#dvDialog").html(str);
+            $("#dvDialog").dialog({
+                /*title: "Open Survey for this user: " + ParticipantName,*/
+                title: "Re- open Survey for " + ParticipantName + " submitted by " + RaterName,
+                modal: true,
+                width: "700",
+                height: "auto",
+                close: function () {
+                    $(this).dialog('destroy');
+                    $("#dvDialog").html("");
+                },
+                //open: function () {
+                //    $(this).next().find("button").removeClass("ui-button ui-corner-all ui-widget");
+                //},
+                buttons: [
+                {
+                    text: "Yes",
+                    class: "btns btn-submit",
+                    click: function () {
+
+                        $("#dvFadeForProcessing").show();
+                        $(this).dialog('close');
+                        PageMethods.fnReOpen_Result(RspID, CycleID, LoginId, function (result) {
+                            fnGetDetails();
+                            $("#dvFadeForProcessing").hide();
+                            if (result.split("|")[0] == 2) {
+                                fnShowmsg("Error:" + result.split("|")[1]);
+                                return false;
+                            }
+
+                        }, function (result) {
+                            $("#dvFadeForProcessing").hide();
+                            fnShowmsg("Error:" + result._message);
+                        });
+                    }
+                },
+                {
+                    text: "No",
+                    class: "btns btn-danger",
+                    click: function () {
+                        $(this).dialog('close');
+                    }
+                }
+            ]
+            })
+
+        }
+
+
+        function fnShowmsg(msg) {
+            $("#dvAlert").html(msg);
+            $("#dvAlert").dialog({
+                title: "Alert!",
+                modal: true,
+                width: "auto",
+                height: "auto",
+                dialogClass: "alertcss",
+                close: function () {
+                    $(this).dialog('destroy');
+                    $("#dvAlert").html("");
+                },
+                open: function () {
+                    $(this).next().find("button").removeClass("ui-button ui-corner-all ui-widget");
+                },
+                buttons: [
+                    {
+                        text: "OK",
+                        "class": "btns btn-dark",
+                        click: function () {
+                            $("#dvAlert").dialog('close');
+                        }
+                    }
+                ]
+            })
+        }
+
+        function fnViewNominationedRater(ParticipantName, ApseNodeId, ctrl) {
+            var LoginId = $("#MainContent_hdnLoginId").val();
+            var CycleID = $("#MainContent_ddlCycle").val();
+            PageMethods.fnViewNominationedRaterDetail(ApseNodeId, CycleID, GetNominationedRaterDetailSuccess, fnFailed, ParticipantName);
+
+        }
+        function GetNominationedRaterDetailSuccess(result, ParticipantName) {
+            //alert(result);
+            //  $("#divtblReport").css("display", "none");
+            $("#dvNominationedRaterDetail").css("display", "block");
+
+            $("#dvNominationedRaterDetail").html(result);
+
+            $("#loader").css("display", "none");
+            $("#fade").css("display", "none");
+
+            var height = 0; var width = 0;
+            var body = window.document.body;
+            if (window.innerHeight) {
+                height = window.innerHeight;
+                width = window.innerWidth;
+            } else if (body.parentElement.clientHeight) {
+                height = body.parentElement.clientHeight;
+                width = body.parentElement.clientWidth;
+            } else if (body && body.clientHeight) {
+                height = body.clientHeight;
+                width = body.clientWidth;
+            }
+
+            //$('#tblBasicDetailsInfoDetails').DataTable({
+            //    "ordering": false,
+            //    "paging": false,
+            //    "pagingType": "full_numbers",
+            //    "bLengthChange": false,
+            //    "iDisplayLength": parseInt((height - 280) / 25),
+            //    "searching": true
+            //});
+
+
+
+            $("#dvNominationedRaterDetail").dialog({
+                title: "Nominationed Rater : " + ParticipantName,
+                height: "650",
+                width: "70%",
+                modal: true,
+                show: {
+                    effect: "blind",
+                    duration: 100
+                },
+                hide: {
+                    duration: 100
+                },
+                beforeClose: function (event, ui) {
+                    $("#dvNominationedRaterDetail").html('');
+                    $("#loader").css("display", "none");
+                    $("#fade_dark").css("display", "none");
+                }
+            });
+
+
+
+        }
+
+        function fnFailed(result) {
+            alert(result.get_message());
+            $("#loader").css("display", "none");
+            $("#fade").css("display", "none");
+        }
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
+    <%-- <div id="loader" style="position: fixed; height: 100%; width: 100%; left: 0%; top: 0%; display: none;">
+        <img src="../Images/blue-loading.gif" alt="loader" style="margin-left: 45%; margin-top: 20%;" />
+    </div>--%>
+
+    <div style="text-align: center">
+        <h3 class="text-center" style="background-color: #88bd26; color: white;">Survey Status Report </h3>
+    </div>
     <table style="margin: 0 auto">
+
         <tr>
-            <td style="font-size: 22px">Select Cycle:</td>
+            <td style="font-size: 15px">Select Batch:</td>
             <td style="padding: 10px">
-                <asp:DropDownList ID="ddlCycle" CssClass="form-control" Style="width: 195px" runat="server">
-                </asp:DropDownList></td>
-            <td style="padding: 10px">
-                <asp:Button ID="btnShow" runat="server" Text="Show Report" CssClass="btns btn-submit w-100"
-                    OnClick="btnShow_Click" /></td>
-            <td style="padding: 10px">
-                <asp:Button ID="btnExportReport" runat="server" Text="Export To Excel" CssClass="btns btn-submit w-100"
-                    OnClick="btnExportReport_Click" /></td>
+                <asp:DropDownList ID="ddlCycle" CssClass="form-control" Style="width: auto" runat="server">
+                </asp:DropDownList>
+            </td>
+
+            <td style="font-size: 15px;">Select Status:</td>
+            <td style="padding: 10px;">
+                <asp:DropDownList runat="server" ID="ddlStatus" Style="width: auto" CssClass="form-control">
+                    <%--        <asp:ListItem Value="0" Selected="True">- ALL - </asp:ListItem>
+                    <asp:ListItem Value="1">Not Submitted</asp:ListItem>
+                    <asp:ListItem Value="2">Pending Final Submission</asp:ListItem>
+                    <asp:ListItem Value="3">Submitted</asp:ListItem>--%>
+                </asp:DropDownList>
+            </td>
+
             <td>
-                <div style="width: 284%; display: inline-block" class="search-container">
+                <a href="###" class="btns btn-submit w-100" onclick="fnGetDetails();" style="margin-left: 20px;">Get Report</a>
+                <a href="###" class="btns btn-submit w-100" onclick="fnDownload();" style="margin-left: 10px;">Download</a>
+
+
+                <asp:Button runat="server" ID="btnDownload" Text="." OnClick="btnDownload_Click" Style="visibility: hidden;" />
+            </td>
+
+            <td>
+                <div style="width: 250px; display: inline-block" class="search-container">
                     <input typ="text" id="txtTypeSearch" style="width: 100%" class="form-control" placeholder="Type atleast 3 charcters to Search" onkeyup="TypeSearch();" />
                 </div>
             </td>
         </tr>
     </table>
+    <div class="clear"></div>
+
+    <div id="dvContainer" style="width: 96%; margin: 0 auto;"></div>
+
+    <div id="dvNominationedRaterDetail" style="display: none; font-size: 8.5pt" title="Nominationed Rater">
+    </div>
+    <div id="divPopup" style="display: none;"></div>
+    <asp:HiddenField ID="hdnLoginId" runat="server" Value="0" />
+    <div id="dvDialog" style="display: none"></div>
+    <div class="loader_bg" style="display: none" id="dvFadeForProcessing">
+        <div class="loader"></div>
+    </div>
 
 
-    <asp:GridView ID="grdWSMapping" runat="server" BorderWidth="1" align="center" class="table table-bordered table-sm mt-3" Width="80%" EmptyDataText="There is no record found" BorderStyle="Solid"
-        ForeColor="#333333" AutoGenerateColumns="False" HeaderStyle-VerticalAlign="Middle">
-        <HeaderStyle VerticalAlign="Middle" />
-        <FooterStyle BackColor="#507CD1" Font-Bold="false" ForeColor="White" />
-        <Columns>
-            <asp:BoundField DataField="Participant Code" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Participant Code" HeaderStyle-HorizontalAlign="left"
-                SortExpression="Participant Code" NullDisplayText="0">
-                <HeaderStyle ForeColor="#F4F4F4" HorizontalAlign="left" Width="8%" VerticalAlign="Middle" />
-                <ItemStyle HorizontalAlign="left" Width="8%" Font-Size="10" />
-            </asp:BoundField>
-
-            <asp:BoundField DataField="Participant Name" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Participant Name" HeaderStyle-HorizontalAlign="left"
-                SortExpression="Participant Name" NullDisplayText="0">
-                <HeaderStyle ForeColor="#F4F4F4" HorizontalAlign="left" Width="13%" VerticalAlign="Middle" />
-                <ItemStyle HorizontalAlign="left" Width="13%" Font-Size="10" />
-            </asp:BoundField>
-
-            <asp:BoundField DataField="Participant Email Id" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Participant Email Id" HeaderStyle-HorizontalAlign="left"
-                SortExpression="Participant Email Id" NullDisplayText="0">
-                <HeaderStyle ForeColor="#F4F4F4" HorizontalAlign="left" Width="10%" VerticalAlign="Middle" />
-                <ItemStyle HorizontalAlign="left" Width="5%" Font-Size="10" />
-            </asp:BoundField>
-
-
-            <asp:BoundField DataField="Participant Level" Visible="false" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Participant Level" HeaderStyle-HorizontalAlign="left"
-                SortExpression="Participant Level" NullDisplayText="0">
-                <HeaderStyle ForeColor="#F4F4F4" Width="13%" HorizontalAlign="left" VerticalAlign="Middle" />
-                <ItemStyle HorizontalAlign="left" Width="13%" Font-Size="10" />
-            </asp:BoundField>
-
-
-            <asp:BoundField DataField="Rater Code" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Rater Code" HeaderStyle-HorizontalAlign="left"
-                SortExpression="Rater Code" NullDisplayText="0">
-                <HeaderStyle ForeColor="#F4F4F4" Width="17%" HorizontalAlign="left" VerticalAlign="Middle" />
-                <ItemStyle HorizontalAlign="left" Width="15%" Font-Size="10" />
-            </asp:BoundField>
-
-              <asp:BoundField DataField="Rater Name" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Rater Name" HeaderStyle-HorizontalAlign="left"
-                SortExpression="Rater Name" NullDisplayText="0">
-                <HeaderStyle ForeColor="#F4F4F4" Width="17%" HorizontalAlign="left" VerticalAlign="Middle" />
-                <ItemStyle HorizontalAlign="left" Width="15%" Font-Size="10" />
-            </asp:BoundField>
-
-              <asp:BoundField DataField="Rater Email Id" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Rater Email Id" HeaderStyle-HorizontalAlign="left"
-                SortExpression="Rater Email Id" NullDisplayText="0">
-                <HeaderStyle ForeColor="#F4F4F4" Width="17%" HorizontalAlign="left" VerticalAlign="Middle" />
-                <ItemStyle HorizontalAlign="left" Width="15%" Font-Size="10" />
-            </asp:BoundField>
-
-            <asp:BoundField DataField="Relationship" HeaderStyle-ForeColor="#F4F4F4" HeaderStyle-HorizontalAlign="left"
-                HeaderText="Relationship" SortExpression="Relationship" NullDisplayText="0">
-                <HeaderStyle ForeColor="#F4F4F4" Width="13%" HorizontalAlign="left" VerticalAlign="Middle" />
-                <ItemStyle HorizontalAlign="left" Width="13%" Font-Size="10" />
-            </asp:BoundField>
-
-            <asp:BoundField DataField="Status" HeaderStyle-ForeColor="#F4F4F4" HeaderText="Status" HeaderStyle-HorizontalAlign="left"
-                SortExpression="Status" NullDisplayText="0">
-                <HeaderStyle ForeColor="#F4F4F4" Width="10%" HorizontalAlign="left" VerticalAlign="Middle" />
-                <ItemStyle HorizontalAlign="left" Width="10%" Font-Size="10" />
-            </asp:BoundField>
-
-        </Columns>
-        <PagerStyle BackColor="#ef4522" ForeColor="White" HorizontalAlign="Left" />
-
-        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-        <HeaderStyle Height="25" Font-Size="10" BackColor="#88bd26" Font-Bold="True" ForeColor="White" />
-        <EditRowStyle BackColor="#ef4522" />
-    </asp:GridView>
 </asp:Content>
+
