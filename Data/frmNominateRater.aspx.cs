@@ -428,9 +428,9 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                                
                                 sb.Append("<td>" + dt.Rows[i]["FullName"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["EMailID"].ToString() + "</td>");
-                                sb.Append("<td>" + dt.Rows[i]["Function"].ToString() + "</td>");
+                                sb.Append("<td>" + dt.Rows[i]["Business"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Department"].ToString() + "</td>");
-                                sb.Append("<td>" + dt.Rows[i]["Designation"].ToString() + "</td>");
+                                sb.Append("<td>" + dt.Rows[i]["Grade"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Status"].ToString() + "</td>");
                                 if (dt.Rows[i]["flgSubmittedForApproval"].ToString() == "0" && dt.Rows[i]["flgApproved"].ToString() == "0" && dt.Rows[i]["RltshpID"].ToString() != "4" && dt.Rows[i]["RltshpID"].ToString() != "1")
                                 {

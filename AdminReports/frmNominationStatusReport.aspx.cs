@@ -32,6 +32,7 @@ public partial class AdminReports_frmNominationStatusReport : System.Web.UI.Page
 
             ddlCycle.Items.Insert(0, "Select");
             fnFillCycle();
+            fnFillStatus();
         }
     }
     public void fnFillCycle()
@@ -49,6 +50,21 @@ public partial class AdminReports_frmNominationStatusReport : System.Web.UI.Page
         ddlCycle.DataBind();
     }
 
+    public void fnFillStatus()
+    {
+        SqlConnection con = new SqlConnection(strCon.Split('|')[0]);
+        string com = "spGetStatusListForNominationSubmission";
+        SqlDataAdapter adpt = new SqlDataAdapter(com, con);
+
+        DataTable dt = new DataTable();
+        adpt.Fill(dt);
+        ddlStatus.DataSource = dt;
+        ddlStatus.DataBind();
+        ddlStatus.DataTextField = "Status";
+        ddlStatus.DataValueField = "StatusID";
+        ddlStatus.DataBind();
+    }
+
 
     [System.Web.Services.WebMethod()]
     public static string GetDetails(string CycleId, string StatusID)
@@ -61,6 +77,7 @@ public partial class AdminReports_frmNominationStatusReport : System.Web.UI.Page
             Scmd.Connection = Scon;
             Scmd.CommandText = "[spRptGetNominationStatus]";
             Scmd.Parameters.AddWithValue("@CycleId", CycleId);
+            Scmd.Parameters.AddWithValue("@StatusId", StatusID);
             // Scmd.Parameters.AddWithValue("@ReportDate", ReportDate);
             Scmd.CommandType = CommandType.StoredProcedure;
             Scmd.CommandTimeout = 0;
@@ -71,8 +88,12 @@ public partial class AdminReports_frmNominationStatusReport : System.Web.UI.Page
             Scmd.Dispose();
             Scon.Dispose();
 
-            string[] SkipColumn = new string[1];
+            string[] SkipColumn = new string[5];
             SkipColumn[0] = "flgGrouping";
+            SkipColumn[1] = "ApseNodeId";
+            SkipColumn[2] = "flgApproved";
+            SkipColumn[3] = "flgFeedbackStarted";
+            SkipColumn[4] = "StatusId";
             return "0|^|" + dttoHTML(ds.Tables[0], SkipColumn, "Rpt");
         }
         catch (Exception ex)
@@ -90,12 +111,13 @@ public partial class AdminReports_frmNominationStatusReport : System.Web.UI.Page
         sb.Append("<thead>");
         sb.Append("<tr>");
 
-        sb.Append("<th style='min-width: 30px; width: 30px;background: #88bd26;color: #F4F4F4;'>Sr.No</th>");
+        sb.Append("<th style='background: #88bd26;color: #F4F4F4;'>Sr.No</th>");
         for (int j = 0; j < dt.Columns.Count; j++)
             if (!SkipColumn.Contains(dt.Columns[j].ColumnName.ToString().Trim()))
                 sb.Append("<th style='background: #88bd26;color: #F4F4F4;'>" + dt.Columns[j].ColumnName.ToString() + "</th>");
 
         //sb.Append("<th style='display: none;'>Search</th>");
+        sb.Append("<th style='background: #88bd26;color: #F4F4F4;'>Action</th>");
         sb.Append("</tr>");
         sb.Append("</thead>");
         sb.Append("<tbody>");
@@ -109,18 +131,18 @@ public partial class AdminReports_frmNominationStatusReport : System.Web.UI.Page
                 if (!SkipColumn.Contains(dt.Columns[j].ColumnName.ToString().Trim()))
                 {
                     sbAlign.Clear();
-                    //if (dt.Columns[j].ColumnName.ToString().Split('$')[1] == "1")
-                    //    sbAlign.Append("left");
-                    //if (dt.Columns[j].ColumnName.ToString().Split('$')[1] == "2")
-                    //    sbAlign.Append("center");
-                    //if (dt.Columns[j].ColumnName.ToString().Split('$')[1] == "3")
-                    //    sbAlign.Append("right");
 
                     sbTypeSearch.Append(dt.Rows[i][j].ToString() + " ");
                     sb.Append("<td style='text-align: " + sbAlign.ToString() + "; '>" + dt.Rows[i][j].ToString() + "</td>");
-                    //sb.Append("<td style='text-align: " + sbAlign.ToString() + ";'>" + (dt.Rows[i][j].ToString().Length > 30 ? dt.Rows[i][j].ToString().Substring(0, 28) + ".. <a href='#' header='" + dt.Columns[j].ColumnName.ToString().Trim() + "' lbl='" + dt.Rows[i][j].ToString() + "' onclick='fnShowFullString(this);'>(more)</a>" : dt.Rows[i][j].ToString()) + "</td>");
                 }
-
+            if (dt.Rows[i]["StatusId"].ToString() == "3")
+            {
+                sb.Append("<td style='text-align: center;'><a href = '###'  onclick='fnReOpen(" + dt.Rows[i]["ApseNodeId"].ToString() + ", this);'>Re-open</a></td>");
+            }
+            else
+            {
+                sb.Append("<td></td>");
+            }
             //sb.Append("<td iden='Search' style='display: none;'>" + sbTypeSearch.ToString() + "</td>");
             sb.Append("</tr>");
         }
@@ -239,4 +261,15 @@ public partial class AdminReports_frmNominationStatusReport : System.Web.UI.Page
 
         return wb;
     }
+
+
+
+    [System.Web.Services.WebMethod()]
+    public static string fnReOpen_Result(int ApseNodeId)
+    {
+        string str = "";
+
+        return str.ToString();
+    }
+
 }

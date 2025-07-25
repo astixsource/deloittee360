@@ -343,9 +343,9 @@
                     valueField: 'EMailID'
                 },
                 {
-                    name: 'Function',
+                    name: 'Business',
                     width: '200px',
-                    valueField: 'Function'
+                    valueField: 'Business'
                 }
                     ,
                 {
@@ -426,7 +426,7 @@
                         str += "<td>" + $("#MainContent_ddlRelatioShip option:selected").attr("rptxt") + "</td>";
                         str += "<td>" + ui.item.FullName + "</td>";
                         str += "<td>" + ui.item.EMailID + "</td>";
-                        str += "<td>" + ui.item.Function + "</td>";
+                        str += "<td>" + ui.item.Business + "</td>";
                         str += "<td>" + ui.item.Department + "</td>";
                         str += "<td>" + ui.item.Designation + "</td>";
                         str += "<td>Initial draft</td>";
@@ -974,7 +974,7 @@
                                     <th>Name</th>
                                     <th style="width: 20.5%">Email ID
                                     </th>
-                                    <th style="width: 10%">Function
+                                    <th style="width: 10%">Business
                                     </th>
                                     <th style="width: 9%">Department
                                     </th>
@@ -1039,7 +1039,7 @@
                     <input type="text" class="form-control form-control-sm" /></td>
             </tr>
             <tr>
-                <td>Function : </td>
+                <td>Business : </td>
                 <td>:</td>
                 <td>
                     <input type="text" class="form-control form-control-sm" /></td>

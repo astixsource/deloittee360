@@ -159,6 +159,14 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         sb.Append("</td>");
         sb.Append("</tr>");
 
+        sb.Append("<tr>");
+        sb.Append("<td>Sent Report</td>");
+        sb.Append("<td><a href='../AdminReports/frmSendReport_Mail5.aspx' class='btn-one w-100'>Sent Report</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>Sent Report</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
+
 
         sb.Append("</tbody>");
          sb.Append("</table>");

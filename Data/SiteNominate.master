@@ -86,17 +86,17 @@
                                         Professional nominates raters
                                         <div class="info">
                                             <i class="fa fa-info-circle"></i>
-                                            <span class="ecs_tooltip">Professional selects raters across categories by <%=Convert.ToString(Session("NominationRatersDate")) %>.</span>
+                                            <span class="ecs_tooltip FirstPoint">Professional selects raters across categories by <%=Convert.ToString(Session("NominationRatersDate")) %>.</span>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="status-lvl">
-                                        <%=IIf(Convert.ToString(Session("LevelId")) = "2", " CDA approves raters", " RM/Coach approves raters") %>
+                                        <%=IIf(Convert.ToString(Session("LevelId")) = "2", " CDA approves raters", " Reporting Manager/Coach approves raters") %>
 
                                         <div class="info">
                                             <i class="fa fa-info-circle"></i>
-                                            <span class="ecs_tooltip">CDA reviews and approves nominated raters by <%=Convert.ToString(Session("ApproverRatersDate")) %>.</span>
+                                            <span class="ecs_tooltip secondPoint"><%=IIf(Convert.ToString(Session("LevelId")) = "2", " CDA", " Reporting Manager/Coach") %> reviews and approves nominated raters by <%=Convert.ToString(Session("ApproverRatersDate")) %>.</span>
                                         </div>
                                     </div>
                                 </li>
@@ -105,7 +105,7 @@
                                         Complete 360 evaluation
                                         <div class="info">
                                             <i class="fa fa-info-circle"></i>
-                                            <span class="ecs_tooltip">All nominated raters complete the 360 Survey by <%=Convert.ToString(Session("SurveyCompletionDate")) %></span>
+                                            <span class="ecs_tooltip ThirdPoint">All nominated raters complete the 360  Feedback Survey by <%=Convert.ToString(Session("SurveyCompletionDate")) %>.</span>
                                         </div>
                                     </div>
                                 </li>
@@ -114,7 +114,7 @@
                                         Complete
                                         <div class="info">
                                             <i class="fa fa-info-circle"></i>
-                                            <span class="ecs_tooltip">Consolidation of inputs and reporting on 360 feedback survey.</span>
+                                            <span class="ecs_tooltip FourthPoint">Consolidation of inputs and reporting on 360 Feedback Survey.</span>
                                         </div>
                                     </div>
                                 </li>
@@ -137,7 +137,7 @@
                                     <td><%=Session("emailid") %></td>
                                 </tr>
                                 <tr>
-                                    <td>Function</td>
+                                    <td>Business</td>
                                     <td>:</td>
                                     <td><%=Session("function") %></td>
                                 </tr>
@@ -147,12 +147,12 @@
                                     <td><%=Session("Department") %></td>
                                 </tr>
                                 <tr>
-                                    <td>Designation</td>
+                                    <td>Grade</td>
                                     <td>:</td>
                                     <td><%=Session("Desgination") %></td>
                                 </tr>
                                 <tr>
-                                    <td>RM/Coach/CDA</td>
+                                     <%=IIf(Convert.ToString(Session("LevelId")) = "2", "<td>CDA</td>", "<td>Reporting Manager/Coach</td>") %>                                    
                                     <td>:</td>
                                     <td><%=Session("RM") %></td>
                                 </tr>

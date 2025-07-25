@@ -100,7 +100,16 @@ public partial class AdminReports_frmNominationStatusReport : System.Web.UI.Page
             SkipColumn[2] = "StatusId";
             SkipColumn[3] = "flgApproved";
             SkipColumn[4] = "flgFeedbackStarted";
-            return "0|^|" + dttoHTML(ds.Tables[0], SkipColumn, "Rpt");
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return "0|^|" + dttoHTML(ds.Tables[0], SkipColumn, "Rpt");
+            }
+            else
+            {
+                return "0|^|" + "No Record found for this selection..";
+            }
+            // return "0|^|" + dttoHTML(ds.Tables[0], SkipColumn, "Rpt");
         }
         catch (Exception ex)
         {

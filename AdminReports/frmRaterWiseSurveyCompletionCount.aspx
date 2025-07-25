@@ -21,11 +21,13 @@
             var StatusID = $("#MainContent_ddlStatus").val();
             var LoginId = $("#MainContent_hdnLoginId").val();
 
+            $("#dvFadeForProcessing").show();
             $("#loader").css("display", "block");
             $("#fade").css("display", "inline");
             PageMethods.GetDetails(CycleID, StatusID, GetDetails_pass, GetDetails_fail);
         }
         function GetDetails_pass(res) {
+            $("#dvFadeForProcessing").hide();
             $("#loader").css("display", "none");
             $("#fade").css("display", "none");
 
@@ -245,6 +247,41 @@
         }
 
     </script>
+        <style type="text/css">
+    table#tblRpt > thead > tr > th:nth-child(1), table#tblRpt > tbody > tr > td:nth-child(1) {
+        width: 2% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(2), table#tblRpt > tbody > tr > td:nth-child(2) {
+        width: 5% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(3), table#tblRpt > tbody > tr > td:nth-child(3) {
+        width: 7% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(4), table#tblRpt > tbody > tr > td:nth-child(4) {
+        width: 5% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(5), table#tblRpt > tbody > tr > td:nth-child(5) {
+        width: 5% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(6), table#tblRpt > tbody > tr > td:nth-child(6) {
+        width: 5% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(7), table#tblRpt > tbody > tr > td:nth-child(7) {
+        width: 5% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(8), table#tblRpt > tbody > tr > td:nth-child(8) {
+        width: 5% !important;
+    }
+
+   
+</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <%-- <div id="loader" style="position: fixed; height: 100%; width: 100%; left: 0%; top: 0%; display: none;">

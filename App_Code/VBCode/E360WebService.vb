@@ -396,6 +396,11 @@ Public Class E360WebService
     'CHANGE
     <System.Web.Services.WebMethod()>
     Public Function subPopulateQuestions(ByVal RspID As Integer, ByVal PGNmbr As Integer, ByVal levelID As Integer) As String
+
+        If (PGNmbr = 0) Or (PGNmbr < 0) Then
+            PGNmbr = 1
+        End If
+
         Dim Objcon As New SqlConnection(strConn.Split("|")(0))
         Dim objCom As New SqlCommand("[spRSPManageDet]", Objcon)
         Dim drdr As SqlDataReader

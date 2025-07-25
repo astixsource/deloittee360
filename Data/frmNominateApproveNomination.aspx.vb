@@ -23,7 +23,7 @@ Partial Class _Welcome
         End If
 
         If Convert.ToString(Session("LevelId")) = "1" Then
-            dvRMCoach.InnerHtml = "For RM/Coach: Click on below icon to review your team members’ rater selections:"
+            dvRMCoach.InnerHtml = "For Reporting Manager/Coach: Click on below icon to review your team members’ rater selections:"
         Else
             dvRMCoach.InnerHtml = "For CDA: Click on below icon to review your team members’ rater selections:"
         End If

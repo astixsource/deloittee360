@@ -1,6 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminReports/AdminSite.master" AutoEventWireup="true" CodeFile="frmNominationStatusReport.aspx.cs" Inherits="AdminReports_frmNominationStatusReport" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
+        <link href="../Content/jquery-ui.css" rel="stylesheet" />
+    <link href="../JDatatable/dataTables.dataTables.css" rel="stylesheet" />
+    <link href="../JDatatable/fixedHeader.dataTables.css" rel="stylesheet" />
+
+    <script src="../Scripts/jquery-ui.js"></script>
+    <script src="../JDatatable/dataTables.js"></script>
+    <script src="../JDatatable/dataTables.fixedHeader.js"></script>
+    <script src="../JDatatable/fixedHeader.dataTables.js"></script>
+    <script src="../Scripts/progressbarJS.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             fnGetDetails();
@@ -10,18 +20,21 @@
             var CycleID = $("#MainContent_ddlCycle").val();
             var StatusID = $("#MainContent_ddlStatus").val();
 
+            $("#dvFadeForProcessing").show();
             $("#loader").css("display", "block");
             $("#fade").css("display", "inline");
+
             PageMethods.GetDetails(CycleID, StatusID, GetDetails_pass, GetDetails_fail);
         }
         function GetDetails_pass(res) {
+            $("#dvFadeForProcessing").hide();
             $("#loader").css("display", "none");
             $("#fade").css("display", "none");
 
             $("#txtTypeSearch").val("");
             if (res.split("|^|")[0] == "0") {
 
-                $("#dvContainer").html("<div id='divRptHeader'>" + res.split("|^|")[1] + "</div><div id='divRptBody' style='overflow-y: auto;'>" + res.split("|^|")[1] + "</div>");
+                $("#dvContainer").html("<div id='divRptHeader' style='display: none;'>" + res.split("|^|")[1] + "</div><div id='divRptBody' style='overflow-y: auto;'>" + res.split("|^|")[1] + "</div>");
                 $("#divRptHeader").find("tbody").remove();
 
                 $("#divRptBody").css("height", ($(window).height() - ($("#dvBanner").height() + $("#dvHeading").height() + $("#dvFilter").height() + $("#divRptHeader").height() + 60) + "px"));
@@ -70,7 +83,148 @@
                 $("#divRptBody").find("#tblRpt").find("tbody").find("tr").css("display", "table-row");
             }
         }
+
+        function fnReOpen(ApseNodeId, ctrl) {
+            
+            var str = "<div>Are you sure you want to Reopen this rater?</div>";
+            $("#dvDialog").html(str);
+                $("#dvDialog").dialog({
+                title: "Confirmation :",
+                modal: true,
+                width: "300",
+                height: "auto",
+                close: function () {
+                    $(this).dialog('destroy');
+                    $("#dvDialog").html("");
+                },
+                //open: function () {
+                //    $(this).next().find("button").removeClass("ui-button ui-corner-all ui-widget");
+                //},
+                buttons: [
+                    {
+                        text: "Yes",
+                        class: "btns btn-submit",
+                        click: function () {
+                           
+                            $("#dvFadeForProcessing").show();
+                            $(this).dialog('close');
+                            PageMethods.fnReOpen_Result(ApseNodeId, function (result) {
+                                $("#dvFadeForProcessing").hide();
+                                if (result.split("|")[0] == 2) {
+                                    fnShowmsg("Error:" + result.split("|")[1]);
+                                    return false;
+                                }
+                               
+
+                            }, function (result) {
+                                $("#dvFadeForProcessing").hide();
+                                fnShowmsg("Error:" + result._message);
+                            });
+                        }
+                    },
+                    {
+                        text: "No",
+                        class: "btns btn-danger",
+                        click: function () {
+                            $(this).dialog('close');
+                        }
+                    }
+                ]
+            })
+
+        }
+
+
+        function fnShowmsg(msg) {
+            $("#dvAlert").html(msg);
+            $("#dvAlert").dialog({
+                title: "Alert!",
+                modal: true,
+                width: "auto",
+                height: "auto",
+                dialogClass: "alertcss",
+                close: function () {
+                    $(this).dialog('destroy');
+                    $("#dvAlert").html("");
+                },
+                open: function () {
+                    $(this).next().find("button").removeClass("ui-button ui-corner-all ui-widget");
+                },
+                buttons: [
+                    {
+                        text: "OK",
+                        "class": "btns btn-dark",
+                        click: function () {
+                            $("#dvAlert").dialog('close');
+                        }
+                    }
+                ]
+            })
+        }
+        
     </script>
+
+    <style type="text/css">
+    table#tblRpt > thead > tr > th:nth-child(1), table#tblRpt > tbody > tr > td:nth-child(1) {
+        width: 2% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(2), table#tblRpt > tbody > tr > td:nth-child(2) {
+        width: 5% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(3), table#tblRpt > tbody > tr > td:nth-child(3) {
+        width: 7% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(4), table#tblRpt > tbody > tr > td:nth-child(4) {
+        width: 5% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(5), table#tblRpt > tbody > tr > td:nth-child(5) {
+        width: 5% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(6), table#tblRpt > tbody > tr > td:nth-child(6) {
+        width: 5% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(7), table#tblRpt > tbody > tr > td:nth-child(7) {
+        width: 18% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(8), table#tblRpt > tbody > tr > td:nth-child(8) {
+        width: 8% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(9), table#tblRpt > tbody > tr > td:nth-child(9) {
+        width: 5% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(10), table#tblRpt > tbody > tr > td:nth-child(10) {
+        width: 5% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(11), table#tblRpt > tbody > tr > td:nth-child(11) {
+        width: 5% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(12), table#tblRpt > tbody > tr > td:nth-child(12) {
+        width: 5% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(13), table#tblRpt > tbody > tr > td:nth-child(13) {
+        width: 5% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(14), table#tblRpt > tbody > tr > td:nth-child(14) {
+        width: 5% !important;
+    }
+
+    table#tblRpt > thead > tr > th:nth-child(15), table#tblRpt > tbody > tr > td:nth-child(15) {
+        width: 8% !important;
+    }
+</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <%-- <div id="loader" style="position: fixed; height: 100%; width: 100%; left: 0%; top: 0%; display: none;">
@@ -84,13 +238,13 @@
                 </asp:DropDownList>
             </td>
 
-            <td style="font-size: 15px;display:none">Select Status:</td>
-            <td style="padding: 10px;display:none">
-                <asp:DropDownList runat="server" ID="ddlStatus" CssClass="form-control">
-                    <asp:ListItem Value="0" Selected="True">- ALL - </asp:ListItem>
+            <td style="font-size: 15px">Select Status:</td>
+            <td style="padding: 10px">
+                <asp:DropDownList runat="server" ID="ddlStatus" Style="width: auto" CssClass="form-control">
+                    <%--        <asp:ListItem Value="0" Selected="True">- ALL - </asp:ListItem>
                     <asp:ListItem Value="1">Not Submitted</asp:ListItem>
                     <asp:ListItem Value="2">Pending Final Submission</asp:ListItem>
-                    <asp:ListItem Value="3">Submitted</asp:ListItem>
+                    <asp:ListItem Value="3">Submitted</asp:ListItem>--%>
                 </asp:DropDownList>
             </td>
 
@@ -103,7 +257,7 @@
             </td>
 
             <td>
-                <div style="width:250px; display: inline-block" class="search-container">
+                <div style="width: 250px; display: inline-block" class="search-container">
                     <input typ="text" id="txtTypeSearch" style="width: 100%" class="form-control" placeholder="Type atleast 3 charcters to Search" onkeyup="TypeSearch();" />
                 </div>
             </td>
@@ -111,10 +265,14 @@
     </table>
     <div class="clear"></div>
 
-    <div id="dvContainer" style="width: 96%; margin: 0 auto;"></div>
+    <div id="dvContainer" style="width: 100%; height:570px; overflow-y:scroll;overflow-x:hidden;"></div>
 
 
     <div id="divPopup" style="display: none;"></div>
+    <div id="dvDialog" style="display: none"></div>
+        <div class="loader_bg" style="display: none" id="dvFadeForProcessing">
+        <div class="loader"></div>
+    </div>
 
 
 </asp:Content>
