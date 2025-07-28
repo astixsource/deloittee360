@@ -116,9 +116,15 @@ Partial Class LoginPageSSO
                 HttpContext.Current.Session("flgIsManager") = objdr.Item("flgIsManager")
                 HttpContext.Current.Session("flgParticipant") = objdr.Item("flgParticipant")
                 HttpContext.Current.Session("emailid") = objdr.Item("EmailID")
-                HttpContext.Current.Session("function") = Convert.ToString(objdr.Item("Function"))
+                'HttpContext.Current.Session("function") = Convert.ToString(objdr.Item("Function"))
+                'HttpContext.Current.Session("Department") = Convert.ToString(objdr.Item("Department"))
+                'HttpContext.Current.Session("Desgination") = Convert.ToString(objdr.Item("Desgination"))
+
+                HttpContext.Current.Session("function") = Convert.ToString(objdr.Item("Business"))
                 HttpContext.Current.Session("Department") = Convert.ToString(objdr.Item("Department"))
-                HttpContext.Current.Session("Desgination") = Convert.ToString(objdr.Item("Desgination"))
+                HttpContext.Current.Session("Desgination") = Convert.ToString(objdr.Item("Grade"))
+
+
                 HttpContext.Current.Session("RM") = Convert.ToString(objdr.Item("ReportingManager"))
                 HttpContext.Current.Session("LevelId") = Convert.ToString(objdr.Item("LevelId"))
                 HttpContext.Current.Session("IsNominationSubmissionEnable") = Convert.ToString(objdr.Item("IsNominationSubmissionEnable"))

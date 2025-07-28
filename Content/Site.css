@@ -198,7 +198,7 @@ ol, ul {
         margin-bottom: 0px;
     }
 
-.w-100{
+.w-100 {
     width: 100%;
 }
 
@@ -422,33 +422,68 @@ span.ecs_tooltip {
     font-size: .688rem;
     padding: 5px 5px 8px;
     position: absolute;
-    left: -60px;
+ /*   left: -60px;*/
     top: -58px;
     text-align: center;
-    width: 140px;
+/*    width: 140px;*/
     box-shadow: 0 0.46875rem 2.1875rem rgba(4,9,20,0.03),0 0.9375rem 1.40625rem rgba(4,9,20,0.03),0 0.25rem 0.53125rem rgba(4,9,20,0.05),0 0.125rem 0.1875rem rgba(4,9,20,0.03);
 }
 
-    span.ecs_tooltip::after,
-    span.ecs_tooltip::before {
-        content: '';
-        position: absolute;
-        border-style: solid;
-        border-width: 10px;
-        display: block;
-        margin-top: 40px;
+.FirstPoint {
+    width: 140px;
+    left: -60px;
+}
+    .FirstPoint::after,
+    .FirstPoint::before {
+        margin-left: 51px;
+    }
+.secondPoint {
+    width: 196px;
+    left: -94px;
+}
+    .secondPoint::after,
+    .secondPoint::before {
+        margin-left: 85px;
+    }
+
+.ThirdPoint {
+    width: 160px;
+    left: -60px;
+}
+    .ThirdPoint::after,
+    .ThirdPoint::before {
         margin-left: 51px;
     }
 
-    span.ecs_tooltip::after {
-        top: 10px;
-        border-color: #FFF transparent transparent transparent;
+.FourthPoint {
+    width: 140px;
+    left: -60px;
+}
+    .FourthPoint::after,
+    .FourthPoint::before {
+        margin-left: 51px;
     }
 
-    span.ecs_tooltip::before {
-        top: 11px;
-        border-color: #707070 transparent transparent transparent;
-    }
+span.ecs_tooltip::after,
+span.ecs_tooltip::before {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 10px;
+    display: block;
+    margin-top: 40px;
+  /*  margin-left: 51px;*/
+}
+
+span.ecs_tooltip::after {
+    top: 10px;
+    border-color: #FFF transparent transparent transparent;
+}
+
+span.ecs_tooltip::before {
+    top: 11px;
+    border-color: #707070 transparent transparent transparent;
+}
 
 /*span.ecs_tooltip::after {
     border-left: 8px solid transparent;
@@ -878,7 +913,6 @@ input[type="radio"].styled-radio {
         position: absolute;
         right: 1px;
         top: 1px;
-
         display: inline-block;
         padding: 5px 10px;
         white-space: normal;
@@ -1450,10 +1484,11 @@ input {
         box-shadow: 0 7px 14px rgba(0, 0, 0, 0.18), 0 5px 5px rgba(0, 0, 0, 0.12);
     }
 
-.btns.small {
-    padding: 6px 12px !important;
-    font-size: 0.8rem;
-}
+    .btns.small {
+        padding: 6px 12px !important;
+        font-size: 0.8rem;
+    }
+
     .btns.btn-submit {
         background-color: #88bd26;
         border: 1px solid #88bd26;
