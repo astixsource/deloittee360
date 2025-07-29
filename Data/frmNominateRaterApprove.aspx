@@ -354,9 +354,9 @@
                     valueField: 'Department'
                 },
                 {
-                    name: 'Designation',
+                    name: 'Grade',
                     width: '130px',
-                    valueField: 'Designation'
+                    valueField: 'Grade'
                 }
                 ],
                 minLength: 1,
@@ -428,7 +428,7 @@
                         str += "<td>" + ui.item.EMailID + "</td>";
                         str += "<td>" + ui.item.Business + "</td>";
                         str += "<td>" + ui.item.Department + "</td>";
-                        str += "<td>" + ui.item.Designation + "</td>";
+                        str += "<td>" + ui.item.Grade + "</td>";
                         str += "<td>Initial draft</td>";
                         str += "<td class='text-center'><i class='fa fa-pencil' onclick='fnEditCategory(this)' title='click to edit' style='cursor:pointer'></i> <i class='fa fa-trash-o' onclick='fnRemoverow(this)' style='color:red;cursor:pointer;margin-left:5px' title='click to delete'></i></td>";
                         str += "</tr>";
@@ -978,7 +978,7 @@
                                     </th>
                                     <th style="width: 9%">Department
                                     </th>
-                                    <th style="width: 10.5%">Designation
+                                    <th style="width: 10.5%">Grade
                                     </th>
                                     <th style="width: 14%">Status
                                     </th>
@@ -1051,7 +1051,7 @@
                     <input type="text" class="form-control form-control-sm" /></td>
             </tr>
             <tr>
-                <td>Designation : </td>
+                <td>Grade : </td>
                 <td>:</td>
                 <td>
                     <input type="text" class="form-control form-control-sm" /></td>

@@ -207,9 +207,14 @@ Partial Class Login
                     HttpContext.Current.Session("emailid") = drdr.Item("EmailID")
                 'HttpContext.Current.Session("function") = Convert.ToString(drdr.Item("Function"))
                 HttpContext.Current.Session("function") = Convert.ToString(drdr.Item("Business"))
+
                 HttpContext.Current.Session("Department") = Convert.ToString(drdr.Item("Department"))
+
                 'HttpContext.Current.Session("Desgination") = Convert.ToString(drdr.Item("Desgination"))
                 HttpContext.Current.Session("Desgination") = Convert.ToString(drdr.Item("Grade"))
+
+
+
                 HttpContext.Current.Session("RM") = Convert.ToString(drdr.Item("ReportingManager"))
                 HttpContext.Current.Session("LevelId") = Convert.ToString(drdr.Item("LevelId"))
                 HttpContext.Current.Session("IsNominationSubmissionEnable") = Convert.ToString(drdr.Item("IsNominationSubmissionEnable"))

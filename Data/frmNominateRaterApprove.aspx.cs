@@ -228,7 +228,7 @@ public partial class frmNominateRaterApprove : System.Web.UI.Page
                                     sb.Append("<td style='word-break:break-all'>" + dt.Rows[i]["EMailID"].ToString() + "</td>");
                                     sb.Append("<td>" + dt.Rows[i]["Business"].ToString() + "</td>");
                                     sb.Append("<td  style='word-break:break-all'>" + dt.Rows[i]["Department"].ToString() + "</td>");
-                                    sb.Append("<td  style='word-break:break-all'>" + dt.Rows[i]["Designation"].ToString() + "</td>");
+                                    sb.Append("<td  style='word-break:break-all'>" + dt.Rows[i]["Grade"].ToString() + "</td>");
                                     sb.Append("<td>" + dt.Rows[i]["Status"].ToString() + "</td>");
                                     if (dt.Rows[i]["flgApproved"].ToString() == "0" && dt.Rows[i]["RltshpID"].ToString() != "4" && dt.Rows[i]["RltshpID"].ToString() != "1")
                                     {
