@@ -246,7 +246,7 @@ Public Class E360WebService
                     strTable &= str & "</td>"
 
                     strTable &= "<td align='left'>"
-                    str = drdr.Item("Function")
+                    str = drdr.Item("Business")
                     strTable &= str & "</td>"
 
                     strTable &= "<td align='left'>"
@@ -254,7 +254,7 @@ Public Class E360WebService
                     strTable &= str & "</td>"
 
                     strTable &= "<td align='left'>"
-                    str = drdr.Item("Designation")
+                    str = drdr.Item("Grade")
                     strTable &= str & "</td>"
 
 

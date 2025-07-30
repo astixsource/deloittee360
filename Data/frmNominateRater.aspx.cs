@@ -357,15 +357,15 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
             strBody.Append("<p>The 360-Degree Feedback application is designed to enhance overall feedback and development processes within the organisation. This tool focuses on offering a comprehensive view of an individual's competencies core to the Deloitte Future Leaders Framework and provides feedback from various sources.</p>");
             // strBody.Append("<p>We request your attention to review and approve the 360-Degree Feedback raters' list selected by " + PFName + ". The deadline for approval is <strong>20-Feb-2025</strong>.</p>");
             strBody.Append("<p>We request your attention to review and approve the 360-Degree Feedback nominations raised by " + PFName + ". The deadline for approval is " + DeadLineDate + ".</p>");
-            strBody.Append("<p>If not approved by this date, the participant list will be auto-approved and proceed to the next step.</p>");
-            strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through the following URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
+            strBody.Append("<p>If not approved by this date, the nominee list will be auto-approved and proceed to the next step. </p>");
+            strBody.Append("<p>To view and approve the list, you can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
             //strBody.Append("<p>If not approved by this date, the participant list will be auto-approved and proceed to the next step. You can access and approve this document at the following URL : <a href=" + WebSitePath + ">" + WebSitePath + "</a></p>");
             //strBody.Append("<p><b>Login ID: " + ManagerName + "</b></p>");
             //strBody.Append("<p><b>Password: " + ManagerPassword + "</b></p>");
 
             strBody.Append("<p>The way forward involves triggering an assessment process, where the selected list of participants will provide feedback through this tool.</p>");
             //strBody.Append("<p>If you have any questions, please connect with PED Matters team.</p>");
-            strBody.Append("<p>If you have any questions, please connect with Partner and ED Matters team, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
+            strBody.Append("<p>In case of any query kindly connect with your <strong>talent advisor</strong> or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
             // strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
 
             //strBody.Append("<p>Regards,</p>");
