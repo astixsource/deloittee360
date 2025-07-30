@@ -877,12 +877,12 @@
                                         <img src="../Images/pending-submis.svg" style="width: 20px; height: 20px;" /></td>
                                     <td><strong>Pending submission</strong> - Team Member is yet to raise the 360 nominations</td>
                                 </tr>
-                                <tr>
-                                    <%--<td><i class="fa fa-circle" aria-hidden="true" style="color: #43B02A; font-size: 15pt"></i></td>--%>
+                               <%-- <tr>
+                                    
                                     <td>
                                         <img src="../Images/submission.svg" style="width: 20px; height: 20px;" /></td>
                                     <td><b>Submitted</b> - Team member has initiated the 360-feedback form</td>
-                                </tr>
+                                </tr>--%>
                                 <tr>
                                     <%--<td><i class="fa fa-refresh" aria-hidden="true" style="background-color: #0076A8; color: #fff; padding: 2px;"></i></td>--%>
                                     <td>
