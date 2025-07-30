@@ -912,11 +912,11 @@
             <div style="font-size: 10pt" id="divContent_1" runat="server" attr="SMD">
                 <p>>For each category, please ensure you meet the minimum nomination requirements as mentioned below:</p>
                 <ul>
-                    <li><strong>Direct reports</strong> (minimum. 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
-                    <li><strong>Peers</strong> (Min. 2) &ndash; would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
+                    <li><strong>Direct reports</strong> (minimum-2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
+                    <li><strong>Peers</strong> (minimum-2) &ndash; would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
                     <li><strong>Review partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
                     <li><strong>Reporting manager (RM)/Coach</strong> &ndash; Auto-added, with an option to add more raters</li>
-                    <li><strong>Other stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M,B&amp;C, Talent, RBP (Risk and Brand Protection), Admin, IT, etc.</li>
+                    <li><strong>Other stakeholders</strong> (minimum-2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M,B&amp;C, Talent, RBP (Risk and Brand Protection), Admin, IT, etc.</li>
                     <li>For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with a valid Deloitte domain (e.g., deloitte.com, deloitte.co.uk)</li>
                   </ul>
                 <p>To help ensure a holistic feedback and maintains confidentiality, you will only be able to submit your nominations if these requirements are met.</p>
@@ -926,11 +926,11 @@
             <div style="font-size: 10pt" id="divContent_2" attr="PED" runat="server">
                 <p>For each category, please ensure you meet the minimum nomination requirements as mentioned below:</p>
                 <ul>
-                    <li><strong>Direct reports</strong> (minimum 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
-                    <li><strong>Peers</strong> (Min. 2) &ndash; would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
+                    <li><strong>Direct reports</strong> (minimum-2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
+                    <li><strong>Peers</strong> (minimum-2) &ndash; would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
                     <li><strong>Review partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
                     <li><strong>Career Development Advisor (CDA)</strong> &ndash; Auto-added</li>
-                    <li><strong>Other stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M, B&amp;C, Talent, RBP (Risk and Brand Protection), Admin, IT, etc.</li>
+                    <li><strong>Other stakeholders</strong> (minimum-2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M, B&amp;C, Talent, RBP (Risk and Brand Protection), Admin, IT, etc.</li>
                    <li>For stakeholders outside the list, you may add another Deloitte stakeholder. Please ensure their email must end with a valid Deloitte domain (e.g., deloitte.com, deloitte.co.uk)</li>
  </ul>
                 <p>To help ensure holistic feedback and maintains confidentiality, you will only be able to submit your nominations if these requirements are met.</p>

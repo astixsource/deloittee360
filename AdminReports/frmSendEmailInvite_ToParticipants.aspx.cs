@@ -325,7 +325,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             strBody.Append("<p>Dear " + ParticipantName + ",</p>");
             strBody.Append("<p>The 360-Degree Feedback application is designed to enhance overall feedback and development processes within the organisation. This tool focuses on offering a comprehensive view of an individual's competencies core to the Deloitte Future Leaders Framework and provides feedback from various sources.</p>");
             
-            strBody.Append("<p>Please note that your 360 - Degree Feedback Form 2024-25 is now available. To know more about the survey, you can access the <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Pages/360-Degree-Framework-Toolkit.aspx'>360 Feedback Toolkit</a></p>");
+            strBody.Append("<p>Please note that your 360-Degree Feedback Form 2024–25 is now available. To know more about the survey, you can access the <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Pages/360-Degree-Framework-Toolkit.aspx'>360 Feedback Toolkit</a></p>");
 
             // //< a href = " + WebSitePath + " > " + WebSitePath + " </ a >
             // strBody.Append("<p><b>Login ID: " + ParticipantUserName + "</b></p>");
@@ -334,9 +334,10 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
 
             strBody.Append("<p>We request you to:</p>");
             strBody.Append("<p>1. Initiate selection of your raters for 360-Degree Feedback form by " + DeadlineDate + "</p>");
-            strBody.Append("<p>2. Ensure your Reporting Manager/Coach/CDA approves the nominations</p>");
-            strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a>. The way forward involves triggering a process, where the selected list of participants will provide feedback through this tool.</p>");
-            strBody.Append("<p>If you have any questions, please connect with Partner and ED Matters team, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
+            strBody.Append("<p>2. Ensure your Reporting Manager/Coach approves the nominations</p>");
+            strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a>.</p>");
+            strBody.Append("<p>The way forward involves triggering a process, where the selected list of participants will provide feedback through this tool.</p>");
+            strBody.Append("<p>In case of any query kindly connect with your talent advisor or raise a ticket on  <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
          
           //  strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
           

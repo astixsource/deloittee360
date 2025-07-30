@@ -26,11 +26,11 @@
                 <ul>
                     <li>You will <strong>nominate raters</strong> across five categories:
                         <ul>
-                            <li><strong>Direct reports</strong> (minimum 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
-                            <li><strong>Peers</strong> (min. 2) &ndash; Would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
+                            <li><strong>Direct reports</strong> (minimum-2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
+                            <li><strong>Peers</strong> (minimum-2) &ndash; Would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
                             <li><strong>Review partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.</li>
                             <li><strong>Reporting manager (RM)/Coach</strong> &ndash; Auto-added, with an option to add more raters</li>
-                            <li><strong>Other stakeholders</strong> (Min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M,B&amp;C, Talent, RRO, Admin, IT, etc.</li>
+                            <li><strong>Other stakeholders</strong> (minimum-2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M,B&amp;C, Talent, RBP(Risk and Brand Protection), Admin, IT, etc.</li>
                         </ul>
                     </li>
                     <li>A <strong>minimum of two raters per category</strong> ensures confidentiality.</li>
@@ -55,11 +55,11 @@
                 <ul>
                     <li>You will <strong>nominate raters</strong> across five categories:
                     <ul>
-                        <li><strong>Direct reports</strong> (minimum 2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
-                        <li><strong>Peers</strong> (min. 2) &ndash; Would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
+                        <li><strong>Direct reports</strong> (minimum-2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
+                        <li><strong>Peers</strong> (minimum-2) &ndash; Would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
                         <li><strong>Career Development Advisor (CDA)</strong> &ndash; Auto-added</li>
                         <li><strong>Review partner</strong> &ndash; can be your reporting partner, or engagement partner. You will have an option to add multiple partners in this category.&nbsp;</li>
-                        <li><strong>Other stakeholders</strong> (min. 2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M, B&C, Talent, RRO, Admin, IT, etc.  </li>
+                        <li><strong>Other stakeholders</strong> (minimum-2) &ndash; would include the professionals who cannot be categorised under any other relationship categories available. E.g.- People part of teams beyond your core work area, like M, B&C, Talent, RBP(Risk and Brand Protection), Admin, IT, etc.  </li>
                     </ul></li>
                     <li>A <strong>minimum of two raters per category</strong> ensures confidentiality.</li>
                     <li>Once submitted, your <strong>CDA will review and approve</strong> your nominations.</li>
