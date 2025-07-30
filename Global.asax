@@ -32,23 +32,16 @@
             //string _clientSecret = secretClient.GetSecret("DeloitteProdDBConnection").Value.Value;
             // Application["_clientSecret"] = _clientSecret;
 
-            // Application["SSO_clientSecret"] = secretClient.GetSecret("Secret-SSO-Deloitte").Value.Value;
+             Application["SSO_clientSecret"] = secretClient.GetSecret("Secret-SSO-Deloitte").Value.Value;
             ///Application["_skey"] = _skey;// secretClient.GetSecret("Secret-skey-Deloitte").Value.Value;
-            Application["AzureMailconnectionString"] = "eY/ca2ZawDDXmJx1KvbW0FXw5CbMmucrsW+mjBqE9urodCYTNJeiBeRq3vjX/s7cVlCymgjphLEPbeF9IJRSuw==";// secretClient.GetSecret("Secret-AzureMailconnectionString-Deloitte").Value.Value;
+            Application["AzureMailconnectionString"] = secretClient.GetSecret("Secret-AzureMailconnectionString-Deloitte").Value.Value;
                                                                                                                                                   // Retrieve the secrets
 
-            //string _dbUserName = secretClient.GetSecret("Secret-PRODDB-Username").Value.Value;
-            //string _dbPassword = secretClient.GetSecret("Secret-PRODDB-Password").Value.Value;
+            string _dbUserName = secretClient.GetSecret("Secret-PRODDB-Username").Value.Value;
+            string _dbPassword = secretClient.GetSecret("Secret-PRODDB-Password").Value.Value;
 
 
-            //// Retrieve the secrets For Live
-            //string _dbUserName = "delsqladmin";
-            //string _dbPassword = "FADF312$3AF#@4ff";
-
-
-            // Retrieve the secrets For Dev
-            string _dbUserName = "sqladmin";
-            string _dbPassword = "SAFF@31324FASD$";
+            
 
 
             // Construct the SQL connection string
