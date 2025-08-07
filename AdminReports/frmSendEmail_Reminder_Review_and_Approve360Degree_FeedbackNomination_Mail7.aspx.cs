@@ -60,7 +60,7 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
         ddlCycle.DataValueField = "CycleId";
         ddlCycle.DataBind();
     }
- 
+
 
     //Get Scheme And Product Detail Bases on Store
     [System.Web.Services.WebMethod()]
@@ -108,11 +108,11 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
                 SkipColumn[8] = "ManagerEmpCode";
                 SkipColumn[9] = "ManagerUserName";
                 SkipColumn[10] = "ManagerPassword";
-                
-                    
-                    
-                    
-                    
+
+
+
+
+
 
 
 
@@ -219,7 +219,7 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
             {
                 dtDataSaving.Rows[0].Delete();
             }
-          //  SqlConnection Scon = new SqlConnection(ConfigurationManager.ConnectionStrings["strConn"].ConnectionString);
+            //  SqlConnection Scon = new SqlConnection(ConfigurationManager.ConnectionStrings["strConn"].ConnectionString);
 
             string strCon = HttpContext.Current.Application["DbConnectionString"].ToString();
             SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]);
@@ -230,7 +230,7 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
             {
                 try
                 {
-          
+
                     string ManagerId = drow["ManagerId"].ToString();
                     string ManagerName = drow["ManagerName"].ToString();
                     string ManagerEmpCode = drow["ManagerEmpCode"].ToString();
@@ -279,7 +279,7 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
         {
             string MailTo = ManagerEMailID;
             //string MailTo = "abhishek@astix.in";
-           
+
             string WebSitePath = ConfigurationManager.AppSettings["PhysicalPath"].ToString();
             string flgActualUser = ConfigurationManager.AppSettings["flgActualUser"].ToString();
             string fromMail = ConfigurationManager.AppSettings["FromAddress"].ToString();
@@ -373,16 +373,12 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
 
 
             strBody.Append("<p>If not approved by this date, the nominee list will be auto-approved and proceed to the next step. To view and approve the list, you can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
-            //strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through the following URL: (platform URL will come later)</p>");
-            //strBody.Append("<p>If not approved by this date, the participant list will be auto-approved and proceed to the next step. You can access and approve this document at the following URL : <a href=" + WebSitePath + ">" + WebSitePath + "</a></p>");
+
             //strBody.Append("<p><b>Login ID: " + ManagerName + "</b></p>");
             //strBody.Append("<p><b>Password: " + ManagerPassword + "</b></p>");
 
-            strBody.Append("<p>If you have any questions, please connect with Partner and ED Matters team.</p>");
-            //  strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
+            strBody.Append("<p>In case of any query kindly connect with your talent advisor or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
 
-            //strBody.Append("<p>Regards,</p>");
-            //strBody.Append("<p>Talent team</p>");
 
             strBody.Append("<p>Note: This is a system-generated email. Please do not reply to this ID.</p>");
 
@@ -425,7 +421,7 @@ public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
     }
 
 
-   
+
 
     public static void fnUpdateMailSp(string SPName, string EmpNodeID, string FlgMailState, string flgUpdate, string UserType, SqlConnection Scon1)
     {

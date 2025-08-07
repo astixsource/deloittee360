@@ -358,7 +358,7 @@
     <div id="divPopup" style="display: none;"></div>
     <asp:HiddenField ID="hdnLoginId" runat="server" Value="0" />
     <div id="dvDialog" style="display: none"></div>
-
+    
     <div class="loader_bg" style="display: none" id="dvFadeForProcessing">
         <div class="loader"></div>
     </div>

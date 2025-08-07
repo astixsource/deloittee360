@@ -29,7 +29,7 @@ public partial class AdminReports_frmNominationStatusReport : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-
+            hdnLoginId.Value = Session["LoginId"].ToString();
             ddlCycle.Items.Insert(0, "Select");
             fnFillCycle();
             fnFillStatus();
@@ -135,9 +135,13 @@ public partial class AdminReports_frmNominationStatusReport : System.Web.UI.Page
                     sbTypeSearch.Append(dt.Rows[i][j].ToString() + " ");
                     sb.Append("<td style='text-align: " + sbAlign.ToString() + "; '>" + dt.Rows[i][j].ToString() + "</td>");
                 }
+            if (dt.Rows[i]["StatusId"].ToString() == "2")
+            {
+                sb.Append("<td style='width:12%'><a href = '###' onclick='fnViewNominationedRater(\"" + dt.Rows[i]["Participant Name"].ToString().Trim() + "\"," + dt.Rows[i]["ApseNodeId"].ToString() + ", this);' style='margin-left: 20px;'>View Nomination</a></td>");
+            }
             if (dt.Rows[i]["StatusId"].ToString() == "3")
             {
-                sb.Append("<td style='text-align: center;'><a href = '###'  onclick='fnReOpen(" + dt.Rows[i]["ApseNodeId"].ToString() + ", this);'>Re-open</a></td>");
+                sb.Append("<td style='width:12%'><a href = '###' onclick='fnReOpen(\"" + dt.Rows[i]["Participant Name"].ToString().Trim() + "\"," + dt.Rows[i]["ApseNodeId"].ToString() + "," + dt.Rows[i]["flgApproved"].ToString() + "," + dt.Rows[i]["flgFeedbackStarted"].ToString() + ", this);' style='margin-left: 20px;'>Re-open</a></br><a href = '###'  onclick='fnViewNominationedRater(\"" + dt.Rows[i]["Participant Name"].ToString().Trim() + "\"," + dt.Rows[i]["ApseNodeId"].ToString() + ", this);' style='margin-left: 20px;'>View Nomination</a></td>");
             }
             else
             {
@@ -265,9 +269,84 @@ public partial class AdminReports_frmNominationStatusReport : System.Web.UI.Page
 
 
     [System.Web.Services.WebMethod()]
-    public static string fnReOpen_Result(int ApseNodeId)
+    public static string fnReOpen_Result(int ApseNodeId, int CycleID, int LoginID)
     {
-        string str = "";
+        string jsonData = "";
+        try
+        {
+
+            using (SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]))
+            {
+                using (SqlCommand command = new SqlCommand("spManage_ReOpenNominationSubmission", Scon))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.CommandTimeout = 0;
+                    command.Parameters.AddWithValue("@ApseNodeId", ApseNodeId);
+                    command.Parameters.AddWithValue("@CycleId", CycleID);
+                    command.Parameters.AddWithValue("@LoginId", LoginID);
+                    Scon.Open();
+                    command.ExecuteNonQuery();
+                    Scon.Close();
+                    jsonData = "1|";
+                }
+
+            }
+        }
+        catch (Exception e)
+        {
+            jsonData = "2|" + e.Message;
+        }
+
+        return jsonData;
+    }
+
+    [System.Web.Services.WebMethod()]
+    public static string fnViewNominationedRaterDetail(int ApseNodeId, int CycleID)
+    {
+        string lbl = "Rpt";
+        SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]);
+        //SqlConnection Scon = new SqlConnection(ConfigurationManager.AppSettings["strConn"]);
+        SqlCommand Scmd = new SqlCommand();
+        Scmd.Connection = Scon;
+        Scmd.CommandText = "spGetListOfNominatedRaters";//"[SpVanGetCoveragedetails]";
+        Scmd.Parameters.AddWithValue("@ApseNodeId", ApseNodeId);
+        Scmd.Parameters.AddWithValue("@CycleId", CycleID);
+        Scmd.CommandType = CommandType.StoredProcedure;
+        Scmd.CommandTimeout = 0;
+        SqlDataAdapter Sdap = new SqlDataAdapter(Scmd);
+        DataSet Ds = new DataSet();
+        Sdap.Fill(Ds);
+
+        StringBuilder str = new StringBuilder();
+        if (Ds.Tables[0].Rows.Count > 0)
+        {
+            str.Append("<table id='tbl" + lbl + "' class='table table-bordered table-sm tbl-" + lbl + "'>");
+            // str.Append("<table cellpadding='0' cellspacing='0' style='width:100%; border-bottom:1px solid gray;border-collapse:collapse;' id='tblBasicDetailsInfoDetails' class='table-bordered' ><thead>");
+            str.Append("<thead>");
+            str.Append("<tr>");
+            str.Append("<th style='width:2%; background: #88bd26;color: #F4F4F4;'>Sr.No.</th>");
+            str.Append("<th style='width:7%; background: #88bd26;color: #F4F4F4;'>Rater Name</th>");
+            str.Append("<th style='width:7%; background: #88bd26;color: #F4F4F4;'>Rater Email ID</th>");
+            str.Append("<th style='width:7%; background: #88bd26;color: #F4F4F4;'>Relationship</th>");
+            str.Append("<th style='width:7%; background: #88bd26;color: #F4F4F4;'>Status</th>");
+
+            str.Append("</tr></thead><tbody>");
+
+            for (int i = 0; i < Ds.Tables[0].Rows.Count; i++)
+            {
+                str.Append("<tr> ");
+                str.Append("<td style='width:2%;text-align:center;'>" + (i + 1) + "</td>");
+
+                str.Append("<td style='width:7%;text-align:left;'>" + Ds.Tables[0].Rows[i]["ApsrName"].ToString() + "</td>");
+                str.Append("<td style='width:7%;text-align:left;'>" + Ds.Tables[0].Rows[i]["Email"].ToString() + "</td>");
+                str.Append("<td style='width:7%;text-align:left;'>" + Ds.Tables[0].Rows[i]["Relationship"].ToString() + "</td>");
+                str.Append("<td style='width:7%;text-align:left;'>" + Ds.Tables[0].Rows[i]["Status"].ToString() + "</td>");
+
+
+                str.Append("</tr>");
+            }
+            str.Append("</tbody></table>");
+        }
 
         return str.ToString();
     }

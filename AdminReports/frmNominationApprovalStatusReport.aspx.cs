@@ -29,7 +29,7 @@ public partial class frmNominationApprovalStatusReport : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-
+            hdnLoginId.Value = Session["LoginId"].ToString();
             ddlCycle.Items.Insert(0, "Select");
             fnFillCycle();
             fnFillStatus();
@@ -76,7 +76,7 @@ public partial class frmNominationApprovalStatusReport : System.Web.UI.Page
             SqlCommand Scmd = new SqlCommand();
             Scmd.Connection = Scon;
             Scmd.CommandText = "[spRptGetNominationApprovalStatus]";
-            Scmd.Parameters.AddWithValue("@CycleId", 1);
+            Scmd.Parameters.AddWithValue("@CycleId", CycleId);
             Scmd.Parameters.AddWithValue("@StatusId", StatusID);
             Scmd.CommandType = CommandType.StoredProcedure;
             Scmd.CommandTimeout = 0;
@@ -362,9 +362,15 @@ public partial class frmNominationApprovalStatusReport : System.Web.UI.Page
 
                 str.Append("</tr>");
             }
-            str.Append("</tbody></table>");
+            
         }
-
+        else
+        {
+            str.Append("<tr> ");
+            str.Append("<td style='width:7%;text-align:left;'>No record found for this rater.</td>");
+            str.Append("</tr>");
+        }
+        str.Append("</tbody></table>");
         return str.ToString();
     }
 }

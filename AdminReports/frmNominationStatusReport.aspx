@@ -19,6 +19,7 @@
         function fnGetDetails() {
             var CycleID = $("#MainContent_ddlCycle").val();
             var StatusID = $("#MainContent_ddlStatus").val();
+            var LoginId = $("#MainContent_hdnLoginId").val();
 
             $("#dvFadeForProcessing").show();
             $("#loader").css("display", "block");
@@ -84,12 +85,29 @@
             }
         }
 
-        function fnReOpen(ApseNodeId, ctrl) {
-            
-            var str = "<div>Are you sure you want to Reopen this rater?</div>";
+        function fnReOpen(ParticipantName, ApseNodeId, flgApproved, flgFeedbackStarted, ctrl) {
+            //alert("Hi");
+            //alert(flgApproved)
+
+            var LoginId = $("#MainContent_hdnLoginId").val();
+            var CycleID = $("#MainContent_ddlCycle").val();
+
+          
+            var str = "";
+            if (flgApproved == 1 && flgFeedbackStarted == 1) {
+                str = "<div>Nominations are approved already & atleast 1 rater has started providing feedback also. Are you sure for moving the nominations to editable stage?</div>";
+            }
+            else if (flgApproved == 1 && flgFeedbackStarted == 0) {
+                str = "<div>Nominations are approved already. Are you sure for moving the nominations to editable stage?</div>";
+            }
+            if (flgApproved == 0) {
+                str = "<div>Are you sure for moving the nominations to editable stage?</div>";
+            }
+
+
             $("#dvDialog").html(str);
-                $("#dvDialog").dialog({
-                title: "Confirmation :",
+            $("#dvDialog").dialog({
+                title: "Reset Nomination for : " + ParticipantName,
                 modal: true,
                 width: "300",
                 height: "auto",
@@ -105,16 +123,16 @@
                         text: "Yes",
                         class: "btns btn-submit",
                         click: function () {
-                           
+
                             $("#dvFadeForProcessing").show();
                             $(this).dialog('close');
-                            PageMethods.fnReOpen_Result(ApseNodeId, function (result) {
+                            PageMethods.fnReOpen_Result(ApseNodeId, CycleID, LoginId, function (result) {
+                                fnGetDetails();
                                 $("#dvFadeForProcessing").hide();
                                 if (result.split("|")[0] == 2) {
                                     fnShowmsg("Error:" + result.split("|")[1]);
                                     return false;
                                 }
-                               
 
                             }, function (result) {
                                 $("#dvFadeForProcessing").hide();
@@ -160,6 +178,75 @@
                     }
                 ]
             })
+        }
+
+        function fnViewNominationedRater(ParticipantName, ApseNodeId, ctrl) {
+            var LoginId = $("#MainContent_hdnLoginId").val();
+            var CycleID = $("#MainContent_ddlCycle").val();
+            PageMethods.fnViewNominationedRaterDetail(ApseNodeId, CycleID, GetNominationedRaterDetailSuccess, fnFailed, ParticipantName);
+
+        }
+        function GetNominationedRaterDetailSuccess(result, ParticipantName) {
+            //alert(result);
+            //  $("#divtblReport").css("display", "none");
+            $("#dvNominationedRaterDetail").css("display", "block");
+
+            $("#dvNominationedRaterDetail").html(result);
+
+            $("#loader").css("display", "none");
+            $("#fade").css("display", "none");
+
+            var height = 0; var width = 0;
+            var body = window.document.body;
+            if (window.innerHeight) {
+                height = window.innerHeight;
+                width = window.innerWidth;
+            } else if (body.parentElement.clientHeight) {
+                height = body.parentElement.clientHeight;
+                width = body.parentElement.clientWidth;
+            } else if (body && body.clientHeight) {
+                height = body.clientHeight;
+                width = body.clientWidth;
+            }
+
+            //$('#tblBasicDetailsInfoDetails').DataTable({
+            //    "ordering": false,
+            //    "paging": false,
+            //    "pagingType": "full_numbers",
+            //    "bLengthChange": false,
+            //    "iDisplayLength": parseInt((height - 280) / 25),
+            //    "searching": true
+            //});
+
+
+
+            $("#dvNominationedRaterDetail").dialog({
+                title: "Nominationed Rater : " + ParticipantName,
+                height: "650",
+                width: "70%",
+                modal: true,
+                show: {
+                    effect: "blind",
+                    duration: 100
+                },
+                hide: {
+                    duration: 100
+                },
+                beforeClose: function (event, ui) {
+                    $("#dvNominationedRaterDetail").html('');
+                    $("#loader").css("display", "none");
+                    $("#fade_dark").css("display", "none");
+                }
+            });
+
+
+
+        }
+
+        function fnFailed(result) {
+            alert(result.get_message());
+            $("#loader").css("display", "none");
+            $("#fade").css("display", "none");
         }
         
     </script>
@@ -267,8 +354,11 @@
 
     <div id="dvContainer" style="width: 100%; height:570px; overflow-y:scroll;overflow-x:hidden;"></div>
 
+        <div id="dvNominationedRaterDetail" style="display: none; font-size: 8.5pt" title="Nominationed Rater">
+    </div>
 
     <div id="divPopup" style="display: none;"></div>
+    <asp:HiddenField ID="hdnLoginId" runat="server" Value="0" />
     <div id="dvDialog" style="display: none"></div>
         <div class="loader_bg" style="display: none" id="dvFadeForProcessing">
         <div class="loader"></div>
