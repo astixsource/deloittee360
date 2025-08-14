@@ -208,9 +208,9 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
 
                                 sb.Append("<td>" + dt.Rows[i]["Rater Name"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Rater Email"].ToString() + "</td>");
-                                sb.Append("<td>" + dt.Rows[i]["Function"].ToString() + "</td>");
+                                sb.Append("<td>" + dt.Rows[i]["Business"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Department"].ToString() + "</td>");
-                                sb.Append("<td>" + dt.Rows[i]["Designation"].ToString() + "</td>");
+                                sb.Append("<td>" + dt.Rows[i]["Grade"].ToString() + "</td>");
                                 sb.Append("<td>" + dt.Rows[i]["Survey Status"].ToString() + "</td>");
                                 sb.Append("<td class='text-center'><i class='fa fa-pencil' onclick='fnEditCategory(this)' title='click to edit' style='cursor:pointer'></i>  <i class='fa fa-trash-o' onclick='fnRemoveFromDB(this)' style='color:red;cursor:pointer;margin-left:5px' title='click to delete'></i></td>");
                                 sb.Append("</tr>");

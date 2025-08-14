@@ -910,7 +910,7 @@
             </div>
             <h6><b>What you should know before selecting your raters:</b></h6>
             <div style="font-size: 10pt" id="divContent_1" runat="server" attr="SMD">
-                <p>>For each category, please ensure you meet the minimum nomination requirements as mentioned below:</p>
+                <p>For each category, please ensure you meet the minimum nomination requirements as mentioned below:</p>
                 <ul>
                     <li><strong>Direct reports</strong> (minimum-2) &ndash; would include your juniors with whom you have worked directly in last 12-18 months.</li>
                     <li><strong>Peers</strong> (minimum-2) &ndash; would include the professional at the same career level as yours. These can be people from your work group or other service lines.</li>
