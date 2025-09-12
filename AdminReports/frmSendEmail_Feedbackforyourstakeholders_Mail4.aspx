@@ -153,8 +153,9 @@
                 var RaterUserName = $(this).closest("tr").attr("RaterUserName");
                 var RaterPassword = $(this).closest("tr").attr("RaterPassword");
                 var DeadlineDate = $(this).closest("tr").attr("DeadlineDate");
+                var flgExternalUser = $(this).closest("tr").attr("flgExternalUser");
 
-                ArrDataSaving.push({ RaterId: RaterId, RaterName: RaterName, RaterEMailId: RaterEMailId, MailStatus: '', RaterUserName: RaterUserName, RaterPassword: RaterPassword, DeadlineDate: DeadlineDate });
+                ArrDataSaving.push({ RaterId: RaterId, RaterName: RaterName, RaterEMailId: RaterEMailId, MailStatus: '', RaterUserName: RaterUserName, RaterPassword: RaterPassword, DeadlineDate: DeadlineDate, flgExternalUser: flgExternalUser });
             });
 
 

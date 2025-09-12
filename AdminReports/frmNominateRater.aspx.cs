@@ -325,7 +325,7 @@ public partial class Data_frmNominateRater : System.Web.UI.Page
                         using (DataTable dt = new DataTable())
                         {
                             da.Fill(dt);
-                            //fnSendMailToUsers(Convert.ToString(dt.Rows[0][0]), Convert.ToString(dt.Rows[0]["ParticipantName"]), Convert.ToString(dt.Rows[0][1]), Convert.ToString(dt.Rows[0]["DeadLineDate"]));
+                            fnSendMailToUsers(Convert.ToString(dt.Rows[0][0]), Convert.ToString(dt.Rows[0]["ParticipantName"]), Convert.ToString(dt.Rows[0][1]), Convert.ToString(dt.Rows[0]["DeadLineDate"]));
                         }
                     }
                     jsonData = "1|";

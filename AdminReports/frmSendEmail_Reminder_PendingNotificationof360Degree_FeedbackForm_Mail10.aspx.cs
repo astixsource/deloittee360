@@ -307,7 +307,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             }
 
 
-            msg.Subject = "Reminder: Pending Notification of 360-Degree Feedback Form - Participants";
+            msg.Subject = "Reminder: Pending Notification of 360-Degree Feedback Form-Self-Survey";
 
 
 
@@ -316,7 +316,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
 
             strBody.Append("<p>Dear " + ParticipantName + ",</p>");
             strBody.Append("<p>This is a reminder that  your 360-Degree Feedback forms is pending your self-survey.</p>");
-            strBody.Append("<p>Please complete the same by " + DeadlineDate +". Your active participation is highly appreciated.</p>");
+            strBody.Append("<p>Please complete the same by " + DeadlineDate + ".Your active participation is highly appreciated.</p>");
             strBody.Append("<p>Kindly note: if you do not complete your self-survey, your 360 Feedback report will not be generated.</p>");
 
             //strBody.Append("<p>Please complete the same by " + DeadlineDate + ". Your active participation is highly appreciated.</p>");
@@ -324,9 +324,9 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             //strBody.Append("<p><b>Login ID: " + ParticipantUserName + "</b></p>");
             //strBody.Append("<p><b>Password: " + ParticipantPassword + "</b></p>");
 
-            strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
+            strBody.Append("<p>You can log in to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
 
-            strBody.Append("<p>If you have any questions, please connect with Partner and ED Matters team, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
+            strBody.Append("<p>In case of any query kindly connect with your talent advisor or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
             // strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
 
             //strBody.Append("<p>Regards,</p>");
@@ -363,7 +363,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
 
 
 
-            var emailSendOperation = emailClient.Send(wait: WaitUntil.Completed, message: emailMessage);
+            var emailSendOperation = emailClient.Send(wait: WaitUntil.Started, message: emailMessage);
         }
         catch (Exception ex)
         {

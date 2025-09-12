@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -25,9 +25,11 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
     string strConOLD = System.Configuration.ConfigurationManager.AppSettings["strConn"];
     string strCon = HttpContext.Current.Application["DbConnectionString"].ToString();
 
+ 
     protected void Page_Load(object sender, EventArgs e)
     {
-         if (Session["LoginID"] == null)
+
+        if (Session["LoginID"] == null)
         {
             Response.Redirect("~/Login.aspx");
         }
@@ -40,6 +42,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
                 ddlCycle.Items.Insert(0, "Select");
                 fnFillCycle();
             }
+
         }
         //Panel panelLogout;
         //panelLogout = (Panel)Page.Master.FindControl("panelLogout");
@@ -60,7 +63,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
         ddlCycle.DataValueField = "CycleId";
         ddlCycle.DataBind();
     }
- 
+
 
     //Get Scheme And Product Detail Bases on Store
     [System.Web.Services.WebMethod()]
@@ -83,12 +86,10 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             List<SqlParameter> sp = new List<SqlParameter>()
               {
                    new SqlParameter("@CycleId", CycleId),
-                   new SqlParameter("@MailType", 3), //  frmSendEmail_KickOffNotice_Mail3 // Mail Type 3
+                   new SqlParameter("@MailType", 12), //  Reminder: Initiate Your 360-Degree Feedback Form | Last day to submit nominations // Mail Type 12
               };
             Ds = clsDbCommand.ExecuteQueryReturnDataSet(storedProcName, con, sp);
 
-
-            HttpContext.Current.Session["dtRelationshipDetail"] = Ds.Tables[1];
 
             StringBuilder str = new StringBuilder();
             StringBuilder str1 = new StringBuilder();
@@ -104,7 +105,6 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
                 SkipColumn[4] = "ParticipantPassword";
                 SkipColumn[5] = "DeadlineDate";
                 SkipColumn[6] = "ParticipantEmpCode";
-                
 
 
 
@@ -199,7 +199,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             {
                 dtDataSaving.Rows[0].Delete();
             }
-          //  SqlConnection Scon = new SqlConnection(ConfigurationManager.ConnectionStrings["strConn"].ConnectionString);
+            //  SqlConnection Scon = new SqlConnection(ConfigurationManager.ConnectionStrings["strConn"].ConnectionString);
 
             string strCon = HttpContext.Current.Application["DbConnectionString"].ToString();
             SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]);
@@ -249,24 +249,22 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
         return strResponse;
     }
 
-    
+
     public static string fnSendICSFIleToUsers(string ParticipantID, string ParticipantName, string ParticipantEmpCode, string ParticipantEMailID, string ParticipantLevelID, string ParticipantUserType, string ParticipantUserName, string ParticipantPassword, string DeadlineDate)
     {
-    
-
         string strRespoonse = "1";
         try
         {
             string MailTo = ParticipantEMailID;
             //string MailTo = "abhishek@astix.in";
-           
+
             string WebSitePath = ConfigurationManager.AppSettings["PhysicalPath"].ToString();
             string flgActualUser = ConfigurationManager.AppSettings["flgActualUser"].ToString();
             string fromMail = ConfigurationManager.AppSettings["FromAddress"].ToString();
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress("VAC Manager<" + fromMail + ">");
-
             var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=" + Convert.ToString(HttpContext.Current.Application["AzureMailconnectionString"]);
+
 
             var emailClient = new EmailClient(connectionString);
 
@@ -310,60 +308,26 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             }
 
 
-            msg.Subject = "360 Degree Feedback for " + ParticipantName + ": Kickoff Notice";
+            msg.Subject = "Reminder: Initiate Your 360-Degree Feedback Form | Last day to submit nominations";
 
 
 
             StringBuilder strBody = new StringBuilder();
             strBody.Append("<font  style='COLOR: #000000; FONT-FAMILY: Arial'  size=2>");
 
-
-
-            DataTable dt = (DataTable)HttpContext.Current.Session["dtRelationshipDetail"];
-            DataRow[] dr_FilterData = dt.Select("ParticipantID= " + ParticipantID);
-            DataTable dtRelationshipDetail_FilterData = dr_FilterData.CopyToDataTable();
-
-
             strBody.Append("<p>Dear " + ParticipantName + ",</p>");
-            strBody.Append("<p>We are pleased to inform you that the 360-Degree Feedback process has officially commenced, and the participants selection has been approved.</ p>");
-            strBody.Append("<p>The professionals listed below have been strategically selected to provide a comprehensive assessment of your strength and development areas:</p>");
-
-            // List will Come Here
+            strBody.Append("<p>Today " + DeadlineDate + ", is the last day to initiate your 360-Degree Feedback form. To know more about the survey, access the : <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Pages/360-Degree-Framework-Toolkit.aspx'>360 Feedback Toolkit</a></p>");
 
 
-            strBody.Append("<table cellpadding='0' cellspacing='0' style='width:60%; border: 1px solid #020202;'>");
-            strBody.Append("<tr><td style='text-align:center; border: 1px solid #020202; background: #020202; width: 20%;color:white;'>Rater Name</td><td style='text-align:center; border: 1px solid #020202; background: #020202;width: 20%;color:white;'>Relationship</td></tr>");
-
-            foreach (DataRow dr in dtRelationshipDetail_FilterData.Rows)
-            {
-                strBody.Append("<tr>");
-                string RaterName = dr["RaterName"].ToString();
-                string Relationship = dr["Relationship"].ToString();
-              
-
-                strBody.Append("<td style='text-align:center; border: 1px solid #020202; background: white; width: 20%;color:black;'>" + RaterName + "</td>");
-                strBody.Append("<td style='text-align:center; border: 1px solid #020202; background: White; width: 20%;color:black;'>" + Relationship + "</td>");
-                strBody.Append("</tr>");
-
-            }
-
-            strBody.Append("</table>");
-
-
-            //strBody.Append("<p>Please note that your 360-Degree Feedback Form 2024–25 is now available. You can access this document at the following URL: <a href=" + WebSitePath + ">" + WebSitePath + "</a></p>");
             //strBody.Append("<p><b>Login ID: " + ParticipantUserName + "</b></p>");
             //strBody.Append("<p><b>Password: " + ParticipantPassword + "</b></p>");
 
-            strBody.Append("<p><b>Next steps:</b></p>");
 
-            strBody.Append("<p>Complete your self-assessment which is designed to evaluate various competencies aligned with your professional development goals. You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
-            strBody.Append("<p><b>Timeline:</b> Kindly complete the survey by  " + DeadlineDate + " .</p>");
+            strBody.Append("<p>We request you to:</p>");
+            strBody.Append("<p>1. Initiate selection of your raters for 360-Degree Feedback form</p>");
+            strBody.Append("<p>2. Ensure your Reporting Manager/Coach approves the nominations</p>");
+            strBody.Append("<p>The way forward involves triggering a process, where the selected list of participants will provide feedback through this tool. You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through the following URL:  <a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
             strBody.Append("<p>In case of any query kindly connect with your talent advisor or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
-            // strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
-
-            //strBody.Append("<p>Regards,</p>");
-            //strBody.Append("<p>Talent team</p>");
-
             strBody.Append("<p>Note: This is a system-generated email. Please do not reply to this ID.</p>");
 
 
@@ -405,7 +369,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
     }
 
 
-   
+
 
     public static void fnUpdateMailSp(string SPName, string EmpNodeID, string FlgMailState, string flgUpdate, string UserType, SqlConnection Scon1)
     {
@@ -414,7 +378,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
         Scmd.Connection = Scon1;
         Scmd.CommandText = SPName;
         Scmd.Parameters.AddWithValue("@UserID", EmpNodeID);
-        Scmd.Parameters.AddWithValue("@MailType", 3);
+        Scmd.Parameters.AddWithValue("@MailType", 12);
         Scmd.Parameters.AddWithValue("@CycApseAssmntTypeMapID", 1);
 
         Scmd.CommandType = CommandType.StoredProcedure;
@@ -422,6 +386,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
 
         Scmd.ExecuteNonQuery();
     }
+
 
 
 }

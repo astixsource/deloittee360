@@ -1,11 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminReports/AdminSite.master" AutoEventWireup="true" CodeFile="frmSendEmail_Reminder_PendingNotificationof360Degree_FeedbackForm_Mail9.aspx.cs" EnableEventValidation="false" Inherits="frmSendEmailInvite" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminReports/AdminSite.master" AutoEventWireup="true" CodeFile="frmSendEmail_Reminder_Review_and_Approve360Degree_FeedbackNomination_DeadlineExtension_Mail17.aspx.cs" EnableEventValidation="false" Inherits="frmSend_Review_Approve_Email_ToManager" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
-    <style type="text/css">
-        tr.clstrgdmapped > td {
-            background-color: #f5f5f5;
-        }
-    </style>
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -143,19 +138,26 @@
 
             var cntOneTonOne = 0; var OldParticipantCycleMappingId = 0; var startTime = ""; var timeselected = 0;
             $("#MainContent_divdrmmain").find("#tbldbrlist input[flg=1]:checked").each(function () {
+                //var ParticipantID = $(this).closest("tr").attr("ParticipantID");
+                //var ParticipantName = $(this).closest("tr").attr("ParticipantName");
+                //var ParticipantEmpCode = $(this).closest("tr").attr("ParticipantEmpCode");
+
+                //var ParticipantEMailID = $(this).closest("tr").attr("ParticipantEMailID");
+                //var ParticipantLevelID = $(this).closest("tr").attr("ParticipantLevelID");
+                //var ParticipantUserType = $(this).closest("tr").attr("ParticipantUserType");
+
+                var ManagerId = $(this).closest("tr").attr("ManagerId");
+                var ManagerName = $(this).closest("tr").attr("ManagerName");
+                var ManagerEmpCode = $(this).closest("tr").attr("ManagerEmpCode");
+                var ManagerEMailID = $(this).closest("tr").attr("ManagerEMailID");
+
+                var ManagerUserName = $(this).closest("tr").attr("ManagerUserName");
+                var ManagerPassword = $(this).closest("tr").attr("ManagerPassword");
 
 
-
-                var RaterId = $(this).closest("tr").attr("RaterId");
-                var RaterName = $(this).closest("tr").attr("RaterName");
-
-                var RaterEMailId = $(this).closest("tr").attr("RaterEMailId");
-                var RaterUserName = $(this).closest("tr").attr("RaterUserName");
-                var RaterPassword = $(this).closest("tr").attr("RaterPassword");
                 var DeadlineDate = $(this).closest("tr").attr("DeadlineDate");
-                var flgExternalUser = $(this).closest("tr").attr("flgExternalUser");
 
-                ArrDataSaving.push({ RaterId: RaterId, RaterName: RaterName, RaterEMailId: RaterEMailId, MailStatus: '', RaterUserName: RaterUserName, RaterPassword: RaterPassword, DeadlineDate: DeadlineDate, flgExternalUser: flgExternalUser });
+                ArrDataSaving.push({ MailStatus: '',  ManagerId: ManagerId, ManagerName: ManagerName, ManagerEmpCode: ManagerEmpCode, ManagerEMailID: ManagerEMailID, ManagerUserName: ManagerUserName, ManagerPassword: ManagerPassword, DeadlineDate: DeadlineDate });
             });
 
 
@@ -307,6 +309,7 @@
 
         }
     </script>
+
      <script type="text/javascript">
          function TypeSearch() {
              var searchtxt = $("#txtTypeSearch").val().toUpperCase().trim();
@@ -327,7 +330,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="section-title clearfix">
-        <h3 class="text-center">Reminder: Pending Notification of 360-Degree Feedback Form</h3>
+        <h3 class="text-center">Reminder: Review and Approve 360-Degree Feedback Nomination | Deadline extension</h3>
         <div class="title-line-center"></div>
     </div>
 
@@ -347,7 +350,7 @@
                 <div class="col-sm-7">
                     <asp:DropDownList runat="server" ID="ddlUserType" CssClass="form-control">
                         <asp:ListItem Value="0">- Select - </asp:ListItem>
-                        <asp:ListItem Value="1" Selected="True">Rater</asp:ListItem>
+                        <asp:ListItem Value="1" Selected="True">Manager</asp:ListItem>
                     </asp:DropDownList>
                 </div>
             </div>
@@ -355,13 +358,12 @@
         <div class="col-md-2">
             <input type="button" id="btnShowUsers" value="Show Users" onclick="fnUserList()" class="btns small btn-submit">
         </div>
-          <div class="col-md-3 search-container">
+         <div class="col-md-3 search-container">
             <input type="text" id="txtTypeSearch" class="form-control" placeholder="Type atleast 3 charcters to Search" onkeyup="TypeSearch();" />
         </div>
     </div>
 
     <div id="divdrmmain" runat="server" style="min-height: 300px; margin-top: 10px;"></div>
-
 
     <div class="text-center" id="divBTNS" style="display: none;">
         <a href="###" class="btns btn-submit" onclick="return fnSave(1)" id="anchorbtn_other" style="display: none">Send Mail</a>

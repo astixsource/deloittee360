@@ -92,7 +92,7 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         sb.Append("<td>Email Notification: Invite</td>");
         sb.Append("<td><a href='../AdminReports/frmSendEmail_KickOffNotice_Mail3.aspx' class='btn-one w-100'>360 Degree Feedback for <Emp Name>: Kickoff Notice </a></td>");
         sb.Append("<td>");
-        sb.Append("<ul class=''><li>360 Degree Feedback for <Emp Name>: Kickoff Notice </li></ul>");
+        sb.Append("<ul class=''><li>360 Degree Feedback for <Emp Name>: Kickoff Notice : Mail Type 3 </li></ul>");
         sb.Append("</td>");
         sb.Append("</tr>");
 
@@ -101,7 +101,7 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         sb.Append("<td>Email Notification: Invite</td>");
         sb.Append("<td><a href='../AdminReports/frmSendEmail_Feedbackforyourstakeholders_Mail4.aspx' class='btn-one w-100'>360 Degree Feedback for your stakeholders: Survey Launch </a></td>");
         sb.Append("<td>");
-        sb.Append("<ul class=''><li>360 Degree Feedback for your stakeholders: Survey Launch </li></ul>");
+        sb.Append("<ul class=''><li>360 Degree Feedback for your stakeholders: Survey Launch : Mail Type 4 </li></ul>");
         sb.Append("</td>");
         sb.Append("</tr>");
 
@@ -110,7 +110,7 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         sb.Append("<td>Email Notification: Reminder</td>");
         sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_InitiateYour360Degree_FeedbackForm_Mail6.aspx' class='btn-one w-100'>Reminder: Initiate Your 360-Degree Feedback Form</a></td>");
         sb.Append("<td>");
-        sb.Append("<ul class=''><li>Reminder: Initiate Your 360-Degree Feedback Form</li></ul>");
+        sb.Append("<ul class=''><li>Reminder: Initiate Your 360-Degree Feedback Form : Mail Type 6</li></ul>");
         sb.Append("</td>");
         sb.Append("</tr>");
 
@@ -119,7 +119,7 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         sb.Append("<td>Email Notification: Reminder</td>");
         sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_Review_and_Approve360Degree_FeedbackNomination_Mail7.aspx' class='btn-one w-100'>Reminder: Review and Approve 360-Degree Feedback Nomination</a></td>");
         sb.Append("<td>");
-        sb.Append("<ul class=''><li>Reminder: Review and Approve 360-Degree Feedback Nomination</li></ul>");
+        sb.Append("<ul class=''><li>Reminder: Review and Approve 360-Degree Feedback Nomination : Mail Type 7</li></ul>");
         sb.Append("</td>");
         sb.Append("</tr>");
 
@@ -128,7 +128,7 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         sb.Append("<td>Email Notification: Reminder</td>");
         sb.Append("<td><a href='../AdminReports/frmSendEmail_Urgent_InitiateYour360Degree_FeedbackForm_Mail8.aspx' class='btn-one w-100'>Urgent: Initiate Your 360-Degree Feedback Form</a></td>");
         sb.Append("<td>");
-        sb.Append("<ul class=''><li>Urgent: Initiate Your 360-Degree Feedback Form</li></ul>");
+        sb.Append("<ul class=''><li>Urgent: Initiate Your 360-Degree Feedback Form : Mail Type 8</li></ul>");
         sb.Append("</td>");
         sb.Append("</tr>");
 
@@ -137,7 +137,7 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         sb.Append("<td>Email Notification: Reminder</td>");
         sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_PendingNotificationof360Degree_FeedbackForm_Mail9.aspx' class='btn-one w-100'>Reminder: Pending Notification of 360-Degree Feedback Form- Receipent</a></td>");
         sb.Append("<td>");
-        sb.Append("<ul class=''><li>Reminder: Pending Notification of 360-Degree Feedback Form - Receipent</li></ul>");
+        sb.Append("<ul class=''><li>Reminder: Pending Notification of 360-Degree Feedback Form - Receipent : Mail Type 9</li></ul>");
         sb.Append("</td>");
         sb.Append("</tr>");
 
@@ -146,10 +146,40 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         sb.Append("<td>Email Notification: Reminder</td>");
         sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_PendingNotificationof360Degree_FeedbackForm_Mail10.aspx' class='btn-one w-100'>Reminder: Pending Notification of 360-Degree Feedback Form- Participants</a></td>");
         sb.Append("<td>");
-        sb.Append("<ul class=''><li>Reminder: Pending Notification of 360-Degree Feedback Form - Participants</li></ul>");
+        sb.Append("<ul class=''><li>Reminder: Pending Notification of 360-Degree Feedback Form - Participants : Mail Type 10</li></ul>");
         sb.Append("</td>");
         sb.Append("</tr>");
 
+        sb.Append("<tr>");
+        sb.Append("<td>Email Notification: Reminder</td>");
+        sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_InitiateYour360Degree_FeedbackForm_DeadlineExtension_Mail11.aspx' class='btn-one w-100'>Reminder: Initiate Your 360-Degree Feedback Form | Deadline Extension Mail</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>Reminder: Initiate Your 360-Degree Feedback Form | Deadline Extension : Mail Type 11</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
+
+
+
+
+        sb.Append("<tr>");
+        sb.Append("<td>Email Notification: Reminder</td>");
+        sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_InitiateYour360DegreeFeedbackForm_Lastdaytosubmitnominations_Mail12.aspx' class='btn-one w-100'>Reminder: Initiate Your 360-Degree Feedback Form | Last day to submit nominations</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>Reminder: Initiate Your 360-Degree Feedback Form | Last day to submit nominations : Mail Type 12</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
+
+
+
+
+        
+                sb.Append("<tr>");
+        sb.Append("<td>Email Notification: Reminder</td>");
+        sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_Review_and_Approve360Degree_FeedbackNomination_DeadlineExtension_Mail17.aspx' class='btn-one w-100'>Reminder: Review and Approve 360-Degree Feedback Nomination Deadline Extension</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>Reminder: Review and Approve 360-Degree Feedback Nomination Deadline Extension : Mail Type 17</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
 
         sb.Append("<tr>");
         sb.Append("<td>Edit Nomination</td>");
@@ -169,7 +199,7 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
 
 
         sb.Append("</tbody>");
-         sb.Append("</table>");
+        sb.Append("</table>");
         return sb.ToString();
     }
 

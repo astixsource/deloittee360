@@ -17,7 +17,7 @@ using Azure.Communication.Email;
 
 using System.Net.Mime;
 
-public partial class frmSendEmailInvite : System.Web.UI.Page
+public partial class frmSend_Review_Approve_Email_ToManager : System.Web.UI.Page
 {
     SqlConnection objCon = default(SqlConnection);
     SqlCommand objCom = default(SqlCommand);
@@ -27,7 +27,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-         if (Session["LoginID"] == null)
+        if (Session["LoginID"] == null)
         {
             Response.Redirect("~/Login.aspx");
         }
@@ -60,7 +60,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
         ddlCycle.DataValueField = "CycleId";
         ddlCycle.DataBind();
     }
- 
+
 
     //Get Scheme And Product Detail Bases on Store
     [System.Web.Services.WebMethod()]
@@ -83,12 +83,12 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             List<SqlParameter> sp = new List<SqlParameter>()
               {
                    new SqlParameter("@CycleId", CycleId),
-                   new SqlParameter("@MailType", 3), //  frmSendEmail_KickOffNotice_Mail3 // Mail Type 3
+                   new SqlParameter("@MailType", 17), // Reminder: Review and Approve 360-Degree Feedback Nomination For Mail Type 7
               };
             Ds = clsDbCommand.ExecuteQueryReturnDataSet(storedProcName, con, sp);
 
-
             HttpContext.Current.Session["dtRelationshipDetail"] = Ds.Tables[1];
+
 
             StringBuilder str = new StringBuilder();
             StringBuilder str1 = new StringBuilder();
@@ -104,7 +104,15 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
                 SkipColumn[4] = "ParticipantPassword";
                 SkipColumn[5] = "DeadlineDate";
                 SkipColumn[6] = "ParticipantEmpCode";
-                
+                SkipColumn[7] = "ManagerId";
+                SkipColumn[8] = "ManagerEmpCode";
+                SkipColumn[9] = "ManagerUserName";
+                SkipColumn[10] = "ManagerPassword";
+
+
+
+
+
 
 
 
@@ -132,19 +140,31 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
 
                 for (int i = 0; i < Ds.Tables[0].Rows.Count; i++)
                 {
-                    string ParticipantID = Ds.Tables[0].Rows[i]["ParticipantID"].ToString();
-                    string ParticipantName = Ds.Tables[0].Rows[i]["ParticipantName"].ToString();
-                    string ParticipantEmpCode = Ds.Tables[0].Rows[i]["ParticipantEmpCode"].ToString();
-                    string ParticipantEMailID = Ds.Tables[0].Rows[i]["ParticipantEMailID"].ToString();
-                    string ParticipantLevelID = Ds.Tables[0].Rows[i]["LevelID"].ToString();
-                    string ParticipantUserType = Ds.Tables[0].Rows[i]["UserType"].ToString();
-                    string ParticipantUserName = Ds.Tables[0].Rows[i]["ParticipantUserName"].ToString();
-                    string ParticipantPassword = Ds.Tables[0].Rows[i]["ParticipantPassword"].ToString();
+
+                    // ManagerId	ManagerName	ManagerEmpCode	ManagerEMailID	ManagerUserName	ManagerPassword
+
+                    //string ParticipantID = Ds.Tables[0].Rows[i]["ParticipantID"].ToString();
+                    //string ParticipantName = Ds.Tables[0].Rows[i]["ParticipantName"].ToString();
+                    //string ParticipantEmpCode = Ds.Tables[0].Rows[i]["ParticipantEmpCode"].ToString();
+                    //string ParticipantEMailID = Ds.Tables[0].Rows[i]["ParticipantEMailID"].ToString();
+                    //string ParticipantLevelID = Ds.Tables[0].Rows[i]["LevelID"].ToString();
+                    //string ParticipantUserType = Ds.Tables[0].Rows[i]["UserType"].ToString();
+
+
+
+                    string ManagerId = Ds.Tables[0].Rows[i]["ManagerId"].ToString();
+                    string ManagerName = Ds.Tables[0].Rows[i]["ManagerName"].ToString();
+                    string ManagerEmpCode = Ds.Tables[0].Rows[i]["ManagerEmpCode"].ToString();
+                    string ManagerEMailID = Ds.Tables[0].Rows[i]["ManagerEMailID"].ToString();
+                    string ManagerUserName = Ds.Tables[0].Rows[i]["ManagerUserName"].ToString();
+                    string ManagerPassword = Ds.Tables[0].Rows[i]["ManagerPassword"].ToString();
+
+
                     string DeadlineDate = Ds.Tables[0].Rows[i]["DeadlineDate"].ToString();
 
 
 
-                    str.Append("<tr ParticipantID = '" + ParticipantID + "' ParticipantName = '" + ParticipantName + "' ParticipantEmpCode = '" + ParticipantEmpCode + "'  ParticipantEMailID = '" + ParticipantEMailID + "' ParticipantLevelID ='" + ParticipantLevelID + "'  ParticipantUserType ='" + ParticipantUserType + "' ParticipantUserName = '" + ParticipantUserName + "' ParticipantPassword = '" + ParticipantPassword + "' DeadlineDate = '" + DeadlineDate + "'   > ");
+                    str.Append("<tr  ManagerId = '" + ManagerId + "' ManagerName = '" + ManagerName + "' ManagerEmpCode = '" + ManagerEmpCode + "' ManagerEMailID = '" + ManagerEMailID + "' ManagerUserName = '" + ManagerUserName + "' ManagerPassword = '" + ManagerPassword + "' DeadlineDate = '" + DeadlineDate + "'   > ");
                     str.Append("<td style='text-align:center'>" + (i + 1) + "</td>");
                     for (int j = 0; j < Ds.Tables[0].Columns.Count; j++)
                     {
@@ -199,7 +219,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             {
                 dtDataSaving.Rows[0].Delete();
             }
-          //  SqlConnection Scon = new SqlConnection(ConfigurationManager.ConnectionStrings["strConn"].ConnectionString);
+            //  SqlConnection Scon = new SqlConnection(ConfigurationManager.ConnectionStrings["strConn"].ConnectionString);
 
             string strCon = HttpContext.Current.Application["DbConnectionString"].ToString();
             SqlConnection Scon = new SqlConnection(strCon.Split('|')[0]);
@@ -210,25 +230,26 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             {
                 try
                 {
-                    string ParticipantID = drow["ParticipantID"].ToString();
-                    string ParticipantName = drow["ParticipantName"].ToString();
-                    string ParticipantEmpCode = drow["ParticipantEmpCode"].ToString();
-                    string ParticipantEMailID = drow["ParticipantEMailID"].ToString();
-                    string ParticipantLevelID = drow["ParticipantLevelID"].ToString();
-                    string ParticipantUserType = drow["ParticipantUserType"].ToString();
-                    string ParticipantUserName = drow["ParticipantUserName"].ToString();
-                    string ParticipantPassword = drow["ParticipantPassword"].ToString();
+
+                    string ManagerId = drow["ManagerId"].ToString();
+                    string ManagerName = drow["ManagerName"].ToString();
+                    string ManagerEmpCode = drow["ManagerEmpCode"].ToString();
+                    string ManagerEMailID = drow["ManagerEMailID"].ToString();
+                    string ManagerUserName = drow["ManagerUserName"].ToString();
+                    string ManagerPassword = drow["ManagerPassword"].ToString();
+
+
                     string DeadlineDate = drow["DeadlineDate"].ToString();
 
 
 
 
-                    string strStatus = fnSendICSFIleToUsers(ParticipantID, ParticipantName, ParticipantEmpCode, ParticipantEMailID, ParticipantLevelID, ParticipantUserType, ParticipantUserName, ParticipantPassword, DeadlineDate);
+                    string strStatus = fnSendICSFIleToUsers(ManagerId, ManagerName, ManagerEmpCode, ManagerEMailID, ManagerUserName, ManagerPassword, DeadlineDate);
                     drow["MailStatus"] = strStatus == "1" ? "Mail Sent" : strStatus;
 
                     if (strStatus == "1")
                     {
-                        fnUpdateMailSp("spMailUpdateLog", ParticipantID, "1", "2", "1", Scon);
+                        fnUpdateMailSp("spMailUpdateLog", ManagerId, "1", "2", "1", Scon);
                     }
 
 
@@ -249,17 +270,16 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
         return strResponse;
     }
 
-    
-    public static string fnSendICSFIleToUsers(string ParticipantID, string ParticipantName, string ParticipantEmpCode, string ParticipantEMailID, string ParticipantLevelID, string ParticipantUserType, string ParticipantUserName, string ParticipantPassword, string DeadlineDate)
-    {
-    
 
+    //ParticipantID, ParticipantName, ParticipantEmpCode, ParticipantEMailID, ParticipantLevelID, ParticipantUserType, ManagerId, ManagerName, ManagerEmpCode, ManagerEMailID, ManagerUserName, ManagerPassword, DeadlineDate
+    public static string fnSendICSFIleToUsers(string ManagerId, string ManagerName, string ManagerEmpCode, string ManagerEMailID, string ManagerUserName, string ManagerPassword, string DeadlineDate)
+    {
         string strRespoonse = "1";
         try
         {
-            string MailTo = ParticipantEMailID;
+            string MailTo = ManagerEMailID;
             //string MailTo = "abhishek@astix.in";
-           
+
             string WebSitePath = ConfigurationManager.AppSettings["PhysicalPath"].ToString();
             string flgActualUser = ConfigurationManager.AppSettings["flgActualUser"].ToString();
             string fromMail = ConfigurationManager.AppSettings["FromAddress"].ToString();
@@ -267,7 +287,6 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             msg.From = new MailAddress("VAC Manager<" + fromMail + ">");
 
             var connectionString = "endpoint=https://astixemailcommunication.india.communication.azure.com/;accesskey=" + Convert.ToString(HttpContext.Current.Application["AzureMailconnectionString"]);
-
             var emailClient = new EmailClient(connectionString);
 
             var emailRecipients = new EmailRecipients();
@@ -310,7 +329,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             }
 
 
-            msg.Subject = "360 Degree Feedback for " + ParticipantName + ": Kickoff Notice";
+            msg.Subject = "Reminder: Review and Approve 360-Degree Feedback Nomination | Deadline extension";
 
 
 
@@ -320,29 +339,28 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
 
 
             DataTable dt = (DataTable)HttpContext.Current.Session["dtRelationshipDetail"];
-            DataRow[] dr_FilterData = dt.Select("ParticipantID= " + ParticipantID);
+            DataRow[] dr_FilterData = dt.Select("ManagerId= " + ManagerId);
             DataTable dtRelationshipDetail_FilterData = dr_FilterData.CopyToDataTable();
 
-
-            strBody.Append("<p>Dear " + ParticipantName + ",</p>");
-            strBody.Append("<p>We are pleased to inform you that the 360-Degree Feedback process has officially commenced, and the participants selection has been approved.</ p>");
-            strBody.Append("<p>The professionals listed below have been strategically selected to provide a comprehensive assessment of your strength and development areas:</p>");
-
-            // List will Come Here
+            strBody.Append("<p>Dear " + ManagerName + ",</p>");
+            strBody.Append("<p>We have extended the deadline for participants to nominate their raters. Accordingly, you now have until " + DeadlineDate + " to review and approve the 360-Degree Feedback nominations submitted by the professionals listed below:</p>");
 
 
-            strBody.Append("<table cellpadding='0' cellspacing='0' style='width:60%; border: 1px solid #020202;'>");
-            strBody.Append("<tr><td style='text-align:center; border: 1px solid #020202; background: #020202; width: 20%;color:white;'>Rater Name</td><td style='text-align:center; border: 1px solid #020202; background: #020202;width: 20%;color:white;'>Relationship</td></tr>");
+            //Table List Will Come Start  Participant Name will come under the Table
+
+
+            strBody.Append("<table cellpadding='0' cellspacing='0' style='width:60%;border: 1px solid #020202;'>");
+            strBody.Append("<tr><td style='text-align:center; border: 1px solid #020202; background: #020202; width: 20%;color:white;'>Participant Name</td></tr>");
 
             foreach (DataRow dr in dtRelationshipDetail_FilterData.Rows)
             {
                 strBody.Append("<tr>");
-                string RaterName = dr["RaterName"].ToString();
-                string Relationship = dr["Relationship"].ToString();
-              
+                string ParticipantName = dr["ParticipantName"].ToString();
+                //string Relationship = dr["Relationship"].ToString();
 
-                strBody.Append("<td style='text-align:center; border: 1px solid #020202; background: white; width: 20%;color:black;'>" + RaterName + "</td>");
-                strBody.Append("<td style='text-align:center; border: 1px solid #020202; background: White; width: 20%;color:black;'>" + Relationship + "</td>");
+
+                strBody.Append("<td style='text-align:center; border: 1px solid #020202; background: white; width: 20%;color:black;'>" + ParticipantName + "</td>");
+                //strBody.Append("<td style='text-align:center; border: 1px solid #020202; background: White; width: 20%;color:black;'>" + Relationship + "</td>");
                 strBody.Append("</tr>");
 
             }
@@ -350,19 +368,17 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             strBody.Append("</table>");
 
 
-            //strBody.Append("<p>Please note that your 360-Degree Feedback Form 2024–25 is now available. You can access this document at the following URL: <a href=" + WebSitePath + ">" + WebSitePath + "</a></p>");
-            //strBody.Append("<p><b>Login ID: " + ParticipantUserName + "</b></p>");
-            //strBody.Append("<p><b>Password: " + ParticipantPassword + "</b></p>");
+            //Table List Will Come End
 
-            strBody.Append("<p><b>Next steps:</b></p>");
 
-            strBody.Append("<p>Complete your self-assessment which is designed to evaluate various competencies aligned with your professional development goals. You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
-            strBody.Append("<p><b>Timeline:</b> Kindly complete the survey by  " + DeadlineDate + " .</p>");
+
+            strBody.Append("<p>If not approved by this date, the nominee list will be auto-approved and proceed to the next step. To view and approve the list, you can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
+
+            //strBody.Append("<p><b>Login ID: " + ManagerName + "</b></p>");
+            //strBody.Append("<p><b>Password: " + ManagerPassword + "</b></p>");
+
             strBody.Append("<p>In case of any query kindly connect with your talent advisor or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
-            // strBody.Append("<p>If you have any questions, please connect with your <a href='https://apcdeloitte.sharepoint.com/sites/in/psupport/hr/Documents/Forms/AllItems.aspx?id=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments%2Fin%2Dtalent%2Dorganogram%2Dfeb%2D2025%2Epdf&parent=%2Fsites%2Fin%2Fpsupport%2Fhr%2FDocuments'>Talent business advisor</a>, or raise a ticket on <a href='https://inhelpd.deloitte.com/MDLIncidentMgmt/IM_LogTicket.aspx'>HelpD</a>.</p>");
 
-            //strBody.Append("<p>Regards,</p>");
-            //strBody.Append("<p>Talent team</p>");
 
             strBody.Append("<p>Note: This is a system-generated email. Please do not reply to this ID.</p>");
 
@@ -405,7 +421,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
     }
 
 
-   
+
 
     public static void fnUpdateMailSp(string SPName, string EmpNodeID, string FlgMailState, string flgUpdate, string UserType, SqlConnection Scon1)
     {
@@ -414,7 +430,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
         Scmd.Connection = Scon1;
         Scmd.CommandText = SPName;
         Scmd.Parameters.AddWithValue("@UserID", EmpNodeID);
-        Scmd.Parameters.AddWithValue("@MailType", 3);
+        Scmd.Parameters.AddWithValue("@MailType", 17);
         Scmd.Parameters.AddWithValue("@CycApseAssmntTypeMapID", 1);
 
         Scmd.CommandType = CommandType.StoredProcedure;
