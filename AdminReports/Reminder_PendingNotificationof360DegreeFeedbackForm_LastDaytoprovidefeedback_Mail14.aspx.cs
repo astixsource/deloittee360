@@ -85,7 +85,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             List<SqlParameter> sp = new List<SqlParameter>()
               {
                    new SqlParameter("@CycleId", CycleId),
-                   new SqlParameter("@MailType", 9), //  Reminder: Pending Notification of 360-Degree Feedback Form // Mail Type 9
+                   new SqlParameter("@MailType", 14), //  Reminder: Pending Notification of 360-Degree Feedback Form // Mail Type 14
               };
             Ds = clsDbCommand.ExecuteQueryReturnDataSet(storedProcName, con, sp);
 
@@ -311,7 +311,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             }
 
 
-            msg.Subject = "Reminder: Pending Notification of 360-Degree Feedback Forms- Raters";
+            msg.Subject = "Reminder: Pending Notification of 360-Degree Feedback Form | Last Day to provide feedback";
 
 
 
@@ -326,7 +326,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
 
 
             strBody.Append("<p>Dear " + RaterName + ",</p>");
-            strBody.Append("<p>This is a reminder that the 360-Degree Feedback forms for  below-mentioned professionals is pending your feedback.</ p>");
+            strBody.Append("<p>Today "+ DeadlineDate + " is the last day to complete the 360 - Degree Feedback form for the below-mentioned professionals.</ p>");
 
 
             strBody.Append("<table cellpadding='0' cellspacing='0' style='width:60%;border: 1px solid #020202;'>");
@@ -480,7 +480,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             }
 
 
-            msg.Subject = "Reminder: Pending Notification of 360-Degree Feedback Form";
+            msg.Subject = "Reminder: Pending Notification of 360-Degree Feedback Form | Last Day to provide feedback";
 
 
 
@@ -495,7 +495,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
 
 
             strBody.Append("<p>Dear " + RaterName + ",</p>");
-            strBody.Append("<p>This is a reminder that the 360-Degree Feedback forms for below mentioned professionals is pending your feedback.</ p>");
+            strBody.Append("<p>Today " + DeadlineDate + " is the last day to complete the 360-Degree Feedback form for the below-mentioned professionals. </ p>");
 
 
             strBody.Append("<table cellpadding='0' cellspacing='0' style='width:60%;border: 1px solid #020202;'>");
@@ -521,10 +521,11 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             //strBody.Append("<p><b>Login ID: " + ParticipantUserName + "</b></p>");
             //strBody.Append("<p><b>Password: " + ParticipantPassword + "</b></p>");
 
-            strBody.Append("<p>Please complete the same by " + DeadlineDate + ". Your active participation is highly appreciated.</p>");
+            strBody.Append("<p>Your active participation is highly appreciated.</ p>");
 
 
-            strBody.Append("<p>You can login to the platform via Single Sign On (SSO) using your Deloitte credentials through this URL: <a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
+            strBody.Append("<p>You can log in to the platform using the below-mentioned credentials: </p>");
+            strBody.Append("<p><b>URL :</b><a href = " + WebSitePath + " > " + WebSitePath + "</a></p>");
             strBody.Append("<p><b>Login ID: " + RaterUserName + "</b></p>");
             strBody.Append("<p><b>Password: " + RaterPassword + "</b></p>");
 
@@ -597,7 +598,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
         Scmd.Connection = Scon1;
         Scmd.CommandText = SPName;
         Scmd.Parameters.AddWithValue("@UserID", EmpNodeID);
-        Scmd.Parameters.AddWithValue("@MailType", 9);
+        Scmd.Parameters.AddWithValue("@MailType", 14);
         Scmd.Parameters.AddWithValue("@CycApseAssmntTypeMapID", 1);
 
         Scmd.CommandType = CommandType.StoredProcedure;

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Math;
+using DocumentFormat.OpenXml.Office2013.Excel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -169,6 +172,25 @@ public partial class AdminReports_AdminDashboard : System.Web.UI.Page
         sb.Append("</td>");
         sb.Append("</tr>");
 
+
+         sb.Append("<tr>");
+        sb.Append("<td>Email Notification: Reminder</td>");    
+        sb.Append("<td><a href='../AdminReports/frmSendEmail_Reminder_PendingNotificationof360DegreeFeedbackForm_LastdaytoCompleteSelfSurvey_Mail13.aspx' class='btn-one w-100'>Reminder: Pending Notification of 360-Degree Feedback Form | Last day to Complete Self-Survey</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>Reminder: Pending Notification of 360-Degree Feedback Form | Last day to Complete Self-Survey : Mail Type 13</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
+
+
+                 
+
+        sb.Append("<tr>");
+        sb.Append("<td>Email Notification: Reminder</td>");
+        sb.Append("<td><a href='../AdminReports/Reminder_PendingNotificationof360DegreeFeedbackForm_LastDaytoprovidefeedback_Mail14.aspx' class='btn-one w-100'>Reminder: Pending Notification of 360-Degree Feedback Form | Last Day to provide feedback</a></td>");
+        sb.Append("<td>");
+        sb.Append("<ul class=''><li>Reminder: Pending Notification of 360-Degree Feedback Form | Last Day to provide feedback : Mail Type 14</li></ul>");
+        sb.Append("</td>");
+        sb.Append("</tr>");
 
 
 
