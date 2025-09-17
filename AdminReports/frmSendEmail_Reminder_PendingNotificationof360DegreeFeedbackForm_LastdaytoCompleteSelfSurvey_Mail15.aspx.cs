@@ -85,7 +85,7 @@ public partial class frmSendEmailInvite : System.Web.UI.Page
             List<SqlParameter> sp = new List<SqlParameter>()
               {
                    new SqlParameter("@CycleId", CycleId),
-                   new SqlParameter("@MailType", 13), //  Reminder: Pending Notification of 360-Degree Feedback Form // Mail Type 10
+                   new SqlParameter("@MailType", 15), //  Reminder: Pending Notification of 360-Degree Feedback Form // Mail Type 10
               };
             Ds = clsDbCommand.ExecuteQueryReturnDataSet(storedProcName, con, sp);
 
